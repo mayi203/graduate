@@ -516,11 +516,12 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020007;
         public static final int job_card_bg=0x7f020008;
         public static final int selector_cricle_btn=0x7f020009;
+        public static final int shap_search_item=0x7f02000a;
     }
     public static final class id {
-        public static final int action_websearch=0x7f0a0018;
-        public static final int address=0x7f0a0012;
-        public static final int compony=0x7f0a0013;
+        public static final int action_websearch=0x7f0a0019;
+        public static final int address=0x7f0a0013;
+        public static final int compony=0x7f0a0014;
         public static final int content_frame=0x7f0a0001;
         public static final int drawer_layout=0x7f0a0000;
         public static final int drop_down_list_footer_button=0x7f0a0004;
@@ -530,19 +531,20 @@ containing a value of this type.
         public static final int drop_down_list_header_image=0x7f0a0007;
         public static final int drop_down_list_header_progress_bar=0x7f0a0005;
         public static final int drop_down_list_header_second_text=0x7f0a0009;
-        public static final int education=0x7f0a0015;
-        public static final int exprience=0x7f0a0016;
-        public static final int item1=0x7f0a000c;
-        public static final int item2=0x7f0a000d;
-        public static final int item3=0x7f0a000e;
-        public static final int item4=0x7f0a000f;
-        public static final int item5=0x7f0a0010;
+        public static final int education=0x7f0a0016;
+        public static final int exprience=0x7f0a0017;
+        public static final int item1=0x7f0a000d;
+        public static final int item2=0x7f0a000e;
+        public static final int item3=0x7f0a000f;
+        public static final int item4=0x7f0a0010;
+        public static final int item5=0x7f0a0011;
+        public static final int lay_search=0x7f0a000a;
         public static final int left_drawer=0x7f0a0002;
-        public static final int list_view=0x7f0a000a;
-        public static final int menu=0x7f0a000b;
-        public static final int position=0x7f0a0011;
-        public static final int salary=0x7f0a0014;
-        public static final int time=0x7f0a0017;
+        public static final int list_view=0x7f0a000b;
+        public static final int menu=0x7f0a000c;
+        public static final int position=0x7f0a0012;
+        public static final int salary=0x7f0a0015;
+        public static final int time=0x7f0a0018;
     }
     public static final class layout {
         public static final int a_home_page=0x7f030000;

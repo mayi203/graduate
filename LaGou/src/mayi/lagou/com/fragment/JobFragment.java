@@ -110,6 +110,13 @@ public class JobFragment extends BaseFragment implements OnClickListener {
                         + dateFormat.format(new Date()));
 			}
 		});
+		findViewById(R.id.lay_search).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				changeFragment(new SearchFragment(), R.id.content_frame);
+			}
+		});
 		mMenuButton.setOnClickListener(this);
 		mItemButton1.setOnClickListener(this);
 		mItemButton2.setOnClickListener(this);

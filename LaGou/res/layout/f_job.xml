@@ -5,16 +5,22 @@
     android:layout_height="match_parent" >
 
     <LinearLayout
+        android:id="@+id/lay_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:padding="8dp"
-        android:orientation="horizontal" >
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="8dp" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:textColor="#d8d8d8"
+            android:layout_gravity="center_vertical"
             android:drawableLeft="@drawable/explore_search_normal"
+            android:gravity="center_vertical"
             android:text="输入关键字精确查找" />
     </LinearLayout>
 
@@ -22,6 +28,7 @@
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/lay_search"
         android:divider="@color/hole_background"
         android:dividerHeight="6dp"
         android:drawSelectorOnTop="false"
