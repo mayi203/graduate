@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:listViewAttr="http://schemas.android.com/apk/res/mayi.lagou.com"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/explore_search_normal"
+            android:text="输入关键字精确查找" />
+    </LinearLayout>
+
+    <mayi.lagou.com.view.DropDownListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/hole_background"
+        android:dividerHeight="6dp"
+        android:drawSelectorOnTop="false"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:scrollbars="none"
+        listViewAttr:isAutoLoadOnBottom="true"
+        listViewAttr:isDropDownStyle="true"
+        listViewAttr:isOnBottomStyle="true" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp" >
+
+        <Button
+            android:id="@+id/menu"
+            style="@style/MenuStyle"
+            android:text="城市" />
+
+        <Button
+            android:id="@+id/item1"
+            style="@style/MenuItemStyle"
+            android:text="北京"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/item2"
+            style="@style/MenuItemStyle"
+            android:text="上海"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/item3"
+            style="@style/MenuItemStyle"
+            android:text="杭州"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/item4"
+            style="@style/MenuItemStyle"
+            android:text="深圳"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/item5"
+            style="@style/MenuItemStyle"
+            android:text="广州"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</RelativeLayout>
