@@ -3,24 +3,21 @@
  */
 package mayi.lagou.com.fragment;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.R;
 import mayi.lagou.com.adapter.JobItemAdapt;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.LaGouPosition;
 import mayi.lagou.com.utils.ParserUtil;
-import mayi.lagou.com.view.DropDownListView;
-import mayi.lagou.com.view.DropDownListView.OnDropDownListener;
+import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase;
+import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
+import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
-
+import android.widget.ListView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
@@ -35,7 +32,9 @@ import com.nineoldandroids.animation.ObjectAnimator;
 public class JobFragment extends BaseFragment implements OnClickListener {
 	public static final String ARG_PLANET_NUMBER = "planet_number";
 	private static final String TAG = "JobFragment";
-	private DropDownListView listView;
+
+	private PullToRefreshListView mPullToRefreshListView;
+	private ListView mListView;
 	private JobItemAdapt adapter;
 	private Button mMenuButton;
 	private Button mItemButton1;
@@ -45,6 +44,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	private Button mItemButton5;
 	private String cityName;
 	private boolean mIsMenuOpen = false;
+	private int radius;
 
 	/*
 	 * (non-Javadoc)
@@ -63,7 +63,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	 */
 	@Override
 	public void findViewsById() {
-		listView = (DropDownListView) findListView(R.id.list_view);
+		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.job_list);
 		mMenuButton = findButton(R.id.menu);
 		mItemButton1 = findButton(R.id.item1);
 		mItemButton2 = findButton(R.id.item2);
@@ -79,8 +79,11 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	 */
 	@Override
 	public void initValue() {
+		radius=app().getScreenWidth(getActivity())/2-30;
+		mPullToRefreshListView.setPullLoadEnabled(true);
+		mListView = mPullToRefreshListView.getRefreshableView();
 		adapter = new JobItemAdapt(getActivity());
-		listView.setAdapter(adapter);
+		mListView.setAdapter(adapter);
 	}
 
 	/*
@@ -90,28 +93,23 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	 */
 	@Override
 	public void initListener() {
-		listView.setOnBottomListener(new OnClickListener() {
+		mPullToRefreshListView
+				.setOnRefreshListener(new OnRefreshListener<ListView>() {
 
-			@Override
-			public void onClick(View arg0) {
-				Toast.makeText(getActivity(), "底部加载更多", Toast.LENGTH_SHORT)
-						.show();
-				listView.onBottomComplete();
-			}
-		});
-		listView.setOnDropDownListener(new OnDropDownListener() {
+					@Override
+					public void onPullDownToRefresh(
+							PullToRefreshBase<ListView> refreshView) {
 
-			@Override
-			public void onDropDown() {
-				Toast.makeText(getActivity(), "顶部刷新", Toast.LENGTH_SHORT)
-						.show();
-				SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd HH:mm:ss");
-				listView.onDropDownComplete(getString(R.string.update_at)
-                        + dateFormat.format(new Date()));
-			}
-		});
+					}
+
+					@Override
+					public void onPullUpToRefresh(
+							PullToRefreshBase<ListView> refreshView) {
+
+					}
+				});
 		findViewById(R.id.lay_search).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				changeFragment(new SearchFragment(), R.id.content_frame);
@@ -133,16 +131,16 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		initData();
+		refreshData();
 	}
 
-	private void initData() {
+	private void refreshData() {
 		client.get(LaGouApi.Host, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
 				List<LaGouPosition> list = ParserUtil.parserPosition(response);
 				adapter.addItems(list);
-				System.out.println(list.get(0).getCity());
+				System.out.println(list.get(0).getCompany());
 			}
 		});
 	}
@@ -156,18 +154,18 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	public void onClick(View v) {
 		if (!mIsMenuOpen) {
 			mIsMenuOpen = true;
-			doAnimateOpen(mItemButton1, 0, 5, 300);
-			doAnimateOpen(mItemButton2, 1, 5, 300);
-			doAnimateOpen(mItemButton3, 2, 5, 300);
-			doAnimateOpen(mItemButton4, 3, 5, 300);
-			doAnimateOpen(mItemButton5, 4, 5, 300);
+			doAnimateOpen(mItemButton1, 0, 5, radius);
+			doAnimateOpen(mItemButton2, 1, 5, radius);
+			doAnimateOpen(mItemButton3, 2, 5, radius);
+			doAnimateOpen(mItemButton4, 3, 5, radius);
+			doAnimateOpen(mItemButton5, 4, 5, radius);
 		} else {
 			mIsMenuOpen = false;
-			doAnimateClose(mItemButton1, 0, 5, 300);
-			doAnimateClose(mItemButton2, 1, 5, 300);
-			doAnimateClose(mItemButton3, 2, 5, 300);
-			doAnimateClose(mItemButton4, 3, 5, 300);
-			doAnimateClose(mItemButton5, 4, 5, 300);
+			doAnimateClose(mItemButton1, 0, 5, radius);
+			doAnimateClose(mItemButton2, 1, 5, radius);
+			doAnimateClose(mItemButton3, 2, 5, radius);
+			doAnimateClose(mItemButton4, 3, 5, radius);
+			doAnimateClose(mItemButton5, 4, 5, radius);
 		}
 		cityName = findButton(v.getId()).getText().toString();
 		mMenuButton.setText(cityName);
@@ -258,4 +256,5 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 
 		set.setDuration(1 * 500).start();
 	}
+
 }

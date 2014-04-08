@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:listViewAttr="http://schemas.android.com/apk/res/mayi.lagou.com"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
     <LinearLayout
         android:id="@+id/lay_search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_margin="8dp"
         android:background="@color/white"
         android:orientation="horizontal"
@@ -16,28 +15,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="5dp"
-            android:textColor="#d8d8d8"
             android:layout_gravity="center_vertical"
             android:drawableLeft="@drawable/explore_search_normal"
+            android:drawablePadding="5dp"
             android:gravity="center_vertical"
-            android:text="输入关键字精确查找" />
+            android:text="输入关键字精确查找"
+            android:textColor="#d8d8d8" />
     </LinearLayout>
 
-    <mayi.lagou.com.view.DropDownListView
-        android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView
+        android:id="@+id/job_list"
         android:layout_below="@id/lay_search"
-        android:divider="@color/hole_background"
-        android:dividerHeight="6dp"
-        android:drawSelectorOnTop="false"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:scrollbars="none"
-        listViewAttr:isAutoLoadOnBottom="true"
-        listViewAttr:isDropDownStyle="true"
-        listViewAttr:isOnBottomStyle="true" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <FrameLayout
         android:layout_width="match_parent"

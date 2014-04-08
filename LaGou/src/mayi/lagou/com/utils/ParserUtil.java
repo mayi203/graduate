@@ -34,7 +34,6 @@ public class ParserUtil {
 			position.setStage(getCompanySpan(companyNodes.get(i), 2));
 			position.setScale(getTimeOrScale(companyNodes.get(i)));
 			position.setWeal(getWeal(companyNodes.get(i)));
-//			System.out.println(position.getWeal().get(0));
 			positionList.add(position);
 		}
 		return positionList;
@@ -68,7 +67,10 @@ public class ParserUtil {
 	}
 
 	private static String getCompany(Element element) {
-		return element.select("a").text();
+		if (element.select("div.mb10") != null)
+			return element.select("div.mb10").select("a").text();
+		else
+			return element.select("a").text();
 	}
 
 	private static String getMoney(Element element) {

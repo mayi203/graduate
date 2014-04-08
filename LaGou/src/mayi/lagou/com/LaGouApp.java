@@ -3,6 +3,7 @@
  */
 package mayi.lagou.com;
 
+import android.app.Activity;
 import android.app.Application;
 
 /**
@@ -31,5 +32,21 @@ public class LaGouApp extends Application {
 		}
 		return _instance;
 	}
+	private static int screenWidth = 0;
 
+	public static int getScreenWidth(Activity activity) {
+		if (screenWidth == 0) {
+			screenWidth = activity.getWindow().getWindowManager().getDefaultDisplay().getWidth();
+		}
+		return screenWidth;
+	}
+
+	private static int screenHeight = 0;
+
+	public static int getScreenHeight(Activity activity) {
+		if (screenHeight == 0) {
+			screenHeight = activity.getWindow().getWindowManager().getDefaultDisplay().getHeight();
+		}
+		return screenHeight;
+	}
 }
