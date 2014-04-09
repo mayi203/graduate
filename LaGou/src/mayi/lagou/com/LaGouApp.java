@@ -34,6 +34,7 @@ public class LaGouApp extends Application {
 	}
 	private static int screenWidth = 0;
 
+	@SuppressWarnings("deprecation")
 	public static int getScreenWidth(Activity activity) {
 		if (screenWidth == 0) {
 			screenWidth = activity.getWindow().getWindowManager().getDefaultDisplay().getWidth();
@@ -43,6 +44,7 @@ public class LaGouApp extends Application {
 
 	private static int screenHeight = 0;
 
+	@SuppressWarnings("deprecation")
 	public static int getScreenHeight(Activity activity) {
 		if (screenHeight == 0) {
 			screenHeight = activity.getWindow().getWindowManager().getDefaultDisplay().getHeight();

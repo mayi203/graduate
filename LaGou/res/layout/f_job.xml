@@ -3,10 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <RelativeLayout
+        android:id="@+id/topbar"
+        style="@style/topBar" >
+
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/selecter_profile" />
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/lay_search"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_below="@id/topbar"
         android:layout_margin="8dp"
         android:background="@color/white"
         android:orientation="horizontal"
@@ -25,9 +39,9 @@
 
     <mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView
         android:id="@+id/job_list"
-        android:layout_below="@id/lay_search"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/lay_search" />
 
     <FrameLayout
         android:layout_width="match_parent"

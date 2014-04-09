@@ -3,6 +3,9 @@
  */
 package mayi.lagou.com.fragment;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.R;
@@ -13,9 +16,12 @@ import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -45,6 +51,10 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	private String cityName;
 	private boolean mIsMenuOpen = false;
 	private int radius;
+	private int pageNum = 1;
+	List<LaGouPosition> allData;
+	@SuppressLint("SimpleDateFormat")
+	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
 
 	/*
 	 * (non-Javadoc)
@@ -77,13 +87,16 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	 * 
 	 * @see mayi.lagou.com.core.BaseFragment#initValue()
 	 */
+	@SuppressWarnings("static-access")
 	@Override
 	public void initValue() {
-		radius=app().getScreenWidth(getActivity())/2-30;
+		radius = app().getScreenWidth(getActivity()) * 2 / 5;
 		mPullToRefreshListView.setPullLoadEnabled(true);
 		mListView = mPullToRefreshListView.getRefreshableView();
+		mListView.setDividerHeight(10);
 		adapter = new JobItemAdapt(getActivity());
 		mListView.setAdapter(adapter);
+		allData = new ArrayList<LaGouPosition>();
 	}
 
 	/*
@@ -99,13 +112,15 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 					@Override
 					public void onPullDownToRefresh(
 							PullToRefreshBase<ListView> refreshView) {
-
+						pageNum = 1;
+						refreshData(pageNum, "down");
 					}
 
 					@Override
 					public void onPullUpToRefresh(
 							PullToRefreshBase<ListView> refreshView) {
-
+						pageNum++;
+						refreshData(pageNum, "up");
 					}
 				});
 		findViewById(R.id.lay_search).setOnClickListener(new OnClickListener() {
@@ -121,6 +136,15 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		mItemButton3.setOnClickListener(this);
 		mItemButton4.setOnClickListener(this);
 		mItemButton5.setOnClickListener(this);
+		mListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				addFragmentToStack(R.id.contain, new JobDetailFragment(allData
+						.get(position).getPositionUrl()));
+			}
+		});
 	}
 
 	/*
@@ -131,18 +155,43 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		refreshData();
+		refreshData(1, "down");
 	}
 
-	private void refreshData() {
-		client.get(LaGouApi.Host, new AsyncHttpResponseHandler() {
-			@Override
-			public void onSuccess(String response) {
-				List<LaGouPosition> list = ParserUtil.parserPosition(response);
-				adapter.addItems(list);
-				System.out.println(list.get(0).getCompany());
-			}
-		});
+	private void setLastUpdateTime() {
+		String text = formatDateTime(System.currentTimeMillis());
+		mPullToRefreshListView.setLastUpdatedLabel(text);
+	}
+
+	private String formatDateTime(long time) {
+		if (0 == time) {
+			return "";
+		}
+		return mDateFormat.format(new Date(time));
+	}
+
+	private void refreshData(int pageNum, final String type) {
+		client.get(LaGouApi.Host + LaGouApi.All_Jobs + "&pn=" + pageNum,
+				new AsyncHttpResponseHandler() {
+					@Override
+					public void onSuccess(String response) {
+						List<LaGouPosition> list = ParserUtil
+								.parserPosition(response);
+						if ("down".equals(type)) {
+							adapter.deleteAllItems();
+							adapter.addItems(list);
+							setLastUpdateTime();
+							mPullToRefreshListView.onPullDownRefreshComplete();
+						} else if ("up".equals(type)) {
+							adapter.addItems(list);
+							mPullToRefreshListView.onPullUpRefreshComplete();
+						}
+						if (list != null && list.size() > 0) {
+							allData.addAll(list);
+						}
+						System.out.println(list.get(0).getCompany());
+					}
+				});
 	}
 
 	/*

@@ -525,58 +525,68 @@ containing a value of this type.
         public static final int ic_drawer=0x7f020007;
         public static final int ic_launcher=0x7f020008;
         public static final int job_card_bg=0x7f020009;
-        public static final int selector_cricle_btn=0x7f02000a;
-        public static final int shap_search_item=0x7f02000b;
-        public static final int xsearch_loading=0x7f02000c;
-        public static final int xsearch_msg_pull_arrow_down=0x7f02000d;
+        public static final int profile_icon_bright=0x7f02000a;
+        public static final int profile_icon_dark=0x7f02000b;
+        public static final int selecter_profile=0x7f02000c;
+        public static final int selector_cricle_btn=0x7f02000d;
+        public static final int shap_search_item=0x7f02000e;
+        public static final int xsearch_loading=0x7f02000f;
+        public static final int xsearch_msg_pull_arrow_down=0x7f020010;
     }
     public static final class id {
-        public static final int action_websearch=0x7f0b0023;
-        public static final int address=0x7f0b0013;
-        public static final int compony=0x7f0b0014;
-        public static final int content_frame=0x7f0b0001;
-        public static final int drawer_layout=0x7f0b0000;
-        public static final int drop_down_list_footer_button=0x7f0b0004;
-        public static final int drop_down_list_footer_progress_bar=0x7f0b0003;
-        public static final int drop_down_list_header_default_text=0x7f0b0008;
-        public static final int drop_down_list_header_default_text_layout=0x7f0b0006;
-        public static final int drop_down_list_header_image=0x7f0b0007;
-        public static final int drop_down_list_header_progress_bar=0x7f0b0005;
-        public static final int drop_down_list_header_second_text=0x7f0b0009;
-        public static final int education=0x7f0b0016;
-        public static final int exprience=0x7f0b0017;
-        public static final int item1=0x7f0b000d;
-        public static final int item2=0x7f0b000e;
-        public static final int item3=0x7f0b000f;
-        public static final int item4=0x7f0b0010;
-        public static final int item5=0x7f0b0011;
-        public static final int job_list=0x7f0b000b;
-        public static final int lay_search=0x7f0b000a;
-        public static final int left_drawer=0x7f0b0002;
-        public static final int menu=0x7f0b000c;
-        public static final int position=0x7f0b0012;
-        public static final int pull_to_load_footer_content=0x7f0b0019;
-        public static final int pull_to_load_footer_hint_textview=0x7f0b001b;
-        public static final int pull_to_load_footer_progressbar=0x7f0b001a;
-        public static final int pull_to_refresh_header_arrow=0x7f0b0021;
-        public static final int pull_to_refresh_header_content=0x7f0b001c;
-        public static final int pull_to_refresh_header_hint_textview=0x7f0b001e;
-        public static final int pull_to_refresh_header_progressbar=0x7f0b0022;
-        public static final int pull_to_refresh_header_text=0x7f0b001d;
-        public static final int pull_to_refresh_header_time=0x7f0b0020;
-        public static final int pull_to_refresh_last_update_time_text=0x7f0b001f;
-        public static final int salary=0x7f0b0015;
+        public static final int action_websearch=0x7f0b0027;
+        public static final int address=0x7f0b0017;
+        public static final int compony=0x7f0b001c;
+        public static final int contain=0x7f0b0000;
+        public static final int content_frame=0x7f0b0002;
+        public static final int des=0x7f0b0015;
+        public static final int drawer_layout=0x7f0b0001;
+        public static final int drop_down_list_footer_button=0x7f0b0005;
+        public static final int drop_down_list_footer_progress_bar=0x7f0b0004;
+        public static final int drop_down_list_header_default_text=0x7f0b0009;
+        public static final int drop_down_list_header_default_text_layout=0x7f0b0007;
+        public static final int drop_down_list_header_image=0x7f0b0008;
+        public static final int drop_down_list_header_progress_bar=0x7f0b0006;
+        public static final int drop_down_list_header_second_text=0x7f0b000a;
+        public static final int education=0x7f0b001a;
+        public static final int exprience=0x7f0b001b;
+        public static final int item1=0x7f0b0010;
+        public static final int item2=0x7f0b0011;
+        public static final int item3=0x7f0b0012;
+        public static final int item4=0x7f0b0013;
+        public static final int item5=0x7f0b0014;
+        public static final int job_list=0x7f0b000e;
+        public static final int lay_search=0x7f0b000d;
+        public static final int left_drawer=0x7f0b0003;
+        public static final int menu=0x7f0b000f;
+        public static final int position=0x7f0b0016;
+        public static final int profile=0x7f0b000c;
+        public static final int pull_to_load_footer_content=0x7f0b001d;
+        public static final int pull_to_load_footer_hint_textview=0x7f0b001f;
+        public static final int pull_to_load_footer_progressbar=0x7f0b001e;
+        public static final int pull_to_refresh_header_arrow=0x7f0b0025;
+        public static final int pull_to_refresh_header_content=0x7f0b0020;
+        public static final int pull_to_refresh_header_hint_textview=0x7f0b0022;
+        public static final int pull_to_refresh_header_progressbar=0x7f0b0026;
+        public static final int pull_to_refresh_header_text=0x7f0b0021;
+        public static final int pull_to_refresh_header_time=0x7f0b0024;
+        public static final int pull_to_refresh_last_update_time_text=0x7f0b0023;
+        public static final int salary=0x7f0b0019;
         public static final int time=0x7f0b0018;
+        public static final int topbar=0x7f0b000b;
     }
     public static final class layout {
-        public static final int a_home_page=0x7f030000;
-        public static final int drawer_list_item=0x7f030001;
-        public static final int drop_down_list_footer=0x7f030002;
-        public static final int drop_down_list_header=0x7f030003;
-        public static final int f_job=0x7f030004;
-        public static final int item_job=0x7f030005;
-        public static final int pull_to_load_footer=0x7f030006;
-        public static final int pull_to_refresh_header=0x7f030007;
+        public static final int a_home=0x7f030000;
+        public static final int a_home_page=0x7f030001;
+        public static final int drawer_list_item=0x7f030002;
+        public static final int drop_down_list_footer=0x7f030003;
+        public static final int drop_down_list_header=0x7f030004;
+        public static final int f_job=0x7f030005;
+        public static final int f_job_detail=0x7f030006;
+        public static final int f_user_info=0x7f030007;
+        public static final int item_job=0x7f030008;
+        public static final int pull_to_load_footer=0x7f030009;
+        public static final int pull_to_refresh_header=0x7f03000a;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
@@ -639,11 +649,13 @@ containing a value of this type.
 
 
 
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
 
 
 
@@ -674,6 +686,7 @@ containing a value of this type.
         public static final int drop_down_list_header_font_style=0x7f090006;
         public static final int drop_down_list_header_progress_bar_style=0x7f090004;
         public static final int drop_down_list_header_second_font_style=0x7f090007;
+        public static final int topBar=0x7f090009;
     }
     public static final class styleable {
         /** Attributes that can be used with a drop_down_list_attr.

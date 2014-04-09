@@ -103,7 +103,7 @@ public class JobItemAdapt extends BaseAdapter {
 		holder.salary.setText(objects.get(position).getMoney().replace(" ", "").replace("：", ":"));
 		holder.education.setText(objects.get(position).getEducation().replace(" ", "").replace("：", ":"));
 		holder.exprience.setText(objects.get(position).getExperience().replace(" ", "").replace("：", ":"));
-		holder.time.setText(objects.get(position).getTime());
+		holder.time.setText(objects.get(position).getTime().replace("发布", ""));
 		return convertview;
 	}
 
