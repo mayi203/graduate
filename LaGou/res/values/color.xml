@@ -283,7 +283,7 @@
     <!-- 水鸭色 -->
     <color name="green">#008000</color>
     <!-- 绿色 -->
-    <color name="darkgreen">#006400</color>
+    <color name="darkgreen">#019875</color>
     <!-- 暗绿色 -->
     <color name="blue">#0000FF</color>
     <!-- 蓝色 -->
@@ -301,5 +301,7 @@
     <color name="drop_down_list_header_second_font_color">#000000</color>
     <!-- drop down list footer font color -->
     <color name="drop_down_list_footer_font_color">#000000</color>
+    <!-- NetProgressDialog BackgroundColor -->
+    <color name="black_gray">#4d4d4d</color>
 
 </resources>

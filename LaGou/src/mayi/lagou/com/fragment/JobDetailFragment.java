@@ -4,6 +4,7 @@ import mayi.lagou.com.R;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.PositionDetail;
 import mayi.lagou.com.utils.ParserUtil;
+import mayi.lagou.com.widget.networkdialog.DialogUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -64,6 +65,7 @@ public class JobDetailFragment extends BaseFragment {
 	}
 
 	private void refreshData() {
+		DialogUtils.showProcessDialog(getActivity(), true);
 		client.get(mUrl, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
@@ -82,7 +84,20 @@ public class JobDetailFragment extends BaseFragment {
 						+ detail.getScale() + "|" + detail.getStage() + "\n"
 						+ "地址：" + detail.getAddress());
 				details.setText(detail.getJobDetail());
+				DialogUtils.hideProcessDialog();
 			}
 		});
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.support.v4.app.Fragment#onDestroyView()
+	 */
+	@Override
+	public void onDestroyView() {
+		DialogUtils.hideProcessDialog();
+		super.onDestroyView();
+	}
+
 }

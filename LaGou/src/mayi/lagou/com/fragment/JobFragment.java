@@ -13,6 +13,7 @@ import mayi.lagou.com.adapter.JobItemAdapt;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.LaGouPosition;
 import mayi.lagou.com.utils.ParserUtil;
+import mayi.lagou.com.widget.networkdialog.DialogUtils;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
@@ -171,6 +172,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 			final String type) {
 		String url = LaGouApi.Host + LaGouApi.Jobs + jobTYpe + "?city=" + city
 				+ "&pn=" + pageNum;
+		DialogUtils.showProcessDialog(getActivity(), true);
 		client.get(url, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
@@ -188,6 +190,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 					allData.addAll(list);
 				}
 				System.out.println(list.get(0).getCompany());
+				DialogUtils.hideProcessDialog();
 			}
 		});
 	}
@@ -300,6 +303,17 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		});
 
 		set.setDuration(1 * 500).start();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.support.v4.app.Fragment#onDestroyView()
+	 */
+	@Override
+	public void onDestroyView() {
+		DialogUtils.hideProcessDialog();
+		super.onDestroyView();
 	}
 
 }
