@@ -61,8 +61,17 @@
 
     <style name="topBar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">45dp</item>
-        <item name="android:background">@color/darkturquoise</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@color/darkgreen</item>
     </style>
 
+    <style name="back_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableLeft">@drawable/back_arrow</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginLeft">4dp</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
 </resources>

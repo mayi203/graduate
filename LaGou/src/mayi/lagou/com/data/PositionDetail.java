@@ -4,7 +4,6 @@
 package mayi.lagou.com.data;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author wenfeili@163.com
@@ -46,7 +45,7 @@ public class PositionDetail implements Serializable {
 	/** 发布时间 */
 	private String releaseTime;
 	/** 职位详情 */
-	private List<String> jobDetail;
+	private String jobDetail;
 
 	/**
 	 * @return the field
@@ -256,7 +255,7 @@ public class PositionDetail implements Serializable {
 	/**
 	 * @return the jobDetail
 	 */
-	public List<String> getJobDetail() {
+	public String getJobDetail() {
 		return jobDetail;
 	}
 
@@ -264,7 +263,7 @@ public class PositionDetail implements Serializable {
 	 * @param jobDetail
 	 *            the jobDetail to set
 	 */
-	public void setJobDetail(List<String> jobDetail) {
+	public void setJobDetail(String jobDetail) {
 		this.jobDetail = jobDetail;
 	}
 

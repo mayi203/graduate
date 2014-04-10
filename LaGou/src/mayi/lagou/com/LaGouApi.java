@@ -10,6 +10,7 @@ package mayi.lagou.com;
  */
 public class LaGouApi {
 	public static String Host = "http://www.lagou.com";
-	public static String All_Jobs="/jobs/list_所有职位?city=全国";
-	public static String Job_Android = "/jobs/list_Android?labelWords=label&city=全国";
+	public static String LogIn = "/user/login.json";
+	public static String Resume = "/resume/myresume.html";
+	public static String Jobs = "/jobs/list_";
 }

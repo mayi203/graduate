@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import mayi.lagou.com.data.LaGouPosition;
 import mayi.lagou.com.data.PositionDetail;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -120,6 +118,7 @@ public class ParserUtil {
 				doc.select("dd.job_request").get(0), "<br />([^<div>]*)", 0));
 		positionDetail.setReleaseTime(getDetailReleaseTime(doc));
 		positionDetail.setJobDetail(obtainJobDetail(doc));
+		System.out.println(obtainJobDetail(doc));
 		return positionDetail;
 	}
 
@@ -127,9 +126,23 @@ public class ParserUtil {
 	 * @param doc
 	 * @return
 	 */
+	private static String obtainJobDetail(Document doc) {
+		String detail = doc.select("dd.job_bt").toString().replace(" ", "")
+				.replace("<br />", "<br /><br />")
+				.replace("</h3>", "</h3><br />").replace("</p>", "</p><br />")
+				.replace("</li>", "</li><br />").replace("&nbsp", "")
+				.replace(";", "");
+		Document dom = Jsoup.parse(detail);
+		return dom.text().replace(" ", "\n").trim();
+	}
+
+	/**
+	 * @param doc
+	 * @return
+	 */
 	private static String getComIconUrl(Document doc) {
-		return doc.select("dl.job_company").select("h2").select("img")
-				.attr("src").toString();
+		return doc.select("dl.job_company").select("img.b2").attr("src")
+				.toString();
 	}
 
 	/**
@@ -139,19 +152,6 @@ public class ParserUtil {
 	private static String getDetailAddress(Document doc) {
 		Elements divs = doc.select("dl.job_company").select("dd").select("div");
 		return divs.get(0).text();
-	}
-
-	/**
-	 * @param doc
-	 * @return
-	 */
-	private static List<String> obtainJobDetail(Document doc) {
-		List<String> jobDetails = new ArrayList<String>();
-		Elements ps = doc.select("dd.job_bt").select("p");
-		for (int i = 0; i < ps.size(); i++) {
-			jobDetails.add(ps.get(i).text());
-		}
-		return jobDetails;
 	}
 
 	/**

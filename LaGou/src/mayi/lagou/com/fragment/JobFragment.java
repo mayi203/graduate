@@ -24,6 +24,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
@@ -41,6 +43,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 
 	private PullToRefreshListView mPullToRefreshListView;
 	private ListView mListView;
+	public TextView search;
 	private JobItemAdapt adapter;
 	private Button mMenuButton;
 	private Button mItemButton1;
@@ -51,28 +54,22 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	private String cityName;
 	private boolean mIsMenuOpen = false;
 	private int radius;
-	private int pageNum = 1;
+	public int pageNum = 1;
+	public static String city = "全国";
+	public static String jobType = "所有职位";
 	List<LaGouPosition> allData;
+	private static JobFragment instance;
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see mayi.lagou.com.core.BaseFragment#contentView()
-	 */
 	@Override
 	public int contentView() {
 		return R.layout.f_job;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see mayi.lagou.com.core.BaseFragment#findViewsById()
-	 */
 	@Override
 	public void findViewsById() {
+		search = findTextView(R.id.seatch_txt);
 		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.job_list);
 		mMenuButton = findButton(R.id.menu);
 		mItemButton1 = findButton(R.id.item1);
@@ -82,14 +79,10 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		mItemButton5 = findButton(R.id.item5);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see mayi.lagou.com.core.BaseFragment#initValue()
-	 */
 	@SuppressWarnings("static-access")
 	@Override
 	public void initValue() {
+		instance = this;
 		radius = app().getScreenWidth(getActivity()) * 2 / 5;
 		mPullToRefreshListView.setPullLoadEnabled(true);
 		mListView = mPullToRefreshListView.getRefreshableView();
@@ -99,13 +92,15 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		allData = new ArrayList<LaGouPosition>();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see mayi.lagou.com.core.BaseFragment#initListener()
-	 */
 	@Override
 	public void initListener() {
+		findImageView(R.id.profile).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				addFragmentToStack(R.id.contain, new UserInfoFragment());
+			}
+		});
 		mPullToRefreshListView
 				.setOnRefreshListener(new OnRefreshListener<ListView>() {
 
@@ -113,21 +108,21 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 					public void onPullDownToRefresh(
 							PullToRefreshBase<ListView> refreshView) {
 						pageNum = 1;
-						refreshData(pageNum, "down");
+						refreshData(jobType, city, pageNum, "down");
 					}
 
 					@Override
 					public void onPullUpToRefresh(
 							PullToRefreshBase<ListView> refreshView) {
 						pageNum++;
-						refreshData(pageNum, "up");
+						refreshData(jobType, city, pageNum, "up");
 					}
 				});
 		findViewById(R.id.lay_search).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				changeFragment(new SearchFragment(), R.id.content_frame);
+				addFragmentToStack(R.id.contain, new SearchFragment());
 			}
 		});
 		mMenuButton.setOnClickListener(this);
@@ -147,15 +142,14 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		});
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.support.v4.app.Fragment#onResume()
-	 */
+	public static JobFragment getInsatance() {
+		return instance;
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
-		refreshData(1, "down");
+		refreshData(jobType, city, 1, "down");
 	}
 
 	private void setLastUpdateTime() {
@@ -170,37 +164,38 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		return mDateFormat.format(new Date(time));
 	}
 
-	private void refreshData(int pageNum, final String type) {
-		client.get(LaGouApi.Host + LaGouApi.All_Jobs + "&pn=" + pageNum,
-				new AsyncHttpResponseHandler() {
-					@Override
-					public void onSuccess(String response) {
-						List<LaGouPosition> list = ParserUtil
-								.parserPosition(response);
-						if ("down".equals(type)) {
-							adapter.deleteAllItems();
-							adapter.addItems(list);
-							setLastUpdateTime();
-							mPullToRefreshListView.onPullDownRefreshComplete();
-						} else if ("up".equals(type)) {
-							adapter.addItems(list);
-							mPullToRefreshListView.onPullUpRefreshComplete();
-						}
-						if (list != null && list.size() > 0) {
-							allData.addAll(list);
-						}
-						System.out.println(list.get(0).getCompany());
-					}
-				});
+	/**
+	 * type down清除现有，重新加载 up加载更多
+	 */
+	public void refreshData(String jobTYpe, String city, int pageNum,
+			final String type) {
+		String url = LaGouApi.Host + LaGouApi.Jobs + jobTYpe + "?city=" + city
+				+ "&pn=" + pageNum;
+		client.get(url, new AsyncHttpResponseHandler() {
+			@Override
+			public void onSuccess(String response) {
+				List<LaGouPosition> list = ParserUtil.parserPosition(response);
+				if ("down".equals(type)) {
+					adapter.deleteAllItems();
+					adapter.addItems(list);
+					setLastUpdateTime();
+					mPullToRefreshListView.onPullDownRefreshComplete();
+				} else if ("up".equals(type)) {
+					adapter.addItems(list);
+					mPullToRefreshListView.onPullUpRefreshComplete();
+				}
+				if (list != null && list.size() > 0) {
+					allData.addAll(list);
+				}
+				System.out.println(list.get(0).getCompany());
+			}
+		});
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.view.View.OnClickListener#onClick(android.view.View)
-	 */
 	@Override
 	public void onClick(View v) {
+		cityName = findButton(v.getId()).getText().toString();
+		findButton(v.getId()).setText("全国");
 		if (!mIsMenuOpen) {
 			mIsMenuOpen = true;
 			doAnimateOpen(mItemButton1, 0, 5, radius);
@@ -215,8 +210,9 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 			doAnimateClose(mItemButton3, 2, 5, radius);
 			doAnimateClose(mItemButton4, 3, 5, radius);
 			doAnimateClose(mItemButton5, 4, 5, radius);
+			city = cityName;
+			refreshData(jobType, cityName, pageNum, "down");
 		}
-		cityName = findButton(v.getId()).getText().toString();
 		mMenuButton.setText(cityName);
 	}
 

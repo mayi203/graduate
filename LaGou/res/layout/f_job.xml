@@ -13,13 +13,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:clickable="true"
             android:src="@drawable/selecter_profile" />
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/lay_search"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_below="@id/topbar"
         android:layout_margin="8dp"
         android:background="@color/white"
@@ -27,6 +28,7 @@
         android:padding="8dp" >
 
         <TextView
+            android:id="@+id/seatch_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -51,7 +53,7 @@
         <Button
             android:id="@+id/menu"
             style="@style/MenuStyle"
-            android:text="城市" />
+            android:text="全国" />
 
         <Button
             android:id="@+id/item1"
