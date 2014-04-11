@@ -2,6 +2,7 @@ package mayi.lagou.com.fragment;
 
 import mayi.lagou.com.R;
 import mayi.lagou.com.core.BaseFragment;
+import android.graphics.Color;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -49,6 +50,8 @@ public class SearchFragment extends BaseFragment {
 				JobFragment.getInsatance().refreshData(tags[position],
 						JobFragment.city, 1, "down");
 				JobFragment.getInsatance().search.setText(tags[position]);
+				JobFragment.getInsatance().search.setTextSize(18);
+				JobFragment.getInsatance().search.setTextColor(Color.BLACK);
 				getActivity().onBackPressed();
 			}
 		});

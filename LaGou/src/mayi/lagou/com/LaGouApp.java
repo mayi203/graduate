@@ -14,11 +14,6 @@ import android.app.Application;
  */
 public class LaGouApp extends Application {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Application#onCreate()
-	 */
 	private static LaGouApp _instance;
 	private ImageLoader imageLoader;
 	@Override

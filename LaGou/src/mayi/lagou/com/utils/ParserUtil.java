@@ -6,6 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mayi.lagou.com.data.LaGouPosition;
 import mayi.lagou.com.data.PositionDetail;
+import mayi.lagou.com.data.UserInfo;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -199,5 +201,25 @@ public class ParserUtil {
 	 */
 	private static String getDetailPositionName(Document doc) {
 		return doc.select("h1").attr("title").toString();
+	}
+
+	public static UserInfo parserUserInfo(String html) {
+		Document doc = Jsoup.parse(html);
+		UserInfo userInfo = new UserInfo();
+		userInfo.setBasicInfo(getBasicInfo(doc));
+		System.out.println("one tew " + userInfo.getBasicInfo());
+		return null;
+	}
+
+	/**
+	 * @param doc
+	 * @return
+	 */
+	private static String getBasicInfo(Document doc) {
+		String info = doc.select("div.basicShow").select("span").toString()
+				.replace("<br />", "\\n");
+		Document dom = Jsoup.parse(info);
+		System.out.println(info);
+		return dom.text();
 	}
 }

@@ -7,6 +7,15 @@
         android:id="@+id/topbar"
         style="@style/topBar" >
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="拉钩网"
+            android:layout_marginLeft="30dp"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
         <ImageView
             android:id="@+id/profile"
             android:layout_width="wrap_content"

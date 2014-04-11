@@ -99,7 +99,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				addFragmentToStack(R.id.contain, new UserInfoFragment());
+				addFragmentToStack(R.id.contain, new LoginFragment());
 			}
 		});
 		mPullToRefreshListView
@@ -213,8 +213,10 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 			doAnimateClose(mItemButton3, 2, 5, radius);
 			doAnimateClose(mItemButton4, 3, 5, radius);
 			doAnimateClose(mItemButton5, 4, 5, radius);
-			city = cityName;
-			refreshData(jobType, cityName, pageNum, "down");
+			if (!cityName.equals(city)) {
+				city = cityName;
+				refreshData(jobType, cityName, pageNum, "down");
+			}
 		}
 		mMenuButton.setText(cityName);
 	}

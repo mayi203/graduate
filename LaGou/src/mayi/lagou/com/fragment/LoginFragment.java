@@ -13,11 +13,11 @@ import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.R;
 import mayi.lagou.com.core.BaseFragment;
 
-public class UserInfoFragment extends BaseFragment implements OnClickListener {
+public class LoginFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public int contentView() {
-		return R.layout.f_user_info;
+		return R.layout.f_login;
 	}
 
 	@Override

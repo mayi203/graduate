@@ -17,6 +17,7 @@ public class JobDetailFragment extends BaseFragment {
 	private TextView title, require, release_time, com_name, com_del, details;
 	private String mUrl;
 	private ImageView com_img;
+	private View view;
 
 	public JobDetailFragment() {
 
@@ -33,6 +34,7 @@ public class JobDetailFragment extends BaseFragment {
 
 	@Override
 	public void findViewsById() {
+		view=findViewById(R.id.scroll);
 		title = findTextView(R.id.title);
 		require = findTextView(R.id.require);
 		release_time = findTextView(R.id.release_time);
@@ -85,6 +87,7 @@ public class JobDetailFragment extends BaseFragment {
 						+ "地址：" + detail.getAddress());
 				details.setText(detail.getJobDetail());
 				DialogUtils.hideProcessDialog();
+				view.setVisibility(View.VISIBLE);
 			}
 		});
 	}

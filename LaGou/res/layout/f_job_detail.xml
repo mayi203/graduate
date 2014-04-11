@@ -15,11 +15,13 @@
     </RelativeLayout>
 
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="45dp"
         android:layout_below="@id/lay_top"
-        android:scrollbars="none" >
+        android:layout_marginBottom="45dp"
+        android:scrollbars="none"
+        android:visibility="invisible" >
 
         <LinearLayout
             android:layout_width="match_parent"
