@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.R;
+import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.adapter.JobItemAdapt;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.LaGouPosition;
@@ -99,7 +100,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				addFragmentToStack(R.id.contain, new LoginFragment());
+				startActivity(UserInfoActicity.class);
 			}
 		});
 		mPullToRefreshListView

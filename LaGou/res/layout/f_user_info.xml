@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <RelativeLayout
-        android:id="@+id/top_lay"
+        android:id="@+id/top"
         style="@style/topBar" >
 
         <TextView
@@ -13,42 +13,18 @@
             android:text="个人中心" />
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/lay_info"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/top_lay"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:padding="15dp" >
+        android:layout_below="@id/top"
+        android:background="@color/white" >
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="请输入登录邮箱地址"
-            android:textSize="15dp" />
-
-        <EditText
-            android:id="@+id/psw"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="请输入密码"
-            android:textSize="15dp" />
-
-        <Button
-            android:id="@+id/login_btn"
-            android:padding="3dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/darkgreen"
-            android:textColor="@color/white"
-            android:text="登      录"
-            android:textSize="18dp" />
-    </LinearLayout>
+        <mayi.lagou.com.view.CircularImage
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop" />
+    </RelativeLayout>
 
 </RelativeLayout>

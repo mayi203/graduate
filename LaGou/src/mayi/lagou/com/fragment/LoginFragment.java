@@ -6,14 +6,19 @@ import java.util.Map;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.R;
+import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.core.BaseFragment;
+import mayi.lagou.com.utils.SharePreferenceUtil;
 
 public class LoginFragment extends BaseFragment implements OnClickListener {
+
+	private Refresh refresh;
 
 	@Override
 	public int contentView() {
@@ -48,6 +53,12 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 	}
 
 	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		refresh = (UserInfoActicity) activity;
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		getUserInfo();
@@ -77,7 +88,15 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 			@Override
 			public void onSuccess(String response) {
 				Log.v("lagou", response);
+				SharePreferenceUtil.putString(getActivity(), "email",
+						"wenfeili@163.com");
+				SharePreferenceUtil.putString(getActivity(), "psw", "l1w2f3");
+				refresh.refresh();
 			}
 		});
+	}
+
+	public interface Refresh {
+		public void refresh();
 	}
 }
