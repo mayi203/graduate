@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import mayi.lagou.com.data.EducationExperirnce;
+import mayi.lagou.com.data.JobExperience;
 import mayi.lagou.com.data.LaGouPosition;
 import mayi.lagou.com.data.PositionDetail;
+import mayi.lagou.com.data.ProjectExperience;
+import mayi.lagou.com.data.ProjectShow;
 import mayi.lagou.com.data.UserInfo;
 
 import org.jsoup.Jsoup;
@@ -14,6 +19,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class ParserUtil {
+
+	private static final String BROKEN = "BROKEN";
 
 	public static List<LaGouPosition> parserPosition(String html) {
 		Document doc = Jsoup.parse(html);
@@ -129,13 +136,13 @@ public class ParserUtil {
 	 * @return
 	 */
 	private static String obtainJobDetail(Document doc) {
-		String detail = doc.select("dd.job_bt").toString().replace(" ", "")
-				.replace("<br />", "<br /><br />")
-				.replace("</h3>", "</h3><br />").replace("</p>", "</p><br />")
-				.replace("</li>", "</li><br />").replace("&nbsp", "")
-				.replace(";", "");
+		String detail = doc.select("dd.job_bt").toString()
+				.replace("<br />", "<br /> " + BROKEN)
+				.replace("</h3>", "</h3> " + BROKEN)
+				.replace("</p>", "</p> " + BROKEN)
+				.replace("</li>", "</li> " + BROKEN).replace("&nbsp;", "");
 		Document dom = Jsoup.parse(detail);
-		return dom.text().replace(" ", "\n").trim();
+		return dom.text().replace(BROKEN, "\n").trim();
 	}
 
 	/**
@@ -171,12 +178,16 @@ public class ParserUtil {
 	private static String obtainDetailByRegular(Element source, String tag,
 			int index) {
 		List<String> info = new ArrayList<String>();
-		Pattern pattern = Pattern.compile(tag);
-		Matcher matcher = pattern.matcher(source.toString());
-		while (matcher.find()) {
-			info.add(matcher.group(1));
+		try {
+			Pattern pattern = Pattern.compile(tag);
+			Matcher matcher = pattern.matcher(source.toString());
+			while (matcher.find()) {
+				info.add(matcher.group(1));
+			}
+			return info.get(index);
+		} catch (IndexOutOfBoundsException e) {
+			return "";
 		}
-		return info.get(index);
 	}
 
 	/**
@@ -207,8 +218,155 @@ public class ParserUtil {
 		Document doc = Jsoup.parse(html);
 		UserInfo userInfo = new UserInfo();
 		userInfo.setBasicInfo(getBasicInfo(doc));
-		System.out.println("one tew " + userInfo.getBasicInfo());
-		return null;
+		userInfo.setUserIcon(getUserIcon(doc));
+		userInfo.setJobExpect(getJobExpect(doc));
+		userInfo.setJobExperience(obtainJobExperience(doc));
+		userInfo.setProjectExperience(obatinProjectExperience(doc));
+		userInfo.setResumePreviewUrl(getResumePreviewUrl(doc));
+		userInfo.setEducationExperience(obtainEducationExperience(doc));
+		userInfo.setSelfDescription(getSelfDescription(doc));
+		userInfo.setProjectShow(obtainProjectShow(doc));
+		return userInfo;
+	}
+
+	/**
+	 * @param doc
+	 * @return
+	 */
+	private static List<EducationExperirnce> obtainEducationExperience(
+			Document doc) {
+		try {
+			List<EducationExperirnce> educationExperience = new ArrayList<EducationExperirnce>();
+			EducationExperirnce education = null;
+			Elements educations = doc.select("ul.elist").select("div");
+			for (int i = 0; i < educations.size(); i++) {
+				education = new EducationExperirnce();
+				education.setSchool(educations.get(i).select("h3").text()
+						.trim());
+				education
+						.setMajor(educations.get(i).select("h4").text().trim());
+				education.setEducationTime(doc.select("ul.elist")
+						.select("span").get(i).text().trim());
+				educationExperience.add(education);
+			}
+			return educationExperience;
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+
+	/**
+	 * @param doc
+	 * @return
+	 */
+	private static List<ProjectShow> obtainProjectShow(Document doc) {
+
+		List<ProjectShow> projectShows = new ArrayList<ProjectShow>();
+		ProjectShow project = null;
+		try {
+			Elements projects = doc.select("div.workShow").select("div.f16");
+			for (int i = 0; i < projects.size(); i++) {
+				project = new ProjectShow();
+				project.setProjectUrl(projects.get(i).select("a").text());
+				project.setProjectDetail(doc.select("div.workShow").select("p")
+						.text().trim());
+				projectShows.add(project);
+			}
+		} catch (IndexOutOfBoundsException e) {
+		}
+		return projectShows;
+	}
+
+	/**
+	 * @param doc
+	 * @return
+	 */
+	private static String getSelfDescription(Document doc) {
+		try {
+			return doc.select("div.descriptionShow").text();
+		} catch (NullPointerException e) {
+			return null;
+		}
+	}
+
+	/**
+	 * @param doc
+	 * @return
+	 */
+	private static List<JobExperience> obtainJobExperience(Document doc) {
+		try {
+			List<JobExperience> jobExperiences = new ArrayList<JobExperience>();
+			JobExperience job = null;
+			Elements jobs = doc.select("ul.wlist").select("div");
+			for (int i = 0; i < jobs.size(); i++) {
+				job = new JobExperience();
+				job.setPositionName(jobs.get(i).select("h3").text());
+				job.setCompanyName(jobs.get(i).select("h4").text());
+				job.setIconUrl(jobs.get(i).select("img").attr("src"));
+				job.setJobTime(doc.select("ul.wlist").select("span").get(i)
+						.text());
+				jobExperiences.add(job);
+			}
+			return jobExperiences;
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+
+	/**
+	 * @param doc
+	 * @return
+	 */
+	private static List<ProjectExperience> obatinProjectExperience(Document doc) {
+		try {
+			List<ProjectExperience> projects = new ArrayList<ProjectExperience>();
+			ProjectExperience project = null;
+			Elements projectList = doc.select("div.projectList");
+			for (int i = 0; i < projectList.size(); i++) {
+				project = new ProjectExperience();
+				String proName = projectList.get(i).select("div.f16").text()
+						.trim();
+				proName.substring(0, proName.indexOf(" "));
+				project.setProjectName(proName.substring(0,
+						proName.indexOf(" ")));
+				project.setProjectTime(projectList.get(i).select("span").text()
+						.trim().trim());
+				project.setProjectDetail(projectList.get(i).select("div.dl1")
+						.text().trim());
+				projects.add(project);
+			}
+			return projects;
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+
+	/**
+	 * @param doc
+	 * @return
+	 */
+	private static String getJobExpect(Document doc) {
+		try {
+			return doc.select("div.expectShow").select("span").text().trim();
+		} catch (NullPointerException e) {
+			return null;
+		}
+	}
+
+	/**
+	 * @param doc
+	 * @return
+	 */
+	private static String getResumePreviewUrl(Document doc) {
+		return doc.select("div.nameShow").select("a").attr("href");
+	}
+
+	/**
+	 * @param doc
+	 * @return
+	 */
+	private static String getUserIcon(Document doc) {
+		return doc.select("div.basicShow").select("img").attr("src");
 	}
 
 	/**
@@ -216,10 +374,13 @@ public class ParserUtil {
 	 * @return
 	 */
 	private static String getBasicInfo(Document doc) {
-		String info = doc.select("div.basicShow").select("span").toString()
-				.replace("<br />", "\\n");
-		Document dom = Jsoup.parse(info);
-		System.out.println(info);
-		return dom.text();
+		try {
+			String info = doc.select("div.basicShow").select("span").toString()
+					.replace("<br />", BROKEN);
+			Document dom = Jsoup.parse(info);
+			return dom.text().replace(BROKEN, "\n").trim();
+		} catch (NullPointerException e) {
+			return null;
+		}
 	}
 }

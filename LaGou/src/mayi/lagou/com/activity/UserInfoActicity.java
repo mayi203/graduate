@@ -2,12 +2,17 @@ package mayi.lagou.com.activity;
 
 import mayi.lagou.com.R;
 import mayi.lagou.com.core.BaseFragmentActivity;
+import mayi.lagou.com.data.UserInfo;
 import mayi.lagou.com.fragment.LoginFragment;
 import mayi.lagou.com.fragment.LoginFragment.Refresh;
 import mayi.lagou.com.fragment.UserInfoFragment;
+import mayi.lagou.com.fragment.UserInfoFragment.OnRequestInfo;
 import mayi.lagou.com.utils.SharePreferenceUtil;
 
-public class UserInfoActicity extends BaseFragmentActivity implements Refresh {
+public class UserInfoActicity extends BaseFragmentActivity implements Refresh,
+		OnRequestInfo {
+
+	private UserInfo mInfo;
 
 	@Override
 	public int contentView() {
@@ -37,5 +42,15 @@ public class UserInfoActicity extends BaseFragmentActivity implements Refresh {
 		} else {
 			changeFragment(new UserInfoFragment(), R.id.u_contain);
 		}
+	}
+
+	@Override
+	public void setUserInfo(UserInfo user) {
+		mInfo = user;
+	}
+
+	@Override
+	public UserInfo getUserInfo() {
+		return mInfo;
 	}
 }

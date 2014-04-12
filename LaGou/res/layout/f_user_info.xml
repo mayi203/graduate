@@ -13,18 +13,33 @@
             android:text="个人中心" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <include
         android:id="@+id/lay_info"
-        android:layout_margin="8dp"
+        layout="@layout/l_user_info" />
+
+    <TextView
+        android:id="@+id/hope"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/top"
-        android:background="@color/white" >
+        android:layout_below="@id/lay_info"
+        android:layout_margin="8dp"
+        android:background="@color/white"
+        android:padding="8dp" />
 
-        <mayi.lagou.com.view.CircularImage
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:scaleType="centerCrop" />
+    <RelativeLayout
+        android:id="@+id/lay_resume"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hope"
+        android:layout_margin="8dp"
+        android:background="@color/white"
+        android:padding="8dp" >
+
+        <TextView
+            android:id="@+id/my_resume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的简历" />
     </RelativeLayout>
 
 </RelativeLayout>

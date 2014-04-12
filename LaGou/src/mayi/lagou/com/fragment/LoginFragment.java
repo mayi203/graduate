@@ -7,7 +7,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import mayi.lagou.com.LaGouApi;
@@ -77,23 +76,15 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 		client.post(LaGouApi.Host + LaGouApi.LogIn, params,
 				new AsyncHttpResponseHandler() {
 					@Override
-					public void onSuccess(String response) {
-						getResume(LaGouApi.Host + LaGouApi.Resume);
+					public void onSuccess(int statusCode, String content) {
+						if(statusCode==200){
+							SharePreferenceUtil.putString(getActivity(), "email",
+									"wenfeili@163.com");
+							SharePreferenceUtil.putString(getActivity(), "psw", "l1w2f3");
+							refresh.refresh();
+						}
 					}
 				});
-	}
-
-	private void getResume(String url) {
-		client.get(url, new AsyncHttpResponseHandler() {
-			@Override
-			public void onSuccess(String response) {
-				Log.v("lagou", response);
-				SharePreferenceUtil.putString(getActivity(), "email",
-						"wenfeili@163.com");
-				SharePreferenceUtil.putString(getActivity(), "psw", "l1w2f3");
-				refresh.refresh();
-			}
-		});
 	}
 
 	public interface Refresh {
