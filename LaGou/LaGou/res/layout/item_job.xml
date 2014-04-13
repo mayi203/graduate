@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:ellipsize="end"
+        android:maxEms="10"
+        android:singleLine="true"
+        android:text="职位"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/position"
+        android:text="地点"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:ellipsize="end"
+        android:maxEms="8"
+        android:singleLine="true"
+        android:text="公司" />
+
+    <TextView
+        android:id="@+id/salary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/position"
+        android:layout_marginRight="10dp"
+        android:text="薪资" />
+
+    <TextView
+        android:id="@+id/education"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/position"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@id/salary"
+        android:text="学历" />
+
+    <TextView
+        android:id="@+id/exprience"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/position"
+        android:layout_toRightOf="@id/education"
+        android:text="工作经验" />
+
+    <TextView
+        android:id="@+id/compony"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/salary"
+        android:layout_marginTop="5dp"
+        android:text="发布时间"
+        android:visibility="gone" />
+
+</RelativeLayout>

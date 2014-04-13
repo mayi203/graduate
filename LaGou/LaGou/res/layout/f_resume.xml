@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RelativeLayout style="@style/topBar" >
+
+        <TextView
+            android:id="@+id/back"
+            style="@style/back_text"
+            android:text="我的简历" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@color/white"
+                android:padding="8dp" >
+
+                <mayi.lagou.com.view.CircularImage
+                    android:id="@+id/icon"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/default_avatar" />
+
+                <TextView
+                    android:id="@+id/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/icon"
+                    android:paddingLeft="4dp"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/expect"
+                style="@style/resume_item"
+                android:layout_marginTop="-9dp"
+                android:text="期望工作" />
+
+            <TextView
+                android:id="@+id/experience"
+                style="@style/resume_item"
+                android:text="工作经历" />
+
+            <TextView
+                android:id="@+id/project"
+                style="@style/resume_item"
+                android:text="项目经验" />
+
+            <TextView
+                android:id="@+id/education"
+                style="@style/resume_item"
+                android:text="教育背景" />
+
+            <TextView
+                android:id="@+id/self"
+                style="@style/resume_item"
+                android:text="自我描述" />
+
+            <TextView
+                android:id="@+id/producation"
+                style="@style/resume_item"
+                android:text="作品展示" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
