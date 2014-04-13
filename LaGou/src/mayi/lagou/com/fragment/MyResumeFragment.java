@@ -25,8 +25,13 @@ public class MyResumeFragment extends BaseFragment {
 
 	@Override
 	public void findViewsById() {
+<<<<<<< HEAD
 		userIcon = findImageView(R.id.icon);
 		baseInfo = findTextView(R.id.base);
+=======
+		userIcon = findImageView(R.id.user_icon);
+		baseInfo = findTextView(R.id.base_info);
+>>>>>>> d6d0de978b2a720ecffbacdd41cfdeed07e7ef23
 		expect = findTextView(R.id.expect);
 		experience = findTextView(R.id.experience);
 		project = findTextView(R.id.project);
@@ -60,7 +65,11 @@ public class MyResumeFragment extends BaseFragment {
 		mUserInfo = userInfo.getUserInfo();
 		app().getImageLoader().loadImage(userIcon, mUserInfo.getUserIcon(),
 				R.drawable.default_avatar);
+<<<<<<< HEAD
 		baseInfo.setText(mUserInfo.getBasicInfo());
+=======
+		baseInfo.setText("基本信息");
+>>>>>>> d6d0de978b2a720ecffbacdd41cfdeed07e7ef23
 		expect.setText(mUserInfo.getJobExpect());
 		StringBuilder exp = new StringBuilder();
 		for (int i = 0, j = mUserInfo.getJobExperience().size(); i < j; i++) {

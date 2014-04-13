@@ -533,6 +533,7 @@ containing a value of this type.
         public static final int drawer_shadow=0x7f020008;
         public static final int drop_down_list_arrow=0x7f020009;
         public static final int explore_search_normal=0x7f02000a;
+<<<<<<< HEAD
         public static final int green_btn_actived=0x7f02000b;
         public static final int green_btn_normal=0x7f02000c;
         public static final int ic_drawer=0x7f02000d;
@@ -566,12 +567,46 @@ containing a value of this type.
         public static final int base=0x7f0b002c;
         public static final int base_info=0x7f0b0041;
         public static final int button_layout=0x7f0b004d;
+=======
+        public static final int ic_drawer=0x7f02000b;
+        public static final int ic_launcher=0x7f02000c;
+        public static final int iocn_dialog_process_01=0x7f02000d;
+        public static final int iocn_dialog_process_02=0x7f02000e;
+        public static final int iocn_dialog_process_03=0x7f02000f;
+        public static final int iocn_dialog_process_04=0x7f020010;
+        public static final int iocn_dialog_process_05=0x7f020011;
+        public static final int iocn_dialog_process_06=0x7f020012;
+        public static final int iocn_dialog_process_07=0x7f020013;
+        public static final int iocn_dialog_process_08=0x7f020014;
+        public static final int iocn_dialog_process_09=0x7f020015;
+        public static final int iocn_dialog_process_10=0x7f020016;
+        public static final int job_card_bg=0x7f020017;
+        public static final int lagou=0x7f020018;
+        public static final int profile_icon_bright=0x7f020019;
+        public static final int profile_icon_dark=0x7f02001a;
+        public static final int selecter_profile=0x7f02001b;
+        public static final int selector_cricle_btn=0x7f02001c;
+        public static final int shap_search_item=0x7f02001d;
+        public static final int waiting=0x7f02001e;
+        public static final int xsearch_loading=0x7f02001f;
+        public static final int xsearch_msg_pull_arrow_down=0x7f020020;
+    }
+    public static final class id {
+        public static final int action_websearch=0x7f0b0049;
+        public static final int address=0x7f0b0037;
+        public static final int back=0x7f0b001d;
+        public static final int base_info=0x7f0b003e;
+>>>>>>> d6d0de978b2a720ecffbacdd41cfdeed07e7ef23
         public static final int cloud_m=0x7f0b0005;
         public static final int cloud_s=0x7f0b0004;
         public static final int com_del=0x7f0b0024;
         public static final int com_img=0x7f0b0022;
         public static final int com_name=0x7f0b0023;
+<<<<<<< HEAD
         public static final int compony=0x7f0b003e;
+=======
+        public static final int compony=0x7f0b003b;
+>>>>>>> d6d0de978b2a720ecffbacdd41cfdeed07e7ef23
         public static final int contain=0x7f0b0000;
         public static final int content_frame=0x7f0b0002;
         public static final int details=0x7f0b0025;
@@ -587,6 +622,7 @@ containing a value of this type.
         public static final int drop_down_list_header_image=0x7f0b000e;
         public static final int drop_down_list_header_progress_bar=0x7f0b000c;
         public static final int drop_down_list_header_second_text=0x7f0b0010;
+<<<<<<< HEAD
         public static final int education=0x7f0b0030;
         public static final int email=0x7f0b0028;
         public static final int expect=0x7f0b002d;
@@ -595,6 +631,15 @@ containing a value of this type.
         public static final int gridview=0x7f0b0033;
         public static final int hope=0x7f0b0036;
         public static final int icon=0x7f0b002b;
+=======
+        public static final int education=0x7f0b002d;
+        public static final int email=0x7f0b0027;
+        public static final int expect=0x7f0b002a;
+        public static final int experience=0x7f0b002b;
+        public static final int exprience=0x7f0b003a;
+        public static final int gridview=0x7f0b0030;
+        public static final int hope=0x7f0b0033;
+>>>>>>> d6d0de978b2a720ecffbacdd41cfdeed07e7ef23
         public static final int item1=0x7f0b0017;
         public static final int item2=0x7f0b0018;
         public static final int item3=0x7f0b0019;
@@ -602,14 +647,20 @@ containing a value of this type.
         public static final int item5=0x7f0b001b;
         public static final int job_list=0x7f0b0015;
         public static final int lagou=0x7f0b0006;
+<<<<<<< HEAD
         public static final int lay_deliver=0x7f0b0026;
         public static final int lay_info=0x7f0b0035;
         public static final int lay_resume=0x7f0b0037;
+=======
+        public static final int lay_info=0x7f0b0032;
+        public static final int lay_resume=0x7f0b0034;
+>>>>>>> d6d0de978b2a720ecffbacdd41cfdeed07e7ef23
         public static final int lay_search=0x7f0b0013;
         public static final int lay_top=0x7f0b001c;
         public static final int left_drawer=0x7f0b0003;
         public static final int login_btn=0x7f0b002a;
         public static final int menu=0x7f0b0016;
+<<<<<<< HEAD
         public static final int message=0x7f0b004c;
         public static final int my_resume=0x7f0b0038;
         public static final int position=0x7f0b0039;
@@ -641,6 +692,38 @@ containing a value of this type.
         public static final int topbar=0x7f0b0011;
         public static final int u_contain=0x7f0b0007;
         public static final int user_icon=0x7f0b0040;
+=======
+        public static final int my_resume=0x7f0b0035;
+        public static final int position=0x7f0b0036;
+        public static final int producation=0x7f0b002f;
+        public static final int profile=0x7f0b0012;
+        public static final int project=0x7f0b002c;
+        public static final int psw=0x7f0b0028;
+        public static final int pull_to_load_footer_content=0x7f0b003f;
+        public static final int pull_to_load_footer_hint_textview=0x7f0b0041;
+        public static final int pull_to_load_footer_progressbar=0x7f0b0040;
+        public static final int pull_to_refresh_header_arrow=0x7f0b0047;
+        public static final int pull_to_refresh_header_content=0x7f0b0042;
+        public static final int pull_to_refresh_header_hint_textview=0x7f0b0044;
+        public static final int pull_to_refresh_header_progressbar=0x7f0b0048;
+        public static final int pull_to_refresh_header_text=0x7f0b0043;
+        public static final int pull_to_refresh_header_time=0x7f0b0046;
+        public static final int pull_to_refresh_last_update_time_text=0x7f0b0045;
+        public static final int release_time=0x7f0b0021;
+        public static final int require=0x7f0b0020;
+        public static final int salary=0x7f0b0039;
+        public static final int scroll=0x7f0b001e;
+        public static final int seatch_txt=0x7f0b0014;
+        public static final int self=0x7f0b002e;
+        public static final int tag=0x7f0b003c;
+        public static final int time=0x7f0b0038;
+        public static final int title=0x7f0b001f;
+        public static final int top=0x7f0b0031;
+        public static final int top_lay=0x7f0b0026;
+        public static final int topbar=0x7f0b0011;
+        public static final int u_contain=0x7f0b0007;
+        public static final int user_icon=0x7f0b003d;
+>>>>>>> d6d0de978b2a720ecffbacdd41cfdeed07e7ef23
     }
     public static final class layout {
         public static final int a_home=0x7f030000;
@@ -662,7 +745,10 @@ containing a value of this type.
         public static final int l_user_info=0x7f030010;
         public static final int pull_to_load_footer=0x7f030011;
         public static final int pull_to_refresh_header=0x7f030012;
+<<<<<<< HEAD
         public static final int v_mydialog=0x7f030013;
+=======
+>>>>>>> d6d0de978b2a720ecffbacdd41cfdeed07e7ef23
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
