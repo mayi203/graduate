@@ -1,0 +1,15 @@
+<animation-list
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:oneshot="false"
+  >
+  	<item android:drawable="@drawable/iocn_dialog_process_10" android:duration="100"></item>
+  	<item android:drawable="@drawable/iocn_dialog_process_09" android:duration="100"></item>
+  	<item android:drawable="@drawable/iocn_dialog_process_08" android:duration="100"></item>
+  	<item android:drawable="@drawable/iocn_dialog_process_07" android:duration="100"></item>
+  	<item android:drawable="@drawable/iocn_dialog_process_06" android:duration="100"></item>
+  	<item android:drawable="@drawable/iocn_dialog_process_05" android:duration="100"></item>
+  	<item android:drawable="@drawable/iocn_dialog_process_04" android:duration="100"></item>
+  	<item android:drawable="@drawable/iocn_dialog_process_03" android:duration="100"></item>
+  	<item android:drawable="@drawable/iocn_dialog_process_02" android:duration="100"></item>
+  	<item android:drawable="@drawable/iocn_dialog_process_01" android:duration="100"></item>
+</animation-list>

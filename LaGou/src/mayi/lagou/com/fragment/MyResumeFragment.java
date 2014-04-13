@@ -60,7 +60,7 @@ public class MyResumeFragment extends BaseFragment {
 		mUserInfo = userInfo.getUserInfo();
 		app().getImageLoader().loadImage(userIcon, mUserInfo.getUserIcon(),
 				R.drawable.default_avatar);
-		baseInfo.setText(mUserInfo.getBasicInfo());
+		baseInfo.setText("基本信息");
 		expect.setText(mUserInfo.getJobExpect());
 		StringBuilder exp = new StringBuilder();
 		for (int i = 0, j = mUserInfo.getJobExperience().size(); i < j; i++) {

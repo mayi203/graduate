@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/topbar"
+        style="@style/topBar" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="拉钩网"
+            android:layout_marginLeft="30dp"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:src="@drawable/selecter_profile" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/lay_search"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/topbar"
+        android:layout_margin="8dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="8dp" >
+
+        <TextView
+            android:id="@+id/seatch_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:drawableLeft="@drawable/explore_search_normal"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:text="输入关键字精确查找"
+            android:textColor="#d8d8d8" />
+    </LinearLayout>
+
+    <mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView
+        android:id="@+id/job_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/lay_search" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp" >
+
+        <Button
+            android:id="@+id/menu"
+            style="@style/MenuStyle"
+            android:text="全国" />
+
+        <Button
+            android:id="@+id/item1"
+            style="@style/MenuItemStyle"
+            android:text="北京"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/item2"
+            style="@style/MenuItemStyle"
+            android:text="上海"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/item3"
+            style="@style/MenuItemStyle"
+            android:text="杭州"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/item4"
+            style="@style/MenuItemStyle"
+            android:text="深圳"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/item5"
+            style="@style/MenuItemStyle"
+            android:text="广州"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</RelativeLayout>
