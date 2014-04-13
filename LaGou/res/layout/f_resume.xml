@@ -22,7 +22,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-<<<<<<< HEAD
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,15 +50,6 @@
                 android:id="@+id/expect"
                 style="@style/resume_item"
                 android:layout_marginTop="-9dp"
-=======
-            <include
-                layout="@layout/l_user_info" />
-
-            <TextView
-                android:id="@+id/expect"
-                android:layout_marginTop="-9dp"
-                style="@style/resume_item"
->>>>>>> d6d0de978b2a720ecffbacdd41cfdeed07e7ef23
                 android:text="期望工作" />
 
             <TextView

@@ -92,7 +92,6 @@
         <item name="android:layout_marginRight">8dp</item>
         <item name="android:background">@color/white</item>
     </style>
-<<<<<<< HEAD
 
     <style name="MyDialog" parent="@android:Theme.Dialog">
         <item name="android:windowFrame">@null</item>
@@ -102,6 +101,4 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-=======
->>>>>>> d6d0de978b2a720ecffbacdd41cfdeed07e7ef23
 </resources>
