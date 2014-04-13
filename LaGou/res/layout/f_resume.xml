@@ -10,7 +10,7 @@
         <TextView
             android:id="@+id/back"
             style="@style/back_text"
-            android:text="我的简历" />
+            android:text="@string/resume" />
     </RelativeLayout>
 
     <ScrollView
@@ -47,35 +47,52 @@
             </RelativeLayout>
 
             <TextView
+                style="@style/Info_Title"
+                android:text="@string/expect_job" />
+
+            <TextView
                 android:id="@+id/expect"
-                style="@style/resume_item"
-                android:layout_marginTop="-9dp"
-                android:text="期望工作" />
+                style="@style/resume_item" />
+
+            <TextView
+                style="@style/Info_Title"
+                android:text="@string/job_experience" />
 
             <TextView
                 android:id="@+id/experience"
-                style="@style/resume_item"
-                android:text="工作经历" />
+                style="@style/resume_item" />
+
+            <TextView
+                style="@style/Info_Title"
+                android:text="@string/project_experience" />
 
             <TextView
                 android:id="@+id/project"
-                style="@style/resume_item"
-                android:text="项目经验" />
+                style="@style/resume_item" />
+
+            <TextView
+                style="@style/Info_Title"
+                android:text="@string/education_experience" />
 
             <TextView
                 android:id="@+id/education"
-                style="@style/resume_item"
-                android:text="教育背景" />
+                style="@style/resume_item" />
+
+            <TextView
+                style="@style/Info_Title"
+                android:text="@string/self_description" />
 
             <TextView
                 android:id="@+id/self"
-                style="@style/resume_item"
-                android:text="自我描述" />
+                style="@style/resume_item" />
+
+            <TextView
+                style="@style/Info_Title"
+                android:text="@string/project_show" />
 
             <TextView
                 android:id="@+id/producation"
-                style="@style/resume_item"
-                android:text="作品展示" />
+                style="@style/resume_item" />
         </LinearLayout>
     </ScrollView>
 

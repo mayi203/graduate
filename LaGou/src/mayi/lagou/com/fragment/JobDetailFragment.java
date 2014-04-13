@@ -20,6 +20,8 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,8 @@ public class JobDetailFragment extends BaseFragment {
 	private OnChangeUrl onChangeUrl;
 	private boolean config = false;
 	private MyDialog myDialog;
+	private Animation anim;
+	private ImageView email;
 
 	public JobDetailFragment() {
 
@@ -58,11 +62,13 @@ public class JobDetailFragment extends BaseFragment {
 		com_img = findImageView(R.id.com_img);
 		details = findTextView(R.id.details);
 		deliver = findViewById(R.id.lay_deliver);
+		email=findImageView(R.id.email);
 	}
 
 	@Override
 	public void initValue() {
-
+		anim=AnimationUtils.loadAnimation(getActivity(), R.anim.email_anim);
+		anim.setRepeatMode(Animation.RESTART);
 	}
 
 	@Override
@@ -132,6 +138,10 @@ public class JobDetailFragment extends BaseFragment {
 		super.onDestroyView();
 	}
 
+	private void startAnim(){
+		email.setVisibility(View.VISIBLE);
+		email.setAnimation(anim);
+	}
 	private void getUserInfo() {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("email", "wenfeili@163.com");
@@ -159,6 +169,7 @@ public class JobDetailFragment extends BaseFragment {
 	}
 
 	private void deliverResume() {
+		startAnim();
 		String userId = SharePreferenceUtil.getString(getActivity(), "userId");
 		String jobId = mUrl.substring(mUrl.length() - 9, mUrl.length() - 5);
 		Map<String, String> map = new HashMap<String, String>();
@@ -197,7 +208,7 @@ public class JobDetailFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				refreshData();
+//				refreshData();
 				myDialog.dismiss();
 			}
 		});
@@ -232,6 +243,8 @@ public class JobDetailFragment extends BaseFragment {
 							if ("20".equals(code) || "21".equals(code)) {
 								Toast.makeText(getActivity(), message,
 										Toast.LENGTH_SHORT).show();
+							}else if("22".equals(code)){
+								
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();

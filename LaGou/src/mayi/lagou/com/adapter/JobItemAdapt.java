@@ -30,7 +30,7 @@ public class JobItemAdapt extends BaseAdapter {
 
 	static class ViewHolder {
 		private TextView position;
-		private TextView address;
+		// private TextView address;
 		private TextView compony;
 		private TextView salary;
 		private TextView education;
@@ -83,7 +83,8 @@ public class JobItemAdapt extends BaseAdapter {
 			convertview = LayoutInflater.from(context).inflate(
 					R.layout.item_job, null);
 			holder = new ViewHolder();
-			holder.address = (TextView) convertview.findViewById(R.id.address);
+			// holder.address = (TextView)
+			// convertview.findViewById(R.id.address);
 			holder.position = (TextView) convertview
 					.findViewById(R.id.position);
 			holder.compony = (TextView) convertview.findViewById(R.id.compony);
@@ -97,13 +98,23 @@ public class JobItemAdapt extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertview.getTag();
 		}
-		holder.address.setText(objects.get(position).getCity());
 		holder.position.setText(objects.get(position).getPositionName());
 		holder.compony.setText(objects.get(position).getCompany());
-		holder.salary.setText(objects.get(position).getMoney().replace(" ", "").replace("：", ":"));
-		holder.education.setText(objects.get(position).getEducation().replace(" ", "").replace("：", ":"));
-		holder.exprience.setText(objects.get(position).getExperience().replace(" ", "").replace("：", ":"));
+		holder.salary.setText(objects.get(position).getMoney()
+				.substring(objects.get(position).getMoney().indexOf("：") + 1)
+				+ "   |");
+		holder.education.setText(objects.get(position).getCity()
+				.replace("[", "").replace("]", "")
+				+ "   |");
+		holder.exprience.setText(objects.get(position).getCompany());
 		holder.time.setText(objects.get(position).getTime().replace("发布", ""));
+		// holder.address.setText(objects.get(position).getCity());
+		// holder.education.setText(objects.get(position).getEducation()
+		// .substring(objects.get(position).getEducation().indexOf("："))
+		// .replace("：", "|"));
+		// holder.exprience.setText(objects.get(position).getExperience()
+		// .substring(objects.get(position).getExperience().indexOf("："))
+		// .replace("：", "|"));
 		return convertview;
 	}
 

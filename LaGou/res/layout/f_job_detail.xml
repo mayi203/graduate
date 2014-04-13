@@ -11,7 +11,7 @@
         <TextView
             android:id="@+id/back"
             style="@style/back_text"
-            android:text="职位详情" />
+            android:text="@string/position_detail" />
     </RelativeLayout>
 
     <ScrollView
@@ -47,12 +47,14 @@
                 <TextView
                     android:id="@+id/require"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dimgrey" />
 
                 <TextView
                     android:id="@+id/release_time"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dimgrey" />
             </LinearLayout>
 
             <RelativeLayout
@@ -66,6 +68,7 @@
                     android:id="@+id/com_img"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
+                    android:contentDescription="@string/app_name"
                     android:scaleType="centerCrop" />
 
                 <TextView
@@ -75,6 +78,7 @@
                     android:layout_margin="4dp"
                     android:layout_marginBottom="3dp"
                     android:layout_toRightOf="@id/com_img"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -83,7 +87,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/com_name"
                     android:layout_marginLeft="4dp"
-                    android:layout_toRightOf="@id/com_img" />
+                    android:layout_toRightOf="@id/com_img"
+                    android:textColor="@color/dimgrey" />
             </RelativeLayout>
 
             <LinearLayout
@@ -95,9 +100,15 @@
                 android:padding="6dp" >
 
                 <TextView
+                    style="@style/Info_Title"
+                    android:text="@string/position_detail" />
+
+                <TextView
                     android:id="@+id/details"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/dimgrey" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -112,9 +123,20 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="投个简历"
+            android:text="@string/send_resume"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/email"
+        android:visibility="invisible" />
 
 </RelativeLayout>

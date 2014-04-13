@@ -63,30 +63,34 @@ public class MyResumeFragment extends BaseFragment {
 		baseInfo.setText(mUserInfo.getBasicInfo());
 		expect.setText(mUserInfo.getJobExpect());
 		StringBuilder exp = new StringBuilder();
-		for (int i = 0, j = mUserInfo.getJobExperience().size(); i < j; i++) {
+		for (int i = 0, j = mUserInfo.getJobExperience().size(); j > 0 && i < j; i++) {
 			exp.append(mUserInfo.getJobExperience().get(i).getCompanyName());
 		}
 		experience.setText(exp.toString());
 		StringBuilder pro = new StringBuilder();
-		for (int i = 0, j = mUserInfo.getProjectExperience().size(); i < j; i++) {
+		for (int i = 0, j = mUserInfo.getProjectExperience().size(); j > 0
+				&& i < j; i++) {
 			pro.append(mUserInfo.getProjectExperience().get(i).getProjectName()
 					+ mUserInfo.getProjectExperience().get(i).getProjectTime()
 					+ mUserInfo.getProjectExperience().get(i)
-							.getProjectDetail()+"\n");
+							.getProjectDetail() + "\n");
 		}
 		project.setText(pro.toString());
 		StringBuilder edu = new StringBuilder();
-		for (int i = 0, j = mUserInfo.getEducationExperience().size(); i < j; i++) {
+		for (int i = 0, j = mUserInfo.getEducationExperience().size(); j > 0
+				&& i < j; i++) {
 			edu.append(mUserInfo.getEducationExperience().get(i)
 					.getEducationTime()
 					+ mUserInfo.getEducationExperience().get(i).getSchool()
-					+ mUserInfo.getEducationExperience().get(i).getMajor()+"\n");
+					+ mUserInfo.getEducationExperience().get(i).getMajor()
+					+ "\n");
 		}
 		education.setText(edu.toString());
 		StringBuilder produ = new StringBuilder();
-		for (int i = 0, j = mUserInfo.getProjectShow().size(); i < j; i++) {
+		for (int i = 0, j = mUserInfo.getProjectShow().size(); j > 0 && i < j; i++) {
 			produ.append(mUserInfo.getProjectShow().get(i).getProjectUrl()
-					+ mUserInfo.getProjectShow().get(i).getProjectDetail()+"\n");
+					+ mUserInfo.getProjectShow().get(i).getProjectDetail()
+					+ "\n");
 		}
 		producation.setText(produ.toString());
 		self.setText(mUserInfo.getSelfDescription());

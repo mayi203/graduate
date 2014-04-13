@@ -12,8 +12,9 @@ public final class R {
         public static final int cloud_m_anim=0x7f040000;
         public static final int cloud_s_anim=0x7f040001;
         public static final int dialog_process_anim=0x7f040002;
-        public static final int lagou_anim=0x7f040003;
-        public static final int update_loading_progressbar_anim=0x7f040004;
+        public static final int email_anim=0x7f040003;
+        public static final int lagou_anim=0x7f040004;
+        public static final int update_loading_progressbar_anim=0x7f040005;
     }
     public static final class array {
         public static final int planets_array=0x7f080000;
@@ -532,36 +533,38 @@ containing a value of this type.
         public static final int default_ptr_rotate=0x7f020007;
         public static final int drawer_shadow=0x7f020008;
         public static final int drop_down_list_arrow=0x7f020009;
-        public static final int explore_search_normal=0x7f02000a;
-        public static final int green_btn_actived=0x7f02000b;
-        public static final int green_btn_normal=0x7f02000c;
-        public static final int ic_drawer=0x7f02000d;
-        public static final int ic_launcher=0x7f02000e;
-        public static final int iocn_dialog_process_01=0x7f02000f;
-        public static final int iocn_dialog_process_02=0x7f020010;
-        public static final int iocn_dialog_process_03=0x7f020011;
-        public static final int iocn_dialog_process_04=0x7f020012;
-        public static final int iocn_dialog_process_05=0x7f020013;
-        public static final int iocn_dialog_process_06=0x7f020014;
-        public static final int iocn_dialog_process_07=0x7f020015;
-        public static final int iocn_dialog_process_08=0x7f020016;
-        public static final int iocn_dialog_process_09=0x7f020017;
-        public static final int iocn_dialog_process_10=0x7f020018;
-        public static final int job_card_bg=0x7f020019;
-        public static final int lagou=0x7f02001a;
-        public static final int profile_icon_bright=0x7f02001b;
-        public static final int profile_icon_dark=0x7f02001c;
-        public static final int selecter_profile=0x7f02001d;
-        public static final int selector_btn_green=0x7f02001e;
-        public static final int selector_cricle_btn=0x7f02001f;
-        public static final int shap_search_item=0x7f020020;
-        public static final int waiting=0x7f020021;
-        public static final int xsearch_loading=0x7f020022;
-        public static final int xsearch_msg_pull_arrow_down=0x7f020023;
+        public static final int email=0x7f02000a;
+        public static final int explore_search_normal=0x7f02000b;
+        public static final int green_btn_actived=0x7f02000c;
+        public static final int green_btn_normal=0x7f02000d;
+        public static final int ic_drawer=0x7f02000e;
+        public static final int ic_launcher=0x7f02000f;
+        public static final int iocn_dialog_process_01=0x7f020010;
+        public static final int iocn_dialog_process_02=0x7f020011;
+        public static final int iocn_dialog_process_03=0x7f020012;
+        public static final int iocn_dialog_process_04=0x7f020013;
+        public static final int iocn_dialog_process_05=0x7f020014;
+        public static final int iocn_dialog_process_06=0x7f020015;
+        public static final int iocn_dialog_process_07=0x7f020016;
+        public static final int iocn_dialog_process_08=0x7f020017;
+        public static final int iocn_dialog_process_09=0x7f020018;
+        public static final int iocn_dialog_process_10=0x7f020019;
+        public static final int job_card_bg=0x7f02001a;
+        public static final int lagou=0x7f02001b;
+        public static final int left_tab=0x7f02001c;
+        public static final int profile_icon_bright=0x7f02001d;
+        public static final int profile_icon_dark=0x7f02001e;
+        public static final int right_arrow=0x7f02001f;
+        public static final int selecter_profile=0x7f020020;
+        public static final int selector_btn_green=0x7f020021;
+        public static final int selector_cricle_btn=0x7f020022;
+        public static final int shap_search_item=0x7f020023;
+        public static final int waiting=0x7f020024;
+        public static final int xsearch_loading=0x7f020025;
+        public static final int xsearch_msg_pull_arrow_down=0x7f020026;
     }
     public static final class id {
         public static final int action_websearch=0x7f0b0050;
-        public static final int address=0x7f0b003a;
         public static final int back=0x7f0b001d;
         public static final int base=0x7f0b002c;
         public static final int base_info=0x7f0b0041;
@@ -588,7 +591,7 @@ containing a value of this type.
         public static final int drop_down_list_header_progress_bar=0x7f0b000c;
         public static final int drop_down_list_header_second_text=0x7f0b0010;
         public static final int education=0x7f0b0030;
-        public static final int email=0x7f0b0028;
+        public static final int email=0x7f0b0027;
         public static final int expect=0x7f0b002d;
         public static final int experience=0x7f0b002e;
         public static final int exprience=0x7f0b003d;
@@ -629,15 +632,16 @@ containing a value of this type.
         public static final int pull_to_refresh_last_update_time_text=0x7f0b0048;
         public static final int release_time=0x7f0b0021;
         public static final int require=0x7f0b0020;
+        public static final int right_arrow=0x7f0b003b;
         public static final int salary=0x7f0b003c;
         public static final int scroll=0x7f0b001e;
         public static final int seatch_txt=0x7f0b0014;
         public static final int self=0x7f0b0031;
         public static final int tag=0x7f0b003f;
-        public static final int time=0x7f0b003b;
+        public static final int time=0x7f0b003a;
         public static final int title=0x7f0b001f;
         public static final int top=0x7f0b0034;
-        public static final int top_lay=0x7f0b0027;
+        public static final int top_lay=0x7f0b0028;
         public static final int topbar=0x7f0b0011;
         public static final int u_contain=0x7f0b0007;
         public static final int user_icon=0x7f0b0040;
@@ -682,8 +686,11 @@ containing a value of this type.
         public static final int drop_down_list_header_loading_text=0x7f070021;
         public static final int drop_down_list_header_pull_text=0x7f07001f;
         public static final int drop_down_list_header_release_text=0x7f070020;
+        public static final int education_experience=0x7f07002e;
+        public static final int expect_job=0x7f07002b;
         public static final int hello_world=0x7f070018;
         public static final int image_content=0x7f070026;
+        public static final int job_experience=0x7f07002c;
         /**  加载中提示 
          */
         public static final int picture_image_loading=0x7f070008;
@@ -696,6 +703,9 @@ containing a value of this type.
         /**  图片保存的文字 
          */
         public static final int picture_save_succeed=0x7f070012;
+        public static final int position_detail=0x7f070027;
+        public static final int project_experience=0x7f07002d;
+        public static final int project_show=0x7f070030;
         public static final int pull_to_refresh_footer_hint_ready=0x7f07000e;
         public static final int pull_to_refresh_header_hint_loading=0x7f07000c;
         /**  下拉刷新和上拉加载更多的文本 
@@ -713,6 +723,10 @@ containing a value of this type.
         public static final int pushmsg_center_pull_down_update_time=0x7f070004;
         public static final int pushmsg_center_pull_release_text=0x7f070003;
         public static final int pushmsg_center_pull_up_text=0x7f070001;
+        public static final int resume=0x7f07002a;
+        public static final int self=0x7f070029;
+        public static final int self_description=0x7f07002f;
+        public static final int send_resume=0x7f070028;
         public static final int update_at=0x7f070025;
         public static final int xsearch_loading=0x7f070006;
     }
@@ -745,6 +759,7 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f090001;
+        public static final int Info_Title=0x7f09000e;
         public static final int MenuItemStyle=0x7f090003;
         public static final int MenuStyle=0x7f090002;
         public static final int MyDialog=0x7f09000d;

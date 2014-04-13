@@ -51,52 +51,101 @@ public class ParserUtil {
 
 	private static List<String> getWeal(Element element) {
 		List<String> wealList = new ArrayList<String>();
-		int size = element.select("li").size();
-		for (int i = 0; i < size; i++) {
-			String weal = element.select("li").get(i).text();
-			wealList.add(weal);
+		try {
+			int size = element.select("li").size();
+			for (int i = 0; i < size; i++) {
+				String weal = element.select("li").get(i).text()
+						.replace(" ", "");
+				wealList.add(weal);
+			}
+			return wealList;
+		} catch (IndexOutOfBoundsException e) {
+			return null;
 		}
-		return wealList;
 	}
 
 	private static String getPositionSpan(Element element, int index) {
-		return element.select("span").get(index).text();
+		try {
+			return element.select("span").get(index).text().replace(" ", "");
+		} catch (NullPointerException e) {
+			return "";
+		} catch (IndexOutOfBoundsException e) {
+			return "";
+		}
 	}
 
 	private static String getCompanySpan(Element element, int index) {
-		return element.select("span").get(index).text();
+		try {
+			return element.select("span").get(index).text().replace(" ", "");
+		} catch (NullPointerException e) {
+			return "";
+		} catch (IndexOutOfBoundsException e) {
+			return "";
+		}
 	}
 
 	private static String getTimeOrScale(Element element) {
-		int size = element.select("span").size();
-		return element.select("span").get(size - 1).text();
+		try {
+			int size = element.select("span").size();
+			return element.select("span").get(size - 1).text().replace(" ", "");
+		} catch (NullPointerException e) {
+			return "";
+		} catch (IndexOutOfBoundsException e) {
+			return "";
+		}
 	}
 
 	private static String getCompanyUrl(Element element) {
-		return element.select("a").attr("href");
+		try {
+			return element.select("a").attr("href");
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	private static String getCompany(Element element) {
-		if (element.select("div.mb10") != null)
-			return element.select("div.mb10").select("a").text();
-		else
-			return element.select("a").text();
+		try {
+			if (element.select("div.mb10") != null)
+				return element.select("div.mb10").select("a").text()
+						.replace(" ", "");
+			else
+				return element.select("a").text().replace(" ", "");
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	private static String getMoney(Element element) {
-		return element.select("span").get(1).text();
+		try {
+			return element.select("span").get(1).text().replace(" ", "");
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	private static String getCity(Element element) {
-		return element.select("span.c9").text();
+		try {
+			return element.select("span.c9").text().replace(" ", "");
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	private static String getPositionName(Element element) {
-		return element.select("div.mb10").select("a").text();
+		try {
+			return element.select("div.mb10").select("a").text()
+					.replace(" ", "");
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	private static String getPositionUrl(Element element) {
-		return element.select("div.mb10").select("a").attr("href");
+		try {
+			return element.select("div.mb10").select("a").attr("href");
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	public static PositionDetail parserPositionDetail(String html) {
@@ -144,13 +193,17 @@ public class ParserUtil {
 	 * @return
 	 */
 	private static String obtainJobDetail(Document doc) {
-		String detail = doc.select("dd.job_bt").toString()
-				.replace("<br />", "<br /> " + BROKEN)
-				.replace("</h3>", "</h3> " + BROKEN)
-				.replace("</p>", "</p> " + BROKEN)
-				.replace("</li>", "</li> " + BROKEN).replace("&nbsp;", "");
-		Document dom = Jsoup.parse(detail);
-		return dom.text().replace(BROKEN, "\n").trim();
+		try {
+			String detail = doc.select("dd.job_bt").toString()
+					.replace("<br />", "<br /> " + BROKEN)
+					.replace("</h3>", "</h3> " + BROKEN)
+					.replace("</p>", "</p> " + BROKEN)
+					.replace("</li>", "</li> " + BROKEN).replace("&nbsp;", "");
+			Document dom = Jsoup.parse(detail);
+			return dom.text().replace(BROKEN, "\n").substring(4).trim();
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	/**
@@ -158,8 +211,12 @@ public class ParserUtil {
 	 * @return
 	 */
 	private static String getComIconUrl(Document doc) {
-		return doc.select("dl.job_company").select("img.b2").attr("src")
-				.toString();
+		try {
+			return doc.select("dl.job_company").select("img.b2").attr("src")
+					.toString();
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	/**
@@ -167,8 +224,13 @@ public class ParserUtil {
 	 * @return
 	 */
 	private static String getDetailAddress(Document doc) {
-		Elements divs = doc.select("dl.job_company").select("dd").select("div");
-		return divs.get(0).text();
+		try {
+			Elements divs = doc.select("dl.job_company").select("dd")
+					.select("div");
+			return divs.get(0).text();
+		} catch (IndexOutOfBoundsException e) {
+			return "";
+		}
 	}
 
 	/**
@@ -176,7 +238,11 @@ public class ParserUtil {
 	 * @return
 	 */
 	private static String getDetailReleaseTime(Document doc) {
-		return doc.select("dd.job_request").select("div").text();
+		try {
+			return doc.select("dd.job_request").select("div").text();
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	/**
@@ -203,7 +269,11 @@ public class ParserUtil {
 	 * @return
 	 */
 	private static String getDetailSpan(Elements spans, int index) {
-		return spans.get(index).text();
+		try {
+			return spans.get(index).text();
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	/**
@@ -211,7 +281,11 @@ public class ParserUtil {
 	 * @return
 	 */
 	private static String getDetailSalary(Document doc) {
-		return doc.select("dd.job_request").select("span.red").text();
+		try {
+			return doc.select("dd.job_request").select("span.red").text();
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	/**
@@ -219,7 +293,11 @@ public class ParserUtil {
 	 * @return
 	 */
 	private static String getDetailPositionName(Document doc) {
-		return doc.select("h1").attr("title").toString();
+		try {
+			return doc.select("h1").attr("title").toString();
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	public static UserInfo parserUserInfo(String html) {
@@ -293,7 +371,7 @@ public class ParserUtil {
 		try {
 			return doc.select("div.descriptionShow").text();
 		} catch (NullPointerException e) {
-			return null;
+			return "";
 		}
 	}
 
@@ -339,8 +417,12 @@ public class ParserUtil {
 						proName.indexOf(" ")));
 				project.setProjectTime(projectList.get(i).select("span").text()
 						.trim().trim());
-				project.setProjectDetail(projectList.get(i).select("div.dl1")
-						.text().trim());
+				try {
+					project.setProjectDetail(projectList.get(i)
+							.select("div.dl1").text().trim());
+				} catch (NullPointerException e) {
+					project.setProjectDetail("");
+				}
 				projects.add(project);
 			}
 			return projects;
@@ -357,7 +439,7 @@ public class ParserUtil {
 		try {
 			return doc.select("div.expectShow").select("span").text().trim();
 		} catch (NullPointerException e) {
-			return null;
+			return "";
 		}
 	}
 
@@ -388,7 +470,12 @@ public class ParserUtil {
 			Document dom = Jsoup.parse(info);
 			return dom.text().replace(BROKEN, "\n").trim();
 		} catch (NullPointerException e) {
-			return null;
+			return "";
 		}
+	}
+
+	public static String parseResumeDialogText(String html) {
+		Document doc = Jsoup.parse(html);
+		return doc.text().replace(" ", "");
 	}
 }

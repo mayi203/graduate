@@ -30,6 +30,15 @@
     <string name="drop_down_list_footer_no_more_text">No More</string>
     <string name="update_at">更新于</string>
     <string name="image_content">Image</string>
-
+    <string name="position_detail">职位详情</string>
+    <string name="send_resume">投个简历</string>
+    <string name="self">个人中心</string>
+    <string name="resume">我的简历</string>
+    <string name="expect_job">期望工作</string>
+    <string name="job_experience">工作经历</string>
+    <string name="project_experience">项目经验</string>
+    <string name="education_experience">教育背景</string>
+    <string name="self_description">自我描述</string>
+    <string name="project_show">作品展示</string>
 
 </resources>

@@ -13,26 +13,27 @@
         android:ellipsize="end"
         android:maxEms="10"
         android:singleLine="true"
-        android:text="职位"
+        android:textColor="@color/black"
         android:textSize="18sp" />
-
+    <!--
     <TextView
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/position"
-        android:text="地点"
+        android:textColor="@color/darkgray"
         android:textSize="16sp" />
+    -->
 
     <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@+id/right_arrow"
         android:ellipsize="end"
         android:maxEms="8"
         android:singleLine="true"
-        android:text="公司" />
+        android:textColor="@color/darkgray" />
 
     <TextView
         android:id="@+id/salary"
@@ -40,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/position"
         android:layout_marginRight="10dp"
-        android:text="薪资" />
+        android:textColor="@color/darkgray" />
 
     <TextView
         android:id="@+id/education"
@@ -49,7 +50,7 @@
         android:layout_below="@id/position"
         android:layout_marginRight="10dp"
         android:layout_toRightOf="@id/salary"
-        android:text="学历" />
+        android:textColor="@color/darkgray" />
 
     <TextView
         android:id="@+id/exprience"
@@ -57,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/position"
         android:layout_toRightOf="@id/education"
-        android:text="工作经验" />
+        android:textColor="@color/darkgray" />
 
     <TextView
         android:id="@+id/compony"
@@ -65,7 +66,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/salary"
         android:layout_marginTop="5dp"
-        android:text="发布时间"
+        android:textColor="@color/darkgray"
         android:visibility="gone" />
+
+    <ImageView
+        android:id="@id/right_arrow"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/right_arrow" />
 
 </RelativeLayout>
