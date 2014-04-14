@@ -176,6 +176,8 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 			refreshData(jobType, city, 1, "down");
 		} else {
 			afresh();
+			mMenuButton.setClickable(false);
+			findViewById(R.id.lay_search).setClickable(false);
 			mPullToRefreshListView.setVisibility(View.GONE);
 			Toast.makeText(getActivity(), "好像没有联网哦", Toast.LENGTH_SHORT).show();
 		}
@@ -187,6 +189,8 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		public void handleMessage(Message msg) {
 			if (msg.what == 1) {
 				mPullToRefreshListView.setVisibility(View.VISIBLE);
+				mMenuButton.setClickable(true);
+				findViewById(R.id.lay_search).setClickable(true);
 				refreshData(jobType, city, 1, "down");
 			}
 			super.handleMessage(msg);

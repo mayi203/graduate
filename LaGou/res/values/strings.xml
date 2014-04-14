@@ -36,9 +36,9 @@
     <!-- MyResumeFragment -->
     <string name="self">个人中心</string>
     <string name="resume">我的简历</string>
-    <string name="my_deliver">我投递的简历</string>
+    <string name="my_deliver">我的投递反馈</string>
     <string name="clear_save">清除缓存</string>
-    <string name="change_user">更换账号</string>
+    <string name="change_user">退出当前账户</string>
     <string name="expect_job">期望工作</string>
     <string name="job_experience">工作经历</string>
     <string name="project_experience">项目经验</string>
@@ -56,5 +56,11 @@
     <string name="search_guangzhou">广州</string>
     <string name="title_home">拉钩网</string>
     <string name="search_position">职位搜索</string>
+
+    <!-- LoginFragment -->
+    <string name="string_login_email">请输入登录邮箱地址</string>
+    <string name="string_login_psw">请输入密码</string>
+    <string name="string_login_btn">登      录</string>
+    <string name="string_login">登录</string>
 
 </resources>

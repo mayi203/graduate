@@ -46,13 +46,14 @@ public class MyResumeFragment extends BaseFragment {
 
 	@Override
 	public void initListener() {
-		findTextView(R.id.back).setOnClickListener(new OnClickListener() {
+		findTextView(R.id.resume_back).setOnClickListener(
+				new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				getActivity().onBackPressed();
-			}
-		});
+					@Override
+					public void onClick(View v) {
+						getActivity().onBackPressed();
+					}
+				});
 
 	}
 
@@ -73,11 +74,7 @@ public class MyResumeFragment extends BaseFragment {
 		app().getImageLoader().loadImage(userIcon, mUserInfo.getUserIcon(),
 				R.drawable.default_avatar);
 		baseInfo.setText(mUserInfo.getBasicInfo());
-		expect.setText(mUserInfo.getJobExpect() + "\n");
-		StringBuilder exp = new StringBuilder();
-		for (int i = 0, j = mUserInfo.getJobExperience().size(); j > 0 && i < j; i++) {
-			exp.append(mUserInfo.getJobExperience().get(i).getCompanyName());
-		}
+		expect.setText(mUserInfo.getJobExpect());
 		adapter = new ExprienceAdapter(getActivity(), app().getImageLoader(),
 				mUserInfo.getJobExperience());
 		exList.setAdapter(adapter);
@@ -88,7 +85,7 @@ public class MyResumeFragment extends BaseFragment {
 					+ mUserInfo.getProjectExperience().get(i).getProjectTime()
 					+ "\n"
 					+ mUserInfo.getProjectExperience().get(i)
-							.getProjectDetail() + "\n");
+							.getProjectDetail());
 		}
 		project.setText(pro.toString());
 		StringBuilder edu = new StringBuilder();
@@ -98,19 +95,17 @@ public class MyResumeFragment extends BaseFragment {
 					.getEducationTime()
 					+ "\n"
 					+ mUserInfo.getEducationExperience().get(i).getSchool()
-					+ mUserInfo.getEducationExperience().get(i).getMajor()
-					+ "\n");
+					+ mUserInfo.getEducationExperience().get(i).getMajor());
 		}
 		education.setText(edu.toString());
 		StringBuilder produ = new StringBuilder();
 		for (int i = 0, j = mUserInfo.getProjectShow().size(); j > 0 && i < j; i++) {
 			produ.append(mUserInfo.getProjectShow().get(i).getProjectUrl()
 					+ "\n"
-					+ mUserInfo.getProjectShow().get(i).getProjectDetail()
-					+ "\n");
+					+ mUserInfo.getProjectShow().get(i).getProjectDetail());
 		}
 		producation.setText(produ.toString());
-		self.setText(mUserInfo.getSelfDescription() + "\n");
+		self.setText(mUserInfo.getSelfDescription());
 	}
 
 }

@@ -3,16 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/hole_background"
-    android:orientation="vertical"
-    android:padding="5dp" >
+    android:orientation="vertical" >
+
+    <RelativeLayout style="@style/topBar" >
+
+        <TextView
+            android:id="@+id/deliver_back"
+            style="@style/back_text"
+            android:text="投递反馈" />
+    </RelativeLayout>
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
+        android:background="@color/hole_background"
         android:cacheColorHint="#ffffff"
-        android:dividerHeight="10dp"
-        android:listSelector="@null" >
+        android:divider="@color/hole_background"
+        android:dividerHeight="8dp"
+        android:listSelector="@null"
+        android:padding="8dp" >
     </ListView>
 
 </LinearLayout>

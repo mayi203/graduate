@@ -18,6 +18,7 @@ import mayi.lagou.com.utils.SharePreferenceUtil;
 import mayi.lagou.com.view.MyDialog;
 import mayi.lagou.com.widget.networkdialog.DialogUtils;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -106,11 +107,29 @@ public class JobDetailFragment extends BaseFragment {
 			public void onClick(View v) {
 				if (isLogin) {
 					getUserInfo();
-				}else{
+				} else {
 					startActivity(UserInfoActicity.class);
+					SharePreferenceUtil.putBoolean(getActivity(), "toDetail",
+							true);
 				}
 			}
 		});
+		findTextView(R.id.share).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				shareUrl(mUrl);
+			}
+		});
+	}
+
+	private void shareUrl(String url) {
+		Intent sendIntent = new Intent();
+		sendIntent.setAction(Intent.ACTION_SEND);
+		sendIntent.putExtra(Intent.EXTRA_TEXT, "我在拉钩网客户端发现了一个很不错的职位" + url
+				+ "你也去看看吧！");
+		sendIntent.setType("text/plain");
+		startActivity(sendIntent);
 	}
 
 	@Override
@@ -128,6 +147,9 @@ public class JobDetailFragment extends BaseFragment {
 		if (userInfo == null || "".equals(userInfo)) {
 			bottomTxt.setText("投个简历[未登录]");
 			isLogin = false;
+		} else {
+			bottomTxt.setText("投个简历");
+			isLogin = true;
 		}
 	}
 
@@ -251,7 +273,7 @@ public class JobDetailFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				// refreshData();
+				refreshData();
 				myDialog.dismiss();
 			}
 		});

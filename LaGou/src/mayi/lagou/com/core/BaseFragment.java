@@ -6,6 +6,7 @@ package mayi.lagou.com.core;
 import com.loopj.android.http.AsyncHttpClient;
 
 import mayi.lagou.com.LaGouApp;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -158,5 +160,16 @@ public abstract class BaseFragment extends Fragment {
 		} catch (Exception e) {
 		}
 	}
-
+	/**
+	 * 隐藏软键盘
+	 */
+	public void hideSoftInput() {
+		try {
+			((InputMethodManager) getActivity()
+					.getSystemService(Context.INPUT_METHOD_SERVICE))
+					.hideSoftInputFromWindow(getActivity().getCurrentFocus()
+							.getWindowToken(), 0);
+		} catch (Exception e) {
+		}
+	}
 }

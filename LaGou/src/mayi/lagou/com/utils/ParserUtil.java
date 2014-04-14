@@ -489,15 +489,15 @@ public class ParserUtil {
 		DeliverFeedback deliver = null;
 		Document doc = Jsoup.parse(html);
 		try {
-			Elements positions = doc.select("d_item");
+			Elements positions = doc.select("div.d_item");
 			for (int i = 0; i < positions.size(); i++) {
 				deliver = new DeliverFeedback();
 				deliver.setPosition(positions.get(i).select("h2").select("em")
 						.text().trim());
 				deliver.setSalary(positions.get(i).select("h2").select("span")
 						.text().trim());
-				deliver.setCompany(positions.get(i).select("h2")
-						.select("a.d_jobname").text().trim());
+				deliver.setCompany(positions.get(i).select("a.d_jobname")
+						.text().trim());
 				deliver.setDeliverTime(positions.get(i).select("span.d_time")
 						.text().trim());
 				deliver.setResume(positions.get(i).select("div.d_resume")

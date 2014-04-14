@@ -22,6 +22,7 @@ import mayi.lagou.com.R;
 import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.UserInfo;
+import mayi.lagou.com.fragment.LoginFragment.Refresh;
 import mayi.lagou.com.utils.NetWorkState;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.utils.SharePreferenceUtil;
@@ -31,6 +32,7 @@ public class UserInfoFragment extends BaseFragment {
 	private TextView userInfo;
 	private ImageView userHead;
 	private OnRequestInfo onRequest;
+	private Refresh refresh;
 
 	public UserInfoFragment() {
 
@@ -71,7 +73,7 @@ public class UserInfoFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				addFragmentToStack(R.id.u_contain, new MyResumeFragment());
+				getMyDeliver();
 			}
 		});
 		findViewById(R.id.clear_save).setOnClickListener(new OnClickListener() {
@@ -86,8 +88,12 @@ public class UserInfoFragment extends BaseFragment {
 
 					@Override
 					public void onClick(View v) {
-						addFragmentToStack(R.id.u_contain,
-								new MyResumeFragment());
+						SharePreferenceUtil.putString(getActivity(), "email",
+								"");
+						SharePreferenceUtil.putString(getActivity(), "psw", "");
+						SharePreferenceUtil.putString(getActivity(),
+								"userInfo", null);
+						refresh.refresh();
 					}
 				});
 	}
@@ -96,6 +102,7 @@ public class UserInfoFragment extends BaseFragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		onRequest = (UserInfoActicity) activity;
+		refresh = (UserInfoActicity) activity;
 	}
 
 	@Override
@@ -113,6 +120,19 @@ public class UserInfoFragment extends BaseFragment {
 		}
 	}
 
+	private void getMyDeliver() {
+		client.get(LaGouApi.Host + LaGouApi.DeliverRecord,
+				new AsyncHttpResponseHandler() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						onRequest.setDeliver(content);
+						addFragmentToStack(R.id.u_contain,
+								new DeliverFeedbackFragment());
+					}
+				});
+	}
+
 	private void getUserInfo() {
 		Map<String, String> map = new HashMap<String, String>();
 		String emailTxt = SharePreferenceUtil.getString(getActivity(), "email");
@@ -128,10 +148,12 @@ public class UserInfoFragment extends BaseFragment {
 						if (statusCode == 200) {
 							try {
 								JSONObject object = new JSONObject(response);
-								SharePreferenceUtil.putString(getActivity(),
-										"userId",
-										object.optJSONObject("content")
-												.optString("userid"));
+								if (!isExit) {
+									SharePreferenceUtil.putString(getActivity(),
+											"userId",
+											object.optJSONObject("content")
+													.optString("userid"));
+								}
 							} catch (JSONException e) {
 								e.printStackTrace();
 							}
@@ -148,8 +170,10 @@ public class UserInfoFragment extends BaseFragment {
 			public void onSuccess(int statusCode, Header[] headers,
 					String content) {
 				initData(content);
-				SharePreferenceUtil.putString(getActivity(), "userInfo",
-						content);
+				if (!isExit) {
+					SharePreferenceUtil.putString(getActivity(), "userInfo",
+							content);
+				}
 				Log.v("lagou", content);
 			}
 		});
@@ -170,6 +194,10 @@ public class UserInfoFragment extends BaseFragment {
 		public void setUserInfo(UserInfo user);
 
 		public UserInfo getUserInfo();
+
+		public void setDeliver(String deliver);
+
+		public String getDeliver();
 	}
 
 	private boolean isExit = false;

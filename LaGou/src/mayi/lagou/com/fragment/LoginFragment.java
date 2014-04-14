@@ -3,6 +3,9 @@ package mayi.lagou.com.fragment;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -95,11 +98,34 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 					@Override
 					public void onSuccess(int statusCode, String content) {
 						if (statusCode == 200) {
-							SharePreferenceUtil.putString(getActivity(),
-									"email", emailTxt);
-							SharePreferenceUtil.putString(getActivity(), "psw",
-									pswTxt);
-							refresh.refresh();
+							try {
+								JSONObject object = new JSONObject(content);
+								String sucess = object.optString("success");
+								String msg = object.optString("msg");
+								if ("true".equals(sucess)) {
+									SharePreferenceUtil.putString(
+											getActivity(), "email", emailTxt);
+									SharePreferenceUtil.putString(
+											getActivity(), "psw", pswTxt);
+									boolean toDetail = SharePreferenceUtil
+											.getBoolean(getActivity(),
+													"toDetail");
+									if (toDetail) {
+										SharePreferenceUtil.putBoolean(
+												getActivity(), "toDetail",
+												false);
+										getActivity().onBackPressed();
+
+									} else {
+										refresh.refresh();
+									}
+								} else {
+									Toast.makeText(getActivity(), msg,
+											Toast.LENGTH_SHORT).show();
+								}
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 				});
@@ -108,4 +134,11 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 	public interface Refresh {
 		public void refresh();
 	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		hideSoftInput();
+	}
+	
 }
