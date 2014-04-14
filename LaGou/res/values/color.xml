@@ -2,7 +2,7 @@
 <resources>
 
     <color name="hole_background">#E8E8E7</color>
-    <!-- HoloLight默认背景色-->
+    <!-- HoloLight默认背景色 -->
     <color name="white">#FFFFFF</color>
     <!-- 白色 -->
     <color name="ivory">#FFFFF0</color>
@@ -285,6 +285,8 @@
     <!-- 绿色 -->
     <color name="darkgreen">#019875</color>
     <!-- 暗绿色 -->
+    <color name="deepgreen">#02604A</color>
+    <!-- 深绿色 -->
     <color name="blue">#0000FF</color>
     <!-- 蓝色 -->
     <color name="mediumblue">#0000CD</color>

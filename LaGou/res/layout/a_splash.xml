@@ -14,16 +14,6 @@
         android:src="@drawable/cloud_s" />
 
     <ImageView
-        android:id="@+id/cloud_s2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:visibility="gone"
-        android:layout_marginTop="50dp"
-        android:layout_toRightOf="@id/cloud_s"
-        android:src="@drawable/cloud_s" />
-
-    <ImageView
         android:id="@+id/cloud_m"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

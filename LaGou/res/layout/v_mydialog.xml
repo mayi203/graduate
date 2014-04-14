@@ -15,8 +15,8 @@
         android:minHeight="70dp"
         android:padding="10dp"
         android:scrollbars="vertical"
-        android:text="无信息"
-        android:textSize="20dp" >
+        android:textColor="@color/dimgrey"
+        android:textSize="16sp" >
     </TextView>
 
     <LinearLayout
@@ -40,10 +40,10 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:background="@drawable/selector_btn_green"
+            android:background="@drawable/selector_detail_deliver_btn"
             android:maxWidth="180dp"
+            android:text="@string/string_mydialog_sure"
             android:textColor="@color/white"
-            android:text="确定"
             android:textSize="16sp" >
         </Button>
 
@@ -54,9 +54,9 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:background="@drawable/selector_btn_green"
+            android:background="@drawable/selector_detail_deliver_btn"
             android:maxWidth="180dp"
-            android:text="取消"
+            android:text="@string/string_mydialog_cancle"
             android:textColor="@color/white"
             android:textSize="16sp" >
         </Button>

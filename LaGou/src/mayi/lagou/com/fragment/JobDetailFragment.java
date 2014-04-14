@@ -3,9 +3,6 @@ package mayi.lagou.com.fragment;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.R;
 import mayi.lagou.com.activity.HomeActivity;
@@ -17,6 +14,10 @@ import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.utils.SharePreferenceUtil;
 import mayi.lagou.com.view.MyDialog;
 import mayi.lagou.com.widget.networkdialog.DialogUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
@@ -26,6 +27,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +40,7 @@ public class JobDetailFragment extends BaseFragment {
 			bottomTxt;
 	private String mUrl, token;
 	private ImageView com_img;
+	private RelativeLayout detail_null;
 	private View view;
 	private View deliver;
 	private OnChangeUrl onChangeUrl;
@@ -60,6 +63,7 @@ public class JobDetailFragment extends BaseFragment {
 	public void findViewsById() {
 		view = findViewById(R.id.scroll);
 		title = findTextView(R.id.title);
+		detail_null = (RelativeLayout) findViewById(R.id.job_detail_null);
 		require = findTextView(R.id.require);
 		release_time = findTextView(R.id.release_time);
 		com_name = findTextView(R.id.com_name);
@@ -160,28 +164,34 @@ public class JobDetailFragment extends BaseFragment {
 			public void onSuccess(String response) {
 				PositionDetail detail = ParserUtil
 						.parserPositionDetail(response);
-				title.setText(detail.getPositionName());
-				require.setText(detail.getSalary() + "/" + detail.getCity()
-						+ "/" + detail.getExperience() + "/"
-						+ detail.getEducation() + "/" + detail.getJobCategory()
-						+ "\n" + detail.getJobTempt().trim());
-				release_time.setText(detail.getReleaseTime());
-				if (detail.getComIconUrl() != null
-						&& !"".equals(detail.getComIconUrl()) && !isExit) {
-					app().getImageLoader().loadImage(com_img,
-							detail.getComIconUrl(), R.drawable.waiting);
+				if (detail != null && !"".equals(detail)) {
+					view.setVisibility(View.VISIBLE);
+					deliver.setVisibility(View.VISIBLE);
+					title.setText(detail.getPositionName());
+					require.setText(detail.getSalary() + "/" + detail.getCity()
+							+ "/" + detail.getExperience() + "/"
+							+ detail.getEducation() + "/"
+							+ detail.getJobCategory() + "\n"
+							+ detail.getJobTempt().trim());
+					release_time.setText(detail.getReleaseTime());
+					if (detail.getComIconUrl() != null
+							&& !"".equals(detail.getComIconUrl()) && !isExit) {
+						app().getImageLoader().loadImage(com_img,
+								detail.getComIconUrl(), R.drawable.waiting);
+					}
+					com_name.setText(detail.getCompany().trim());
+					com_del.setText(detail.getField().trim() + "|"
+							+ detail.getScale() + "|" + detail.getStage()
+							+ "\n" + "地址：" + detail.getAddress());
+					details.setText(detail.getJobDetail());
+					token = detail.getSubmitValue();
+					if (config) {
+						confirmation();
+					}
+				} else {
+					detail_null.setVisibility(View.VISIBLE);
 				}
-				com_name.setText(detail.getCompany().trim());
-				com_del.setText(detail.getField().trim() + "|"
-						+ detail.getScale() + "|" + detail.getStage() + "\n"
-						+ "地址：" + detail.getAddress());
-				details.setText(detail.getJobDetail());
 				DialogUtils.hideProcessDialog();
-				view.setVisibility(View.VISIBLE);
-				token = detail.getSubmitValue();
-				if (config) {
-					confirmation();
-				}
 			}
 		});
 	}

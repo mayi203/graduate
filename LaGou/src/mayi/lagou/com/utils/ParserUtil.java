@@ -24,30 +24,35 @@ public class ParserUtil {
 	private static final String BROKEN = "BROKEN";
 
 	public static List<LaGouPosition> parserPosition(String html) {
-		Document doc = Jsoup.parse(html);
-		List<LaGouPosition> positionList = new ArrayList<LaGouPosition>();
-		LaGouPosition position = null;
-		Elements positionNodes = doc.select("div.hot_pos_l");
-		Elements companyNodes = doc.select("div.hot_pos_r");
-		for (int i = 0; i < positionNodes.size(); i++) {
-			position = new LaGouPosition();
-			position.setPositionName(getPositionName(positionNodes.get(i)));
-			position.setPositionUrl(getPositionUrl(positionNodes.get(i)));
-			position.setCity(getCity(positionNodes.get(i)));
-			position.setMoney(getMoney(positionNodes.get(i)));
-			position.setExperience(getPositionSpan(positionNodes.get(i), 2));
-			position.setEducation(getPositionSpan(positionNodes.get(i), 3));
-			position.setPositionTempt(getPositionSpan(positionNodes.get(i), 4));
-			position.setTime(getTimeOrScale(positionNodes.get(i)));
-			position.setCompany(getCompany(companyNodes.get(i)));
-			position.setCompanyUrl(getCompanyUrl(companyNodes.get(i)));
-			position.setField(getCompanySpan(companyNodes.get(i), 0));
-			position.setStage(getCompanySpan(companyNodes.get(i), 2));
-			position.setScale(getTimeOrScale(companyNodes.get(i)));
-			position.setWeal(getWeal(companyNodes.get(i)));
-			positionList.add(position);
+		try {
+			Document doc = Jsoup.parse(html);
+			List<LaGouPosition> positionList = new ArrayList<LaGouPosition>();
+			LaGouPosition position = null;
+			Elements positionNodes = doc.select("div.hot_pos_l");
+			Elements companyNodes = doc.select("div.hot_pos_r");
+			for (int i = 0; i < positionNodes.size(); i++) {
+				position = new LaGouPosition();
+				position.setPositionName(getPositionName(positionNodes.get(i)));
+				position.setPositionUrl(getPositionUrl(positionNodes.get(i)));
+				position.setCity(getCity(positionNodes.get(i)));
+				position.setMoney(getMoney(positionNodes.get(i)));
+				position.setExperience(getPositionSpan(positionNodes.get(i), 2));
+				position.setEducation(getPositionSpan(positionNodes.get(i), 3));
+				position.setPositionTempt(getPositionSpan(positionNodes.get(i),
+						4));
+				position.setTime(getTimeOrScale(positionNodes.get(i)));
+				position.setCompany(getCompany(companyNodes.get(i)));
+				position.setCompanyUrl(getCompanyUrl(companyNodes.get(i)));
+				position.setField(getCompanySpan(companyNodes.get(i), 0));
+				position.setStage(getCompanySpan(companyNodes.get(i), 2));
+				position.setScale(getTimeOrScale(companyNodes.get(i)));
+				position.setWeal(getWeal(companyNodes.get(i)));
+				positionList.add(position);
+			}
+			return positionList;
+		} catch (NullPointerException e) {
+			return null;
 		}
-		return positionList;
 	}
 
 	private static List<String> getWeal(Element element) {
@@ -155,33 +160,41 @@ public class ParserUtil {
 	public static PositionDetail parserPositionDetail(String html) {
 		PositionDetail positionDetail = new PositionDetail();
 		Document doc = Jsoup.parse(html);
-		Elements spans = doc.select("dd.job_request").select("span");
-		positionDetail.setCompany(obtainDetailByRegular(
-				doc.select("dl.job_company").select("h2").get(0),
-				"<h2[^>]*>([^<img>]*)", 0));
-		positionDetail.setComIconUrl(getComIconUrl(doc));
-		positionDetail.setField(obtainDetailByRegular(
-				doc.select("dl.job_company").select("ul.c_feature").get(0),
-				"</span>([^</li>]*)", 0));
-		positionDetail.setScale(obtainDetailByRegular(
-				doc.select("dl.job_company").select("ul.c_feature").get(0),
-				"</span>([^</li>]*)", 1));
-		positionDetail.setStage(obtainDetailByRegular(
-				doc.select("dl.job_company").select("ul.c_feature").get(1),
-				"</span>([^</li>]*)", 0));
-		positionDetail.setAddress(getDetailAddress(doc));
-		positionDetail.setPositionName(getDetailPositionName(doc));
-		positionDetail.setSalary(getDetailSalary(doc));
-		positionDetail.setCity(getDetailSpan(spans, 1));
-		positionDetail.setExperience(getDetailSpan(spans, 2));
-		positionDetail.setEducation(getDetailSpan(spans, 3));
-		positionDetail.setJobCategory(getDetailSpan(spans, 4));
-		positionDetail.setJobTempt(obtainDetailByRegular(
-				doc.select("dd.job_request").get(0), "<br />([^<div>]*)", 0));
-		positionDetail.setReleaseTime(getDetailReleaseTime(doc));
-		positionDetail.setJobDetail(obtainJobDetail(doc));
-		positionDetail.setSubmitValue(getSubmitValue(doc));
-		return positionDetail;
+		try {
+			Elements spans = doc.select("dd.job_request").select("span");
+			positionDetail.setCompany(obtainDetailByRegular(
+					doc.select("dl.job_company").select("h2").get(0),
+					"<h2[^>]*>([^<img>]*)", 0));
+			positionDetail.setComIconUrl(getComIconUrl(doc));
+			positionDetail.setField(obtainDetailByRegular(
+					doc.select("dl.job_company").select("ul.c_feature").get(0),
+					"</span>([^</li>]*)", 0));
+			positionDetail.setScale(obtainDetailByRegular(
+					doc.select("dl.job_company").select("ul.c_feature").get(0),
+					"</span>([^</li>]*)", 1));
+			positionDetail.setStage(obtainDetailByRegular(
+					doc.select("dl.job_company").select("ul.c_feature").get(1),
+					"</span>([^</li>]*)", 0));
+			positionDetail.setAddress(getDetailAddress(doc));
+			positionDetail.setPositionName(getDetailPositionName(doc));
+			positionDetail.setSalary(getDetailSalary(doc));
+			positionDetail.setCity(getDetailSpan(spans, 1));
+			positionDetail.setExperience(getDetailSpan(spans, 2));
+			positionDetail.setEducation(getDetailSpan(spans, 3));
+			positionDetail.setJobCategory(getDetailSpan(spans, 4));
+			positionDetail
+					.setJobTempt(obtainDetailByRegular(
+							doc.select("dd.job_request").get(0),
+							"<br />([^<div>]*)", 0));
+			positionDetail.setReleaseTime(getDetailReleaseTime(doc));
+			positionDetail.setJobDetail(obtainJobDetail(doc));
+			positionDetail.setSubmitValue(getSubmitValue(doc));
+			return positionDetail;
+		} catch (NullPointerException e) {
+			return null;
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 
 	/**

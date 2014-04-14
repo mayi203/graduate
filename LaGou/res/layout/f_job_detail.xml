@@ -18,11 +18,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:paddingRight="8dp"
             android:layout_centerVertical="true"
-            android:text="分享" />
+            android:layout_marginRight="8dp"
+            android:background="@drawable/selector_share_btn"
+            android:padding="8dp"
+            android:text="@string/string_share_job"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <ScrollView
@@ -126,8 +128,9 @@
 
     <RelativeLayout
         android:id="@+id/lay_deliver"
-        style="@style/topBar"
-        android:layout_alignParentBottom="true" >
+        style="@style/Bottom_Deliver_Btn"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" >
 
         <TextView
             android:id="@+id/bottom_txt"
@@ -150,5 +153,16 @@
         android:contentDescription="@string/app_name"
         android:src="@drawable/email"
         android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/job_detail_null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/lay_top"
+        android:background="@color/white"
+        android:visibility="gone" >
+
+        <include layout="@layout/f_job_detail_null" />
+    </RelativeLayout>
 
 </RelativeLayout>

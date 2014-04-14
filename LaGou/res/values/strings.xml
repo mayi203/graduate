@@ -63,4 +63,12 @@
     <string name="string_login_btn">登      录</string>
     <string name="string_login">登录</string>
 
+    <!-- MyDialog -->
+    <string name="string_mydialog_sure">确定</string>
+    <string name="string_mydialog_cancle">取消</string>
+
+    <!-- JobDetailFragment -->
+    <string name="string_share_job">分享</string>
+    <string name="string_detail_null">该职位招聘已结束</string>
+
 </resources>
