@@ -22,9 +22,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:background="@drawable/selector_detail_deliver_btn"
             android:clickable="true"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/selecter_profile" />
+            android:src="@drawable/profile_icon_bright" />
     </RelativeLayout>
 
     <LinearLayout

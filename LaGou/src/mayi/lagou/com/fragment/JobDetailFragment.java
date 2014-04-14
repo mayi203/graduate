@@ -118,7 +118,7 @@ public class JobDetailFragment extends BaseFragment {
 				}
 			}
 		});
-		findTextView(R.id.share).setOnClickListener(new OnClickListener() {
+		findImageView(R.id.share).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {

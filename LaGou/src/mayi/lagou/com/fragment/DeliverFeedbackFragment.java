@@ -71,6 +71,5 @@ public class DeliverFeedbackFragment extends BaseFragment {
 	private void setList(String deliver) {
 		List<DeliverFeedback> list = ParserUtil.parseDeliverFeedback(deliver);
 		mAdapter.addItems(list);
-		mAdapter.addItems(list);
 	}
 }

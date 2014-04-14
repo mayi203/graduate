@@ -2,16 +2,17 @@ package mayi.lagou.com.activity;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import mayi.lagou.com.R;
 import mayi.lagou.com.core.BaseActivity;
 
 public class SplashActivity extends BaseActivity {
 
-	private ImageView cloud_s, cloud_m, lagou;
+	private ImageView lagou,lagouDel;
 
 	@Override
 	public int contentView() {
@@ -20,23 +21,33 @@ public class SplashActivity extends BaseActivity {
 
 	@Override
 	public void findViewsById() {
-		cloud_s = findImageView(R.id.cloud_s);
-		cloud_m = findImageView(R.id.cloud_m);
-        //摇摆
-        TranslateAnimation alphaAnimation2 = new TranslateAnimation(0f, 100f, 50, 50);
-        alphaAnimation2.setDuration(800);
-        alphaAnimation2.setRepeatCount(Animation.INFINITE);
-        alphaAnimation2.setRepeatMode(Animation.REVERSE);
-        cloud_s.setAnimation(alphaAnimation2);
-        cloud_m.setAnimation(alphaAnimation2);
-        alphaAnimation2.start();
-        Animation lAnim=AnimationUtils.loadAnimation(this, R.anim.lagou_anim);
-		lagou = findImageView(R.id.lagou);
-		lagou.setAnimation(lAnim);
+		lagou=findImageView(R.id.lagou);
+		lagouDel=findImageView(R.id.lagou_del);
 	}
 
 	@Override
 	public void initValue() {
+		Animation lAnim=AnimationUtils.loadAnimation(this, R.anim.lagou_anim);
+		final Animation dAnim=AnimationUtils.loadAnimation(this, R.anim.lagou_del_anim);
+		lagou.setAnimation(lAnim);
+		lAnim.setAnimationListener(new AnimationListener() {
+			
+			@Override
+			public void onAnimationStart(Animation animation) {
+				
+			}
+			
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				
+			}
+			
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				lagouDel.setVisibility(View.VISIBLE);
+				lagouDel.setAnimation(dAnim);
+			}
+		});
 		new Handler().postDelayed(new Runnable() {
 			public void run() {
 				Intent intent = new Intent();
@@ -44,7 +55,7 @@ public class SplashActivity extends BaseActivity {
 				startActivity(intent);
 				finish();
 			}
-		}, 2000);
+		}, 3000);
 	}
 
 	@Override

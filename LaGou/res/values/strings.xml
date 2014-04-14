@@ -39,6 +39,7 @@
     <string name="my_deliver">我的投递反馈</string>
     <string name="clear_save">清除缓存</string>
     <string name="change_user">退出当前账户</string>
+    <string name="basic_info">基本信息</string>
     <string name="expect_job">期望工作</string>
     <string name="job_experience">工作经历</string>
     <string name="project_experience">项目经验</string>
@@ -69,6 +70,13 @@
 
     <!-- JobDetailFragment -->
     <string name="string_share_job">分享</string>
-    <string name="string_detail_null">该职位招聘已结束</string>
+    <string name="string_detail_null">您来晚了，该职位招聘已结束啦~</string>
+    <string name="string_about_us_btn">关于</string>
+
+    <!-- SplashActivity -->
+    <string name="string_copyright">Copyright ©2012 mayi. All rights reserved</string>
+    <!-- AboutUsFragment -->
+    <string name="string_about_back">关于我们</string>
+    <string name="string_about_us">关于我们。。。</string>
 
 </resources>

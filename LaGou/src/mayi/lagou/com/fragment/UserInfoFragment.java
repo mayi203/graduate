@@ -27,9 +27,10 @@ import mayi.lagou.com.utils.NetWorkState;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.utils.SharePreferenceUtil;
 
-public class UserInfoFragment extends BaseFragment {
+public class UserInfoFragment extends BaseFragment implements OnClickListener {
 
-	private TextView userInfo;
+	private TextView back, userInfo, resume, aboutUs, deliver, clearSave,
+			changeUser;
 	private ImageView userHead;
 	private OnRequestInfo onRequest;
 	private Refresh refresh;
@@ -45,8 +46,14 @@ public class UserInfoFragment extends BaseFragment {
 
 	@Override
 	public void findViewsById() {
+		back = findTextView(R.id.user_info_back);
 		userInfo = findTextView(R.id.base_info);
 		userHead = findImageView(R.id.user_icon);
+		resume = findTextView(R.id.my_resume);
+		aboutUs = findTextView(R.id.about_us);
+		deliver = findTextView(R.id.my_deliver);
+		clearSave = findTextView(R.id.clear_save);
+		changeUser = findTextView(R.id.change_user);
 	}
 
 	@Override
@@ -55,47 +62,12 @@ public class UserInfoFragment extends BaseFragment {
 
 	@Override
 	public void initListener() {
-		findTextView(R.id.back).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				getActivity().onBackPressed();
-			}
-		});
-		findViewById(R.id.my_resume).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addFragmentToStack(R.id.u_contain, new MyResumeFragment());
-			}
-		});
-		findViewById(R.id.my_deliver).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				getMyDeliver();
-			}
-		});
-		findViewById(R.id.clear_save).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				addFragmentToStack(R.id.u_contain, new MyResumeFragment());
-			}
-		});
-		findViewById(R.id.change_user).setOnClickListener(
-				new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						SharePreferenceUtil.putString(getActivity(), "email",
-								"");
-						SharePreferenceUtil.putString(getActivity(), "psw", "");
-						SharePreferenceUtil.putString(getActivity(),
-								"userInfo", null);
-						refresh.refresh();
-					}
-				});
+		back.setOnClickListener(this);
+		resume.setOnClickListener(this);
+		aboutUs.setOnClickListener(this);
+		deliver.setOnClickListener(this);
+		clearSave.setOnClickListener(this);
+		changeUser.setOnClickListener(this);
 	}
 
 	@Override
@@ -149,9 +121,9 @@ public class UserInfoFragment extends BaseFragment {
 							try {
 								JSONObject object = new JSONObject(response);
 								if (!isExit) {
-									SharePreferenceUtil.putString(getActivity(),
-											"userId",
-											object.optJSONObject("content")
+									SharePreferenceUtil.putString(
+											getActivity(), "userId", object
+													.optJSONObject("content")
 													.optString("userid"));
 								}
 							} catch (JSONException e) {
@@ -206,6 +178,39 @@ public class UserInfoFragment extends BaseFragment {
 	public void onPause() {
 		isExit = true;
 		super.onPause();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.user_info_back:
+			getActivity().onBackPressed();
+			break;
+		case R.id.my_resume:
+			addFragmentToStack(R.id.u_contain, new MyResumeFragment());
+			break;
+		case R.id.my_deliver:
+			getMyDeliver();
+			break;
+		case R.id.change_user:
+			SharePreferenceUtil.putString(getActivity(), "email", "");
+			SharePreferenceUtil.putString(getActivity(), "psw", "");
+			SharePreferenceUtil.putString(getActivity(), "userInfo", null);
+			refresh.refresh();
+			break;
+		case R.id.about_us:
+			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
+			break;
+		case R.id.clear_save:
+			break;
+		default:
+			break;
+		}
 	}
 
 }
