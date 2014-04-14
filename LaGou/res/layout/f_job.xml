@@ -11,8 +11,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="拉钩网"
-            android:layout_marginLeft="30dp"
+            android:paddingLeft="10dp"
+            android:text="@string/title_home"
             android:textColor="@color/white"
             android:textSize="22sp" />
 
@@ -23,6 +23,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:clickable="true"
+            android:contentDescription="@string/app_name"
             android:src="@drawable/selecter_profile" />
     </RelativeLayout>
 
@@ -44,7 +45,7 @@
             android:drawableLeft="@drawable/explore_search_normal"
             android:drawablePadding="5dp"
             android:gravity="center_vertical"
-            android:text="输入关键字精确查找"
+            android:text="@string/search_hint"
             android:textColor="#d8d8d8" />
     </LinearLayout>
 
@@ -52,7 +53,9 @@
         android:id="@+id/job_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/lay_search" />
+        android:layout_below="@id/lay_search"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -62,36 +65,36 @@
         <Button
             android:id="@+id/menu"
             style="@style/MenuStyle"
-            android:text="全国" />
+            android:text="@string/search_country" />
 
         <Button
             android:id="@+id/item1"
             style="@style/MenuItemStyle"
-            android:text="北京"
+            android:text="@string/search_beijing"
             android:visibility="gone" />
 
         <Button
             android:id="@+id/item2"
             style="@style/MenuItemStyle"
-            android:text="上海"
+            android:text="@string/search_shanghai"
             android:visibility="gone" />
 
         <Button
             android:id="@+id/item3"
             style="@style/MenuItemStyle"
-            android:text="杭州"
+            android:text="@string/search_hangzhou"
             android:visibility="gone" />
 
         <Button
             android:id="@+id/item4"
             style="@style/MenuItemStyle"
-            android:text="深圳"
+            android:text="@string/search_shenzhen"
             android:visibility="gone" />
 
         <Button
             android:id="@+id/item5"
             style="@style/MenuItemStyle"
-            android:text="广州"
+            android:text="@string/search_guangzhou"
             android:visibility="gone" />
     </FrameLayout>
 

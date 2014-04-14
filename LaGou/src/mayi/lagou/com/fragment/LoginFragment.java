@@ -9,10 +9,12 @@ import com.loopj.android.http.RequestParams;
 import android.app.Activity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.R;
 import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.core.BaseFragment;
+import mayi.lagou.com.utils.NetWorkState;
 import mayi.lagou.com.utils.SharePreferenceUtil;
 
 public class LoginFragment extends BaseFragment implements OnClickListener {
@@ -60,7 +62,11 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		getUserInfo();
+		if(NetWorkState.isNetWorkConnected(getActivity())){
+			getUserInfo();
+		}else{
+			Toast.makeText(getActivity(), "好像没有联网哦", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	private void getUserInfo() {

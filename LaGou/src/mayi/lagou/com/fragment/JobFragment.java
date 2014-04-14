@@ -14,6 +14,7 @@ import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.adapter.JobItemAdapt;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.LaGouPosition;
+import mayi.lagou.com.utils.NetWorkState;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.widget.networkdialog.DialogUtils;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase;
@@ -21,6 +22,8 @@ import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +32,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.nineoldandroids.animation.Animator;
@@ -93,6 +97,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		mListView = mPullToRefreshListView.getRefreshableView();
 		mListView.setFadingEdgeLength(0);
 		mListView.setDividerHeight(10);
+		mListView.setDivider(getResources().getDrawable(R.drawable.list_de));
 		adapter = new JobItemAdapt(getActivity());
 		mListView.setAdapter(adapter);
 		allData = new ArrayList<LaGouPosition>();
@@ -167,7 +172,45 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		refreshData(jobType, city, 1, "down");
+		if (NetWorkState.isNetWorkConnected(getActivity())) {
+			refreshData(jobType, city, 1, "down");
+		} else {
+			afresh();
+			mPullToRefreshListView.setVisibility(View.GONE);
+			Toast.makeText(getActivity(), "好像没有联网哦", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	private Handler handler = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			if (msg.what == 1) {
+				mPullToRefreshListView.setVisibility(View.VISIBLE);
+				refreshData(jobType, city, 1, "down");
+			}
+			super.handleMessage(msg);
+		}
+	};
+
+	private void afresh() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (!NetWorkState.isNetWorkConnected(getActivity())) {
+					try {
+						Thread.sleep(1000);
+						if (NetWorkState.isNetWorkConnected(getActivity())) {
+							Message msg = new Message();
+							msg.what = 1;
+							handler.sendMessage(msg);
+						}
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
 	}
 
 	private void setLastUpdateTime() {

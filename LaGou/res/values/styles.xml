@@ -106,6 +106,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:drawableLeft">@drawable/left_tab</item>
         <item name="android:drawablePadding">5dp</item>
+        <item name="android:padding">8dp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">16sp</item>
     </style>

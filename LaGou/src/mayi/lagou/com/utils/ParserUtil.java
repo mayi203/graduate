@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import mayi.lagou.com.data.DeliverFeedback;
 import mayi.lagou.com.data.EducationExperirnce;
 import mayi.lagou.com.data.JobExperience;
 import mayi.lagou.com.data.LaGouPosition;
@@ -55,7 +56,7 @@ public class ParserUtil {
 			int size = element.select("li").size();
 			for (int i = 0; i < size; i++) {
 				String weal = element.select("li").get(i).text()
-						.replace(" ", "");
+						.replace(" ", "").trim();
 				wealList.add(weal);
 			}
 			return wealList;
@@ -66,7 +67,8 @@ public class ParserUtil {
 
 	private static String getPositionSpan(Element element, int index) {
 		try {
-			return element.select("span").get(index).text().replace(" ", "");
+			return element.select("span").get(index).text().replace(" ", "")
+					.trim();
 		} catch (NullPointerException e) {
 			return "";
 		} catch (IndexOutOfBoundsException e) {
@@ -76,7 +78,8 @@ public class ParserUtil {
 
 	private static String getCompanySpan(Element element, int index) {
 		try {
-			return element.select("span").get(index).text().replace(" ", "");
+			return element.select("span").get(index).text().replace(" ", "")
+					.trim();
 		} catch (NullPointerException e) {
 			return "";
 		} catch (IndexOutOfBoundsException e) {
@@ -87,7 +90,8 @@ public class ParserUtil {
 	private static String getTimeOrScale(Element element) {
 		try {
 			int size = element.select("span").size();
-			return element.select("span").get(size - 1).text().replace(" ", "");
+			return element.select("span").get(size - 1).text().replace(" ", "")
+					.trim();
 		} catch (NullPointerException e) {
 			return "";
 		} catch (IndexOutOfBoundsException e) {
@@ -107,9 +111,9 @@ public class ParserUtil {
 		try {
 			if (element.select("div.mb10") != null)
 				return element.select("div.mb10").select("a").text()
-						.replace(" ", "");
+						.replace(" ", "").trim();
 			else
-				return element.select("a").text().replace(" ", "");
+				return element.select("a").text().replace(" ", "").trim();
 		} catch (NullPointerException e) {
 			return "";
 		}
@@ -117,7 +121,7 @@ public class ParserUtil {
 
 	private static String getMoney(Element element) {
 		try {
-			return element.select("span").get(1).text().replace(" ", "");
+			return element.select("span").get(1).text().replace(" ", "").trim();
 		} catch (NullPointerException e) {
 			return "";
 		}
@@ -125,7 +129,7 @@ public class ParserUtil {
 
 	private static String getCity(Element element) {
 		try {
-			return element.select("span.c9").text().replace(" ", "");
+			return element.select("span.c9").text().replace(" ", "").trim();
 		} catch (NullPointerException e) {
 			return "";
 		}
@@ -134,7 +138,7 @@ public class ParserUtil {
 	private static String getPositionName(Element element) {
 		try {
 			return element.select("div.mb10").select("a").text()
-					.replace(" ", "");
+					.replace(" ", "").trim();
 		} catch (NullPointerException e) {
 			return "";
 		}
@@ -213,7 +217,7 @@ public class ParserUtil {
 	private static String getComIconUrl(Document doc) {
 		try {
 			return doc.select("dl.job_company").select("img.b2").attr("src")
-					.toString();
+					.toString().trim();
 		} catch (NullPointerException e) {
 			return "";
 		}
@@ -227,7 +231,7 @@ public class ParserUtil {
 		try {
 			Elements divs = doc.select("dl.job_company").select("dd")
 					.select("div");
-			return divs.get(0).text();
+			return divs.get(0).text().trim();
 		} catch (IndexOutOfBoundsException e) {
 			return "";
 		}
@@ -239,7 +243,7 @@ public class ParserUtil {
 	 */
 	private static String getDetailReleaseTime(Document doc) {
 		try {
-			return doc.select("dd.job_request").select("div").text();
+			return doc.select("dd.job_request").select("div").text().trim();
 		} catch (NullPointerException e) {
 			return "";
 		}
@@ -258,7 +262,7 @@ public class ParserUtil {
 			while (matcher.find()) {
 				info.add(matcher.group(1));
 			}
-			return info.get(index);
+			return info.get(index).trim();
 		} catch (IndexOutOfBoundsException e) {
 			return "";
 		}
@@ -270,7 +274,7 @@ public class ParserUtil {
 	 */
 	private static String getDetailSpan(Elements spans, int index) {
 		try {
-			return spans.get(index).text();
+			return spans.get(index).text().trim();
 		} catch (NullPointerException e) {
 			return "";
 		}
@@ -282,7 +286,8 @@ public class ParserUtil {
 	 */
 	private static String getDetailSalary(Document doc) {
 		try {
-			return doc.select("dd.job_request").select("span.red").text();
+			return doc.select("dd.job_request").select("span.red").text()
+					.trim();
 		} catch (NullPointerException e) {
 			return "";
 		}
@@ -369,7 +374,7 @@ public class ParserUtil {
 	 */
 	private static String getSelfDescription(Document doc) {
 		try {
-			return doc.select("div.descriptionShow").text();
+			return doc.select("div.descriptionShow").text().trim();
 		} catch (NullPointerException e) {
 			return "";
 		}
@@ -386,11 +391,11 @@ public class ParserUtil {
 			Elements jobs = doc.select("ul.wlist").select("div");
 			for (int i = 0; i < jobs.size(); i++) {
 				job = new JobExperience();
-				job.setPositionName(jobs.get(i).select("h3").text());
-				job.setCompanyName(jobs.get(i).select("h4").text());
+				job.setPositionName(jobs.get(i).select("h3").text().trim());
+				job.setCompanyName(jobs.get(i).select("h4").text().trim());
 				job.setIconUrl(jobs.get(i).select("img").attr("src"));
 				job.setJobTime(doc.select("ul.wlist").select("span").get(i)
-						.text());
+						.text().trim());
 				jobExperiences.add(job);
 			}
 			return jobExperiences;
@@ -412,11 +417,11 @@ public class ParserUtil {
 				project = new ProjectExperience();
 				String proName = projectList.get(i).select("div.f16").text()
 						.trim();
-				proName.substring(0, proName.indexOf(" "));
+				proName.substring(0, proName.indexOf(" ")).trim();
 				project.setProjectName(proName.substring(0,
-						proName.indexOf(" ")));
+						proName.indexOf(" ")).trim());
 				project.setProjectTime(projectList.get(i).select("span").text()
-						.trim().trim());
+						.trim());
 				try {
 					project.setProjectDetail(projectList.get(i)
 							.select("div.dl1").text().trim());
@@ -466,7 +471,7 @@ public class ParserUtil {
 	private static String getBasicInfo(Document doc) {
 		try {
 			String info = doc.select("div.basicShow").select("span").toString()
-					.replace("<br />", BROKEN);
+					.replace("<br />", BROKEN).trim();
 			Document dom = Jsoup.parse(info);
 			return dom.text().replace(BROKEN, "\n").trim();
 		} catch (NullPointerException e) {
@@ -476,6 +481,34 @@ public class ParserUtil {
 
 	public static String parseResumeDialogText(String html) {
 		Document doc = Jsoup.parse(html);
-		return doc.text().replace(" ", "");
+		return doc.text().replace(" ", "").trim();
+	}
+
+	public static List<DeliverFeedback> parseDeliverFeedback(String html) {
+		List<DeliverFeedback> delivers = new ArrayList<DeliverFeedback>();
+		DeliverFeedback deliver = null;
+		Document doc = Jsoup.parse(html);
+		try {
+			Elements positions = doc.select("d_item");
+			for (int i = 0; i < positions.size(); i++) {
+				deliver = new DeliverFeedback();
+				deliver.setPosition(positions.get(i).select("h2").select("em")
+						.text().trim());
+				deliver.setSalary(positions.get(i).select("h2").select("span")
+						.text().trim());
+				deliver.setCompany(positions.get(i).select("h2")
+						.select("a.d_jobname").text().trim());
+				deliver.setDeliverTime(positions.get(i).select("span.d_time")
+						.text().trim());
+				deliver.setResume(positions.get(i).select("div.d_resume")
+						.text().trim());
+				deliver.setProgress(positions.get(i)
+						.select("a.btn_showprogress").text().trim());
+				delivers.add(deliver);
+			}
+			return delivers;
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 }

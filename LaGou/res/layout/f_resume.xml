@@ -58,9 +58,11 @@
                 style="@style/Info_Title"
                 android:text="@string/job_experience" />
 
-            <TextView
-                android:id="@+id/experience"
-                style="@style/resume_item" />
+            <ListView android:id="@+id/ex_list"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </ListView>
 
             <TextView
                 style="@style/Info_Title"

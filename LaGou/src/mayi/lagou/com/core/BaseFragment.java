@@ -25,6 +25,7 @@ import android.widget.TextView;
  */
 public abstract class BaseFragment extends Fragment {
 	public AsyncHttpClient client;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -40,13 +41,6 @@ public abstract class BaseFragment extends Fragment {
 		initListener();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater,
-	 * android.view.ViewGroup, android.os.Bundle)
-	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -66,6 +60,12 @@ public abstract class BaseFragment extends Fragment {
 
 	protected LaGouApp app() {
 		return (LaGouApp) getActivity().getApplication();
+	}
+
+	@Override
+	public void onDestroyView() {
+		client.cancelRequests(getActivity(), true);
+		super.onDestroyView();
 	}
 
 	public TextView findTextView(int id) {

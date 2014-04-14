@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -62,13 +63,28 @@ public class JobDetailFragment extends BaseFragment {
 		com_img = findImageView(R.id.com_img);
 		details = findTextView(R.id.details);
 		deliver = findViewById(R.id.lay_deliver);
-		email=findImageView(R.id.email);
+		email = findImageView(R.id.email);
 	}
 
 	@Override
 	public void initValue() {
-		anim=AnimationUtils.loadAnimation(getActivity(), R.anim.email_anim);
+		anim = AnimationUtils.loadAnimation(getActivity(), R.anim.email_anim);
 		anim.setRepeatMode(Animation.RESTART);
+		anim.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				email.setVisibility(View.GONE);
+			}
+		});
 	}
 
 	@Override
@@ -115,8 +131,11 @@ public class JobDetailFragment extends BaseFragment {
 						+ detail.getEducation() + "/" + detail.getJobCategory()
 						+ "\n" + detail.getJobTempt().trim());
 				release_time.setText(detail.getReleaseTime());
-				app().getImageLoader().loadImage(com_img,
-						detail.getComIconUrl(), R.drawable.waiting);
+				if (detail.getComIconUrl() != null
+						&& !"".equals(detail.getComIconUrl()) && !isExit) {
+					app().getImageLoader().loadImage(com_img,
+							detail.getComIconUrl(), R.drawable.waiting);
+				}
 				com_name.setText(detail.getCompany().trim());
 				com_del.setText(detail.getField().trim() + "|"
 						+ detail.getScale() + "|" + detail.getStage() + "\n"
@@ -138,10 +157,12 @@ public class JobDetailFragment extends BaseFragment {
 		super.onDestroyView();
 	}
 
-	private void startAnim(){
+	private void startAnim() {
 		email.setVisibility(View.VISIBLE);
 		email.setAnimation(anim);
+		anim.start();
 	}
+
 	private void getUserInfo() {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("email", "wenfeili@163.com");
@@ -208,7 +229,7 @@ public class JobDetailFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-//				refreshData();
+				// refreshData();
 				myDialog.dismiss();
 			}
 		});
@@ -243,8 +264,8 @@ public class JobDetailFragment extends BaseFragment {
 							if ("20".equals(code) || "21".equals(code)) {
 								Toast.makeText(getActivity(), message,
 										Toast.LENGTH_SHORT).show();
-							}else if("22".equals(code)){
-								
+							} else if ("22".equals(code)) {
+
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -252,5 +273,13 @@ public class JobDetailFragment extends BaseFragment {
 						Log.v("Lagou", content);
 					}
 				});
+	}
+
+	private boolean isExit = false;
+
+	@Override
+	public void onPause() {
+		isExit = true;
+		super.onPause();
 	}
 }
