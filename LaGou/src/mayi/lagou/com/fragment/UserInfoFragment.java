@@ -60,13 +60,36 @@ public class UserInfoFragment extends BaseFragment {
 				getActivity().onBackPressed();
 			}
 		});
-		findViewById(R.id.lay_resume).setOnClickListener(new OnClickListener() {
+		findViewById(R.id.my_resume).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				addFragmentToStack(R.id.u_contain, new MyResumeFragment());
 			}
 		});
+		findViewById(R.id.my_deliver).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				addFragmentToStack(R.id.u_contain, new MyResumeFragment());
+			}
+		});
+		findViewById(R.id.clear_save).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				addFragmentToStack(R.id.u_contain, new MyResumeFragment());
+			}
+		});
+		findViewById(R.id.change_user).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						addFragmentToStack(R.id.u_contain,
+								new MyResumeFragment());
+					}
+				});
 	}
 
 	@Override
@@ -92,8 +115,10 @@ public class UserInfoFragment extends BaseFragment {
 
 	private void getUserInfo() {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("email", "wenfeili@163.com");
-		map.put("password", "l1w2f3");
+		String emailTxt = SharePreferenceUtil.getString(getActivity(), "email");
+		map.put("email", emailTxt);
+		String pswTxt = SharePreferenceUtil.getString(getActivity(), "psw");
+		map.put("password", pswTxt);
 		map.put("autoLogin", "1");
 		RequestParams params = new RequestParams(map);
 		client.post(LaGouApi.Host + LaGouApi.LogIn, params,
@@ -134,7 +159,8 @@ public class UserInfoFragment extends BaseFragment {
 		UserInfo user = ParserUtil.parserUserInfo(content);
 		onRequest.setUserInfo(user);
 		userInfo.setText(user.getBasicInfo());
-		if (user.getUserIcon() != null && !"".equals(user.getUserIcon())&&!isExit) {
+		if (user.getUserIcon() != null && !"".equals(user.getUserIcon())
+				&& !isExit) {
 			app().getImageLoader().loadImage(userHead, user.getUserIcon(),
 					R.drawable.default_avatar);
 		}
@@ -146,11 +172,12 @@ public class UserInfoFragment extends BaseFragment {
 		public UserInfo getUserInfo();
 	}
 
-	private boolean isExit=false;
+	private boolean isExit = false;
+
 	@Override
 	public void onPause() {
-		isExit=true;
+		isExit = true;
 		super.onPause();
 	}
-	
+
 }

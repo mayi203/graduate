@@ -36,6 +36,9 @@
     <!-- MyResumeFragment -->
     <string name="self">个人中心</string>
     <string name="resume">我的简历</string>
+    <string name="my_deliver">我投递的简历</string>
+    <string name="clear_save">清除缓存</string>
+    <string name="change_user">更换账号</string>
     <string name="expect_job">期望工作</string>
     <string name="job_experience">工作经历</string>
     <string name="project_experience">项目经验</string>

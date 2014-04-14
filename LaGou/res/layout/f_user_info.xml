@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:id="@+id/top"
@@ -18,28 +19,23 @@
         layout="@layout/l_user_info" />
 
     <TextView
-        android:id="@+id/hope"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/lay_info"
-        android:layout_margin="8dp"
-        android:background="@color/white"
-        android:padding="8dp" />
+        android:id="@+id/my_resume"
+        style="@style/User_Info_TextView"
+        android:text="@string/resume" />
 
-    <RelativeLayout
-        android:id="@+id/lay_resume"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/hope"
-        android:layout_margin="8dp"
-        android:background="@color/white"
-        android:padding="8dp" >
+    <TextView
+        android:id="@+id/my_deliver"
+        style="@style/User_Info_TextView"
+        android:text="@string/my_deliver" />
 
-        <TextView
-            android:id="@+id/my_resume"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/resume" />
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/clear_save"
+        style="@style/User_Info_TextView"
+        android:text="@string/clear_save" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/change_user"
+        style="@style/User_Info_TextView"
+        android:text="@string/change_user" />
+
+</LinearLayout>

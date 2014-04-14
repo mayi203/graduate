@@ -10,7 +10,9 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:dividerHeight="10dp" >
+        android:cacheColorHint="#ffffff"
+        android:dividerHeight="10dp"
+        android:listSelector="@null" >
     </ListView>
 
 </LinearLayout>

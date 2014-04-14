@@ -9,6 +9,7 @@ import com.loopj.android.http.RequestParams;
 import android.app.Activity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.R;
@@ -20,6 +21,7 @@ import mayi.lagou.com.utils.SharePreferenceUtil;
 public class LoginFragment extends BaseFragment implements OnClickListener {
 
 	private Refresh refresh;
+	private TextView email, psw;
 
 	@Override
 	public int contentView() {
@@ -28,7 +30,8 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void findViewsById() {
-
+		email = findTextView(R.id.email);
+		psw = findTextView(R.id.psw);
 	}
 
 	@Override
@@ -49,6 +52,7 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 			getActivity().onBackPressed();
 			break;
 		case R.id.login_btn:
+			getUserInfo();
 			break;
 		}
 	}
@@ -62,27 +66,39 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if(NetWorkState.isNetWorkConnected(getActivity())){
-			getUserInfo();
-		}else{
+		if (NetWorkState.isNetWorkConnected(getActivity())) {
+		} else {
 			Toast.makeText(getActivity(), "好像没有联网哦", Toast.LENGTH_SHORT).show();
 		}
 	}
 
 	private void getUserInfo() {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("email", "wenfeili@163.com");
-		map.put("password", "l1w2f3");
+		final String emailTxt = email.getText().toString().trim();
+		if (emailTxt != null && !"".equals(emailTxt)) {
+			map.put("email", email.getText().toString().trim());
+		} else {
+			Toast.makeText(getActivity(), "邮箱不能为空！", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		final String pswTxt = psw.getText().toString().trim();
+		if (pswTxt != null && !"".equals(pswTxt)) {
+			map.put("password", psw.getText().toString().trim());
+		} else {
+			Toast.makeText(getActivity(), "密码不能为空！", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		map.put("autoLogin", "1");
 		RequestParams params = new RequestParams(map);
 		client.post(LaGouApi.Host + LaGouApi.LogIn, params,
 				new AsyncHttpResponseHandler() {
 					@Override
 					public void onSuccess(int statusCode, String content) {
-						if(statusCode==200){
-							SharePreferenceUtil.putString(getActivity(), "email",
-									"wenfeili@163.com");
-							SharePreferenceUtil.putString(getActivity(), "psw", "l1w2f3");
+						if (statusCode == 200) {
+							SharePreferenceUtil.putString(getActivity(),
+									"email", emailTxt);
+							SharePreferenceUtil.putString(getActivity(), "psw",
+									pswTxt);
 							refresh.refresh();
 						}
 					}

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/hole_background"
     android:orientation="vertical" >
 
     <RelativeLayout style="@style/topBar" >
@@ -33,6 +33,7 @@
                     android:id="@+id/icon"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    android:layout_centerVertical="true"
                     android:scaleType="centerCrop"
                     android:src="@drawable/default_avatar" />
 
@@ -43,7 +44,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/icon"
                     android:paddingLeft="4dp"
-                    android:textSize="16sp" />
+                    android:textColor="@color/dimgrey"
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <TextView
@@ -58,10 +60,12 @@
                 style="@style/Info_Title"
                 android:text="@string/job_experience" />
 
-            <ListView android:id="@+id/ex_list"
-                android:padding="8dp"
+            <ListView
+                android:id="@+id/ex_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="8dp" >
             </ListView>
 
             <TextView

@@ -4,6 +4,7 @@
 package mayi.lagou.com.fragment;
 
 import mayi.lagou.com.R;
+import mayi.lagou.com.adapter.DeliverAdapter;
 import mayi.lagou.com.core.BaseFragment;
 import android.widget.ListView;
 
@@ -15,6 +16,7 @@ import android.widget.ListView;
 public class DeliverFeedbackFragment extends BaseFragment {
 
 	private ListView mListView;
+	private DeliverAdapter mAdapter;
 
 	/*
 	 * (non-Javadoc)
@@ -43,6 +45,8 @@ public class DeliverFeedbackFragment extends BaseFragment {
 	 */
 	@Override
 	public void initValue() {
+		mAdapter = new DeliverAdapter(getActivity());
+		mListView.setAdapter(mAdapter);
 	}
 
 	/*
@@ -52,7 +56,6 @@ public class DeliverFeedbackFragment extends BaseFragment {
 	 */
 	@Override
 	public void initListener() {
-		// TODO Auto-generated method stub
 
 	}
 

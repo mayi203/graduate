@@ -50,6 +50,8 @@
         android:layout_below="@id/position"
         android:layout_marginRight="10dp"
         android:layout_toRightOf="@id/salary"
+        android:maxEms="8"
+        android:singleLine="true"
         android:textColor="@color/darkgray" />
 
     <TextView
@@ -58,6 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/position"
         android:layout_toRightOf="@id/education"
+        android:maxEms="8"
+        android:singleLine="true"
         android:textColor="@color/darkgray" />
 
     <TextView

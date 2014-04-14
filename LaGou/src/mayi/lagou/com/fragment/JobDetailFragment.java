@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.R;
 import mayi.lagou.com.activity.HomeActivity;
+import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.PositionDetail;
 import mayi.lagou.com.fragment.JobFragment.OnChangeUrl;
@@ -32,7 +33,8 @@ import com.loopj.android.http.RequestParams;
 
 public class JobDetailFragment extends BaseFragment {
 
-	private TextView title, require, release_time, com_name, com_del, details;
+	private TextView title, require, release_time, com_name, com_del, details,
+			bottomTxt;
 	private String mUrl, token;
 	private ImageView com_img;
 	private View view;
@@ -42,6 +44,7 @@ public class JobDetailFragment extends BaseFragment {
 	private MyDialog myDialog;
 	private Animation anim;
 	private ImageView email;
+	private Boolean isLogin = true;
 
 	public JobDetailFragment() {
 
@@ -64,6 +67,7 @@ public class JobDetailFragment extends BaseFragment {
 		details = findTextView(R.id.details);
 		deliver = findViewById(R.id.lay_deliver);
 		email = findImageView(R.id.email);
+		bottomTxt = findTextView(R.id.bottom_txt);
 	}
 
 	@Override
@@ -100,7 +104,11 @@ public class JobDetailFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				getUserInfo();
+				if (isLogin) {
+					getUserInfo();
+				}else{
+					startActivity(UserInfoActicity.class);
+				}
 			}
 		});
 	}
@@ -116,6 +124,11 @@ public class JobDetailFragment extends BaseFragment {
 		super.onResume();
 		mUrl = onChangeUrl.getUrl();
 		refreshData();
+		String userInfo = SharePreferenceUtil.getString(getActivity(), "email");
+		if (userInfo == null || "".equals(userInfo)) {
+			bottomTxt.setText("投个简历[未登录]");
+			isLogin = false;
+		}
 	}
 
 	private void refreshData() {
@@ -165,8 +178,8 @@ public class JobDetailFragment extends BaseFragment {
 
 	private void getUserInfo() {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("email", "wenfeili@163.com");
-		map.put("password", "l1w2f3");
+		map.put("email", SharePreferenceUtil.getString(getActivity(), "email"));
+		map.put("password", SharePreferenceUtil.getString(getActivity(), "psw"));
 		map.put("autoLogin", "1");
 		RequestParams params = new RequestParams(map);
 		client.post(LaGouApi.Host + LaGouApi.LogIn, params,
@@ -207,9 +220,17 @@ public class JobDetailFragment extends BaseFragment {
 							JSONObject object = new JSONObject(content);
 							String code = object.optString("code");
 							String message = object.optString("msg");
+							String success = object.optString("success");
 							if ("20".equals(code) || "21".equals(code)) {
 								showDialog(message);
 								config = true;
+							} else if (!"true".equals(success)) {
+								Toast.makeText(getActivity(),
+										"投递失败：" + message, Toast.LENGTH_SHORT)
+										.show();
+							} else if ("true".equals(success)) {
+								Toast.makeText(getActivity(), "投递成功！",
+										Toast.LENGTH_SHORT).show();
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -223,7 +244,8 @@ public class JobDetailFragment extends BaseFragment {
 		if (myDialog != null && myDialog.isShowing()) {
 			myDialog.dismiss();
 		}
-		myDialog = new MyDialog(getActivity(), message);
+		String mMessage = ParserUtil.parseResumeDialogText(message);
+		myDialog = new MyDialog(getActivity(), mMessage);
 		myDialog.show();
 		myDialog.setOkBtnOnClickListener(new OnClickListener() {
 
@@ -259,13 +281,15 @@ public class JobDetailFragment extends BaseFragment {
 					public void onSuccess(int statusCode, String content) {
 						try {
 							JSONObject object = new JSONObject(content);
-							String code = object.optString("code");
 							String message = object.optString("msg");
-							if ("20".equals(code) || "21".equals(code)) {
-								Toast.makeText(getActivity(), message,
+							String success = object.optString("success");
+							if (!"true".equals(success)) {
+								Toast.makeText(getActivity(),
+										"投递失败：" + message, Toast.LENGTH_SHORT)
+										.show();
+							} else {
+								Toast.makeText(getActivity(), "投递成功！",
 										Toast.LENGTH_SHORT).show();
-							} else if ("22".equals(code)) {
-
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();

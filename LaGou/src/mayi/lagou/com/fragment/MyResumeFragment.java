@@ -1,6 +1,8 @@
 package mayi.lagou.com.fragment;
 
 import android.app.Activity;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,8 +20,7 @@ public class MyResumeFragment extends BaseFragment {
 	private ImageView userIcon;
 	private ExprienceAdapter adapter;
 	private ListView exList;
-	private TextView baseInfo, expect, project, education, self,
-			producation;
+	private TextView baseInfo, expect, project, education, self, producation;
 	String url;
 
 	@Override
@@ -36,7 +37,7 @@ public class MyResumeFragment extends BaseFragment {
 		education = findTextView(R.id.education);
 		self = findTextView(R.id.self);
 		producation = findTextView(R.id.producation);
-		exList=(ListView)findViewById(R.id.ex_list);
+		exList = (ListView) findViewById(R.id.ex_list);
 	}
 
 	@Override
@@ -45,6 +46,13 @@ public class MyResumeFragment extends BaseFragment {
 
 	@Override
 	public void initListener() {
+		findTextView(R.id.back).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				getActivity().onBackPressed();
+			}
+		});
 
 	}
 
@@ -65,18 +73,20 @@ public class MyResumeFragment extends BaseFragment {
 		app().getImageLoader().loadImage(userIcon, mUserInfo.getUserIcon(),
 				R.drawable.default_avatar);
 		baseInfo.setText(mUserInfo.getBasicInfo());
-		expect.setText(mUserInfo.getJobExpect()+"\n");
+		expect.setText(mUserInfo.getJobExpect() + "\n");
 		StringBuilder exp = new StringBuilder();
 		for (int i = 0, j = mUserInfo.getJobExperience().size(); j > 0 && i < j; i++) {
 			exp.append(mUserInfo.getJobExperience().get(i).getCompanyName());
 		}
-		adapter=new ExprienceAdapter(getActivity(), app().getImageLoader(),mUserInfo.getJobExperience());
+		adapter = new ExprienceAdapter(getActivity(), app().getImageLoader(),
+				mUserInfo.getJobExperience());
 		exList.setAdapter(adapter);
 		StringBuilder pro = new StringBuilder();
 		for (int i = 0, j = mUserInfo.getProjectExperience().size(); j > 0
 				&& i < j; i++) {
 			pro.append(mUserInfo.getProjectExperience().get(i).getProjectName()
-					+ mUserInfo.getProjectExperience().get(i).getProjectTime()+"\n"
+					+ mUserInfo.getProjectExperience().get(i).getProjectTime()
+					+ "\n"
 					+ mUserInfo.getProjectExperience().get(i)
 							.getProjectDetail() + "\n");
 		}
@@ -86,6 +96,7 @@ public class MyResumeFragment extends BaseFragment {
 				&& i < j; i++) {
 			edu.append(mUserInfo.getEducationExperience().get(i)
 					.getEducationTime()
+					+ "\n"
 					+ mUserInfo.getEducationExperience().get(i).getSchool()
 					+ mUserInfo.getEducationExperience().get(i).getMajor()
 					+ "\n");
@@ -93,12 +104,13 @@ public class MyResumeFragment extends BaseFragment {
 		education.setText(edu.toString());
 		StringBuilder produ = new StringBuilder();
 		for (int i = 0, j = mUserInfo.getProjectShow().size(); j > 0 && i < j; i++) {
-			produ.append(mUserInfo.getProjectShow().get(i).getProjectUrl()+"\n"
+			produ.append(mUserInfo.getProjectShow().get(i).getProjectUrl()
+					+ "\n"
 					+ mUserInfo.getProjectShow().get(i).getProjectDetail()
 					+ "\n");
 		}
 		producation.setText(produ.toString());
-		self.setText(mUserInfo.getSelfDescription()+"\n");
+		self.setText(mUserInfo.getSelfDescription() + "\n");
 	}
 
 }

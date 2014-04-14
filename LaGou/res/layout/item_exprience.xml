@@ -6,13 +6,16 @@
     <TextView
         android:id="@+id/exp_time"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:textColor="@color/dimgrey" />
 
     <ImageView
         android:id="@+id/exp_icon"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_below="@id/exp_time"
+        android:contentDescription="@string/app_name"
         android:scaleType="centerCrop" />
 
     <TextView
@@ -20,12 +23,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/exp_time"
-        android:layout_toRightOf="@id/exp_icon" />
+        android:layout_toRightOf="@id/exp_icon"
+        android:paddingLeft="5dp"
+        android:textColor="@color/dimgrey" />
+
     <TextView
         android:id="@+id/exp_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/exp_job"
-        android:layout_toRightOf="@id/exp_icon" />
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/exp_icon"
+        android:paddingLeft="5dp"
+        android:textColor="@color/dimgrey" />
 
 </RelativeLayout>
