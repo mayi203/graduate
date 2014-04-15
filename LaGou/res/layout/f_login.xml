@@ -13,44 +13,56 @@
             android:text="@string/string_login" />
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_below="@id/top_lay"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="50dp"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:padding="15dp" >
+        android:layout_marginTop="50dp" >
 
-        <EditText
-            android:id="@+id/email"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/string_login_email"
-            android:inputType="textEmailAddress"
-            android:textSize="15sp" />
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="15dp" >
 
-        <EditText
-            android:id="@+id/psw"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:hint="@string/string_login_psw"
-            android:inputType="textPassword"
-            android:textSize="15sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/darkgreen"
+                android:layout_marginBottom="10dp"
+                android:text="登录帐号为拉钩网注册帐号" />
 
-        <Button
-            android:id="@+id/login_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/darkgreen"
-            android:padding="3dp"
-            android:text="@string/string_login_btn"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
-    </LinearLayout>
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/string_login_email"
+                android:inputType="textEmailAddress"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/psw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:hint="@string/string_login_psw"
+                android:inputType="textPassword"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/login_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_detail_deliver_btn"
+                android:padding="8dp"
+                android:text="@string/string_login_btn"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

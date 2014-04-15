@@ -63,6 +63,7 @@
     <string name="string_login_psw">请输入密码</string>
     <string name="string_login_btn">登      录</string>
     <string name="string_login">登录</string>
+    <string name="string_login_tips">登录帐号为拉钩网注册帐号</string>
 
     <!-- MyDialog -->
     <string name="string_mydialog_sure">确定</string>
@@ -77,6 +78,8 @@
     <string name="string_copyright">Copyright ©2012 mayi. All rights reserved</string>
     <!-- AboutUsFragment -->
     <string name="string_about_back">关于我们</string>
-    <string name="string_about_us">关于我们。。。</string>
+    <string name="string_version">Ver 1.0</string>
+    <string name="string_weixin">l1204783269</string>
+    <string name="string_sina">203mayi@gmail.com</string>
 
 </resources>

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical" >
+    android:background="@color/white" >
 
     <RelativeLayout
         android:id="@+id/lay_top"
@@ -15,12 +14,59 @@
             android:text="@string/string_about_back" />
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:text="@string/string_about_us"
-        android:textColor="@color/dimgrey"
-        android:textSize="18sp" />
+    <ImageView
+        android:id="@+id/about_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/lay_top"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_launcher" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/ver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/about_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/string_version" />
+
+    <LinearLayout
+        android:id="@+id/lay_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ver"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/weixin"
+            android:drawablePadding="4dp"
+            android:gravity="center_vertical"
+            android:text="@string/string_weixin" />
+
+        <TextView
+            android:id="@+id/gmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:drawableLeft="@drawable/gmail"
+            android:drawablePadding="4dp"
+            android:gravity="center_vertical"
+            android:text="@string/string_sina" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="@string/string_copyright" />
+
+</RelativeLayout>
