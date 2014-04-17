@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mayi.lagou.com.R;
-import mayi.lagou.com.data.LaGouPosition;
+import mayi.lagou.com.data.Position;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +25,7 @@ public class JobItemAdapt extends BaseAdapter {
 
 	public JobItemAdapt(Context mContext) {
 		this.context = mContext;
-		objects = new ArrayList<LaGouPosition>();
+		objects = new ArrayList<Position>();
 	}
 
 	static class ViewHolder {
@@ -38,7 +38,7 @@ public class JobItemAdapt extends BaseAdapter {
 		private TextView time;
 	}
 
-	protected List<LaGouPosition> objects;
+	protected List<Position> objects;
 
 	/*
 	 * (non-Javadoc)
@@ -118,14 +118,14 @@ public class JobItemAdapt extends BaseAdapter {
 		return convertview;
 	}
 
-	public void addItems(List<LaGouPosition> items) {
+	public void addItems(List<Position> items) {
 		if (items != null) {
 			objects.addAll(items);
 			notifyDataSetChanged();
 		}
 	}
 
-	public void deleteItems(List<LaGouPosition> items) {
+	public void deleteItems(List<Position> items) {
 		objects.removeAll(items);
 		notifyDataSetChanged();
 	}

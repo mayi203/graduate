@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import mayi.lagou.com.data.DeliverFeedback;
 import mayi.lagou.com.data.EducationExperirnce;
 import mayi.lagou.com.data.JobExperience;
-import mayi.lagou.com.data.LaGouPosition;
+import mayi.lagou.com.data.Position;
 import mayi.lagou.com.data.PositionDetail;
 import mayi.lagou.com.data.ProjectExperience;
 import mayi.lagou.com.data.ProjectShow;
@@ -23,15 +23,15 @@ public class ParserUtil {
 
 	private static final String BROKEN = "BROKEN";
 
-	public static List<LaGouPosition> parserPosition(String html) {
+	public static List<Position> parserPosition(String html) {
 		try {
 			Document doc = Jsoup.parse(html);
-			List<LaGouPosition> positionList = new ArrayList<LaGouPosition>();
-			LaGouPosition position = null;
+			List<Position> positionList = new ArrayList<Position>();
+			Position position = null;
 			Elements positionNodes = doc.select("div.hot_pos_l");
 			Elements companyNodes = doc.select("div.hot_pos_r");
 			for (int i = 0; i < positionNodes.size(); i++) {
-				position = new LaGouPosition();
+				position = new Position();
 				position.setPositionName(getPositionName(positionNodes.get(i)));
 				position.setPositionUrl(getPositionUrl(positionNodes.get(i)));
 				position.setCity(getCity(positionNodes.get(i)));

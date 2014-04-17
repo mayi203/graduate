@@ -7,13 +7,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.http.Header;
+
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.R;
 import mayi.lagou.com.activity.HomeActivity;
 import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.adapter.JobItemAdapt;
 import mayi.lagou.com.core.BaseFragment;
-import mayi.lagou.com.data.LaGouPosition;
+import mayi.lagou.com.data.Position;
 import mayi.lagou.com.utils.NetWorkState;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.widget.networkdialog.DialogUtils;
@@ -64,9 +67,9 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	private boolean mIsMenuOpen = false;
 	private int radius;
 	public int pageNum = 1;
-	public static String city = "全国";
-	public static String jobType = "所有职位";
-	List<LaGouPosition> allData;
+	public String mCity = "全国";
+	public String jobType = "所有职位";
+	List<Position> allData;
 	private static JobFragment instance;
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
@@ -97,10 +100,20 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		mListView = mPullToRefreshListView.getRefreshableView();
 		mListView.setFadingEdgeLength(0);
 		mListView.setDividerHeight(10);
+		mListView.setSelector(android.R.color.transparent);
 		mListView.setDivider(getResources().getDrawable(R.drawable.list_de));
 		adapter = new JobItemAdapt(getActivity());
 		mListView.setAdapter(adapter);
-		allData = new ArrayList<LaGouPosition>();
+		allData = new ArrayList<Position>();
+		if (NetWorkState.isNetWorkConnected(getActivity())) {
+			refreshData(jobType, mCity, 1, "down");
+		} else {
+			afresh();
+			mMenuButton.setClickable(false);
+			findViewById(R.id.lay_search).setClickable(false);
+			mPullToRefreshListView.setVisibility(View.GONE);
+			Toast.makeText(getActivity(), "好像没有联网哦", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	@Override
@@ -119,14 +132,14 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 					public void onPullDownToRefresh(
 							PullToRefreshBase<ListView> refreshView) {
 						pageNum = 1;
-						refreshData(jobType, city, pageNum, "down");
+						refreshData(jobType, mCity, pageNum, "down");
 					}
 
 					@Override
 					public void onPullUpToRefresh(
 							PullToRefreshBase<ListView> refreshView) {
 						pageNum++;
-						refreshData(jobType, city, pageNum, "up");
+						refreshData(jobType, mCity, pageNum, "up");
 					}
 				});
 		findViewById(R.id.lay_search).setOnClickListener(new OnClickListener() {
@@ -172,17 +185,9 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (NetWorkState.isNetWorkConnected(getActivity())) {
-			refreshData(jobType, city, 1, "down");
-		} else {
-			afresh();
-			mMenuButton.setClickable(false);
-			findViewById(R.id.lay_search).setClickable(false);
-			mPullToRefreshListView.setVisibility(View.GONE);
-			Toast.makeText(getActivity(), "好像没有联网哦", Toast.LENGTH_SHORT).show();
-		}
 	}
 
+	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 
 		@Override
@@ -191,7 +196,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 				mPullToRefreshListView.setVisibility(View.VISIBLE);
 				mMenuButton.setClickable(true);
 				findViewById(R.id.lay_search).setClickable(true);
-				refreshData(jobType, city, 1, "down");
+				refreshData(jobType, mCity, 1, "down");
 			}
 			super.handleMessage(msg);
 		}
@@ -234,6 +239,9 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	 */
 	public void refreshData(String jType, String city, int pageNum,
 			final String type) {
+		if ("".equals(city))
+			;
+		city = mCity;
 		jobType = jType;
 		String url = LaGouApi.Host + LaGouApi.Jobs + jType + "?city=" + city
 				+ "&pn=" + pageNum;
@@ -241,7 +249,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		client.get(url, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
-				List<LaGouPosition> list = ParserUtil.parserPosition(response);
+				List<Position> list = ParserUtil.parserPosition(response);
 				if ("down".equals(type)) {
 					allData.clear();
 					adapter.deleteAllItems();
@@ -255,8 +263,20 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 				if (list != null && list.size() > 0) {
 					allData.addAll(list);
 				}
-				System.out.println(list.get(0).getCompany());
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+					Throwable arg3) {
+				Toast.makeText(getActivity(), "请求出错", Toast.LENGTH_SHORT)
+						.show();
+				super.onFailure(arg0, arg1, arg2, arg3);
+			}
+
+			@Override
+			public void onFinish() {
 				DialogUtils.hideProcessDialog();
+				super.onFinish();
 			}
 		});
 	}
@@ -264,7 +284,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		cityName = findButton(v.getId()).getText().toString();
-		findButton(v.getId()).setText("全国");
+		findButton(v.getId()).setText(mCity);
 		if (!mIsMenuOpen) {
 			mIsMenuOpen = true;
 			doAnimateOpen(mItemButton1, 0, 5, radius);
@@ -279,8 +299,8 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 			doAnimateClose(mItemButton3, 2, 5, radius);
 			doAnimateClose(mItemButton4, 3, 5, radius);
 			doAnimateClose(mItemButton5, 4, 5, radius);
-			if (!cityName.equals(city)) {
-				city = cityName;
+			if (!cityName.equals(mCity)) {
+				mCity = cityName;
 				refreshData(jobType, cityName, pageNum, "down");
 			}
 		}

@@ -191,7 +191,12 @@ public class JobDetailFragment extends BaseFragment {
 				} else {
 					detail_null.setVisibility(View.VISIBLE);
 				}
+			}
+
+			@Override
+			public void onFinish() {
 				DialogUtils.hideProcessDialog();
+				super.onFinish();
 			}
 		});
 	}

@@ -48,7 +48,7 @@ public class SearchFragment extends BaseFragment {
 					int position, long id) {
 				JobFragment.getInsatance().pageNum = 1;
 				JobFragment.getInsatance().refreshData(tags[position],
-						JobFragment.city, 1, "down");
+						"", 1, "down");
 				JobFragment.getInsatance().search.setText(tags[position]);
 				JobFragment.getInsatance().search.setTextSize(18);
 				JobFragment.getInsatance().search.setTextColor(Color.BLACK);
