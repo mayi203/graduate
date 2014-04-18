@@ -239,13 +239,19 @@ public class JobDetailFragment extends BaseFragment {
 				});
 	}
 
+	public static String filterNumber(String number) {
+		number = number.replaceAll("[^(0-9)]", "");
+		return number;
+	}
+
 	private void deliverResume() {
 		startAnim();
 		String userId = SharePreferenceUtil.getString(getActivity(), "userId");
-		String jobId = mUrl.substring(mUrl.length() - 9, mUrl.length() - 5);
+		String jobId = filterNumber(mUrl);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userId", userId);
 		map.put("positionId", jobId);
+		map.put("force", "false");
 		map.put("resubmitToken", token);
 		RequestParams params = new RequestParams(map);
 		client.post(LaGouApi.Host + LaGouApi.Deliver, params,
@@ -303,13 +309,13 @@ public class JobDetailFragment extends BaseFragment {
 
 	private void confirmation() {
 		String userId = SharePreferenceUtil.getString(getActivity(), "userId");
-		String jobId = mUrl.substring(mUrl.length() - 9, mUrl.length() - 5);
+		String jobId = filterNumber(mUrl);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userId", userId);
 		map.put("positionId", jobId);
 		map.put("resubmitToken", token);
 		map.put("force", "true");
-		map.put("type", "0");
+		map.put("type", "1");
 		RequestParams params = new RequestParams(map);
 		client.post(LaGouApi.Host + LaGouApi.Deliver, params,
 				new AsyncHttpResponseHandler() {
