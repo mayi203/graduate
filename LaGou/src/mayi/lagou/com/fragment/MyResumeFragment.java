@@ -102,7 +102,8 @@ public class MyResumeFragment extends BaseFragment {
 		for (int i = 0, j = mUserInfo.getProjectShow().size(); j > 0 && i < j; i++) {
 			produ.append(mUserInfo.getProjectShow().get(i).getProjectUrl()
 					+ "\n"
-					+ mUserInfo.getProjectShow().get(i).getProjectDetail());
+					+ mUserInfo.getProjectShow().get(i).getProjectDetail()
+					+ "\n");
 		}
 		producation.setText(produ.toString());
 		self.setText(mUserInfo.getSelfDescription());

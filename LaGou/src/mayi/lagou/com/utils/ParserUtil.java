@@ -371,9 +371,9 @@ public class ParserUtil {
 			Elements projects = doc.select("div.workShow").select("div.f16");
 			for (int i = 0; i < projects.size(); i++) {
 				project = new ProjectShow();
-				project.setProjectUrl(projects.get(i).select("a").text());
+				project.setProjectUrl(projects.get(i).select("a").text().trim());
 				project.setProjectDetail(doc.select("div.workShow").select("p")
-						.text().trim());
+						.get(i).text().trim());
 				projectShows.add(project);
 			}
 		} catch (IndexOutOfBoundsException e) {
