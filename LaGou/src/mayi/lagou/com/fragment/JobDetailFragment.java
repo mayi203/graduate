@@ -207,7 +207,7 @@ public class JobDetailFragment extends BaseFragment {
 		super.onDestroyView();
 	}
 
-	private void startAnim() {
+	public void startAnim() {
 		email.setVisibility(View.VISIBLE);
 		email.setAnimation(anim);
 		anim.start();
@@ -245,7 +245,8 @@ public class JobDetailFragment extends BaseFragment {
 	}
 
 	private void deliverResume() {
-		startAnim();
+		DialogUtils.showProcessDialog(getActivity(), true);
+		// startAnim();
 		String userId = SharePreferenceUtil.getString(getActivity(), "userId");
 		String jobId = filterNumber(mUrl);
 		Map<String, String> map = new HashMap<String, String>();
@@ -279,6 +280,12 @@ public class JobDetailFragment extends BaseFragment {
 							e.printStackTrace();
 						}
 						Log.v("Lagou", content);
+					}
+
+					@Override
+					public void onFinish() {
+						DialogUtils.hideProcessDialog();
+						super.onFinish();
 					}
 				});
 	}
