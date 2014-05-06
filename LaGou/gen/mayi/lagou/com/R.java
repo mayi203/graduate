@@ -664,34 +664,35 @@ containing a value of this type.
         public static final int xsearch_msg_pull_arrow_down=0x7f020086;
     }
     public static final class id {
-        public static final int about_icon=0x7f0b0018;
-        public static final int about_us=0x7f0b0046;
+        public static final int about_icon=0x7f0b0019;
+        public static final int about_us=0x7f0b0047;
         public static final int about_us_back=0x7f0b0017;
-        public static final int action_websearch=0x7f0b0067;
-        public static final int back=0x7f0b0028;
-        public static final int base=0x7f0b003c;
-        public static final int base_info=0x7f0b0058;
-        public static final int bottom_txt=0x7f0b0033;
-        public static final int button_layout=0x7f0b0064;
-        public static final int change_user=0x7f0b004b;
-        public static final int clear_save=0x7f0b004a;
-        public static final int com_del=0x7f0b0030;
-        public static final int com_img=0x7f0b002e;
-        public static final int com_name=0x7f0b002f;
-        public static final int compony=0x7f0b0055;
+        public static final int action_websearch=0x7f0b0069;
+        public static final int back=0x7f0b0029;
+        public static final int base=0x7f0b003d;
+        public static final int base_info=0x7f0b0059;
+        public static final int bottom_txt=0x7f0b0034;
+        public static final int button_layout=0x7f0b0065;
+        public static final int change_user=0x7f0b004c;
+        public static final int check=0x7f0b0068;
+        public static final int com_del=0x7f0b0031;
+        public static final int com_img=0x7f0b002f;
+        public static final int com_name=0x7f0b0030;
+        public static final int compony=0x7f0b0056;
         public static final int contain=0x7f0b0000;
         public static final int content_frame=0x7f0b0002;
-        public static final int deliver_back=0x7f0b001c;
+        public static final int deliver_back=0x7f0b001d;
         public static final int deliver_company=0x7f0b0009;
         public static final int deliver_position=0x7f0b0007;
         public static final int deliver_progress=0x7f0b000c;
         public static final int deliver_resume=0x7f0b000b;
         public static final int deliver_salary=0x7f0b0008;
+        public static final int deliver_set=0x7f0b004b;
         public static final int deliver_time=0x7f0b000a;
-        public static final int detail_null_img=0x7f0b0036;
-        public static final int details=0x7f0b0031;
-        public static final int dialog_button_cancel=0x7f0b0066;
-        public static final int dialog_button_ok=0x7f0b0065;
+        public static final int detail_null_img=0x7f0b0037;
+        public static final int details=0x7f0b0032;
+        public static final int dialog_button_cancel=0x7f0b0067;
+        public static final int dialog_button_ok=0x7f0b0066;
         public static final int dialog_confirm_layout=0x7f0b000d;
         public static final int dialog_process_image=0x7f0b000e;
         public static final int drawer_layout=0x7f0b0001;
@@ -702,72 +703,73 @@ containing a value of this type.
         public static final int drop_down_list_header_image=0x7f0b0013;
         public static final int drop_down_list_header_progress_bar=0x7f0b0011;
         public static final int drop_down_list_header_second_text=0x7f0b0015;
-        public static final int education=0x7f0b0040;
-        public static final int email=0x7f0b0034;
-        public static final int ex_list=0x7f0b003e;
-        public static final int exp_icon=0x7f0b004d;
-        public static final int exp_job=0x7f0b004e;
-        public static final int exp_name=0x7f0b004f;
-        public static final int exp_time=0x7f0b004c;
-        public static final int expect=0x7f0b003d;
-        public static final int exprience=0x7f0b0054;
-        public static final int gmail=0x7f0b001b;
-        public static final int gridview=0x7f0b0043;
-        public static final int icon=0x7f0b003b;
-        public static final int item1=0x7f0b0023;
-        public static final int item2=0x7f0b0024;
-        public static final int item3=0x7f0b0025;
-        public static final int item4=0x7f0b0026;
-        public static final int item5=0x7f0b0027;
-        public static final int job_detail_null=0x7f0b0035;
-        public static final int job_list=0x7f0b0021;
+        public static final int education=0x7f0b0041;
+        public static final int email=0x7f0b0035;
+        public static final int ex_list=0x7f0b003f;
+        public static final int exp_icon=0x7f0b004e;
+        public static final int exp_job=0x7f0b004f;
+        public static final int exp_name=0x7f0b0050;
+        public static final int exp_time=0x7f0b004d;
+        public static final int expect=0x7f0b003e;
+        public static final int exprience=0x7f0b0055;
+        public static final int gmail=0x7f0b001c;
+        public static final int gridview=0x7f0b0044;
+        public static final int icon=0x7f0b003c;
+        public static final int item1=0x7f0b0024;
+        public static final int item2=0x7f0b0025;
+        public static final int item3=0x7f0b0026;
+        public static final int item4=0x7f0b0027;
+        public static final int item5=0x7f0b0028;
+        public static final int job_detail_null=0x7f0b0036;
+        public static final int job_list=0x7f0b0022;
         public static final int lagou=0x7f0b0004;
         public static final int lagou_del=0x7f0b0005;
-        public static final int lay_about=0x7f0b001a;
-        public static final int lay_deliver=0x7f0b0032;
-        public static final int lay_info=0x7f0b0047;
-        public static final int lay_search=0x7f0b001f;
+        public static final int lay_about=0x7f0b001b;
+        public static final int lay_deliver=0x7f0b0033;
+        public static final int lay_info=0x7f0b0048;
+        public static final int lay_search=0x7f0b0020;
         public static final int lay_top=0x7f0b0016;
         public static final int left_drawer=0x7f0b0003;
-        public static final int login_btn=0x7f0b0039;
-        public static final int menu=0x7f0b0022;
-        public static final int message=0x7f0b0063;
-        public static final int my_deliver=0x7f0b0049;
-        public static final int my_resume=0x7f0b0048;
-        public static final int position=0x7f0b0050;
-        public static final int producation=0x7f0b0042;
-        public static final int profile=0x7f0b001e;
-        public static final int project=0x7f0b003f;
-        public static final int psw=0x7f0b0038;
-        public static final int pull_to_load_footer_content=0x7f0b0059;
-        public static final int pull_to_load_footer_hint_textview=0x7f0b005b;
-        public static final int pull_to_load_footer_progressbar=0x7f0b005a;
-        public static final int pull_to_refresh_header_arrow=0x7f0b0061;
-        public static final int pull_to_refresh_header_content=0x7f0b005c;
-        public static final int pull_to_refresh_header_hint_textview=0x7f0b005e;
-        public static final int pull_to_refresh_header_progressbar=0x7f0b0062;
-        public static final int pull_to_refresh_header_text=0x7f0b005d;
-        public static final int pull_to_refresh_header_time=0x7f0b0060;
-        public static final int pull_to_refresh_last_update_time_text=0x7f0b005f;
-        public static final int release_time=0x7f0b002d;
-        public static final int require=0x7f0b002c;
-        public static final int resume_back=0x7f0b003a;
-        public static final int right_arrow=0x7f0b0052;
-        public static final int salary=0x7f0b0053;
-        public static final int scroll=0x7f0b002a;
-        public static final int seatch_txt=0x7f0b0020;
-        public static final int self=0x7f0b0041;
-        public static final int share=0x7f0b0029;
-        public static final int tag=0x7f0b0056;
-        public static final int time=0x7f0b0051;
-        public static final int title=0x7f0b002b;
-        public static final int top=0x7f0b0044;
-        public static final int top_lay=0x7f0b0037;
-        public static final int topbar=0x7f0b001d;
+        public static final int login_btn=0x7f0b003a;
+        public static final int menu=0x7f0b0023;
+        public static final int message=0x7f0b0064;
+        public static final int my_deliver=0x7f0b004a;
+        public static final int my_resume=0x7f0b0049;
+        public static final int position=0x7f0b0051;
+        public static final int producation=0x7f0b0043;
+        public static final int profile=0x7f0b001f;
+        public static final int project=0x7f0b0040;
+        public static final int psw=0x7f0b0039;
+        public static final int pull_to_load_footer_content=0x7f0b005a;
+        public static final int pull_to_load_footer_hint_textview=0x7f0b005c;
+        public static final int pull_to_load_footer_progressbar=0x7f0b005b;
+        public static final int pull_to_refresh_header_arrow=0x7f0b0062;
+        public static final int pull_to_refresh_header_content=0x7f0b005d;
+        public static final int pull_to_refresh_header_hint_textview=0x7f0b005f;
+        public static final int pull_to_refresh_header_progressbar=0x7f0b0063;
+        public static final int pull_to_refresh_header_text=0x7f0b005e;
+        public static final int pull_to_refresh_header_time=0x7f0b0061;
+        public static final int pull_to_refresh_last_update_time_text=0x7f0b0060;
+        public static final int release_time=0x7f0b002e;
+        public static final int require=0x7f0b002d;
+        public static final int resume_back=0x7f0b003b;
+        public static final int right_arrow=0x7f0b0053;
+        public static final int salary=0x7f0b0054;
+        public static final int scroll=0x7f0b002b;
+        public static final int seatch_txt=0x7f0b0021;
+        public static final int self=0x7f0b0042;
+        public static final int share=0x7f0b002a;
+        public static final int shareApp=0x7f0b0018;
+        public static final int tag=0x7f0b0057;
+        public static final int time=0x7f0b0052;
+        public static final int title=0x7f0b002c;
+        public static final int top=0x7f0b0045;
+        public static final int top_lay=0x7f0b0038;
+        public static final int topbar=0x7f0b001e;
         public static final int u_contain=0x7f0b0006;
-        public static final int user_icon=0x7f0b0057;
-        public static final int user_info_back=0x7f0b0045;
-        public static final int ver=0x7f0b0019;
+        public static final int user_icon=0x7f0b0058;
+        public static final int user_info_back=0x7f0b0046;
+        public static final int ver=0x7f0b001a;
     }
     public static final class layout {
         public static final int a_home=0x7f030000;
@@ -809,7 +811,6 @@ containing a value of this type.
         public static final int apply_for=0x7f070019;
         public static final int basic_info=0x7f07002e;
         public static final int change_user=0x7f07002d;
-        public static final int clear_save=0x7f07002c;
         public static final int drawer_close=0x7f07001b;
         public static final int drawer_open=0x7f07001a;
         public static final int drop_down_list_footer_default_text=0x7f070022;
@@ -873,14 +874,16 @@ containing a value of this type.
         public static final int self=0x7f070029;
         public static final int self_description=0x7f070033;
         public static final int send_resume=0x7f070028;
+        public static final int set_deliver=0x7f07002c;
         /**  AboutUsFragment 
          */
-        public static final int string_about_back=0x7f070049;
-        public static final int string_about_us_btn=0x7f070047;
+        public static final int string_about_back=0x7f07004a;
+        public static final int string_about_us_btn=0x7f070048;
+        public static final int string_check_text=0x7f070045;
         /**  SplashActivity 
          */
-        public static final int string_copyright=0x7f070048;
-        public static final int string_detail_null=0x7f070046;
+        public static final int string_copyright=0x7f070049;
+        public static final int string_detail_null=0x7f070047;
         public static final int string_login=0x7f070041;
         public static final int string_login_btn=0x7f070040;
         /**  LoginFragment 
@@ -894,10 +897,10 @@ containing a value of this type.
         public static final int string_mydialog_sure=0x7f070043;
         /**  JobDetailFragment 
          */
-        public static final int string_share_job=0x7f070045;
-        public static final int string_sina=0x7f07004c;
-        public static final int string_version=0x7f07004a;
-        public static final int string_weixin=0x7f07004b;
+        public static final int string_share_job=0x7f070046;
+        public static final int string_sina=0x7f07004d;
+        public static final int string_version=0x7f07004b;
+        public static final int string_weixin=0x7f07004c;
         public static final int title_home=0x7f07003c;
         public static final int update_at=0x7f070025;
         public static final int xsearch_loading=0x7f070006;
@@ -923,11 +926,13 @@ containing a value of this type.
 
 
 
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
 
 
 

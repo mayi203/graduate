@@ -37,7 +37,7 @@
     <string name="self">个人中心</string>
     <string name="resume">我的简历</string>
     <string name="my_deliver">我的投递反馈</string>
-    <string name="clear_save">清除缓存</string>
+    <string name="set_deliver">投递设置</string>
     <string name="change_user">退出当前账户</string>
     <string name="basic_info">基本信息</string>
     <string name="expect_job">期望工作</string>
@@ -68,6 +68,7 @@
     <!-- MyDialog -->
     <string name="string_mydialog_sure">确定</string>
     <string name="string_mydialog_cancle">取消</string>
+    <string name="string_check_text">记住我的选择</string>
 
     <!-- JobDetailFragment -->
     <string name="string_share_job">分享</string>

@@ -5,6 +5,10 @@ import mayi.lagou.com.core.BaseFragmentActivity;
 import mayi.lagou.com.fragment.JobFragment;
 import mayi.lagou.com.fragment.JobFragment.OnChangeUrl;
 
+/**
+ * @author 203mayi@gmail.com
+ * 2014-5-6
+ */
 public class HomeActivity extends BaseFragmentActivity implements OnChangeUrl{
 
 	private String mUrl;

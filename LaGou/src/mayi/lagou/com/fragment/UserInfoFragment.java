@@ -11,6 +11,8 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,9 +29,12 @@ import mayi.lagou.com.utils.NetWorkState;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.utils.SharePreferenceUtil;
 
+/**
+ * @author 203mayi@gmail.com 2014-5-6
+ */
 public class UserInfoFragment extends BaseFragment implements OnClickListener {
 
-	private TextView back, userInfo, resume, aboutUs, deliver, clearSave,
+	private TextView back, userInfo, resume, aboutUs, deliver, deliverSet,
 			changeUser;
 	private ImageView userHead;
 	private OnRequestInfo onRequest;
@@ -52,7 +57,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		resume = findTextView(R.id.my_resume);
 		aboutUs = findTextView(R.id.about_us);
 		deliver = findTextView(R.id.my_deliver);
-		clearSave = findTextView(R.id.clear_save);
+		deliverSet = findTextView(R.id.deliver_set);
 		changeUser = findTextView(R.id.change_user);
 	}
 
@@ -66,7 +71,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		resume.setOnClickListener(this);
 		aboutUs.setOnClickListener(this);
 		deliver.setOnClickListener(this);
-		clearSave.setOnClickListener(this);
+		deliverSet.setOnClickListener(this);
 		changeUser.setOnClickListener(this);
 	}
 
@@ -180,11 +185,6 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		super.onPause();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.view.View.OnClickListener#onClick(android.view.View)
-	 */
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -206,11 +206,31 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		case R.id.about_us:
 			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
 			break;
-		case R.id.clear_save:
+		case R.id.deliver_set:
+			deliverSet();
 			break;
 		default:
 			break;
 		}
 	}
 
+	private void deliverSet() {
+		int type = 0;
+		String resumeType = SharePreferenceUtil.getString(getActivity(),
+				SharePreferenceUtil.RESUME_TYPE);
+		if (resumeType != null && !"".equals(resumeType)) {
+			type = Integer.parseInt(resumeType);
+		}
+		new AlertDialog.Builder(getActivity())
+				.setTitle("选择默认投递简历")
+				.setSingleChoiceItems(new String[] { "在线简历", "附件简历" }, type,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								SharePreferenceUtil.putString(getActivity(),
+										SharePreferenceUtil.RESUME_TYPE, String.valueOf(which));
+								dialog.dismiss();
+							}
+						}).setNegativeButton("取消", null).show();
+	}
 }

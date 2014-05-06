@@ -26,6 +26,7 @@ import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,6 +35,10 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+/**
+ * @author 203mayi@gmail.com 
+ * 2014-5-6
+ */
 public class JobDetailFragment extends BaseFragment {
 
 	private TextView title, require, release_time, com_name, com_del, details,
@@ -230,7 +235,12 @@ public class JobDetailFragment extends BaseFragment {
 										"userId",
 										object.optJSONObject("content")
 												.optString("userid"));
-								deliverResume();
+								if (getResumeType() != null
+										&& !"".equals(getResumeType())) {
+									deliverResume();
+								} else {
+									choseResume();
+								}
 							} catch (JSONException e) {
 								e.printStackTrace();
 							}
@@ -244,6 +254,56 @@ public class JobDetailFragment extends BaseFragment {
 		return number;
 	}
 
+	private void choseResume() {
+		if (myDialog != null && myDialog.isShowing()) {
+			myDialog.dismiss();
+		}
+		myDialog = new MyDialog(getActivity());
+		myDialog.show();
+		myDialog.setOkBtnText("在线简历");
+		myDialog.setCancelBtnText("附件简历");
+		myDialog.setMessage("选择要投递的简历");
+		myDialog.setCheckBoxListener(new CompoundButton.OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				SharePreferenceUtil.putBoolean(getActivity(), SharePreferenceUtil.REMEMBER_TYPE,
+						isChecked);
+			}
+		});
+		myDialog.setOkBtnOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (SharePreferenceUtil.getBoolean(getActivity(),
+						SharePreferenceUtil.REMEMBER_TYPE)) {
+					SharePreferenceUtil.putString(getActivity(), SharePreferenceUtil.RESUME_TYPE,
+							"1");
+				}
+				deliverResume();
+				myDialog.dismiss();
+			}
+		});
+		myDialog.setCancelBtnOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (SharePreferenceUtil.getBoolean(getActivity(),
+						SharePreferenceUtil.REMEMBER_TYPE)) {
+					SharePreferenceUtil.putString(getActivity(), SharePreferenceUtil.RESUME_TYPE,
+							"0");
+				}
+				deliverResume();
+				myDialog.dismiss();
+			}
+		});
+	}
+
+	private String getResumeType() {
+		return SharePreferenceUtil.getString(getActivity(), SharePreferenceUtil.RESUME_TYPE);
+	}
+
 	private void deliverResume() {
 		DialogUtils.showProcessDialog(getActivity(), true);
 		// startAnim();
@@ -253,6 +313,7 @@ public class JobDetailFragment extends BaseFragment {
 		map.put("userId", userId);
 		map.put("positionId", jobId);
 		map.put("force", "false");
+		map.put("type", getResumeType());
 		map.put("resubmitToken", token);
 		RequestParams params = new RequestParams(map);
 		client.post(LaGouApi.Host + LaGouApi.Deliver, params,
@@ -322,7 +383,7 @@ public class JobDetailFragment extends BaseFragment {
 		map.put("positionId", jobId);
 		map.put("resubmitToken", token);
 		map.put("force", "true");
-		map.put("type", "1");
+		map.put("type", getResumeType());
 		RequestParams params = new RequestParams(map);
 		client.post(LaGouApi.Host + LaGouApi.Deliver, params,
 				new AsyncHttpResponseHandler() {

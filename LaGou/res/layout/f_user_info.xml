@@ -41,9 +41,9 @@
         android:text="@string/my_deliver" />
 
     <TextView
-        android:id="@+id/clear_save"
+        android:id="@+id/deliver_set"
         style="@style/User_Info_TextView"
-        android:text="@string/clear_save" />
+        android:text="@string/set_deliver" />
 
     <TextView
         android:id="@+id/change_user"

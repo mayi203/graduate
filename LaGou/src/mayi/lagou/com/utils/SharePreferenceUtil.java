@@ -13,6 +13,8 @@ import android.content.SharedPreferences;
  */
 public class SharePreferenceUtil {
 	 public static String PREFERENCE_NAME = "LaGouPerference";
+	 public static String RESUME_TYPE="resumeType";
+	 public static String REMEMBER_TYPE="rememberType";
 
 	    /**
 	     * put string preferences

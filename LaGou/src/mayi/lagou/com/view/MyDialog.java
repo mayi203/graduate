@@ -7,13 +7,18 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
+/**
+ * @author 203mayi@gmail.com 2014-5-6
+ */
 public class MyDialog extends Dialog {
 
 	private Button dialogCancelButton;
 	private Button dialogOkButton;
 	private TextView message;
+	private CheckBox checkBox;
 	private String smessage;
 
 	public MyDialog(Context context) {
@@ -37,9 +42,11 @@ public class MyDialog extends Dialog {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.v_mydialog);
 		dialogOkButton = (Button) this.findViewById(R.id.dialog_button_ok);
-		dialogCancelButton = (Button) this.findViewById(R.id.dialog_button_cancel);
+		dialogCancelButton = (Button) this
+				.findViewById(R.id.dialog_button_cancel);
 		message = (TextView) this.findViewById(R.id.message);
 		message.setMovementMethod(ScrollingMovementMethod.getInstance());
+		checkBox = (CheckBox) this.findViewById(R.id.check);
 		this.message.setText(smessage);
 	}
 
@@ -56,12 +63,14 @@ public class MyDialog extends Dialog {
 		dialogCancelButton.setText(text);
 	}
 
-	public void setOkBtnOnClickListener(android.view.View.OnClickListener mOkOnClickListener) {
+	public void setOkBtnOnClickListener(
+			android.view.View.OnClickListener mOkOnClickListener) {
 		dialogOkButton.setVisibility(View.VISIBLE);
 		dialogOkButton.setOnClickListener(mOkOnClickListener);
 	}
 
-	public void setCancelBtnOnClickListener(android.view.View.OnClickListener mCancelOnClickListener) {
+	public void setCancelBtnOnClickListener(
+			android.view.View.OnClickListener mCancelOnClickListener) {
 		dialogCancelButton.setVisibility(View.VISIBLE);
 		dialogCancelButton.setOnClickListener(mCancelOnClickListener);
 	}
@@ -84,6 +93,11 @@ public class MyDialog extends Dialog {
 				MyDialog.this.dismiss();
 			}
 		});
+	}
+
+	public void setCheckBoxListener(android.widget.CompoundButton.OnCheckedChangeListener listener) {
+		checkBox.setVisibility(View.VISIBLE);
+		checkBox.setOnCheckedChangeListener(listener);
 	}
 
 	@Override
