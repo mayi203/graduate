@@ -6,13 +6,13 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
+import android.widget.TextView;
 import mayi.lagou.com.R;
 import mayi.lagou.com.core.BaseActivity;
 
 public class SplashActivity extends BaseActivity {
 
-	private ImageView lagou,lagouDel;
+	private TextView lagou,lagouDel;
 
 	@Override
 	public int contentView() {
@@ -21,8 +21,8 @@ public class SplashActivity extends BaseActivity {
 
 	@Override
 	public void findViewsById() {
-		lagou=findImageView(R.id.lagou);
-		lagouDel=findImageView(R.id.lagou_del);
+		lagou=findTextView(R.id.lagou);
+		lagouDel=findTextView(R.id.lagou_del);
 	}
 
 	@Override

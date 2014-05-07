@@ -141,17 +141,6 @@
             android:textSize="18sp" />
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/email"
-        android:visibility="gone" />
-
     <RelativeLayout
         android:id="@+id/job_detail_null"
         android:layout_width="match_parent"

@@ -201,6 +201,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 			SharePreferenceUtil.putString(getActivity(), "email", "");
 			SharePreferenceUtil.putString(getActivity(), "psw", "");
 			SharePreferenceUtil.putString(getActivity(), "userInfo", null);
+			SharePreferenceUtil.putString(getActivity(), SharePreferenceUtil.RESUME_TYPE, "");
 			refresh.refresh();
 			break;
 		case R.id.about_us:
@@ -215,7 +216,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 	}
 
 	private void deliverSet() {
-		int type = 0;
+		int type = 1;
 		String resumeType = SharePreferenceUtil.getString(getActivity(),
 				SharePreferenceUtil.RESUME_TYPE);
 		if (resumeType != null && !"".equals(resumeType)) {
@@ -223,7 +224,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		}
 		new AlertDialog.Builder(getActivity())
 				.setTitle("选择默认投递简历")
-				.setSingleChoiceItems(new String[] { "在线简历", "附件简历" }, type,
+				.setSingleChoiceItems(new String[] { "附件简历", "在线简历" }, type,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int which) {

@@ -10,12 +10,13 @@
         <TextView
             android:id="@+id/deliver_back"
             style="@style/back_text"
-            android:text="投递反馈" />
+            android:text="@string/string_deliver" />
     </RelativeLayout>
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
+        android:scrollbarStyle="outsideOverlay"
         android:layout_height="fill_parent"
         android:background="@color/hole_background"
         android:cacheColorHint="#ffffff"

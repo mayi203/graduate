@@ -77,10 +77,13 @@
 
     <!-- SplashActivity -->
     <string name="string_copyright">Copyright ©2012 mayi. All rights reserved</string>
+    <string name="string_lagou">拉 勾 网</string>
+    <string name="string_lagou_del">专注互联网职业机会</string>
     <!-- AboutUsFragment -->
     <string name="string_about_back">关于我们</string>
-    <string name="string_version">Ver 2.0.1</string>
+    <string name="string_version">Ver 2.2</string>
     <string name="string_weixin">l1204783269</string>
     <string name="string_sina">203mayi@gmail.com</string>
+    <string name="string_deliver">投递反馈</string>
 
 </resources>

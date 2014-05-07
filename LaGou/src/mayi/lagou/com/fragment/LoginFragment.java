@@ -46,6 +46,7 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 	public void initListener() {
 		findTextView(R.id.back).setOnClickListener(this);
 		findButton(R.id.login_btn).setOnClickListener(this);
+		findTextView(R.id.about_us).setOnClickListener(this);
 	}
 
 	@Override
@@ -56,6 +57,11 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 			break;
 		case R.id.login_btn:
 			getUserInfo();
+			break;
+		case R.id.about_us:
+			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
+			break;
+		default:
 			break;
 		}
 	}
@@ -140,5 +146,5 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 		super.onPause();
 		hideSoftInput();
 	}
-	
+
 }
