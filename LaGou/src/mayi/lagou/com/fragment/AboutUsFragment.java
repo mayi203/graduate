@@ -6,6 +6,7 @@ package mayi.lagou.com.fragment;
 import mayi.lagou.com.R;
 import mayi.lagou.com.core.BaseFragment;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -46,6 +47,16 @@ public class AboutUsFragment extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 				shareUrl();
+			}
+		});
+		findTextView(R.id.gmail).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent data=new Intent(Intent.ACTION_SENDTO);  
+				data.setData(Uri.parse("mailto:203mayi@gmail.com"));  
+				data.putExtra(Intent.EXTRA_SUBJECT, "拉勾招聘使用反馈");  
+				startActivity(data); 
 			}
 		});
 	}

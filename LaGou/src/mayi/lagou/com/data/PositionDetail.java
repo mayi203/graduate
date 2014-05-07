@@ -48,6 +48,23 @@ public class PositionDetail implements Serializable {
 	private String jobDetail;
 	/** 发简历 */
 	private String submitValue;
+	/** 投递状态 */
+	private String deliverState;
+
+	/**
+	 * @return the deliverState
+	 */
+	public String getDeliverState() {
+		return deliverState;
+	}
+
+	/**
+	 * @param deliverState
+	 *            the deliverState to set
+	 */
+	public void setDeliverState(String deliverState) {
+		this.deliverState = deliverState;
+	}
 
 	/**
 	 * @return the submitValue

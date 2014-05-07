@@ -189,6 +189,7 @@ public class ParserUtil {
 			positionDetail.setReleaseTime(getDetailReleaseTime(doc));
 			positionDetail.setJobDetail(obtainJobDetail(doc));
 			positionDetail.setSubmitValue(getSubmitValue(doc));
+			positionDetail.setDeliverState(getDeliverState(doc));
 			return positionDetail;
 		} catch (NullPointerException e) {
 			return null;
@@ -201,8 +202,24 @@ public class ParserUtil {
 	 * @param doc
 	 * @return
 	 */
+	private static String getDeliverState(Document doc) {
+		try {
+			return doc.select("dl.job_detail").select("a.btn").text();
+		} catch (NullPointerException e) {
+			return "";
+		}
+	}
+
+	/**
+	 * @param doc
+	 * @return
+	 */
 	private static String getSubmitValue(Document doc) {
-		return doc.getElementById("resubmitToken").attr("value");
+		try {
+			return doc.getElementById("resubmitToken").attr("value");
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	/**
