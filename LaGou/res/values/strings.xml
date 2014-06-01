@@ -6,21 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="apply_for">投递简历</string>
 
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-    </string-array>
-
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
-    <string name="action_websearch">Web search</string>
-    <string name="app_not_available">Sorry, there\'s no web browser available</string>
     <string name="drop_down_list_header_default_text">Click to refresh&#8230;</string>
     <string name="drop_down_list_header_pull_text">Drop Down to refresh&#8230;</string>
     <string name="drop_down_list_header_release_text">Release to refresh&#8230;</string>
@@ -76,12 +61,12 @@
     <string name="string_about_us_btn">关于</string>
 
     <!-- SplashActivity -->
-    <string name="string_copyright">Copyright ©2012 mayi. All rights reserved</string>
+    <string name="string_copyright">\@奋斗的蚂蚁01</string>
     <string name="string_lagou">拉 勾 网</string>
     <string name="string_lagou_del">专注互联网职业机会</string>
     <!-- AboutUsFragment -->
     <string name="string_about_back">关于我们</string>
-    <string name="string_version">Ver 2.2</string>
+    <string name="string_version">Ver 2.2.3</string>
     <string name="string_weixin">l1204783269</string>
     <string name="string_sina">203mayi@gmail.com</string>
     <string name="string_deliver">投递反馈</string>

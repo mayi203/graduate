@@ -1,6 +1,3 @@
-/**
- * 
- */
 package mayi.lagou.com.fragment;
 
 import java.text.SimpleDateFormat;
@@ -49,7 +46,6 @@ import com.nineoldandroids.animation.ObjectAnimator;
  * @date 2014-3-31
  */
 public class JobFragment extends BaseFragment implements OnClickListener {
-	public static final String ARG_PLANET_NUMBER = "planet_number";
 	private static final String TAG = "JobFragment";
 
 	private PullToRefreshListView mPullToRefreshListView;
@@ -194,7 +190,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		public void handleMessage(Message msg) {
 			if (msg.what == 1) {
 				mPullToRefreshListView.setVisibility(View.VISIBLE);
-				mMenuButton.setClickable(true);
+				// mMenuButton.setClickable(true);
 				findViewById(R.id.lay_search).setClickable(true);
 				refreshData(jobType, mCity, 1, "down");
 			}

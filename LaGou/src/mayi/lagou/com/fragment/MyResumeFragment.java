@@ -71,8 +71,11 @@ public class MyResumeFragment extends BaseFragment {
 
 	private void init() {
 		mUserInfo = userInfo.getUserInfo();
-		app().getImageLoader().loadImage(userIcon, mUserInfo.getUserIcon(),
-				R.drawable.default_avatar);
+		if (mUserInfo.getUserIcon() != null
+				&& !"".equals(mUserInfo.getUserIcon())) {
+			app().getImageLoader().loadImage(userIcon, mUserInfo.getUserIcon(),
+					R.drawable.default_avatar);
+		}
 		baseInfo.setText(mUserInfo.getBasicInfo());
 		expect.setText(mUserInfo.getJobExpect());
 		adapter = new ExprienceAdapter(getActivity(), app().getImageLoader(),

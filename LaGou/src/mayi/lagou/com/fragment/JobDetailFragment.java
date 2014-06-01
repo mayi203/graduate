@@ -36,8 +36,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 /**
- * @author 203mayi@gmail.com 
- * 2014-5-6
+ * @author 203mayi@gmail.com 2014-5-6
  */
 public class JobDetailFragment extends BaseFragment {
 
@@ -117,9 +116,7 @@ public class JobDetailFragment extends BaseFragment {
 				if (isLogin) {
 					getUserInfo();
 				} else {
-					startActivity(UserInfoActicity.class);
-					SharePreferenceUtil.putBoolean(getActivity(), "toDetail",
-							true);
+					gotoLogin();
 				}
 			}
 		});
@@ -130,6 +127,16 @@ public class JobDetailFragment extends BaseFragment {
 				shareUrl(mUrl);
 			}
 		});
+	}
+
+	private void gotoLogin() {
+		SharePreferenceUtil.putString(getActivity(), "email", "");
+		SharePreferenceUtil.putString(getActivity(), "psw", "");
+		SharePreferenceUtil.putString(getActivity(), "userInfo", null);
+		SharePreferenceUtil.putString(getActivity(),
+				SharePreferenceUtil.RESUME_TYPE, "");
+		startActivity(UserInfoActicity.class);
+		SharePreferenceUtil.putBoolean(getActivity(), "toDetail", true);
 	}
 
 	private void shareUrl(String url) {
@@ -231,15 +238,20 @@ public class JobDetailFragment extends BaseFragment {
 						if (statusCode == 200) {
 							try {
 								JSONObject object = new JSONObject(response);
-								SharePreferenceUtil.putString(getActivity(),
-										"userId",
-										object.optJSONObject("content")
-												.optString("userid"));
-								if (getResumeType() != null
-										&& !"".equals(getResumeType())) {
-									deliverResume();
-								} else {
-									choseResume();
+								String success = object.optString("success");
+								if ("true".equals(success)) {
+									SharePreferenceUtil.putString(
+											getActivity(), "userId", object
+													.optJSONObject("content")
+													.optString("userid"));
+									if (getResumeType() != null
+											&& !"".equals(getResumeType())) {
+										deliverResume();
+									} else {
+										choseResume();
+									}
+								} else if ("false".equals(success)) {
+									gotoLogin();
 								}
 							} catch (JSONException e) {
 								e.printStackTrace();
@@ -268,8 +280,8 @@ public class JobDetailFragment extends BaseFragment {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
-				SharePreferenceUtil.putBoolean(getActivity(), SharePreferenceUtil.REMEMBER_TYPE,
-						isChecked);
+				SharePreferenceUtil.putBoolean(getActivity(),
+						SharePreferenceUtil.REMEMBER_TYPE, isChecked);
 			}
 		});
 		myDialog.setOkBtnOnClickListener(new OnClickListener() {
@@ -278,8 +290,8 @@ public class JobDetailFragment extends BaseFragment {
 			public void onClick(View v) {
 				if (SharePreferenceUtil.getBoolean(getActivity(),
 						SharePreferenceUtil.REMEMBER_TYPE)) {
-					SharePreferenceUtil.putString(getActivity(), SharePreferenceUtil.RESUME_TYPE,
-							"1");
+					SharePreferenceUtil.putString(getActivity(),
+							SharePreferenceUtil.RESUME_TYPE, "1");
 				}
 				deliverResume();
 				myDialog.dismiss();
@@ -291,8 +303,8 @@ public class JobDetailFragment extends BaseFragment {
 			public void onClick(View v) {
 				if (SharePreferenceUtil.getBoolean(getActivity(),
 						SharePreferenceUtil.REMEMBER_TYPE)) {
-					SharePreferenceUtil.putString(getActivity(), SharePreferenceUtil.RESUME_TYPE,
-							"0");
+					SharePreferenceUtil.putString(getActivity(),
+							SharePreferenceUtil.RESUME_TYPE, "0");
 				}
 				deliverResume();
 				myDialog.dismiss();
@@ -301,7 +313,8 @@ public class JobDetailFragment extends BaseFragment {
 	}
 
 	private String getResumeType() {
-		return SharePreferenceUtil.getString(getActivity(), SharePreferenceUtil.RESUME_TYPE);
+		return SharePreferenceUtil.getString(getActivity(),
+				SharePreferenceUtil.RESUME_TYPE);
 	}
 
 	private void deliverResume() {

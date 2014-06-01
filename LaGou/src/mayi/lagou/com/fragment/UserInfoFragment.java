@@ -125,16 +125,19 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 						if (statusCode == 200) {
 							try {
 								JSONObject object = new JSONObject(response);
-								if (!isExit) {
+								String success=object.optString("success");
+								if("true".equals(success)&&!isExit){
 									SharePreferenceUtil.putString(
 											getActivity(), "userId", object
 													.optJSONObject("content")
 													.optString("userid"));
+									getResume(LaGouApi.Host + LaGouApi.Resume);
+								}else if("false".equals(success)&&!isExit){
+									logOut();
 								}
 							} catch (JSONException e) {
 								e.printStackTrace();
 							}
-							getResume(LaGouApi.Host + LaGouApi.Resume);
 						}
 					}
 				});
@@ -198,11 +201,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 			getMyDeliver();
 			break;
 		case R.id.change_user:
-			SharePreferenceUtil.putString(getActivity(), "email", "");
-			SharePreferenceUtil.putString(getActivity(), "psw", "");
-			SharePreferenceUtil.putString(getActivity(), "userInfo", null);
-			SharePreferenceUtil.putString(getActivity(), SharePreferenceUtil.RESUME_TYPE, "");
-			refresh.refresh();
+			logOut();
 			break;
 		case R.id.about_us:
 			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
@@ -215,6 +214,13 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		}
 	}
 
+	private void logOut(){
+		SharePreferenceUtil.putString(getActivity(), "email", "");
+		SharePreferenceUtil.putString(getActivity(), "psw", "");
+		SharePreferenceUtil.putString(getActivity(), "userInfo", null);
+		SharePreferenceUtil.putString(getActivity(), SharePreferenceUtil.RESUME_TYPE, "");
+		refresh.refresh();
+	}
 	private void deliverSet() {
 		int type = 1;
 		String resumeType = SharePreferenceUtil.getString(getActivity(),
