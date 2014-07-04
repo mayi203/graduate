@@ -2,10 +2,7 @@
 <resources>
 
     <string name="app_name">拉勾招聘</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="apply_for">投递简历</string>
-
     <string name="drop_down_list_header_default_text">Click to refresh&#8230;</string>
     <string name="drop_down_list_header_pull_text">Drop Down to refresh&#8230;</string>
     <string name="drop_down_list_header_release_text">Release to refresh&#8230;</string>
@@ -70,5 +67,19 @@
     <string name="string_weixin">l1204783269</string>
     <string name="string_sina">203mayi@gmail.com</string>
     <string name="string_deliver">投递反馈</string>
+
+    <string-array name="job_list">
+        <item>Java</item>
+        <item>PHP</item>
+        <item>Android</item>
+        <item>ios</item>
+        <item>产品经理</item>
+        <item>运营</item>
+        <item>前端</item>
+        <item>BD</item>
+        <item>UI</item>
+        <item>实习</item>
+        <item>所有职位</item>
+    </string-array>
 
 </resources>

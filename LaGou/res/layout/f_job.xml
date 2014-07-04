@@ -28,33 +28,43 @@
             android:src="@drawable/profile_icon_bright" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/lay_search"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/topbar"
-        android:layout_margin="8dp"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:padding="8dp" >
+    <HorizontalScrollView
+        android:id="@+id/lay_sc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_below="@id/topbar" >
 
-        <TextView
-            android:id="@+id/seatch_txt"
+        <LinearLayout
+            android:id="@+id/lay_search"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:drawableLeft="@drawable/explore_search_normal"
-            android:drawablePadding="5dp"
-            android:gravity="center_vertical"
-            android:text="@string/search_hint"
-            android:textColor="#d8d8d8" />
-    </LinearLayout>
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="8dp" >
+
+            <!--
+                 <TextView
+                android:id="@+id/seatch_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawableLeft="@drawable/explore_search_normal"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:text="@string/search_hint"
+                android:textColor="#d8d8d8" />
+            -->
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView
         android:id="@+id/job_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/lay_search"
+        android:layout_below="@id/lay_sc"
         android:layout_marginLeft="-2dp"
         android:layout_marginRight="-2dp" />
 

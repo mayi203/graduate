@@ -14,6 +14,7 @@ import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.adapter.JobItemAdapt;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.Position;
+import mayi.lagou.com.utils.AppCommonUtil;
 import mayi.lagou.com.utils.NetWorkState;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.widget.networkdialog.DialogUtils;
@@ -22,14 +23,17 @@ import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,7 +54,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 
 	private PullToRefreshListView mPullToRefreshListView;
 	private ListView mListView;
-	public TextView search;
+	// public TextView search;
 	private OnChangeUrl onChangeUrl;
 	private JobItemAdapt adapter;
 	private Button mMenuButton;
@@ -67,6 +71,9 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	public String jobType = "所有职位";
 	List<Position> allData;
 	private static JobFragment instance;
+	private String[] jobList;
+	private TextView[] tvList;
+	private LinearLayout laySearch;
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
 
@@ -77,7 +84,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void findViewsById() {
-		search = findTextView(R.id.seatch_txt);
+		// search = findTextView(R.id.seatch_txt);
 		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.job_list);
 		mMenuButton = findButton(R.id.menu);
 		mItemButton1 = findButton(R.id.item1);
@@ -85,12 +92,15 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		mItemButton3 = findButton(R.id.item3);
 		mItemButton4 = findButton(R.id.item4);
 		mItemButton5 = findButton(R.id.item5);
+		laySearch = (LinearLayout) findViewById(R.id.lay_search);
 	}
 
 	@SuppressWarnings("static-access")
 	@Override
 	public void initValue() {
 		instance = this;
+		jobList = getActivity().getResources().getStringArray(R.array.job_list);
+		tvList=new TextView[jobList.length];
 		radius = app().getScreenWidth(getActivity()) * 2 / 5;
 		mPullToRefreshListView.setPullLoadEnabled(true);
 		mListView = mPullToRefreshListView.getRefreshableView();
@@ -101,6 +111,20 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		adapter = new JobItemAdapt(getActivity());
 		mListView.setAdapter(adapter);
 		allData = new ArrayList<Position>();
+		int tvMinWidth = AppCommonUtil.dip2px(getActivity(), 40);
+		for (int i = 0, j = jobList.length; i < j; i++) {
+			TextView tv = new TextView(getActivity());
+			tv.setPadding(0, 0, 30, 0);
+			tv.setMinWidth(tvMinWidth);
+			tv.setTextSize(20);
+			tv.setTextColor(Color.rgb(120, 120, 120));
+			tv.setGravity(Gravity.CENTER);
+			tv.setText(jobList[i]);
+			tv.setId(100+i);
+			tv.setOnClickListener(new JobListClickListener());
+			laySearch.addView(tv);
+			tvList[i]=tv;
+		}
 		if (NetWorkState.isNetWorkConnected(getActivity())) {
 			refreshData(jobType, mCity, 1, "down");
 		} else {
@@ -109,6 +133,22 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 			findViewById(R.id.lay_search).setClickable(false);
 			mPullToRefreshListView.setVisibility(View.GONE);
 			Toast.makeText(getActivity(), "好像没有联网哦", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	private int lastClick=0;
+	private class JobListClickListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			int id=v.getId();
+			tvList[id-100].setTextColor(Color.rgb(1, 152, 117));
+			if(lastClick!=0){
+				tvList[lastClick-100].setTextColor(Color.rgb(120, 120, 120));
+			}
+			lastClick=id;
+			jobType=jobList[id-100];
+			refreshData(jobType, mCity, 1, "down");
 		}
 	}
 
@@ -142,7 +182,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 
 			@Override
 			public void onClick(View arg0) {
-				addFragmentToStack(R.id.contain, new SearchFragment());
+				// addFragmentToStack(R.id.contain, new SearchFragment());
 			}
 		});
 		mMenuButton.setOnClickListener(this);

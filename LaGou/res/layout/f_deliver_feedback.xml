@@ -13,17 +13,11 @@
             android:text="@string/string_deliver" />
     </RelativeLayout>
 
-    <ListView
-        android:id="@android:id/list"
+    <mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView
+        android:id="@+id/delive_list"
         android:layout_width="match_parent"
-        android:scrollbarStyle="outsideOverlay"
-        android:layout_height="fill_parent"
-        android:background="@color/hole_background"
-        android:cacheColorHint="#ffffff"
-        android:divider="@color/hole_background"
-        android:dividerHeight="8dp"
-        android:listSelector="@null"
-        android:padding="8dp" >
-    </ListView>
+        android:layout_height="match_parent"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginRight="-2dp" />
 
 </LinearLayout>

@@ -12,6 +12,7 @@ import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.DeliverFeedback;
 import mayi.lagou.com.fragment.UserInfoFragment.OnRequestInfo;
 import mayi.lagou.com.utils.ParserUtil;
+import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
 import android.app.Activity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +25,7 @@ import android.widget.ListView;
  */
 public class DeliverFeedbackFragment extends BaseFragment {
 
+	private PullToRefreshListView mPullToRefreshListView;
 	private ListView mListView;
 	private DeliverAdapter mAdapter;
 	private OnRequestInfo mInfo;
@@ -35,11 +37,16 @@ public class DeliverFeedbackFragment extends BaseFragment {
 
 	@Override
 	public void findViewsById() {
-		mListView = findListView(android.R.id.list);
+		mPullToRefreshListView=(PullToRefreshListView) findViewById(R.id.delive_list);
 	}
 
 	@Override
 	public void initValue() {
+		mListView = mPullToRefreshListView.getRefreshableView();
+		mListView.setFadingEdgeLength(0);
+		mListView.setDividerHeight(10);
+		mListView.setSelector(android.R.color.transparent);
+		mListView.setDivider(getResources().getDrawable(R.drawable.list_de));
 		mAdapter = new DeliverAdapter(getActivity());
 		mListView.setAdapter(mAdapter);
 	}

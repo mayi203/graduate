@@ -2,7 +2,6 @@ package mayi.lagou.com.fragment;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +27,7 @@ import mayi.lagou.com.fragment.LoginFragment.Refresh;
 import mayi.lagou.com.utils.NetWorkState;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.utils.SharePreferenceUtil;
+import mayi.lagou.com.view.MyDialog;
 
 /**
  * @author 203mayi@gmail.com 2014-5-6
@@ -125,14 +125,14 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 						if (statusCode == 200) {
 							try {
 								JSONObject object = new JSONObject(response);
-								String success=object.optString("success");
-								if("true".equals(success)&&!isExit){
+								String success = object.optString("success");
+								if ("true".equals(success) && !isExit) {
 									SharePreferenceUtil.putString(
 											getActivity(), "userId", object
 													.optJSONObject("content")
 													.optString("userid"));
 									getResume(LaGouApi.Host + LaGouApi.Resume);
-								}else if("false".equals(success)&&!isExit){
+								} else if ("false".equals(success) && !isExit) {
 									logOut();
 								}
 							} catch (JSONException e) {
@@ -201,7 +201,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 			getMyDeliver();
 			break;
 		case R.id.change_user:
-			logOut();
+			affriLogout();
 			break;
 		case R.id.about_us:
 			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
@@ -214,13 +214,37 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		}
 	}
 
-	private void logOut(){
+	private MyDialog dialog;
+
+	private void affriLogout() {
+		if (dialog != null && dialog.isShowing()) {
+			dialog.dismiss();
+		}
+		dialog = new MyDialog(getActivity());
+		dialog.show();
+		dialog.setMessage("退出将清除个人信息，确定要退出吗？");
+		dialog.setOkBtnText("确定");
+		dialog.setOkBtnOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				logOut();
+				dialog.dismiss();
+			}
+		});
+		dialog.setCancelBtnText("取消");
+		dialog.showDefaultCancelBtn();
+	}
+
+	private void logOut() {
 		SharePreferenceUtil.putString(getActivity(), "email", "");
 		SharePreferenceUtil.putString(getActivity(), "psw", "");
 		SharePreferenceUtil.putString(getActivity(), "userInfo", null);
-		SharePreferenceUtil.putString(getActivity(), SharePreferenceUtil.RESUME_TYPE, "");
+		SharePreferenceUtil.putString(getActivity(),
+				SharePreferenceUtil.RESUME_TYPE, "");
 		refresh.refresh();
 	}
+
 	private void deliverSet() {
 		int type = 1;
 		String resumeType = SharePreferenceUtil.getString(getActivity(),
@@ -235,7 +259,8 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								SharePreferenceUtil.putString(getActivity(),
-										SharePreferenceUtil.RESUME_TYPE, String.valueOf(which));
+										SharePreferenceUtil.RESUME_TYPE,
+										String.valueOf(which));
 								dialog.dismiss();
 							}
 						}).setNegativeButton("取消", null).show();
