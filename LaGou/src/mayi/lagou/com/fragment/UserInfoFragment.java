@@ -97,19 +97,6 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		}
 	}
 
-	private void getMyDeliver() {
-		client.get(LaGouApi.Host + LaGouApi.DeliverRecord,
-				new AsyncHttpResponseHandler() {
-
-					@Override
-					public void onSuccess(int statusCode, String content) {
-						onRequest.setDeliver(content);
-						addFragmentToStack(R.id.u_contain,
-								new DeliverFeedbackFragment());
-					}
-				});
-	}
-
 	private void getUserInfo() {
 		Map<String, String> map = new HashMap<String, String>();
 		String emailTxt = SharePreferenceUtil.getString(getActivity(), "email");
@@ -175,9 +162,6 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 
 		public UserInfo getUserInfo();
 
-		public void setDeliver(String deliver);
-
-		public String getDeliver();
 	}
 
 	private boolean isExit = false;
@@ -198,7 +182,8 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 			addFragmentToStack(R.id.u_contain, new MyResumeFragment());
 			break;
 		case R.id.my_deliver:
-			getMyDeliver();
+			addFragmentToStack(R.id.u_contain, new DeliverFeedbackFragment());
+			// getMyDeliver();
 			break;
 		case R.id.change_user:
 			affriLogout();

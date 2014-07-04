@@ -112,5 +112,9 @@ public class DeliverAdapter extends BaseAdapter {
 			notifyDataSetChanged();
 		}
 	}
+	public void deleteAllItems() {
+		mObjects.clear();
+		notifyDataSetChanged();
+	}
 
 }

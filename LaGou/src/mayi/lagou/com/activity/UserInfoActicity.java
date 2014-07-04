@@ -13,7 +13,6 @@ public class UserInfoActicity extends BaseFragmentActivity implements Refresh,
 		OnRequestInfo {
 
 	private UserInfo mInfo;
-	private String mDeliver;
 
 	@Override
 	public int contentView() {
@@ -55,13 +54,4 @@ public class UserInfoActicity extends BaseFragmentActivity implements Refresh,
 		return mInfo;
 	}
 
-	@Override
-	public void setDeliver(String deliver) {
-		mDeliver = deliver;
-	}
-
-	@Override
-	public String getDeliver() {
-		return mDeliver;
-	}
 }
