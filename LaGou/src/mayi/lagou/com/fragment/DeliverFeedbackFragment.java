@@ -16,6 +16,7 @@ import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.DeliverFeedback;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.utils.SharePreferenceUtil;
+import mayi.lagou.com.widget.networkdialog.DialogUtils;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
@@ -37,7 +38,8 @@ public class DeliverFeedbackFragment extends BaseFragment {
 	private PullToRefreshListView mPullToRefreshListView;
 	private ListView mListView;
 	private DeliverAdapter mAdapter;
-	private int pageNum=1;
+	private int pageNum = 1;
+	private boolean isFirstLoad = true;
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
 
@@ -74,23 +76,24 @@ public class DeliverFeedbackFragment extends BaseFragment {
 					}
 				});
 		mPullToRefreshListView
-		.setOnRefreshListener(new OnRefreshListener<ListView>() {
+				.setOnRefreshListener(new OnRefreshListener<ListView>() {
 
-			@Override
-			public void onPullDownToRefresh(
-					PullToRefreshBase<ListView> refreshView) {
-				pageNum = 1;
-				loadData(pageNum,"down");
-			}
+					@Override
+					public void onPullDownToRefresh(
+							PullToRefreshBase<ListView> refreshView) {
+						pageNum = 1;
+						loadData(pageNum, "down");
+					}
 
-			@Override
-			public void onPullUpToRefresh(
-					PullToRefreshBase<ListView> refreshView) {
-				pageNum++;
-				loadData(pageNum,"up");
-			}
-		});
+					@Override
+					public void onPullUpToRefresh(
+							PullToRefreshBase<ListView> refreshView) {
+						pageNum++;
+						loadData(pageNum, "up");
+					}
+				});
 	}
+
 	private void setLastUpdateTime() {
 		String text = formatDateTime(System.currentTimeMillis());
 		mPullToRefreshListView.setLastUpdatedLabel(text);
@@ -110,6 +113,9 @@ public class DeliverFeedbackFragment extends BaseFragment {
 	}
 
 	private void getUserInfo() {
+		if (isFirstLoad) {
+			DialogUtils.showProcessDialog(getActivity(), true);
+		}
 		Map<String, String> map = new HashMap<String, String>();
 		String emailTxt = SharePreferenceUtil.getString(getActivity(), "email");
 		map.put("email", emailTxt);
@@ -122,29 +128,43 @@ public class DeliverFeedbackFragment extends BaseFragment {
 					@Override
 					public void onSuccess(int statusCode, String response) {
 						if (statusCode == 200) {
-							loadData(1,"up");
+							loadData(1, "up");
 						}
 					}
 				});
 	}
 
-	private void loadData(int pageNum,final String type) {
-		client.get(LaGouApi.Host + LaGouApi.DeliverRecord+pageNum,
+	private void loadData(int pageNum, final String type) {
+		client.get(LaGouApi.Host + LaGouApi.DeliverRecord + pageNum,
 				new AsyncHttpResponseHandler() {
 
 					@Override
 					public void onSuccess(int statusCode, String content) {
-						List<DeliverFeedback> list = ParserUtil.parseDeliverFeedback(content);
-						if ("down".equals(type)){
+						List<DeliverFeedback> list = ParserUtil
+								.parseDeliverFeedback(content);
+						if ("down".equals(type)) {
 							mAdapter.deleteAllItems();
 							mAdapter.addItems(list);
 							setLastUpdateTime();
 							mPullToRefreshListView.onPullDownRefreshComplete();
-						}else if ("up".equals(type)){
+						} else if ("up".equals(type)) {
 							mAdapter.addItems(list);
 							mPullToRefreshListView.onPullUpRefreshComplete();
 						}
+						isFirstLoad = false;
+					}
+
+					@Override
+					public void onFinish() {
+						DialogUtils.hideProcessDialog();
+						super.onFinish();
 					}
 				});
+	}
+
+	@Override
+	public void onDestroyView() {
+		DialogUtils.hideProcessDialog();
+		super.onDestroyView();
 	}
 }

@@ -56,6 +56,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	private ListView mListView;
 	// public TextView search;
 	private OnChangeUrl onChangeUrl;
+	private boolean isFirstLoad = true;
 	private JobItemAdapt adapter;
 	private Button mMenuButton;
 	private Button mItemButton1;
@@ -100,7 +101,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	public void initValue() {
 		instance = this;
 		jobList = getActivity().getResources().getStringArray(R.array.job_list);
-		tvList=new TextView[jobList.length];
+		tvList = new TextView[jobList.length];
 		radius = app().getScreenWidth(getActivity()) * 2 / 5;
 		mPullToRefreshListView.setPullLoadEnabled(true);
 		mListView = mPullToRefreshListView.getRefreshableView();
@@ -120,11 +121,13 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 			tv.setTextColor(Color.rgb(120, 120, 120));
 			tv.setGravity(Gravity.CENTER);
 			tv.setText(jobList[i]);
-			tv.setId(100+i);
+			tv.setId(100 + i);
 			tv.setOnClickListener(new JobListClickListener());
 			laySearch.addView(tv);
-			tvList[i]=tv;
+			tvList[i] = tv;
 		}
+		tvList[0].setTextColor(Color.rgb(1, 152, 117));
+		lastClick=100;
 		if (NetWorkState.isNetWorkConnected(getActivity())) {
 			refreshData(jobType, mCity, 1, "down");
 		} else {
@@ -136,18 +139,20 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		}
 	}
 
-	private int lastClick=0;
+	private int lastClick = 0;
+
 	private class JobListClickListener implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			int id=v.getId();
-			tvList[id-100].setTextColor(Color.rgb(1, 152, 117));
-			if(lastClick!=0){
-				tvList[lastClick-100].setTextColor(Color.rgb(120, 120, 120));
+			int id = v.getId();
+			tvList[id - 100].setTextColor(Color.rgb(1, 152, 117));
+			if (lastClick != 0) {
+				tvList[lastClick - 100].setTextColor(Color.rgb(120, 120, 120));
 			}
-			lastClick=id;
-			jobType=jobList[id-100];
+			lastClick = id;
+			jobType = jobList[id - 100];
+			isFirstLoad = true;
 			refreshData(jobType, mCity, 1, "down");
 		}
 	}
@@ -281,7 +286,9 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		jobType = jType;
 		String url = LaGouApi.Host + LaGouApi.Jobs + jType + "?city=" + city
 				+ "&pn=" + pageNum;
-		DialogUtils.showProcessDialog(getActivity(), true);
+		if (isFirstLoad) {
+			DialogUtils.showProcessDialog(getActivity(), true);
+		}
 		client.get(url, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
@@ -299,6 +306,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 				if (list != null && list.size() > 0) {
 					allData.addAll(list);
 				}
+				isFirstLoad = false;
 			}
 
 			@Override

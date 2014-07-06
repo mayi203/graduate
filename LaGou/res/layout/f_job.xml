@@ -14,7 +14,7 @@
             android:paddingLeft="10dp"
             android:text="@string/title_home"
             android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/profile"

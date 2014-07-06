@@ -63,12 +63,13 @@
     <string name="string_lagou_del">专注互联网职业机会</string>
     <!-- AboutUsFragment -->
     <string name="string_about_back">关于我们</string>
-    <string name="string_version">Ver 2.2.3</string>
+    <string name="string_version">Ver 2.2.4</string>
     <string name="string_weixin">l1204783269</string>
     <string name="string_sina">203mayi@gmail.com</string>
     <string name="string_deliver">投递反馈</string>
 
     <string-array name="job_list">
+        <item>所有职位</item>
         <item>Java</item>
         <item>PHP</item>
         <item>Android</item>
@@ -79,7 +80,6 @@
         <item>BD</item>
         <item>UI</item>
         <item>实习</item>
-        <item>所有职位</item>
     </string-array>
 
 </resources>
