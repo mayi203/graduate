@@ -3,7 +3,6 @@
  */
 package mayi.lagou.com;
 
-import cn.jpush.android.api.JPushInterface;
 import mayi.lagou.com.imageloader.ImageLoader;
 import android.app.Activity;
 import android.app.Application;
@@ -21,7 +20,6 @@ public class LaGouApp extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		JPushInterface.init(this);
 		_instance = this;
 		imageLoader = new ImageLoader(this, 0.3f);
 	}

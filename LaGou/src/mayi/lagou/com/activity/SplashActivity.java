@@ -1,5 +1,7 @@
 package mayi.lagou.com.activity;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
@@ -62,5 +64,18 @@ public class SplashActivity extends BaseActivity {
 	public void initListener() {
 
 	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+	
 
 }

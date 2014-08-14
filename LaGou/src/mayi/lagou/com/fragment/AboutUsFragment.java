@@ -29,7 +29,7 @@ public class AboutUsFragment extends BaseFragment {
 
 	@Override
 	public void initValue() {
-
+		hideSoftInput();
 	}
 
 	@Override
@@ -50,13 +50,13 @@ public class AboutUsFragment extends BaseFragment {
 			}
 		});
 		findTextView(R.id.gmail).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				Intent data=new Intent(Intent.ACTION_SENDTO);  
-				data.setData(Uri.parse("mailto:203mayi@gmail.com"));  
-				data.putExtra(Intent.EXTRA_SUBJECT, "拉勾招聘使用反馈");  
-				startActivity(data); 
+				Intent data = new Intent(Intent.ACTION_SENDTO);
+				data.setData(Uri.parse("mailto:203mayi@gmail.com"));
+				data.putExtra(Intent.EXTRA_SUBJECT, "拉勾招聘使用反馈");
+				startActivity(data);
 			}
 		});
 	}

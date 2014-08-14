@@ -1,5 +1,7 @@
 package mayi.lagou.com.activity;
 
+import com.umeng.analytics.MobclickAgent;
+
 import mayi.lagou.com.R;
 import mayi.lagou.com.core.BaseFragmentActivity;
 import mayi.lagou.com.data.UserInfo;
@@ -52,6 +54,18 @@ public class UserInfoActicity extends BaseFragmentActivity implements Refresh,
 	@Override
 	public UserInfo getUserInfo() {
 		return mInfo;
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
 	}
 
 }

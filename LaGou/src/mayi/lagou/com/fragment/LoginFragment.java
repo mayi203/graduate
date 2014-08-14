@@ -3,6 +3,7 @@ package mayi.lagou.com.fragment;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -101,8 +102,11 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 		RequestParams params = new RequestParams(map);
 		client.post(LaGouApi.Host + LaGouApi.LogIn, params,
 				new AsyncHttpResponseHandler() {
+
 					@Override
-					public void onSuccess(int statusCode, String content) {
+					@Deprecated
+					public void onSuccess(int statusCode, Header[] headers,
+							String content) {
 						if (statusCode == 200) {
 							try {
 								JSONObject object = new JSONObject(content);
@@ -133,6 +137,7 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 								e.printStackTrace();
 							}
 						}
+						super.onSuccess(statusCode, headers, content);
 					}
 				});
 	}

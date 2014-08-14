@@ -21,6 +21,10 @@ import mayi.lagou.com.widget.networkdialog.DialogUtils;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
+import android.animation.Animator;
+import android.animation.Animator.AnimatorListener;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
@@ -39,10 +43,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.Animator.AnimatorListener;
-import com.nineoldandroids.animation.AnimatorSet;
-import com.nineoldandroids.animation.ObjectAnimator;
 
 /**
  * @author wenfeili@163.com

@@ -45,7 +45,7 @@
     <string name="string_login_psw">请输入密码</string>
     <string name="string_login_btn">登      录</string>
     <string name="string_login">登录</string>
-    <string name="string_login_tips">登录帐号为拉钩网注册帐号</string>
+    <string name="string_login_tips">登录帐号为拉勾网注册帐号</string>
 
     <!-- MyDialog -->
     <string name="string_mydialog_sure">确定</string>
