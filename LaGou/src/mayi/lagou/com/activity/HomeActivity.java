@@ -51,9 +51,15 @@ public class HomeActivity extends BaseFragmentActivity implements OnChangeUrl {
 	}
 
 	@Override
+	protected void onStart() {
+		super.onStart();
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
 		MobclickAgent.onResume(this);
 	}
 
+	
 }

@@ -43,12 +43,6 @@
             android:name=".activity.UserInfoActicity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
-            android:name="com.umeng.fb.ConversationActivity"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        <activity
-            android:name="com.umeng.fb.ContactActivity"
-            android:theme="@android:style/Theme.NoTitleBar" />
 
         <meta-data
             android:name="UMENG_APPKEY"

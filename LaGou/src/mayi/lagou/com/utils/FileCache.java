@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Comparator;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -134,6 +135,7 @@ public class FileCache {
 	/**
 	 * 计算SD卡上的剩余空间
 	 */
+	@SuppressWarnings("deprecation")
 	private int SdCardFreeSpace() {
 		StatFs stat = new StatFs(Environment.getExternalStorageDirectory()
 				.getPath());
