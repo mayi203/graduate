@@ -21,6 +21,9 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -29,6 +32,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +64,8 @@ public class JobDetailFragment extends BaseFragment {
 
 	@Override
 	public int contentView() {
+		
+		getActivity().getActionBar().setTitle(R.string.position_detail);
 		return R.layout.f_job_detail;
 	}
 
@@ -102,13 +108,6 @@ public class JobDetailFragment extends BaseFragment {
 
 	@Override
 	public void initListener() {
-		findTextView(R.id.back).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				getActivity().onBackPressed();
-			}
-		});
 		deliver.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -118,13 +117,6 @@ public class JobDetailFragment extends BaseFragment {
 				} else {
 					gotoLogin();
 				}
-			}
-		});
-		findImageView(R.id.share).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				shareUrl(mUrl);
 			}
 		});
 	}
@@ -139,13 +131,13 @@ public class JobDetailFragment extends BaseFragment {
 		SharePreferenceUtil.putBoolean(getActivity(), "toDetail", true);
 	}
 
-	private void shareUrl(String url) {
+	private Intent shareUrlIntent(String url) {
 		Intent sendIntent = new Intent();
 		sendIntent.setAction(Intent.ACTION_SEND);
 		sendIntent.putExtra(Intent.EXTRA_TEXT, "我在拉钩网客户端发现了一个很不错的职位" + url
 				+ "你也去看看吧！");
 		sendIntent.setType("text/plain");
-		startActivity(sendIntent);
+		return sendIntent;
 	}
 
 	@Override
@@ -430,4 +422,24 @@ public class JobDetailFragment extends BaseFragment {
 		isExit = true;
 		super.onPause();
 	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.jb_detail, menu);
+		MenuItem item = menu.findItem(R.id.share);
+		ShareActionProvider mShareActionProvider = (ShareActionProvider) item
+				.getActionProvider();
+		mShareActionProvider.setShareIntent(shareUrlIntent(mUrl));
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			getActivity().getActionBar().setTitle(R.string.app_name);
+			getActivity().onBackPressed();
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 }

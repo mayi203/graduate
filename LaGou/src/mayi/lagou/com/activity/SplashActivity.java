@@ -5,6 +5,7 @@ import com.umeng.analytics.MobclickAgent;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
@@ -18,6 +19,7 @@ public class SplashActivity extends BaseActivity {
 
 	@Override
 	public int contentView() {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		return R.layout.a_splash;
 	}
 

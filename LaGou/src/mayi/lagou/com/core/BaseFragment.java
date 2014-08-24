@@ -28,12 +28,14 @@ import android.widget.TextView;
 public abstract class BaseFragment extends Fragment {
 	public AsyncHttpClient client;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.support.v4.app.Fragment#onViewCreated(android.view.View,
-	 * android.os.Bundle)
-	 */
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+		getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);

@@ -305,5 +305,8 @@
     <color name="drop_down_list_footer_font_color">#000000</color>
     <!-- NetProgressDialog BackgroundColor -->
     <color name="black_gray">#4d4d4d</color>
+    
+    <color name="umeng_fb_color_btn_pressed">#ff0000</color>
+    <color name="umeng_fb_color_btn_normal">#00ff00</color>
 
 </resources>

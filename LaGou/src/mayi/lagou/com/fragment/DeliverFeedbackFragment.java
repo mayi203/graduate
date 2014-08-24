@@ -21,8 +21,7 @@ import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 import android.annotation.SuppressLint;
-import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -45,6 +44,7 @@ public class DeliverFeedbackFragment extends BaseFragment {
 
 	@Override
 	public int contentView() {
+		getActivity().getActionBar().setTitle(R.string.my_deliver);
 		return R.layout.f_deliver_feedback;
 	}
 
@@ -67,14 +67,6 @@ public class DeliverFeedbackFragment extends BaseFragment {
 
 	@Override
 	public void initListener() {
-		findTextView(R.id.deliver_back).setOnClickListener(
-				new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						getActivity().onBackPressed();
-					}
-				});
 		mPullToRefreshListView
 				.setOnRefreshListener(new OnRefreshListener<ListView>() {
 
@@ -166,5 +158,15 @@ public class DeliverFeedbackFragment extends BaseFragment {
 	public void onDestroyView() {
 		DialogUtils.hideProcessDialog();
 		super.onDestroyView();
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			getActivity().getActionBar().setTitle(R.string.self);
+			getActivity().onBackPressed();
+		} else if (item.getItemId() == R.id.about_us) {
+			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

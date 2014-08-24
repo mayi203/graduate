@@ -1,8 +1,7 @@
 package mayi.lagou.com.fragment;
 
 import android.app.Activity;
-import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +24,7 @@ public class MyResumeFragment extends BaseFragment {
 
 	@Override
 	public int contentView() {
+		getActivity().getActionBar().setTitle(R.string.resume);
 		return R.layout.f_resume;
 	}
 
@@ -46,14 +46,6 @@ public class MyResumeFragment extends BaseFragment {
 
 	@Override
 	public void initListener() {
-		findTextView(R.id.resume_back).setOnClickListener(
-				new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						getActivity().onBackPressed();
-					}
-				});
 
 	}
 
@@ -110,6 +102,16 @@ public class MyResumeFragment extends BaseFragment {
 		}
 		producation.setText(produ.toString());
 		self.setText(mUserInfo.getSelfDescription());
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			getActivity().getActionBar().setTitle(R.string.self);
+			getActivity().onBackPressed();
+		} else if (item.getItemId() == R.id.about_us) {
+			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 }

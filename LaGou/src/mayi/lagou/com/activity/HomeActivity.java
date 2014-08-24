@@ -61,5 +61,4 @@ public class HomeActivity extends BaseFragmentActivity implements OnChangeUrl {
 		MobclickAgent.onResume(this);
 	}
 
-	
 }

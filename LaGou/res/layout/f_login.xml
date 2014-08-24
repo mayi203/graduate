@@ -3,32 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <RelativeLayout
-        android:id="@+id/top_lay"
-        style="@style/topBar" >
-
-        <TextView
-            android:id="@+id/back"
-            style="@style/back_text"
-            android:text="@string/string_login" />
-
-        <TextView
-            android:id="@+id/about_us"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/selector_detail_deliver_btn"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:text="@string/string_about_us_btn"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-    </RelativeLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/top_lay"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="50dp" >

@@ -135,7 +135,6 @@ public class FileCache {
 	/**
 	 * 计算SD卡上的剩余空间
 	 */
-	@SuppressWarnings("deprecation")
 	private int SdCardFreeSpace() {
 		StatFs stat = new StatFs(Environment.getExternalStorageDirectory()
 				.getPath());

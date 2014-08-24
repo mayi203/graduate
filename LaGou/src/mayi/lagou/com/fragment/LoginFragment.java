@@ -11,6 +11,9 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -29,6 +32,7 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public int contentView() {
+		getActivity().getActionBar().setTitle(R.string.string_login);
 		return R.layout.f_login;
 	}
 
@@ -45,22 +49,14 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void initListener() {
-		findTextView(R.id.back).setOnClickListener(this);
 		findButton(R.id.login_btn).setOnClickListener(this);
-		findTextView(R.id.about_us).setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.back:
-			getActivity().onBackPressed();
-			break;
 		case R.id.login_btn:
 			getUserInfo();
-			break;
-		case R.id.about_us:
-			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
 			break;
 		default:
 			break;
@@ -150,6 +146,23 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 	public void onPause() {
 		super.onPause();
 		hideSoftInput();
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.login, menu);
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			getActivity().getActionBar().setTitle(R.string.app_name);
+			getActivity().onBackPressed();
+		} else if (item.getItemId() == R.id.about_us) {
+			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 }

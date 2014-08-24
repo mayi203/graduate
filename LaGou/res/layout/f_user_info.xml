@@ -4,28 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:id="@+id/top"
-        style="@style/topBar" >
-
-        <TextView
-            android:id="@+id/user_info_back"
-            style="@style/back_text"
-            android:text="@string/self" />
-
-        <TextView
-            android:id="@+id/about_us"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/selector_detail_deliver_btn"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:text="@string/string_about_us_btn"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-    </RelativeLayout>
-
     <include
         android:id="@+id/lay_info"
         layout="@layout/l_user_info" />
@@ -44,6 +22,11 @@
         android:id="@+id/deliver_set"
         style="@style/User_Info_TextView"
         android:text="@string/set_deliver" />
+
+    <TextView
+        android:id="@+id/umeng_fb"
+        style="@style/User_Info_TextView"
+        android:text="@string/umeng_fb" />
 
     <TextView
         android:id="@+id/change_user"

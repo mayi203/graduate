@@ -32,6 +32,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -75,6 +78,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	private String[] jobList;
 	private TextView[] tvList;
 	private LinearLayout laySearch;
+//	private View girlLay;
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
 
@@ -94,6 +98,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		mItemButton4 = findButton(R.id.item4);
 		mItemButton5 = findButton(R.id.item5);
 		laySearch = (LinearLayout) findViewById(R.id.lay_search);
+//		girlLay=findViewById(R.id.girl_lay);
 	}
 
 	@SuppressWarnings("static-access")
@@ -127,7 +132,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 			tvList[i] = tv;
 		}
 		tvList[0].setTextColor(Color.rgb(1, 152, 117));
-		lastClick=100;
+		lastClick = 100;
 		if (NetWorkState.isNetWorkConnected(getActivity())) {
 			refreshData(jobType, mCity, 1, "down");
 		} else {
@@ -159,13 +164,6 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void initListener() {
-		findImageView(R.id.profile).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				startActivity(UserInfoActicity.class);
-			}
-		});
 		mPullToRefreshListView
 				.setOnRefreshListener(new OnRefreshListener<ListView>() {
 
@@ -312,6 +310,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
 					Throwable arg3) {
+//				girlLay.setVisibility(View.VISIBLE);
 				Toast.makeText(getActivity(), "请求出错", Toast.LENGTH_SHORT)
 						.show();
 				super.onFailure(arg0, arg1, arg2, arg3);
@@ -441,6 +440,20 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	public void onDestroyView() {
 		DialogUtils.hideProcessDialog();
 		super.onDestroyView();
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.jb_home, menu);
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.profile) {
+			startActivity(UserInfoActicity.class);
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 }

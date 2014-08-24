@@ -28,6 +28,7 @@
     <string name="education_experience">教育背景</string>
     <string name="self_description">自我描述</string>
     <string name="project_show">作品展示</string>
+    <string name="umeng_fb">反馈建议</string>
 
     <!-- JobFragment -->
     <string name="search_hint">输入关键字精确查找</string>
@@ -67,6 +68,8 @@
     <string name="string_weixin">l1204783269</string>
     <string name="string_sina">203mayi@gmail.com</string>
     <string name="string_deliver">投递反馈</string>
+    <string name="umeng_fb_powered_by">umeng_fb_powered_by</string>
+    <string name="girl_txt">拉勾正在挤沟沟，等几分钟再来看吧！</string>
 
     <string-array name="job_list">
         <item>所有职位</item>

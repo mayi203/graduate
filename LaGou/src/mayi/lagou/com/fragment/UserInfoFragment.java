@@ -2,22 +2,7 @@ package mayi.lagou.com.fragment;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.R;
 import mayi.lagou.com.activity.UserInfoActicity;
@@ -29,13 +14,33 @@ import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.utils.SharePreferenceUtil;
 import mayi.lagou.com.view.MyDialog;
 
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
 /**
  * @author 203mayi@gmail.com 2014-5-6
  */
 public class UserInfoFragment extends BaseFragment implements OnClickListener {
 
-	private TextView back, userInfo, resume, aboutUs, deliver, deliverSet,
-			changeUser;
+	private TextView userInfo, resume, deliver, deliverSet, changeUser,
+			umengFb;
 	private ImageView userHead;
 	private OnRequestInfo onRequest;
 	private Refresh refresh;
@@ -46,19 +51,19 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public int contentView() {
+		getActivity().getActionBar().setTitle(R.string.self);
 		return R.layout.f_user_info;
 	}
 
 	@Override
 	public void findViewsById() {
-		back = findTextView(R.id.user_info_back);
 		userInfo = findTextView(R.id.base_info);
 		userHead = findImageView(R.id.user_icon);
 		resume = findTextView(R.id.my_resume);
-		aboutUs = findTextView(R.id.about_us);
 		deliver = findTextView(R.id.my_deliver);
 		deliverSet = findTextView(R.id.deliver_set);
 		changeUser = findTextView(R.id.change_user);
+		umengFb = findTextView(R.id.umeng_fb);
 	}
 
 	@Override
@@ -67,17 +72,19 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void initListener() {
-		back.setOnClickListener(this);
 		resume.setOnClickListener(this);
-		aboutUs.setOnClickListener(this);
 		deliver.setOnClickListener(this);
 		deliverSet.setOnClickListener(this);
 		changeUser.setOnClickListener(this);
+		umengFb.setOnClickListener(this);
 	}
+
+	private UserInfoActicity mactivity;
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		mactivity = (UserInfoActicity) activity;
 		onRequest = (UserInfoActicity) activity;
 		refresh = (UserInfoActicity) activity;
 	}
@@ -175,9 +182,6 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.user_info_back:
-			getActivity().onBackPressed();
-			break;
 		case R.id.my_resume:
 			addFragmentToStack(R.id.u_contain, new MyResumeFragment());
 			break;
@@ -188,12 +192,11 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		case R.id.change_user:
 			affriLogout();
 			break;
-		case R.id.about_us:
-			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
-			break;
 		case R.id.deliver_set:
 			deliverSet();
 			break;
+		case R.id.umeng_fb:
+			mactivity.agent.startFeedbackActivity();
 		default:
 			break;
 		}
@@ -250,4 +253,22 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 							}
 						}).setNegativeButton("取消", null).show();
 	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.login, menu);
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			getActivity().getActionBar().setTitle(R.string.app_name);
+			getActivity().onBackPressed();
+		} else if (item.getItemId() == R.id.about_us) {
+			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 }
