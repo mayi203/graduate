@@ -4,15 +4,18 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="@color/white"
-    android:padding="8dp" >
+    android:padding="8dp" xmlns:app="http://schemas.android.com/apk/res/mayi.lagou.com">
 
-    <mayi.lagou.com.view.CircularImage
+    <mayi.lagou.com.view.CircleImageView
         android:id="@+id/user_icon"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerVertical="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/default_avatar" />
+        android:src="@drawable/default_avatar"
+        app:border_width="2dp"
+        app:border_color="@color/darkgreen"
+        />
 
     <TextView
         android:id="@+id/base_info"
