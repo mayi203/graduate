@@ -49,16 +49,19 @@
         </activity>
         <activity
             android:name="com.umeng.fb.ConversationActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" 
-            />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.umeng.fb.ContactActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" 
-             />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <meta-data
+        <!--
+              <meta-data
             android:name="UMENG_APPKEY"
             android:value="53eca9f8fd98c5cf5b009c6c" >
+        -->
+        <meta-data
+            android:name="UMENG_APPKEY_TEST"
+            android:value="52faf13556240b02ba161d40" >
         </meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
