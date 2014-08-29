@@ -78,7 +78,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	private String[] jobList;
 	private TextView[] tvList;
 	private LinearLayout laySearch;
-//	private View girlLay;
+	// private View girlLay;
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
 
@@ -98,7 +98,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		mItemButton4 = findButton(R.id.item4);
 		mItemButton5 = findButton(R.id.item5);
 		laySearch = (LinearLayout) findViewById(R.id.lay_search);
-//		girlLay=findViewById(R.id.girl_lay);
+		// girlLay=findViewById(R.id.girl_lay);
 	}
 
 	@SuppressWarnings("static-access")
@@ -310,7 +310,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
 					Throwable arg3) {
-//				girlLay.setVisibility(View.VISIBLE);
+				// girlLay.setVisibility(View.VISIBLE);
 				Toast.makeText(getActivity(), "请求出错", Toast.LENGTH_SHORT)
 						.show();
 				super.onFailure(arg0, arg1, arg2, arg3);
@@ -452,6 +452,8 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.profile) {
 			startActivity(UserInfoActicity.class);
+		} else if (item.getItemId() == android.R.id.home) {
+			getActivity().onBackPressed();
 		}
 		return super.onOptionsItemSelected(item);
 	}

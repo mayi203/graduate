@@ -3,6 +3,8 @@
  */
 package mayi.lagou.com;
 
+import com.umeng.fb.FeedbackAgent;
+
 import mayi.lagou.com.imageloader.ImageLoader;
 import android.app.Activity;
 import android.app.Application;
@@ -16,12 +18,15 @@ public class LaGouApp extends Application {
 
 	private static LaGouApp _instance;
 	private ImageLoader imageLoader;
+	public FeedbackAgent agent;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		_instance = this;
 		imageLoader = new ImageLoader(this, 0.3f);
+		agent = new FeedbackAgent(this);
+		agent.sync();
 	}
 
 	public static LaGouApp getInstance() {

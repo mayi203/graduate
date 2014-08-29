@@ -957,28 +957,29 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f090011;
-        public static final int Bottom_Deliver_Btn=0x7f09000a;
+        public static final int AppBaseTheme=0x7f090012;
+        public static final int Bottom_Deliver_Btn=0x7f09000b;
         /**  the theme applied to the application or activity 
          */
         public static final int CustomActionBarTheme=0x7f090000;
-        public static final int Info_Title=0x7f09000f;
-        public static final int MenuItemStyle=0x7f090003;
-        public static final int MenuStyle=0x7f090002;
+        public static final int Info_Title=0x7f090010;
+        public static final int MenuItemStyle=0x7f090004;
+        public static final int MenuStyle=0x7f090003;
+        public static final int MenuTextStyle=0x7f090002;
         /**  ActionBar styles 
          */
         public static final int MyActionBar=0x7f090001;
-        public static final int MyDialog=0x7f09000e;
-        public static final int Mydialog=0x7f09000c;
-        public static final int User_Info_TextView=0x7f090010;
-        public static final int back_text=0x7f09000b;
-        public static final int drop_down_list_footer_font_style=0x7f090008;
-        public static final int drop_down_list_footer_progress_bar_style=0x7f090005;
-        public static final int drop_down_list_header_font_style=0x7f090006;
-        public static final int drop_down_list_header_progress_bar_style=0x7f090004;
-        public static final int drop_down_list_header_second_font_style=0x7f090007;
-        public static final int resume_item=0x7f09000d;
-        public static final int topBar=0x7f090009;
+        public static final int MyDialog=0x7f09000f;
+        public static final int Mydialog=0x7f09000d;
+        public static final int User_Info_TextView=0x7f090011;
+        public static final int back_text=0x7f09000c;
+        public static final int drop_down_list_footer_font_style=0x7f090009;
+        public static final int drop_down_list_footer_progress_bar_style=0x7f090006;
+        public static final int drop_down_list_header_font_style=0x7f090007;
+        public static final int drop_down_list_header_progress_bar_style=0x7f090005;
+        public static final int drop_down_list_header_second_font_style=0x7f090008;
+        public static final int resume_item=0x7f09000e;
+        public static final int topBar=0x7f09000a;
     }
     public static final class styleable {
         /** Attributes that can be used with a drop_down_list_attr.
@@ -1009,7 +1010,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:isAutoLoadOnBottom
+          @attr name mayi.lagou.com:isAutoLoadOnBottom
         */
         public static final int drop_down_list_attr_isAutoLoadOnBottom = 2;
         /**
@@ -1023,7 +1024,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:isDropDownStyle
+          @attr name mayi.lagou.com:isDropDownStyle
         */
         public static final int drop_down_list_attr_isDropDownStyle = 0;
         /**
@@ -1037,7 +1038,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:isOnBottomStyle
+          @attr name mayi.lagou.com:isOnBottomStyle
         */
         public static final int drop_down_list_attr_isOnBottomStyle = 1;
     };

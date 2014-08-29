@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mayi.lagou.com.LaGouApi;
+import mayi.lagou.com.LaGouApp;
 import mayi.lagou.com.R;
 import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.core.BaseFragment;
@@ -79,12 +80,9 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		umengFb.setOnClickListener(this);
 	}
 
-	private UserInfoActicity mactivity;
-
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		mactivity = (UserInfoActicity) activity;
 		onRequest = (UserInfoActicity) activity;
 		refresh = (UserInfoActicity) activity;
 	}
@@ -196,7 +194,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 			deliverSet();
 			break;
 		case R.id.umeng_fb:
-			mactivity.agent.startFeedbackActivity();
+			LaGouApp.getInstance().agent.startFeedbackActivity();
 		default:
 			break;
 		}
