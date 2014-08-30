@@ -18,6 +18,7 @@ public class LaGouApp extends Application {
 
 	private static LaGouApp _instance;
 	private ImageLoader imageLoader;
+	public String mSdcardDataDir;
 
 	@Override
 	public void onCreate() {
