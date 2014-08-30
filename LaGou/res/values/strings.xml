@@ -40,6 +40,7 @@
     <string name="search_guangzhou">广州</string>
     <string name="title_home">拉勾网</string>
     <string name="search_position">职位搜索</string>
+    <string name="fb_null">当前没有投递反馈</string>
 
     <!-- LoginFragment -->
     <string name="string_login_email">请输入登录邮箱地址</string>
@@ -70,6 +71,11 @@
     <string name="string_deliver">投递反馈</string>
     <string name="umeng_fb_powered_by">umeng_fb_powered_by</string>
     <string name="girl_txt">拉勾正在挤沟沟，等几分钟再来看吧！</string>
+
+    <!-- SettingFragment -->
+    <string name="app_setting">设置</string>
+    <string name="clear_cache">清除缓存</string>
+    <string name="about_app">关于软件</string>
 
     <string-array name="job_list">
         <item>所有职位</item>

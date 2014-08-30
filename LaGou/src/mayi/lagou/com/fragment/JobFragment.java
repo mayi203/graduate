@@ -62,11 +62,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	private boolean isFirstLoad = true;
 	private JobItemAdapt adapter;
 	private Button mMenuButton;
-	private Button mItemButton1;
-	private Button mItemButton2;
-	private Button mItemButton3;
-	private Button mItemButton4;
-	private Button mItemButton5;
+	private Button mItemButton1,mItemButton2,mItemButton3,mItemButton4,mItemButton5;
 	private String cityName;
 	private boolean mIsMenuOpen = false;
 	private int radius;

@@ -9,28 +9,20 @@
         layout="@layout/l_user_info" />
 
     <TextView
-        android:id="@+id/my_resume"
-        style="@style/User_Info_TextView"
-        android:text="@string/resume" />
+        android:id="@+id/fb_null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/fb_null"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/darkgray"
+        android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/my_deliver"
-        style="@style/User_Info_TextView"
-        android:text="@string/my_deliver" />
-
-    <TextView
-        android:id="@+id/deliver_set"
-        style="@style/User_Info_TextView"
-        android:text="@string/set_deliver" />
-
-    <TextView
-        android:id="@+id/umeng_fb"
-        style="@style/User_Info_TextView"
-        android:text="@string/umeng_fb" />
-
-    <TextView
-        android:id="@+id/change_user"
-        style="@style/User_Info_TextView"
-        android:text="@string/change_user" />
+    <mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView
+        android:id="@+id/delive_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginRight="-2dp" />
 
 </LinearLayout>

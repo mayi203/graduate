@@ -108,8 +108,6 @@ public class MyResumeFragment extends BaseFragment {
 		if (item.getItemId() == android.R.id.home) {
 			getActivity().getActionBar().setTitle(R.string.self);
 			getActivity().onBackPressed();
-		} else if (item.getItemId() == R.id.about_us) {
-			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
 		}
 		return super.onOptionsItemSelected(item);
 	}

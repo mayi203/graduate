@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/deliver_set"
+        style="@style/User_Info_TextView"
+        android:text="@string/set_deliver" />
+
+    <TextView
+        android:id="@+id/umeng_fb"
+        style="@style/User_Info_TextView"
+        android:text="@string/umeng_fb" />
+    
+    <TextView
+        android:id="@+id/clear_cache"
+        style="@style/User_Info_TextView"
+        android:text="@string/clear_cache" />
+    
+     <TextView
+        android:id="@+id/about_app"
+        style="@style/User_Info_TextView"
+        android:text="@string/about_app" />
+
+    <TextView
+        android:id="@+id/change_user"
+        style="@style/User_Info_TextView"
+        android:text="@string/change_user" />
+
+</LinearLayout>

@@ -11,8 +11,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -149,18 +147,10 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 	}
 
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.login, menu);
-		super.onCreateOptionsMenu(menu, inflater);
-	}
-
-	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {
 			getActivity().getActionBar().setTitle(R.string.app_name);
 			getActivity().onBackPressed();
-		} else if (item.getItemId() == R.id.about_us) {
-			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
 		}
 		return super.onOptionsItemSelected(item);
 	}

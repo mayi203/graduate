@@ -1,26 +1,32 @@
 package mayi.lagou.com.fragment;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.R;
 import mayi.lagou.com.activity.UserInfoActicity;
+import mayi.lagou.com.adapter.DeliverAdapter;
 import mayi.lagou.com.core.BaseFragment;
+import mayi.lagou.com.data.DeliverFeedback;
 import mayi.lagou.com.data.UserInfo;
-import mayi.lagou.com.fragment.LoginFragment.Refresh;
 import mayi.lagou.com.utils.NetWorkState;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.utils.SharePreferenceUtil;
-import mayi.lagou.com.view.MyDialog;
+import mayi.lagou.com.widget.networkdialog.DialogUtils;
+import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase;
+import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
+import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,23 +34,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.umeng.fb.FeedbackAgent;
 
 /**
  * @author 203mayi@gmail.com 2014-5-6
  */
 public class UserInfoFragment extends BaseFragment implements OnClickListener {
 
-	private TextView userInfo, resume, deliver, deliverSet, changeUser,
-			umengFb;
+	private TextView userInfo ,fbNull;
 	private ImageView userHead;
+	private View headView;
 	private OnRequestInfo onRequest;
-	private Refresh refresh;
+	private PullToRefreshListView mPullToRefreshListView;
+	private ListView mListView;
+	private DeliverAdapter mAdapter;
+	private int pageNum = 1;
+	private boolean isFirstLoad = true;
+	@SuppressLint("SimpleDateFormat")
+	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
 
 	public UserInfoFragment() {
 
@@ -60,31 +72,49 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 	public void findViewsById() {
 		userInfo = findTextView(R.id.base_info);
 		userHead = findImageView(R.id.user_icon);
-		resume = findTextView(R.id.my_resume);
-		deliver = findTextView(R.id.my_deliver);
-		deliverSet = findTextView(R.id.deliver_set);
-		changeUser = findTextView(R.id.change_user);
-		umengFb = findTextView(R.id.umeng_fb);
+		headView = findViewById(R.id.lay_info);
+		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.delive_list);
+		fbNull=findTextView(R.id.fb_null);
 	}
 
 	@Override
 	public void initValue() {
+		mPullToRefreshListView.setPullLoadEnabled(true);
+		mListView = mPullToRefreshListView.getRefreshableView();
+		mListView.setFadingEdgeLength(0);
+		mListView.setDividerHeight(10);
+		mListView.setSelector(android.R.color.transparent);
+		mListView.setDivider(getResources().getDrawable(R.drawable.list_de));
+		mAdapter = new DeliverAdapter(getActivity());
+		mListView.setAdapter(mAdapter);
 	}
 
 	@Override
 	public void initListener() {
-		resume.setOnClickListener(this);
-		deliver.setOnClickListener(this);
-		deliverSet.setOnClickListener(this);
-		changeUser.setOnClickListener(this);
-		umengFb.setOnClickListener(this);
+		headView.setOnClickListener(this);
+		mPullToRefreshListView
+				.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+					@Override
+					public void onPullDownToRefresh(
+							PullToRefreshBase<ListView> refreshView) {
+						pageNum = 1;
+						loadFeedBackData(pageNum, "down");
+					}
+
+					@Override
+					public void onPullUpToRefresh(
+							PullToRefreshBase<ListView> refreshView) {
+						pageNum++;
+						loadFeedBackData(pageNum, "up");
+					}
+				});
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		onRequest = (UserInfoActicity) activity;
-		refresh = (UserInfoActicity) activity;
 	}
 
 	@Override
@@ -94,6 +124,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 				"userInfo");
 		if (content != null && !"".equals(content)) {
 			initData(content);
+			isFirstLoad = false;
 		}
 		if (NetWorkState.isNetWorkConnected(getActivity())) {
 			getUserInfo();
@@ -102,7 +133,22 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		}
 	}
 
+	private void setLastUpdateTime() {
+		String text = formatDateTime(System.currentTimeMillis());
+		mPullToRefreshListView.setLastUpdatedLabel(text);
+	}
+
+	private String formatDateTime(long time) {
+		if (0 == time) {
+			return "";
+		}
+		return mDateFormat.format(new Date(time));
+	}
+
 	private void getUserInfo() {
+		if (isFirstLoad) {
+			DialogUtils.showProcessDialog(getActivity(), true);
+		}
 		Map<String, String> map = new HashMap<String, String>();
 		String emailTxt = SharePreferenceUtil.getString(getActivity(), "email");
 		map.put("email", emailTxt);
@@ -124,8 +170,8 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 													.optJSONObject("content")
 													.optString("userid"));
 									getResume(LaGouApi.Host + LaGouApi.Resume);
+									loadFeedBackData(1, "up");
 								} else if ("false".equals(success) && !isExit) {
-									logOut();
 								}
 							} catch (JSONException e) {
 								e.printStackTrace();
@@ -146,7 +192,14 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 					SharePreferenceUtil.putString(getActivity(), "userInfo",
 							content);
 				}
+				isFirstLoad = false;
 				Log.v("lagou", content);
+			}
+
+			@Override
+			public void onFinish() {
+				DialogUtils.hideProcessDialog();
+				super.onFinish();
 			}
 		});
 	}
@@ -160,6 +213,39 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 			app().getImageLoader().loadImage(userHead, user.getUserIcon(),
 					R.drawable.default_avatar);
 		}
+	}
+
+	private void loadFeedBackData(final int pageNum, final String type) {
+		client.get(LaGouApi.Host + LaGouApi.DeliverRecord + pageNum,
+				new AsyncHttpResponseHandler() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						List<DeliverFeedback> list = ParserUtil
+								.parseDeliverFeedback(content);
+						if(pageNum==1&&list.size()==0){
+							fbNull.setVisibility(View.VISIBLE);
+						}else{
+							fbNull.setVisibility(View.GONE);
+						}
+						if ("down".equals(type)) {
+							mAdapter.deleteAllItems();
+							mAdapter.addItems(list);
+							setLastUpdateTime();
+							mPullToRefreshListView.onPullDownRefreshComplete();
+						} else if ("up".equals(type)) {
+							mAdapter.addItems(list);
+							mPullToRefreshListView.onPullUpRefreshComplete();
+						}
+						isFirstLoad = false;
+					}
+
+					@Override
+					public void onFinish() {
+						DialogUtils.hideProcessDialog();
+						super.onFinish();
+					}
+				});
 	}
 
 	public interface OnRequestInfo {
@@ -180,82 +266,23 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.my_resume:
+		case R.id.lay_info:
 			addFragmentToStack(R.id.u_contain, new MyResumeFragment());
 			break;
-		case R.id.my_deliver:
-			addFragmentToStack(R.id.u_contain, new DeliverFeedbackFragment());
-			// getMyDeliver();
-			break;
-		case R.id.change_user:
-			affriLogout();
-			break;
-		case R.id.deliver_set:
-			deliverSet();
-			break;
-		case R.id.umeng_fb:
-			FeedbackAgent agent = new FeedbackAgent(getActivity());
-			agent.startFeedbackActivity();
 		default:
 			break;
 		}
 	}
 
-	private MyDialog dialog;
-
-	private void affriLogout() {
-		if (dialog != null && dialog.isShowing()) {
-			dialog.dismiss();
-		}
-		dialog = new MyDialog(getActivity());
-		dialog.show();
-		dialog.setMessage("退出将清除个人信息，确定要退出吗？");
-		dialog.setOkBtnText("确定");
-		dialog.setOkBtnOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				logOut();
-				dialog.dismiss();
-			}
-		});
-		dialog.setCancelBtnText("取消");
-		dialog.showDefaultCancelBtn();
-	}
-
-	private void logOut() {
-		SharePreferenceUtil.putString(getActivity(), "email", "");
-		SharePreferenceUtil.putString(getActivity(), "psw", "");
-		SharePreferenceUtil.putString(getActivity(), "userInfo", null);
-		SharePreferenceUtil.putString(getActivity(),
-				SharePreferenceUtil.RESUME_TYPE, "");
-		refresh.refresh();
-	}
-
-	private void deliverSet() {
-		int type = 1;
-		String resumeType = SharePreferenceUtil.getString(getActivity(),
-				SharePreferenceUtil.RESUME_TYPE);
-		if (resumeType != null && !"".equals(resumeType)) {
-			type = Integer.parseInt(resumeType);
-		}
-		new AlertDialog.Builder(getActivity())
-				.setTitle("选择默认投递简历")
-				.setSingleChoiceItems(new String[] { "附件简历", "在线简历" }, type,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								SharePreferenceUtil.putString(getActivity(),
-										SharePreferenceUtil.RESUME_TYPE,
-										String.valueOf(which));
-								dialog.dismiss();
-							}
-						}).setNegativeButton("取消", null).show();
+	@Override
+	public void onDestroyView() {
+		DialogUtils.hideProcessDialog();
+		super.onDestroyView();
 	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.login, menu);
+		inflater.inflate(R.menu.setting, menu);
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
@@ -264,10 +291,9 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		if (item.getItemId() == android.R.id.home) {
 			getActivity().getActionBar().setTitle(R.string.app_name);
 			getActivity().onBackPressed();
-		} else if (item.getItemId() == R.id.about_us) {
-			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
+		} else if (item.getItemId() == R.id.setting_icon) {
+			addFragmentToStack(R.id.u_contain, new SettingFragment());
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
 }

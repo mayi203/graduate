@@ -75,7 +75,7 @@ public class AboutUsFragment extends BaseFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {
-			getActivity().getActionBar().setTitle(R.string.self);
+			getActivity().getActionBar().setTitle(R.string.app_setting);
 			getActivity().onBackPressed();
 		}
 		return super.onOptionsItemSelected(item);

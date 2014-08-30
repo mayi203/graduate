@@ -1,0 +1,135 @@
+package mayi.lagou.com.fragment;
+
+import mayi.lagou.com.R;
+import mayi.lagou.com.core.BaseFragment;
+import mayi.lagou.com.fragment.LoginFragment.Refresh;
+import mayi.lagou.com.utils.SharePreferenceUtil;
+import mayi.lagou.com.view.MyDialog;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import mayi.lagou.com.activity.UserInfoActicity;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+
+import com.umeng.fb.FeedbackAgent;
+
+public class SettingFragment extends BaseFragment implements OnClickListener {
+	private Refresh refresh;
+
+	@Override
+	public int contentView() {
+		getActivity().getActionBar().setTitle(R.string.app_setting);
+		return R.layout.f_setting;
+	}
+
+	@Override
+	public void findViewsById() {
+
+	}
+
+	@Override
+	public void initValue() {
+
+	}
+
+	@Override
+	public void initListener() {
+		findViewById(R.id.deliver_set).setOnClickListener(this);
+		findViewById(R.id.umeng_fb).setOnClickListener(this);
+		findViewById(R.id.clear_cache).setOnClickListener(this);
+		findViewById(R.id.about_app).setOnClickListener(this);
+		findViewById(R.id.change_user).setOnClickListener(this);
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		refresh = (UserInfoActicity) activity;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			getActivity().getActionBar().setTitle(R.string.self);
+			getActivity().onBackPressed();
+			refresh.refresh();
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.deliver_set:
+			deliverSet();
+			break;
+		case R.id.umeng_fb:
+			FeedbackAgent agent = new FeedbackAgent(getActivity());
+			agent.startFeedbackActivity();
+			break;
+		case R.id.clear_cache:
+			break;
+		case R.id.about_app:
+			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
+			break;
+		case R.id.change_user:
+			affriLogout();
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void deliverSet() {
+		int type = 1;
+		String resumeType = SharePreferenceUtil.getString(getActivity(),
+				SharePreferenceUtil.RESUME_TYPE);
+		if (resumeType != null && !"".equals(resumeType)) {
+			type = Integer.parseInt(resumeType);
+		}
+		new AlertDialog.Builder(getActivity())
+				.setTitle("选择默认投递简历")
+				.setSingleChoiceItems(new String[] { "附件简历", "在线简历" }, type,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								SharePreferenceUtil.putString(getActivity(),
+										SharePreferenceUtil.RESUME_TYPE,
+										String.valueOf(which));
+								dialog.dismiss();
+							}
+						}).setNegativeButton("取消", null).show();
+	}
+
+	private MyDialog dialog;
+
+	private void affriLogout() {
+		if (dialog != null && dialog.isShowing()) {
+			dialog.dismiss();
+		}
+		dialog = new MyDialog(getActivity());
+		dialog.show();
+		dialog.setMessage("退出将清除个人信息，确定要退出吗？");
+		dialog.setOkBtnText("确定");
+		dialog.setOkBtnOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				logOut();
+				dialog.dismiss();
+			}
+		});
+		dialog.setCancelBtnText("取消");
+		dialog.showDefaultCancelBtn();
+	}
+
+	private void logOut() {
+		SharePreferenceUtil.putString(getActivity(), "email", "");
+		SharePreferenceUtil.putString(getActivity(), "psw", "");
+		SharePreferenceUtil.putString(getActivity(), "userInfo", null);
+		SharePreferenceUtil.putString(getActivity(),
+				SharePreferenceUtil.RESUME_TYPE, "");
+	}
+}

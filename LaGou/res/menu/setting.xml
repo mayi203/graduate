@@ -2,7 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/about_us"
+        android:id="@+id/setting_icon"
+        android:icon="@drawable/setting_icon"
         android:title="@string/string_about_us_btn"
         android:showAsAction="ifRoom"/>
 
