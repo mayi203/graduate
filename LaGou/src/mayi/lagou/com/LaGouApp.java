@@ -18,14 +18,13 @@ public class LaGouApp extends Application {
 
 	private static LaGouApp _instance;
 	private ImageLoader imageLoader;
-	public FeedbackAgent agent;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		_instance = this;
 		imageLoader = new ImageLoader(this, 0.3f);
-		agent = new FeedbackAgent(this);
+		FeedbackAgent agent = new FeedbackAgent(this);
 		agent.sync();
 	}
 

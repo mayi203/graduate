@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mayi.lagou.com.LaGouApi;
-import mayi.lagou.com.LaGouApp;
 import mayi.lagou.com.R;
 import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.core.BaseFragment;
@@ -34,6 +33,7 @@ import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.umeng.fb.FeedbackAgent;
 
 /**
  * @author 203mayi@gmail.com 2014-5-6
@@ -194,7 +194,8 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 			deliverSet();
 			break;
 		case R.id.umeng_fb:
-			LaGouApp.getInstance().agent.startFeedbackActivity();
+			FeedbackAgent agent = new FeedbackAgent(getActivity());
+			agent.startFeedbackActivity();
 		default:
 			break;
 		}
