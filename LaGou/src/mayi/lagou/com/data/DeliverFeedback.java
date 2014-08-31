@@ -28,6 +28,16 @@ public class DeliverFeedback implements Serializable {
 	private String resume;
 	/** 进度 */
 	private String progress;
+	/** 链接 */
+	private String positionUrl;
+
+	public String getPositionUrl() {
+		return positionUrl;
+	}
+
+	public void setPositionUrl(String positionUrl) {
+		this.positionUrl = positionUrl;
+	}
 
 	/**
 	 * @return the position

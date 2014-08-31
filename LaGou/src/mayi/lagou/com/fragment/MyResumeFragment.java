@@ -63,6 +63,9 @@ public class MyResumeFragment extends BaseFragment {
 
 	private void init() {
 		mUserInfo = userInfo.getUserInfo();
+		if (mUserInfo == null || "".equals(mUserInfo)) {
+			return;
+		}
 		if (mUserInfo.getUserIcon() != null
 				&& !"".equals(mUserInfo.getUserIcon())) {
 			app().getImageLoader().loadImage(userIcon, mUserInfo.getUserIcon(),
@@ -103,6 +106,7 @@ public class MyResumeFragment extends BaseFragment {
 		producation.setText(produ.toString());
 		self.setText(mUserInfo.getSelfDescription());
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {

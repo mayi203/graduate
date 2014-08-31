@@ -3,6 +3,7 @@ package mayi.lagou.com.activity;
 import mayi.lagou.com.R;
 import mayi.lagou.com.core.BaseFragmentActivity;
 import mayi.lagou.com.data.UserInfo;
+import mayi.lagou.com.fragment.JobFragment.OnChangeUrl;
 import mayi.lagou.com.fragment.LoginFragment;
 import mayi.lagou.com.fragment.LoginFragment.Refresh;
 import mayi.lagou.com.fragment.UserInfoFragment;
@@ -12,9 +13,10 @@ import mayi.lagou.com.utils.SharePreferenceUtil;
 import com.umeng.analytics.MobclickAgent;
 
 public class UserInfoActicity extends BaseFragmentActivity implements Refresh,
-		OnRequestInfo {
+		OnRequestInfo, OnChangeUrl {
 
 	private UserInfo mInfo;
+	private String mUrl;
 
 	@Override
 	public int contentView() {
@@ -66,6 +68,16 @@ public class UserInfoActicity extends BaseFragmentActivity implements Refresh,
 	protected void onResume() {
 		super.onResume();
 		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	public void setUrl(String url) {
+		mUrl = url;
+	}
+
+	@Override
+	public String getUrl() {
+		return mUrl;
 	}
 
 }

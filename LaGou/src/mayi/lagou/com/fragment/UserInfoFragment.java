@@ -1,6 +1,7 @@
 package mayi.lagou.com.fragment;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,13 +14,15 @@ import mayi.lagou.com.adapter.DeliverAdapter;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.DeliverFeedback;
 import mayi.lagou.com.data.UserInfo;
+import mayi.lagou.com.fragment.JobFragment.OnChangeUrl;
+import mayi.lagou.com.utils.ConfigCache;
 import mayi.lagou.com.utils.NetWorkState;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.utils.SharePreferenceUtil;
 import mayi.lagou.com.widget.networkdialog.DialogUtils;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase;
-import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
+import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
 
 import org.apache.http.Header;
 import org.json.JSONException;
@@ -33,6 +36,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -46,12 +51,14 @@ import com.loopj.android.http.RequestParams;
  */
 public class UserInfoFragment extends BaseFragment implements OnClickListener {
 
-	private TextView userInfo ,fbNull;
+	private TextView userInfo, fbNull;
 	private ImageView userHead;
 	private View headView;
 	private OnRequestInfo onRequest;
 	private PullToRefreshListView mPullToRefreshListView;
 	private ListView mListView;
+	private OnChangeUrl onChangeUrl;
+	List<DeliverFeedback> allData;
 	private DeliverAdapter mAdapter;
 	private int pageNum = 1;
 	private boolean isFirstLoad = true;
@@ -74,7 +81,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		userHead = findImageView(R.id.user_icon);
 		headView = findViewById(R.id.lay_info);
 		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.delive_list);
-		fbNull=findTextView(R.id.fb_null);
+		fbNull = findTextView(R.id.fb_null);
 	}
 
 	@Override
@@ -87,6 +94,19 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		mListView.setDivider(getResources().getDrawable(R.drawable.list_de));
 		mAdapter = new DeliverAdapter(getActivity());
 		mListView.setAdapter(mAdapter);
+		allData = new ArrayList<DeliverFeedback>();
+		String content = SharePreferenceUtil.getString(getActivity(),
+				"userInfo");
+		if (content != null && !"".equals(content)) {
+			initData(content);
+			isFirstLoad = false;
+		}
+		if (NetWorkState.isNetWorkConnected(getActivity())) {
+			getUserInfo();
+		} else {
+			loadFeedBackData(1, "up");
+			Toast.makeText(getActivity(), "好像没有联网哦", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	@Override
@@ -109,28 +129,27 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 						loadFeedBackData(pageNum, "up");
 					}
 				});
+		mListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				onChangeUrl.setUrl(allData.get(position).getPositionUrl());
+				addFragmentToStack(R.id.u_contain, new JobDetailFragment());
+			}
+		});
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		onRequest = (UserInfoActicity) activity;
+		onChangeUrl = (UserInfoActicity) activity;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		String content = SharePreferenceUtil.getString(getActivity(),
-				"userInfo");
-		if (content != null && !"".equals(content)) {
-			initData(content);
-			isFirstLoad = false;
-		}
-		if (NetWorkState.isNetWorkConnected(getActivity())) {
-			getUserInfo();
-		} else {
-			Toast.makeText(getActivity(), "好像没有联网哦", Toast.LENGTH_SHORT).show();
-		}
 	}
 
 	private void setLastUpdateTime() {
@@ -208,44 +227,73 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		UserInfo user = ParserUtil.parserUserInfo(content);
 		onRequest.setUserInfo(user);
 		userInfo.setText(user.getBasicInfo());
-		if (user.getUserIcon() != null && !"".equals(user.getUserIcon())
-				&& !isExit) {
+		if (user.getUserIcon() != null && !"".equals(user.getUserIcon())) {
 			app().getImageLoader().loadImage(userHead, user.getUserIcon(),
 					R.drawable.default_avatar);
 		}
 	}
 
 	private void loadFeedBackData(final int pageNum, final String type) {
-		client.get(LaGouApi.Host + LaGouApi.DeliverRecord + pageNum,
-				new AsyncHttpResponseHandler() {
+		final String url = LaGouApi.Host + LaGouApi.DeliverRecord + pageNum;
+		String contentStr = ConfigCache.getUrlCache(url, getActivity());
+		if (contentStr != null && !"".equals(contentStr)) {
+			List<DeliverFeedback> list = ParserUtil
+					.parseDeliverFeedback(contentStr);
+			if (pageNum == 1 && list.size() == 0) {
+				fbNull.setVisibility(View.VISIBLE);
+			} else {
+				fbNull.setVisibility(View.GONE);
+			}
+			if ("down".equals(type)) {
+				allData.clear();
+				mAdapter.deleteAllItems();
+				mAdapter.addItems(list);
+				setLastUpdateTime();
+				mPullToRefreshListView.onPullDownRefreshComplete();
+			} else if ("up".equals(type)) {
+				mAdapter.addItems(list);
+				mPullToRefreshListView.onPullUpRefreshComplete();
+			}
+			if (list != null && list.size() > 0) {
+				allData.addAll(list);
+			}
+			isFirstLoad = false;
+			return;
+		}
+		client.get(url, new AsyncHttpResponseHandler() {
 
-					@Override
-					public void onSuccess(int statusCode, String content) {
-						List<DeliverFeedback> list = ParserUtil
-								.parseDeliverFeedback(content);
-						if(pageNum==1&&list.size()==0){
-							fbNull.setVisibility(View.VISIBLE);
-						}else{
-							fbNull.setVisibility(View.GONE);
-						}
-						if ("down".equals(type)) {
-							mAdapter.deleteAllItems();
-							mAdapter.addItems(list);
-							setLastUpdateTime();
-							mPullToRefreshListView.onPullDownRefreshComplete();
-						} else if ("up".equals(type)) {
-							mAdapter.addItems(list);
-							mPullToRefreshListView.onPullUpRefreshComplete();
-						}
-						isFirstLoad = false;
-					}
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				List<DeliverFeedback> list = ParserUtil
+						.parseDeliverFeedback(content);
+				if (pageNum == 1 && list.size() == 0) {
+					fbNull.setVisibility(View.VISIBLE);
+				} else {
+					fbNull.setVisibility(View.GONE);
+				}
+				if ("down".equals(type)) {
+					allData.clear();
+					mAdapter.deleteAllItems();
+					mAdapter.addItems(list);
+					setLastUpdateTime();
+					mPullToRefreshListView.onPullDownRefreshComplete();
+				} else if ("up".equals(type)) {
+					mAdapter.addItems(list);
+					mPullToRefreshListView.onPullUpRefreshComplete();
+				}
+				if (list != null && list.size() > 0) {
+					allData.addAll(list);
+				}
+				isFirstLoad = false;
+				ConfigCache.setUrlCache(content, url);
+			}
 
-					@Override
-					public void onFinish() {
-						DialogUtils.hideProcessDialog();
-						super.onFinish();
-					}
-				});
+			@Override
+			public void onFinish() {
+				DialogUtils.hideProcessDialog();
+				super.onFinish();
+			}
+		});
 	}
 
 	public interface OnRequestInfo {

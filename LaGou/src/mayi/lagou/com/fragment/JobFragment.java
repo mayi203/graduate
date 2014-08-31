@@ -15,6 +15,7 @@ import mayi.lagou.com.adapter.JobItemAdapt;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.Position;
 import mayi.lagou.com.utils.AppCommonUtil;
+import mayi.lagou.com.utils.ConfigCache;
 import mayi.lagou.com.utils.NetWorkState;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.widget.networkdialog.DialogUtils;
@@ -62,7 +63,8 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	private boolean isFirstLoad = true;
 	private JobItemAdapt adapter;
 	private Button mMenuButton;
-	private Button mItemButton1,mItemButton2,mItemButton3,mItemButton4,mItemButton5;
+	private Button mItemButton1, mItemButton2, mItemButton3, mItemButton4,
+			mItemButton5;
 	private String cityName;
 	private boolean mIsMenuOpen = false;
 	private int radius;
@@ -129,13 +131,13 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		}
 		tvList[0].setTextColor(Color.rgb(1, 152, 117));
 		lastClick = 100;
+		refreshData(jobType, mCity, 1, "down");
 		if (NetWorkState.isNetWorkConnected(getActivity())) {
-			refreshData(jobType, mCity, 1, "down");
 		} else {
 			afresh();
 			mMenuButton.setClickable(false);
 			findViewById(R.id.lay_search).setClickable(false);
-			mPullToRefreshListView.setVisibility(View.GONE);
+//			mPullToRefreshListView.setVisibility(View.GONE);
 			Toast.makeText(getActivity(), "好像没有联网哦", Toast.LENGTH_SHORT).show();
 		}
 	}
@@ -278,8 +280,27 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 			;
 		city = mCity;
 		jobType = jType;
-		String url = LaGouApi.Host + LaGouApi.Jobs + jType + "?city=" + city
+		final String url = LaGouApi.Host + LaGouApi.Jobs + jType + "?city=" + city
 				+ "&pn=" + pageNum;
+		String responseStr = ConfigCache.getUrlCache(url, getActivity());
+		if (responseStr != null && !"".equals(responseStr)) {
+			List<Position> list = ParserUtil.parserPosition(responseStr);
+			if ("down".equals(type)) {
+				allData.clear();
+				adapter.deleteAllItems();
+				adapter.addItems(list);
+				setLastUpdateTime();
+				mPullToRefreshListView.onPullDownRefreshComplete();
+			} else if ("up".equals(type)) {
+				adapter.addItems(list);
+				mPullToRefreshListView.onPullUpRefreshComplete();
+			}
+			if (list != null && list.size() > 0) {
+				allData.addAll(list);
+			}
+			isFirstLoad = false;
+			return;
+		}
 		if (isFirstLoad) {
 			DialogUtils.showProcessDialog(getActivity(), true);
 		}
@@ -301,6 +322,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 					allData.addAll(list);
 				}
 				isFirstLoad = false;
+				ConfigCache.setUrlCache(response, url);
 			}
 
 			@Override

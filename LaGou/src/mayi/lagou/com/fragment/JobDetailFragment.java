@@ -5,11 +5,11 @@ import java.util.Map;
 
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.R;
-import mayi.lagou.com.activity.HomeActivity;
 import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.PositionDetail;
 import mayi.lagou.com.fragment.JobFragment.OnChangeUrl;
+import mayi.lagou.com.utils.ConfigCache;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.utils.SharePreferenceUtil;
 import mayi.lagou.com.view.MyDialog;
@@ -64,7 +64,7 @@ public class JobDetailFragment extends BaseFragment {
 
 	@Override
 	public int contentView() {
-		
+
 		getActivity().getActionBar().setTitle(R.string.position_detail);
 		return R.layout.f_job_detail;
 	}
@@ -143,13 +143,16 @@ public class JobDetailFragment extends BaseFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		onChangeUrl = (HomeActivity) activity;
+		onChangeUrl = (OnChangeUrl) activity;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		mUrl = onChangeUrl.getUrl();
+		if (mUrl == null || "".equals(mUrl)) {
+			return;
+		}
 		refreshData();
 		String userInfo = SharePreferenceUtil.getString(getActivity(), "email");
 		if (userInfo == null || "".equals(userInfo)) {
@@ -162,6 +165,41 @@ public class JobDetailFragment extends BaseFragment {
 	}
 
 	private void refreshData() {
+		String responseStr = ConfigCache.getUrlCache(mUrl, getActivity());
+		if (responseStr != null && !"".equals(responseStr)) {
+			PositionDetail detail = ParserUtil
+					.parserPositionDetail(responseStr);
+			if (detail != null && !"".equals(detail)) {
+				view.setVisibility(View.VISIBLE);
+				if (onChangeUrl.getClass().getName()
+						.equals(UserInfoActicity.class.getName())) {
+					bottomTxt.setText("已投递");
+					deliver.setClickable(false);
+				}
+				deliver.setVisibility(View.VISIBLE);
+				title.setText(detail.getPositionName());
+				require.setText(detail.getSalary() + "/" + detail.getCity()
+						+ "/" + detail.getExperience() + "/"
+						+ detail.getEducation() + "/" + detail.getJobCategory()
+						+ "\n" + detail.getJobTempt().trim());
+				release_time.setText(detail.getReleaseTime());
+				if (detail.getComIconUrl() != null
+						&& !"".equals(detail.getComIconUrl()) && !isExit) {
+					app().getImageLoader().loadImage(com_img,
+							detail.getComIconUrl(), R.drawable.waiting);
+				}
+				com_name.setText(detail.getCompany().trim());
+				com_del.setText(detail.getField().trim() + "|"
+						+ detail.getScale() + "|" + detail.getStage() + "\n"
+						+ "地址：" + detail.getAddress());
+				details.setText(detail.getJobDetail());
+				token = detail.getSubmitValue();
+				if (config) {
+					confirmation();
+				}
+				return;
+			}
+		}
 		DialogUtils.showProcessDialog(getActivity(), true);
 		client.get(mUrl, new AsyncHttpResponseHandler() {
 			@Override
@@ -170,6 +208,11 @@ public class JobDetailFragment extends BaseFragment {
 						.parserPositionDetail(response);
 				if (detail != null && !"".equals(detail)) {
 					view.setVisibility(View.VISIBLE);
+					if (onChangeUrl.getClass().getName()
+							.equals(UserInfoActicity.class.getName())) {
+						bottomTxt.setText("已投递");
+						deliver.setClickable(false);
+					}
 					deliver.setVisibility(View.VISIBLE);
 					title.setText(detail.getPositionName());
 					require.setText(detail.getSalary() + "/" + detail.getCity()
@@ -192,6 +235,7 @@ public class JobDetailFragment extends BaseFragment {
 					if (config) {
 						confirmation();
 					}
+					ConfigCache.setUrlCache(response, mUrl);
 				} else {
 					detail_null.setVisibility(View.VISIBLE);
 				}
@@ -436,7 +480,11 @@ public class JobDetailFragment extends BaseFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {
-			getActivity().getActionBar().setTitle(R.string.app_name);
+			if(onChangeUrl.getClass().getName().equals(UserInfoActicity.class.getName())){
+				getActivity().getActionBar().setTitle(R.string.self);
+			}else{
+				getActivity().getActionBar().setTitle(R.string.app_name);
+			}
 			getActivity().onBackPressed();
 		}
 		return super.onOptionsItemSelected(item);

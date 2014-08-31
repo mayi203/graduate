@@ -6,6 +6,9 @@ package mayi.lagou.com.fragment;
 import mayi.lagou.com.R;
 import mayi.lagou.com.core.BaseFragment;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,6 +38,16 @@ public class AboutUsFragment extends BaseFragment {
 	@Override
 	public void initValue() {
 		hideSoftInput();
+		PackageManager manager = getActivity().getPackageManager();
+		PackageInfo info;
+		try {
+			info = manager.getPackageInfo(getActivity().getPackageName(), 0);
+			String version = info.versionName;
+			findTextView(R.id.ver).setText("Ver"+version);
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override

@@ -1,6 +1,10 @@
 package mayi.lagou.com.fragment;
 
+import java.io.File;
+
+import mayi.lagou.com.LaGouApp;
 import mayi.lagou.com.R;
+import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.fragment.LoginFragment.Refresh;
 import mayi.lagou.com.utils.SharePreferenceUtil;
@@ -8,7 +12,6 @@ import mayi.lagou.com.view.MyDialog;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import mayi.lagou.com.activity.UserInfoActicity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -70,6 +73,8 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 			agent.startFeedbackActivity();
 			break;
 		case R.id.clear_cache:
+			File file = new File(LaGouApp.getInstance().mSdcardDataDir);
+			DeleteFile(file);
 			break;
 		case R.id.about_app:
 			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
@@ -131,5 +136,36 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 		SharePreferenceUtil.putString(getActivity(), "userInfo", null);
 		SharePreferenceUtil.putString(getActivity(),
 				SharePreferenceUtil.RESUME_TYPE, "");
+		File file = new File(LaGouApp.getInstance().mSdcardDataDir);
+		DeleteFile(file);
+	}
+
+	/**
+	 * 递归删除文件和文件夹
+	 * 
+	 * @param file
+	 *            要删除的根目录
+	 */
+	public void DeleteFile(File file) {
+		SharePreferenceUtil.putString(getActivity(), "userInfo", null);
+		if (file.exists() == false) {
+			return;
+		} else {
+			if (file.isFile()) {
+				file.delete();
+				return;
+			}
+			if (file.isDirectory()) {
+				File[] childFile = file.listFiles();
+				if (childFile == null || childFile.length == 0) {
+					file.delete();
+					return;
+				}
+				for (File f : childFile) {
+					DeleteFile(f);
+				}
+				file.delete();
+			}
+		}
 	}
 }

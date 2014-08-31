@@ -27,6 +27,7 @@ public class LaGouApp extends Application {
 		imageLoader = new ImageLoader(this, 0.3f);
 		FeedbackAgent agent = new FeedbackAgent(this);
 		agent.sync();
+		mSdcardDataDir=getExternalCacheDir().getPath();
 	}
 
 	public static LaGouApp getInstance() {

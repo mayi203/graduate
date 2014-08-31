@@ -534,6 +534,8 @@ public class ParserUtil {
 						.text().trim());
 				deliver.setProgress(positions.get(i)
 						.select("a.btn_showprogress").text().trim());
+				deliver.setPositionUrl(positions.get(i).select("h2")
+						.select("a").attr("href").trim());
 				delivers.add(deliver);
 			}
 			return delivers;

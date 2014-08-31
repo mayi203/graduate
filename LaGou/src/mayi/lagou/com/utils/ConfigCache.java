@@ -1,9 +1,9 @@
 package mayi.lagou.com.utils;
 
 import java.io.File;
-import java.io.IOException;
 
 import mayi.lagou.com.LaGouApp;
+import android.content.Context;
 import android.util.Log;
 
 public class ConfigCache {
@@ -11,7 +11,7 @@ public class ConfigCache {
 	public static final int CONFIG_CACHE_MOBILE_TIMEOUT = 3600000; // 1 hour
 	public static final int CONFIG_CACHE_WIFI_TIMEOUT = 300000; // 5 minute
 
-	public static String getUrlCache(String url) {
+	public static String getUrlCache(String url, Context context) {
 		if (url == null) {
 			return null;
 		}
@@ -26,20 +26,20 @@ public class ConfigCache {
 			// 1. in case the system time is incorrect (the time is turn back
 			// long ago)
 			// 2. when the network is invalid, you can only read the cache
-			if (LaGouApp.mNetWorkState != NetworkUtils.NETWORN_NONE
-					&& expiredTime < 0) {
+			if (NetWorkState.isNetWorkConnected(context) && expiredTime < 0) {
 				return null;
 			}
-			if (LaGouApp.mNetWorkState == NetworkUtils.NETWORN_WIFI
+			if (NetWorkState.isWifiConnected(context)
 					&& expiredTime > CONFIG_CACHE_WIFI_TIMEOUT) {
 				return null;
-			} else if (LaGouApp.mNetWorkState == NetworkUtils.NETWORN_MOBILE
+			} else if (NetWorkState.isNetWorkConnected(context)
+					&& !NetWorkState.isWifiConnected(context)
 					&& expiredTime > CONFIG_CACHE_MOBILE_TIMEOUT) {
 				return null;
 			}
 			try {
 				result = FileUtils.readTextFile(file);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -52,7 +52,7 @@ public class ConfigCache {
 		try {
 			// 创建缓存数据到磁盘，就是创建文件
 			FileUtils.writeTextFile(file, data);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			Log.d(TAG, "write " + file.getAbsolutePath() + " data failed!");
 			e.printStackTrace();
 		}
