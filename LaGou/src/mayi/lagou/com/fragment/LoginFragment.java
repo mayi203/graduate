@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import mayi.lagou.com.LaGouApi;
+import mayi.lagou.com.LaGouApp;
 import mayi.lagou.com.R;
 import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.core.BaseFragment;
@@ -111,6 +112,9 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 											getActivity(), "email", emailTxt);
 									SharePreferenceUtil.putString(
 											getActivity(), "psw", pswTxt);
+									LaGouApp.isLogin=true;
+									SharePreferenceUtil.putBoolean(
+											getActivity(), "islogin", true);
 									boolean toDetail = SharePreferenceUtil
 											.getBoolean(getActivity(),
 													"toDetail");

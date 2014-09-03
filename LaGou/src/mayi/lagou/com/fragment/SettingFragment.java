@@ -4,23 +4,21 @@ import java.io.File;
 
 import mayi.lagou.com.LaGouApp;
 import mayi.lagou.com.R;
-import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.core.BaseFragment;
-import mayi.lagou.com.fragment.LoginFragment.Refresh;
 import mayi.lagou.com.utils.SharePreferenceUtil;
 import mayi.lagou.com.view.MyDialog;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 import com.umeng.fb.FeedbackAgent;
 
 public class SettingFragment extends BaseFragment implements OnClickListener {
-	private Refresh refresh;
 
+	private TextView changeUser;
 	@Override
 	public int contentView() {
 		getActivity().getActionBar().setTitle(R.string.app_setting);
@@ -29,9 +27,16 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void findViewsById() {
-
+		changeUser=findTextView(R.id.change_user);
 	}
 
+	public void changeUserState(){
+		if(LaGouApp.isLogin){
+			changeUser.setVisibility(View.VISIBLE);
+		}else{
+			changeUser.setVisibility(View.GONE);
+		}
+	}
 	@Override
 	public void initValue() {
 
@@ -47,17 +52,10 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 	}
 
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		refresh = (UserInfoActicity) activity;
-	}
-
-	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {
-			getActivity().getActionBar().setTitle(R.string.self);
+			getActivity().getActionBar().setTitle(R.string.app_name);
 			getActivity().onBackPressed();
-			refresh.refresh();
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -138,6 +136,8 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 				SharePreferenceUtil.RESUME_TYPE, "");
 		File file = new File(LaGouApp.getInstance().mSdcardDataDir);
 		DeleteFile(file);
+		LaGouApp.isLogin = false;
+		SharePreferenceUtil.putBoolean(getActivity(), "islogin", false);
 	}
 
 	/**

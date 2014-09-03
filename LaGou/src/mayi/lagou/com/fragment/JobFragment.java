@@ -1,13 +1,13 @@
 package mayi.lagou.com.fragment;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.http.Header;
-
 import mayi.lagou.com.LaGouApi;
+import mayi.lagou.com.LaGouApp;
 import mayi.lagou.com.R;
 import mayi.lagou.com.activity.HomeActivity;
 import mayi.lagou.com.activity.UserInfoActicity;
@@ -22,6 +22,9 @@ import mayi.lagou.com.widget.networkdialog.DialogUtils;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
+
+import org.apache.http.Header;
+
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorSet;
@@ -38,6 +41,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewConfiguration;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -82,6 +87,16 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public int contentView() {
+		try {
+			ViewConfiguration mconfig = ViewConfiguration.get(getActivity());
+			Field menuKeyField = ViewConfiguration.class
+					.getDeclaredField("sHasPermanentMenuKey");
+			if (menuKeyField != null) {
+				menuKeyField.setAccessible(true);
+				menuKeyField.setBoolean(mconfig, false);
+			}
+		} catch (Exception ex) {
+		}
 		return R.layout.f_job;
 	}
 
@@ -137,7 +152,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 			afresh();
 			mMenuButton.setClickable(false);
 			findViewById(R.id.lay_search).setClickable(false);
-//			mPullToRefreshListView.setVisibility(View.GONE);
+			// mPullToRefreshListView.setVisibility(View.GONE);
 			Toast.makeText(getActivity(), "好像没有联网哦", Toast.LENGTH_SHORT).show();
 		}
 	}
@@ -222,6 +237,8 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
+		getActivity().getWindow().invalidatePanelMenu(
+				Window.FEATURE_OPTIONS_PANEL);
 	}
 
 	@SuppressLint("HandlerLeak")
@@ -280,8 +297,8 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 			;
 		city = mCity;
 		jobType = jType;
-		final String url = LaGouApi.Host + LaGouApi.Jobs + jType + "?city=" + city
-				+ "&pn=" + pageNum;
+		final String url = LaGouApi.Host + LaGouApi.Jobs + jType + "?city="
+				+ city + "&pn=" + pageNum;
 		String responseStr = ConfigCache.getUrlCache(url, getActivity());
 		if (responseStr != null && !"".equals(responseStr)) {
 			List<Position> list = ParserUtil.parserPosition(responseStr);
@@ -462,16 +479,22 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.jb_home, menu);
+		if (LaGouApp.isLogin) {
+			inflater.inflate(R.menu.job_home2, menu);
+		} else {
+			inflater.inflate(R.menu.jb_home, menu);
+		}
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.profile) {
+		if (item.getItemId() == R.id.login) {
 			startActivity(UserInfoActicity.class);
 		} else if (item.getItemId() == android.R.id.home) {
 			getActivity().onBackPressed();
+		}else if(item.getItemId() == R.id.setting){
+			startActivity(SettingFragment.class);
 		}
 		return super.onOptionsItemSelected(item);
 	}

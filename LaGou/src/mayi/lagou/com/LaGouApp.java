@@ -6,6 +6,7 @@ package mayi.lagou.com;
 import com.umeng.fb.FeedbackAgent;
 
 import mayi.lagou.com.imageloader.ImageLoader;
+import mayi.lagou.com.utils.SharePreferenceUtil;
 import android.app.Activity;
 import android.app.Application;
 
@@ -19,6 +20,7 @@ public class LaGouApp extends Application {
 	private static LaGouApp _instance;
 	private ImageLoader imageLoader;
 	public String mSdcardDataDir;
+	public static boolean isLogin=false;
 
 	@Override
 	public void onCreate() {
@@ -28,6 +30,7 @@ public class LaGouApp extends Application {
 		FeedbackAgent agent = new FeedbackAgent(this);
 		agent.sync();
 		mSdcardDataDir=getExternalCacheDir().getPath();
+		isLogin=SharePreferenceUtil.getBoolean(this, "islogin");
 	}
 
 	public static LaGouApp getInstance() {

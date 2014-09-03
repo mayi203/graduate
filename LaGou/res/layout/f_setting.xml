@@ -27,6 +27,7 @@
     <TextView
         android:id="@+id/change_user"
         style="@style/User_Info_TextView"
+        android:visibility="gone"
         android:text="@string/change_user" />
 
 </LinearLayout>

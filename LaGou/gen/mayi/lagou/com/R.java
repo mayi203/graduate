@@ -768,12 +768,12 @@ containing a value of this type.
         public static final int lay_info=0x7f0b0040;
         public static final int lay_sc=0x7f0b0017;
         public static final int lay_search=0x7f0b0018;
+        public static final int login=0x7f0b006b;
         public static final int login_btn=0x7f0b0030;
         public static final int menu=0x7f0b001a;
         public static final int message=0x7f0b0065;
         public static final int position=0x7f0b0047;
         public static final int producation=0x7f0b0038;
-        public static final int profile=0x7f0b006b;
         public static final int project=0x7f0b0035;
         public static final int psw=0x7f0b002f;
         public static final int pull_to_load_footer_content=0x7f0b0050;
@@ -792,7 +792,8 @@ containing a value of this type.
         public static final int salary=0x7f0b004a;
         public static final int scroll=0x7f0b0022;
         public static final int self=0x7f0b0037;
-        public static final int setting_icon=0x7f0b006c;
+        public static final int setting=0x7f0b006c;
+        public static final int setting_icon=0x7f0b006d;
         public static final int share=0x7f0b006a;
         public static final int tag=0x7f0b004d;
         public static final int time=0x7f0b0048;
@@ -848,7 +849,8 @@ containing a value of this type.
     public static final class menu {
         public static final int jb_detail=0x7f0a0000;
         public static final int jb_home=0x7f0a0001;
-        public static final int setting=0x7f0a0002;
+        public static final int job_home2=0x7f0a0002;
+        public static final int setting=0x7f0a0003;
     }
     public static final class string {
         public static final int about_app=0x7f070051;
@@ -1036,7 +1038,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:border_color
+          @attr name mayi.lagou.com:border_color
         */
         public static final int CircleImageView_border_color = 1;
         /**
@@ -1052,7 +1054,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:border_width
+          @attr name mayi.lagou.com:border_width
         */
         public static final int CircleImageView_border_width = 0;
         /** Attributes that can be used with a drop_down_list_attr.
@@ -1083,7 +1085,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:isAutoLoadOnBottom
+          @attr name mayi.lagou.com:isAutoLoadOnBottom
         */
         public static final int drop_down_list_attr_isAutoLoadOnBottom = 2;
         /**
@@ -1097,7 +1099,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:isDropDownStyle
+          @attr name mayi.lagou.com:isDropDownStyle
         */
         public static final int drop_down_list_attr_isDropDownStyle = 0;
         /**
@@ -1111,7 +1113,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:isOnBottomStyle
+          @attr name mayi.lagou.com:isOnBottomStyle
         */
         public static final int drop_down_list_attr_isOnBottomStyle = 1;
     };
