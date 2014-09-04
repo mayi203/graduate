@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.LaGouApp;
@@ -39,8 +41,10 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewConfiguration;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -81,6 +85,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	private String[] jobList;
 	private TextView[] tvList;
 	private LinearLayout laySearch;
+	private View grayView;
 	// private View girlLay;
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
@@ -111,6 +116,22 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		mItemButton4 = findButton(R.id.item4);
 		mItemButton5 = findButton(R.id.item5);
 		laySearch = (LinearLayout) findViewById(R.id.lay_search);
+		grayView = findViewById(R.id.grayview);
+		grayView.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View arg0, MotionEvent arg1) {
+				if (arg1.getAction() == MotionEvent.ACTION_DOWN && mIsMenuOpen) {
+					mIsMenuOpen = false;
+					doAnimateClose(mItemButton1, 0, 5, radius);
+					doAnimateClose(mItemButton2, 1, 5, radius);
+					doAnimateClose(mItemButton3, 2, 5, radius);
+					doAnimateClose(mItemButton4, 3, 5, radius);
+					doAnimateClose(mItemButton5, 4, 5, radius);
+				}
+				return false;
+			}
+		});
 		// girlLay=findViewById(R.id.girl_lay);
 	}
 
@@ -237,8 +258,15 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		getActivity().getWindow().invalidatePanelMenu(
-				Window.FEATURE_OPTIONS_PANEL);
+		TimerTask task = new TimerTask() {
+
+			@Override
+			public void run() {
+				getActivity().getWindow().invalidatePanelMenu(
+						Window.FEATURE_OPTIONS_PANEL);
+			}
+		};
+		new Timer().schedule(task, 500);
 	}
 
 	@SuppressLint("HandlerLeak")
@@ -401,6 +429,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		if (view.getVisibility() != View.VISIBLE) {
 			view.setVisibility(View.VISIBLE);
 		}
+		grayView.setVisibility(View.VISIBLE);
 		double degree = Math.PI * index / ((total - 1) * 2) + 3 / 2 * Math.PI;
 		int translationX = (int) (radius * Math.cos(degree));
 		int translationY = (int) (radius * Math.sin(degree));
@@ -435,6 +464,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		if (view.getVisibility() != View.VISIBLE) {
 			view.setVisibility(View.VISIBLE);
 		}
+		grayView.setVisibility(View.GONE);
 		double degree = Math.PI * index / ((total - 1) * 2) + 3 / 2 * Math.PI;
 		int translationX = (int) (radius * Math.cos(degree));
 		int translationY = (int) (radius * Math.sin(degree));
@@ -493,8 +523,8 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 			startActivity(UserInfoActicity.class);
 		} else if (item.getItemId() == android.R.id.home) {
 			getActivity().onBackPressed();
-		}else if(item.getItemId() == R.id.setting){
-			startActivity(SettingFragment.class);
+		} else if (item.getItemId() == R.id.setting) {
+			addFragmentToStack(R.id.contain, new SettingFragment());
 		}
 		return super.onOptionsItemSelected(item);
 	}

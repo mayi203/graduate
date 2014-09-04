@@ -18,19 +18,6 @@
             android:background="@color/white"
             android:orientation="horizontal"
             android:padding="8dp" >
-
-            <!--
-                 <TextView
-                android:id="@+id/seatch_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:drawableLeft="@drawable/explore_search_normal"
-                android:drawablePadding="5dp"
-                android:gravity="center_vertical"
-                android:text="@string/search_hint"
-                android:textColor="#d8d8d8" />
-            -->
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -41,6 +28,13 @@
         android:layout_below="@id/lay_sc"
         android:layout_marginLeft="-2dp"
         android:layout_marginRight="-2dp" />
+
+    <View
+        android:id="@+id/grayview"
+        android:layout_width="match_parent"
+        android:background="#00d8d8d8"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -91,20 +85,20 @@
 
         <ImageView
             android:id="@+id/girl"
-            android:contentDescription="@string/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"
             android:src="@drawable/girl" />
 
         <TextView
             android:layout_width="match_parent"
-            android:text="@string/girl_txt"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/girl"
             android:layout_marginTop="5dp"
             android:gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            android:textColor="@color/darkgreen"
-            android:layout_below="@id/girl" />
+            android:text="@string/girl_txt"
+            android:textColor="@color/darkgreen" />
     </RelativeLayout>
 
 </RelativeLayout>

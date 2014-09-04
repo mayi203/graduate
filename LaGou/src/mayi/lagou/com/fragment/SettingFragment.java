@@ -28,6 +28,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public void findViewsById() {
 		changeUser=findTextView(R.id.change_user);
+		changeUserState();
 	}
 
 	public void changeUserState(){
@@ -75,7 +76,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 			DeleteFile(file);
 			break;
 		case R.id.about_app:
-			addFragmentToStack(R.id.u_contain, new AboutUsFragment());
+			addFragmentToStack(R.id.contain, new AboutUsFragment());
 			break;
 		case R.id.change_user:
 			affriLogout();
@@ -138,6 +139,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 		DeleteFile(file);
 		LaGouApp.isLogin = false;
 		SharePreferenceUtil.putBoolean(getActivity(), "islogin", false);
+		changeUserState();
 	}
 
 	/**

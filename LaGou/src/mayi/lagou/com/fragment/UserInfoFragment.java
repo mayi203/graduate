@@ -31,8 +31,6 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -327,20 +325,10 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		DialogUtils.hideProcessDialog();
 		super.onDestroyView();
 	}
-
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.setting, menu);
-		super.onCreateOptionsMenu(menu, inflater);
-	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {
-			getActivity().getActionBar().setTitle(R.string.app_name);
 			getActivity().onBackPressed();
-		} else if (item.getItemId() == R.id.setting_icon) {
-			addFragmentToStack(R.id.u_contain, new SettingFragment());
 		}
 		return super.onOptionsItemSelected(item);
 	}
