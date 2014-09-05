@@ -999,7 +999,7 @@ containing a value of this type.
         public static final int MyActionBar=0x7f090001;
         public static final int MyDialog=0x7f090010;
         public static final int Mydialog=0x7f09000e;
-        public static final int PopupMenu_Example=0x7f090002;
+        public static final int PopupMenu=0x7f090002;
         public static final int User_Info_TextView=0x7f090012;
         public static final int back_text=0x7f09000d;
         public static final int drop_down_list_footer_font_style=0x7f09000a;

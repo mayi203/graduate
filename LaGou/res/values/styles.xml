@@ -3,7 +3,7 @@
     <!-- the theme applied to the application or activity -->
     <style name="CustomActionBarTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/MyActionBar</item>
-        <item name="android:popupMenuStyle">@style/PopupMenu.Example</item>
+        <item name="android:dropDownListViewStyle">@style/PopupMenu</item>
         <item name="android:actionMenuTextAppearance">@style/MenuTextStyle</item>
     </style>
 
@@ -12,8 +12,8 @@
         <item name="android:background">@color/darkgreen</item>
     </style>
 
-    <style name="PopupMenu.Example" parent="@android:style/Widget.ActionButton.Overflow">
-        <item name="android:popupBackground">@color/white</item>
+    <style name="PopupMenu" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:listSelector">@color/white</item>
     </style>
 
     <style name="MenuTextStyle">
