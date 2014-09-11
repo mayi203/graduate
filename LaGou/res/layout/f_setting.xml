@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/v_topbar" />
+
     <TextView
         android:id="@+id/deliver_set"
         style="@style/User_Info_TextView"
@@ -13,13 +17,13 @@
         android:id="@+id/umeng_fb"
         style="@style/User_Info_TextView"
         android:text="@string/umeng_fb" />
-    
+
     <TextView
         android:id="@+id/clear_cache"
         style="@style/User_Info_TextView"
         android:text="@string/clear_cache" />
-    
-     <TextView
+
+    <TextView
         android:id="@+id/about_app"
         style="@style/User_Info_TextView"
         android:text="@string/about_app" />
@@ -27,7 +31,7 @@
     <TextView
         android:id="@+id/change_user"
         style="@style/User_Info_TextView"
-        android:visibility="gone"
-        android:text="@string/change_user" />
+        android:text="@string/change_user"
+        android:visibility="gone" />
 
 </LinearLayout>

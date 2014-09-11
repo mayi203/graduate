@@ -21,9 +21,6 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -32,12 +29,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * @author 203mayi@gmail.com 2014-5-6
@@ -55,8 +52,9 @@ public class JobDetailFragment extends BaseFragment {
 	private boolean config = false;
 	private MyDialog myDialog;
 	private Animation anim;
-	private ImageView email;
-	private Boolean isLogin = true;
+	private ImageView email,rightTab;
+	private boolean isLogin = true;
+	private boolean gotoLogin = false;
 
 	public JobDetailFragment() {
 
@@ -65,7 +63,7 @@ public class JobDetailFragment extends BaseFragment {
 	@Override
 	public int contentView() {
 
-		getActivity().getActionBar().setTitle(R.string.position_detail);
+		// getActivity().getActionBar().setTitle(R.string.position_detail);
 		return R.layout.f_job_detail;
 	}
 
@@ -83,10 +81,13 @@ public class JobDetailFragment extends BaseFragment {
 		deliver = findViewById(R.id.lay_deliver);
 		email = findImageView(R.id.email);
 		bottomTxt = findTextView(R.id.bottom_txt);
+		rightTab=findImageView(R.id.right_bar);
 	}
 
 	@Override
 	public void initValue() {
+		rightTab.setImageDrawable(getResources().getDrawable(R.drawable.share_icon));
+		rightTab.setVisibility(View.VISIBLE);
 		anim = AnimationUtils.loadAnimation(getActivity(), R.anim.email_anim);
 		anim.setRepeatMode(Animation.RESTART);
 		anim.setAnimationListener(new AnimationListener() {
@@ -112,11 +113,27 @@ public class JobDetailFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
+				MobclickAgent.onEvent(getActivity(), "deliver");
 				if (isLogin) {
 					getUserInfo();
 				} else {
+					gotoLogin = true;
 					gotoLogin();
 				}
+			}
+		});
+		findImageView(R.id.back).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				getActivity().onBackPressed();
+			}
+		});
+		rightTab.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				shareUrlIntent(mUrl);
 			}
 		});
 	}
@@ -131,13 +148,13 @@ public class JobDetailFragment extends BaseFragment {
 		SharePreferenceUtil.putBoolean(getActivity(), "toDetail", true);
 	}
 
-	private Intent shareUrlIntent(String url) {
+	private void shareUrlIntent(String url) {
 		Intent sendIntent = new Intent();
 		sendIntent.setAction(Intent.ACTION_SEND);
 		sendIntent.putExtra(Intent.EXTRA_TEXT, "我在拉钩网客户端发现了一个很不错的职位" + url
 				+ "你也去看看吧！");
 		sendIntent.setType("text/plain");
-		return sendIntent;
+		getActivity().startActivity(sendIntent);
 	}
 
 	@Override
@@ -149,9 +166,11 @@ public class JobDetailFragment extends BaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		mUrl = onChangeUrl.getUrl();
-		if (mUrl == null || "".equals(mUrl)) {
-			return;
+		if (!gotoLogin) {
+			mUrl = onChangeUrl.getUrl();
+			if (mUrl == null || "".equals(mUrl)) {
+				return;
+			}
 		}
 		refreshData();
 		String userInfo = SharePreferenceUtil.getString(getActivity(), "email");
@@ -172,7 +191,8 @@ public class JobDetailFragment extends BaseFragment {
 			if (detail != null && !"".equals(detail)) {
 				view.setVisibility(View.VISIBLE);
 				if (onChangeUrl.getClass().getName()
-						.equals(UserInfoActicity.class.getName())) {
+						.equals(UserInfoActicity.class.getName())
+						&& !gotoLogin) {
 					bottomTxt.setText("已投递");
 					deliver.setClickable(false);
 				}
@@ -209,7 +229,8 @@ public class JobDetailFragment extends BaseFragment {
 				if (detail != null && !"".equals(detail)) {
 					view.setVisibility(View.VISIBLE);
 					if (onChangeUrl.getClass().getName()
-							.equals(UserInfoActicity.class.getName())) {
+							.equals(UserInfoActicity.class.getName())
+							&& !gotoLogin) {
 						bottomTxt.setText("已投递");
 						deliver.setClickable(false);
 					}
@@ -243,6 +264,7 @@ public class JobDetailFragment extends BaseFragment {
 
 			@Override
 			public void onFinish() {
+				gotoLogin = false;
 				DialogUtils.hideProcessDialog();
 				super.onFinish();
 			}
@@ -467,27 +489,28 @@ public class JobDetailFragment extends BaseFragment {
 		super.onPause();
 	}
 
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.jb_detail, menu);
-		MenuItem item = menu.findItem(R.id.share);
-		ShareActionProvider mShareActionProvider = (ShareActionProvider) item
-				.getActionProvider();
-		mShareActionProvider.setShareIntent(shareUrlIntent(mUrl));
-		super.onCreateOptionsMenu(menu, inflater);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
-			if(onChangeUrl.getClass().getName().equals(UserInfoActicity.class.getName())){
-				getActivity().getActionBar().setTitle(R.string.self);
-			}else{
-				getActivity().getActionBar().setTitle(R.string.app_name);
-			}
-			getActivity().onBackPressed();
-		}
-		return super.onOptionsItemSelected(item);
-	}
+	// @Override
+	// public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	// inflater.inflate(R.menu.jb_detail, menu);
+	// MenuItem item = menu.findItem(R.id.share);
+	// ShareActionProvider mShareActionProvider = (ShareActionProvider) item
+	// .getActionProvider();
+	// mShareActionProvider.setShareIntent(shareUrlIntent(mUrl));
+	// super.onCreateOptionsMenu(menu, inflater);
+	// }
+	//
+	// @Override
+	// public boolean onOptionsItemSelected(MenuItem item) {
+	// if (item.getItemId() == android.R.id.home) {
+	// if (onChangeUrl.getClass().getName()
+	// .equals(UserInfoActicity.class.getName())) {
+	// getActivity().getActionBar().setTitle(R.string.self);
+	// } else {
+	// getActivity().getActionBar().setTitle(R.string.app_name);
+	// }
+	// getActivity().onBackPressed();
+	// }
+	// return super.onOptionsItemSelected(item);
+	// }
 
 }

@@ -1,7 +1,6 @@
 package mayi.lagou.com.fragment;
 
 import android.app.Activity;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,7 +23,7 @@ public class MyResumeFragment extends BaseFragment {
 
 	@Override
 	public int contentView() {
-		getActivity().getActionBar().setTitle(R.string.resume);
+//		getActivity().getActionBar().setTitle(R.string.resume);
 		return R.layout.f_resume;
 	}
 
@@ -107,13 +106,13 @@ public class MyResumeFragment extends BaseFragment {
 		self.setText(mUserInfo.getSelfDescription());
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
-			getActivity().getActionBar().setTitle(R.string.self);
-			getActivity().onBackPressed();
-		}
-		return super.onOptionsItemSelected(item);
-	}
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		if (item.getItemId() == android.R.id.home) {
+//			getActivity().getActionBar().setTitle(R.string.self);
+//			getActivity().onBackPressed();
+//		}
+//		return super.onOptionsItemSelected(item);
+//	}
 
 }

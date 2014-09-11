@@ -9,11 +9,11 @@ import mayi.lagou.com.utils.SharePreferenceUtil;
 import mayi.lagou.com.view.MyDialog;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 
 public class SettingFragment extends BaseFragment implements OnClickListener {
@@ -21,7 +21,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 	private TextView changeUser;
 	@Override
 	public int contentView() {
-		getActivity().getActionBar().setTitle(R.string.app_setting);
+//		getActivity().getActionBar().setTitle(R.string.app_setting);
 		return R.layout.f_setting;
 	}
 
@@ -52,14 +52,14 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 		findViewById(R.id.change_user).setOnClickListener(this);
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
-			getActivity().getActionBar().setTitle(R.string.app_name);
-			getActivity().onBackPressed();
-		}
-		return super.onOptionsItemSelected(item);
-	}
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		if (item.getItemId() == android.R.id.home) {
+//			getActivity().getActionBar().setTitle(R.string.app_name);
+//			getActivity().onBackPressed();
+//		}
+//		return super.onOptionsItemSelected(item);
+//	}
 
 	@Override
 	public void onClick(View v) {
@@ -76,6 +76,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 			DeleteFile(file);
 			break;
 		case R.id.about_app:
+			MobclickAgent.onEvent(getActivity(), "aboutus");
 			addFragmentToStack(R.id.contain, new AboutUsFragment());
 			break;
 		case R.id.change_user:

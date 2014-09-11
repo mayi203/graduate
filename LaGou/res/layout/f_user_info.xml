@@ -5,6 +5,10 @@
     android:orientation="vertical" >
 
     <include
+        android:id="@+id/topbar"
+        layout="@layout/v_topbar" />
+
+    <include
         android:id="@+id/lay_info"
         layout="@layout/l_user_info" />
 
@@ -12,9 +16,9 @@
         android:id="@+id/fb_null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:gravity="center_horizontal"
         android:text="@string/fb_null"
-        android:layout_marginTop="15dp"
         android:textColor="@color/darkgray"
         android:visibility="gone" />
 

@@ -11,7 +11,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -31,7 +30,7 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public int contentView() {
-		getActivity().getActionBar().setTitle(R.string.string_login);
+//		getActivity().getActionBar().setTitle(R.string.string_login);
 		return R.layout.f_login;
 	}
 
@@ -150,13 +149,13 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 		hideSoftInput();
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
-			getActivity().getActionBar().setTitle(R.string.app_name);
-			getActivity().onBackPressed();
-		}
-		return super.onOptionsItemSelected(item);
-	}
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		if (item.getItemId() == android.R.id.home) {
+//			getActivity().getActionBar().setTitle(R.string.app_name);
+//			getActivity().onBackPressed();
+//		}
+//		return super.onOptionsItemSelected(item);
+//	}
 
 }

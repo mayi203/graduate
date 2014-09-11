@@ -31,7 +31,6 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -69,7 +68,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public int contentView() {
-		getActivity().getActionBar().setTitle(R.string.self);
+//		getActivity().getActionBar().setTitle(R.string.self);
 		return R.layout.f_user_info;
 	}
 
@@ -325,11 +324,11 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		DialogUtils.hideProcessDialog();
 		super.onDestroyView();
 	}
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
-			getActivity().onBackPressed();
-		}
-		return super.onOptionsItemSelected(item);
-	}
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		if (item.getItemId() == android.R.id.home) {
+//			getActivity().onBackPressed();
+//		}
+//		return super.onOptionsItemSelected(item);
+//	}
 }

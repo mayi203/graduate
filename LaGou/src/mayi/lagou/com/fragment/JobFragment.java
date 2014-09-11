@@ -1,6 +1,5 @@
 package mayi.lagou.com.fragment;
 
-import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,20 +37,20 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.view.ViewConfiguration;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,7 +61,8 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
  * 
  * @date 2014-3-31
  */
-public class JobFragment extends BaseFragment implements OnClickListener {
+public class JobFragment extends BaseFragment implements OnClickListener,
+		OnMenuItemClickListener {
 	private static final String TAG = "JobFragment";
 
 	private PullToRefreshListView mPullToRefreshListView;
@@ -86,22 +86,13 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	private TextView[] tvList;
 	private LinearLayout laySearch;
 	private View grayView;
+	private ImageView rightTab;
 	// private View girlLay;
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
 
 	@Override
 	public int contentView() {
-		try {
-			ViewConfiguration mconfig = ViewConfiguration.get(getActivity());
-			Field menuKeyField = ViewConfiguration.class
-					.getDeclaredField("sHasPermanentMenuKey");
-			if (menuKeyField != null) {
-				menuKeyField.setAccessible(true);
-				menuKeyField.setBoolean(mconfig, false);
-			}
-		} catch (Exception ex) {
-		}
 		return R.layout.f_job;
 	}
 
@@ -115,6 +106,7 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		mItemButton3 = findButton(R.id.item3);
 		mItemButton4 = findButton(R.id.item4);
 		mItemButton5 = findButton(R.id.item5);
+		rightTab = findImageView(R.id.right_bar);
 		laySearch = (LinearLayout) findViewById(R.id.lay_search);
 		grayView = findViewById(R.id.grayview);
 		grayView.setOnTouchListener(new OnTouchListener() {
@@ -139,6 +131,9 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public void initValue() {
 		instance = this;
+		rightTab.setImageDrawable(getResources().getDrawable(
+				R.drawable.overflow_icon));
+		rightTab.setVisibility(View.VISIBLE);
 		jobList = getActivity().getResources().getStringArray(R.array.job_list);
 		tvList = new TextView[jobList.length];
 		radius = app().getScreenWidth(getActivity()) * 2 / 5;
@@ -235,6 +230,24 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 					int position, long id) {
 				onChangeUrl.setUrl(allData.get(position).getPositionUrl());
 				addFragmentToStack(R.id.contain, new JobDetailFragment());
+			}
+		});
+		findImageView(R.id.back).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				getActivity().onBackPressed();
+			}
+		});
+		rightTab.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				if (LaGouApp.isLogin) {
+					showPopMenu(rightTab, R.menu.job_home2);
+				} else {
+					showPopMenu(rightTab, R.menu.jb_home);
+				}
 			}
 		});
 	}
@@ -507,26 +520,44 @@ public class JobFragment extends BaseFragment implements OnClickListener {
 		super.onDestroyView();
 	}
 
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		if (LaGouApp.isLogin) {
-			inflater.inflate(R.menu.job_home2, menu);
-		} else {
-			inflater.inflate(R.menu.jb_home, menu);
-		}
-		super.onCreateOptionsMenu(menu, inflater);
+	private void showPopMenu(View v, int res) {
+		PopupMenu popup = new PopupMenu(getActivity(), v);
+		popup.setOnMenuItemClickListener(this);
+		popup.inflate(res);
+		popup.show();
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.login) {
+	public boolean onMenuItemClick(MenuItem item) {
+		if (item.getItemId()==R.id.login){
 			startActivity(UserInfoActicity.class);
-		} else if (item.getItemId() == android.R.id.home) {
-			getActivity().onBackPressed();
-		} else if (item.getItemId() == R.id.setting) {
+		}else if(item.getItemId()==R.id.setting){
 			addFragmentToStack(R.id.contain, new SettingFragment());
 		}
-		return super.onOptionsItemSelected(item);
+		return false;
 	}
+	// @Override
+	// public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	// if (LaGouApp.isLogin) {
+	// inflater.inflate(R.menu.job_home2, menu);
+	// } else {
+	// inflater.inflate(R.menu.jb_home, menu);
+	// }
+	// super.onCreateOptionsMenu(menu, inflater);
+	// }
+	//
+	// @Override
+	// public boolean onOptionsItemSelected(MenuItem item) {
+	// if (item.getItemId() == R.id.login) {
+	// MobclickAgent.onEvent(getActivity(), "self");
+	// startActivity(UserInfoActicity.class);
+	// } else if (item.getItemId() == android.R.id.home) {
+	// MobclickAgent.onEvent(getActivity(), "self");
+	// getActivity().onBackPressed();
+	// } else if (item.getItemId() == R.id.setting) {
+	// addFragmentToStack(R.id.contain, new SettingFragment());
+	// }
+	// return super.onOptionsItemSelected(item);
+	// }
 
 }

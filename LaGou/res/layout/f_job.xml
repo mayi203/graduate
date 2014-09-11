@@ -3,8 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/v_topbar" />
+
     <HorizontalScrollView
         android:id="@+id/lay_sc"
+        android:layout_below="@id/topbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scrollbars="none" >
@@ -32,8 +37,8 @@
     <View
         android:id="@+id/grayview"
         android:layout_width="match_parent"
-        android:background="#00d8d8d8"
         android:layout_height="match_parent"
+        android:background="#00d8d8d8"
         android:visibility="gone" />
 
     <FrameLayout

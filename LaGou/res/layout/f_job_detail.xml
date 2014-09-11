@@ -4,10 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/v_topbar" />
+
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/topbar"
         android:layout_marginBottom="45dp"
         android:scrollbars="none"
         android:visibility="invisible" >
@@ -123,6 +128,7 @@
         android:id="@+id/job_detail_null"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/topbar"
         android:background="@color/white"
         android:visibility="gone" >
 
