@@ -52,7 +52,7 @@ public class JobDetailFragment extends BaseFragment {
 	private boolean config = false;
 	private MyDialog myDialog;
 	private Animation anim;
-	private ImageView email,rightTab;
+	private ImageView email;
 	private boolean isLogin = true;
 	private boolean gotoLogin = false;
 
@@ -81,13 +81,10 @@ public class JobDetailFragment extends BaseFragment {
 		deliver = findViewById(R.id.lay_deliver);
 		email = findImageView(R.id.email);
 		bottomTxt = findTextView(R.id.bottom_txt);
-		rightTab=findImageView(R.id.right_bar);
 	}
 
 	@Override
 	public void initValue() {
-		rightTab.setImageDrawable(getResources().getDrawable(R.drawable.share_icon));
-		rightTab.setVisibility(View.VISIBLE);
 		anim = AnimationUtils.loadAnimation(getActivity(), R.anim.email_anim);
 		anim.setRepeatMode(Animation.RESTART);
 		anim.setAnimationListener(new AnimationListener() {
@@ -122,14 +119,14 @@ public class JobDetailFragment extends BaseFragment {
 				}
 			}
 		});
-		findImageView(R.id.back).setOnClickListener(new OnClickListener() {
+		findTextView(R.id.back_del).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				getActivity().onBackPressed();
 			}
 		});
-		rightTab.setOnClickListener(new OnClickListener() {
+		findImageView(R.id.right_bar_del).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
@@ -151,7 +148,7 @@ public class JobDetailFragment extends BaseFragment {
 	private void shareUrlIntent(String url) {
 		Intent sendIntent = new Intent();
 		sendIntent.setAction(Intent.ACTION_SEND);
-		sendIntent.putExtra(Intent.EXTRA_TEXT, "我在拉钩网客户端发现了一个很不错的职位" + url
+		sendIntent.putExtra(Intent.EXTRA_TEXT, "我在拉勾招聘发现了一个很不错的职位" + url
 				+ "你也去看看吧！");
 		sendIntent.setType("text/plain");
 		getActivity().startActivity(sendIntent);

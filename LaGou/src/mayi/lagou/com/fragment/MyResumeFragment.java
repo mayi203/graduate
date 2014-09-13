@@ -1,15 +1,17 @@
 package mayi.lagou.com.fragment;
 
-import android.app.Activity;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import mayi.lagou.com.R;
 import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.adapter.ExprienceAdapter;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.UserInfo;
 import mayi.lagou.com.fragment.UserInfoFragment.OnRequestInfo;
+import android.app.Activity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class MyResumeFragment extends BaseFragment {
 
@@ -23,7 +25,7 @@ public class MyResumeFragment extends BaseFragment {
 
 	@Override
 	public int contentView() {
-//		getActivity().getActionBar().setTitle(R.string.resume);
+		// getActivity().getActionBar().setTitle(R.string.resume);
 		return R.layout.f_resume;
 	}
 
@@ -45,6 +47,14 @@ public class MyResumeFragment extends BaseFragment {
 
 	@Override
 	public void initListener() {
+		findTextView(R.id.back_resume).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						getActivity().onBackPressed();
+					}
+				});
 
 	}
 
@@ -106,13 +116,13 @@ public class MyResumeFragment extends BaseFragment {
 		self.setText(mUserInfo.getSelfDescription());
 	}
 
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		if (item.getItemId() == android.R.id.home) {
-//			getActivity().getActionBar().setTitle(R.string.self);
-//			getActivity().onBackPressed();
-//		}
-//		return super.onOptionsItemSelected(item);
-//	}
+	// @Override
+	// public boolean onOptionsItemSelected(MenuItem item) {
+	// if (item.getItemId() == android.R.id.home) {
+	// getActivity().getActionBar().setTitle(R.string.self);
+	// getActivity().onBackPressed();
+	// }
+	// return super.onOptionsItemSelected(item);
+	// }
 
 }

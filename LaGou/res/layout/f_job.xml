@@ -3,15 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <include
+    <RelativeLayout
         android:id="@+id/topbar"
-        layout="@layout/v_topbar" />
+        style="@style/topBar" >
+
+        <TextView
+            android:id="@+id/back_job"
+            style="@style/back_text"
+            android:text="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/right_bar_job"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/overflow_icon"
+            android:background="@drawable/selector_detail_deliver_btn"
+            android:contentDescription="@string/app_name"
+            android:paddingLeft="25dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingRight="15dp"/>
+    </RelativeLayout>
 
     <HorizontalScrollView
         android:id="@+id/lay_sc"
-        android:layout_below="@id/topbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/topbar"
         android:scrollbars="none" >
 
         <LinearLayout

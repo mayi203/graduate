@@ -4,9 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include
+     <RelativeLayout
         android:id="@+id/topbar"
-        layout="@layout/v_topbar" />
+        style="@style/topBar" >
+
+        <TextView
+            android:id="@+id/back_setting"
+            android:text="@string/app_setting"
+            style="@style/back_text" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/deliver_set"

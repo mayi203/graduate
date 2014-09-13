@@ -4,7 +4,16 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/v_topbar" />
+    <RelativeLayout
+        android:id="@+id/topbar"
+        style="@style/topBar" >
+
+        <TextView
+            android:id="@+id/back_login"
+            android:text="@string/string_login_btn"
+            style="@style/back_text" />
+
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"

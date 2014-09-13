@@ -12,7 +12,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 
 /**
  * @author wenfeili@163.com
@@ -21,7 +20,6 @@ import android.widget.ImageView;
  */
 public class AboutUsFragment extends BaseFragment {
 
-	private ImageView rightTab;
 	@Override
 	public int contentView() {
 //		getActivity().getActionBar().setTitle(R.string.string_about_us_btn);
@@ -30,13 +28,10 @@ public class AboutUsFragment extends BaseFragment {
 
 	@Override
 	public void findViewsById() {
-		rightTab=findImageView(R.id.right_bar);
 	}
 
 	@Override
 	public void initValue() {
-		rightTab.setImageDrawable(getResources().getDrawable(R.drawable.share_icon));
-		rightTab.setVisibility(View.VISIBLE);
 		hideSoftInput();
 		PackageManager manager = getActivity().getPackageManager();
 		PackageInfo info;
@@ -63,14 +58,14 @@ public class AboutUsFragment extends BaseFragment {
 				startActivity(data);
 			}
 		});
-		findImageView(R.id.back).setOnClickListener(new OnClickListener() {
+		findTextView(R.id.back_about).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
 				getActivity().onBackPressed();
 			}
 		});
-		rightTab.setOnClickListener(new OnClickListener() {
+		findImageView(R.id.right_bar_about).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {

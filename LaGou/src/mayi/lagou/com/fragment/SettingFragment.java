@@ -50,6 +50,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 		findViewById(R.id.clear_cache).setOnClickListener(this);
 		findViewById(R.id.about_app).setOnClickListener(this);
 		findViewById(R.id.change_user).setOnClickListener(this);
+		findTextView(R.id.back_setting).setOnClickListener(this);
 	}
 
 //	@Override
@@ -81,6 +82,9 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 			break;
 		case R.id.change_user:
 			affriLogout();
+			break;
+		case R.id.back_setting:
+			getActivity().onBackPressed();
 			break;
 		default:
 			break;

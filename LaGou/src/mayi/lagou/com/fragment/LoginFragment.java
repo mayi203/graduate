@@ -48,6 +48,7 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public void initListener() {
 		findButton(R.id.login_btn).setOnClickListener(this);
+		findTextView(R.id.back_login).setOnClickListener(this);
 	}
 
 	@Override
@@ -55,6 +56,9 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.login_btn:
 			getUserInfo();
+			break;
+		case R.id.back_login:
+			getActivity().onBackPressed();
 			break;
 		default:
 			break;

@@ -68,7 +68,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public int contentView() {
-//		getActivity().getActionBar().setTitle(R.string.self);
+		// getActivity().getActionBar().setTitle(R.string.self);
 		return R.layout.f_user_info;
 	}
 
@@ -135,6 +135,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 				addFragmentToStack(R.id.u_contain, new JobDetailFragment());
 			}
 		});
+		findTextView(R.id.back_info).setOnClickListener(this);
 	}
 
 	@Override
@@ -314,6 +315,9 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		case R.id.lay_info:
 			addFragmentToStack(R.id.u_contain, new MyResumeFragment());
 			break;
+		case R.id.back_info:
+			getActivity().onBackPressed();
+			break;
 		default:
 			break;
 		}
@@ -324,11 +328,11 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		DialogUtils.hideProcessDialog();
 		super.onDestroyView();
 	}
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		if (item.getItemId() == android.R.id.home) {
-//			getActivity().onBackPressed();
-//		}
-//		return super.onOptionsItemSelected(item);
-//	}
+	// @Override
+	// public boolean onOptionsItemSelected(MenuItem item) {
+	// if (item.getItemId() == android.R.id.home) {
+	// getActivity().onBackPressed();
+	// }
+	// return super.onOptionsItemSelected(item);
+	// }
 }

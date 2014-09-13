@@ -106,7 +106,7 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 		mItemButton3 = findButton(R.id.item3);
 		mItemButton4 = findButton(R.id.item4);
 		mItemButton5 = findButton(R.id.item5);
-		rightTab = findImageView(R.id.right_bar);
+		rightTab = findImageView(R.id.right_bar_job);
 		laySearch = (LinearLayout) findViewById(R.id.lay_search);
 		grayView = findViewById(R.id.grayview);
 		grayView.setOnTouchListener(new OnTouchListener() {
@@ -131,9 +131,6 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 	@Override
 	public void initValue() {
 		instance = this;
-		rightTab.setImageDrawable(getResources().getDrawable(
-				R.drawable.overflow_icon));
-		rightTab.setVisibility(View.VISIBLE);
 		jobList = getActivity().getResources().getStringArray(R.array.job_list);
 		tvList = new TextView[jobList.length];
 		radius = app().getScreenWidth(getActivity()) * 2 / 5;
@@ -232,7 +229,7 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 				addFragmentToStack(R.id.contain, new JobDetailFragment());
 			}
 		});
-		findImageView(R.id.back).setOnClickListener(new OnClickListener() {
+		findTextView(R.id.back_job).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
