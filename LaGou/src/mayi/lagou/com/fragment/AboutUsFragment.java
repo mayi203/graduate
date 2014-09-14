@@ -3,6 +3,8 @@
  */
 package mayi.lagou.com.fragment;
 
+import com.umeng.analytics.MobclickAgent;
+
 import mayi.lagou.com.R;
 import mayi.lagou.com.core.BaseFragment;
 import android.content.Intent;
@@ -69,6 +71,7 @@ public class AboutUsFragment extends BaseFragment {
 			
 			@Override
 			public void onClick(View arg0) {
+				MobclickAgent.onEvent(getActivity(), "share");
 				shareUrl();
 			}
 		});

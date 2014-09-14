@@ -8,10 +8,14 @@ import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.utils.SharePreferenceUtil;
 import mayi.lagou.com.view.MyDialog;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
@@ -19,25 +23,27 @@ import com.umeng.fb.FeedbackAgent;
 public class SettingFragment extends BaseFragment implements OnClickListener {
 
 	private TextView changeUser;
+
 	@Override
 	public int contentView() {
-//		getActivity().getActionBar().setTitle(R.string.app_setting);
+		// getActivity().getActionBar().setTitle(R.string.app_setting);
 		return R.layout.f_setting;
 	}
 
 	@Override
 	public void findViewsById() {
-		changeUser=findTextView(R.id.change_user);
+		changeUser = findTextView(R.id.change_user);
 		changeUserState();
 	}
 
-	public void changeUserState(){
-		if(LaGouApp.isLogin){
+	public void changeUserState() {
+		if (LaGouApp.isLogin) {
 			changeUser.setVisibility(View.VISIBLE);
-		}else{
+		} else {
 			changeUser.setVisibility(View.GONE);
 		}
 	}
+
 	@Override
 	public void initValue() {
 
@@ -53,14 +59,14 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 		findTextView(R.id.back_setting).setOnClickListener(this);
 	}
 
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		if (item.getItemId() == android.R.id.home) {
-//			getActivity().getActionBar().setTitle(R.string.app_name);
-//			getActivity().onBackPressed();
-//		}
-//		return super.onOptionsItemSelected(item);
-//	}
+	// @Override
+	// public boolean onOptionsItemSelected(MenuItem item) {
+	// if (item.getItemId() == android.R.id.home) {
+	// getActivity().getActionBar().setTitle(R.string.app_name);
+	// getActivity().onBackPressed();
+	// }
+	// return super.onOptionsItemSelected(item);
+	// }
 
 	@Override
 	public void onClick(View v) {
@@ -75,6 +81,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 		case R.id.clear_cache:
 			File file = new File(LaGouApp.getInstance().mSdcardDataDir);
 			DeleteFile(file);
+			showProgressDialog();
 			break;
 		case R.id.about_app:
 			MobclickAgent.onEvent(getActivity(), "aboutus");
@@ -175,4 +182,33 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 			}
 		}
 	}
+
+	private void showProgressDialog() {
+		final ProgressDialog proDialog = android.app.ProgressDialog.show(
+				getActivity(), "清除缓存", "正在清除...");
+		Thread thread = new Thread() {
+			public void run() {
+				try {
+					sleep(1500);
+				} catch (InterruptedException e) {
+					// TODO 自动生成的 catch 块
+					e.printStackTrace();
+				}
+				proDialog.dismiss();
+				mHandler.sendEmptyMessage(1);
+			}
+		};
+		thread.start();
+	}
+
+	Handler mHandler = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			if (msg.what == 1) {
+				Toast.makeText(getActivity(), "已清除", Toast.LENGTH_SHORT).show();
+			}
+		}
+	};
 }

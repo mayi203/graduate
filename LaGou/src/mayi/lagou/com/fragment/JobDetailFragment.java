@@ -130,6 +130,7 @@ public class JobDetailFragment extends BaseFragment {
 			
 			@Override
 			public void onClick(View arg0) {
+				MobclickAgent.onEvent(getActivity(), "share");
 				shareUrlIntent(mUrl);
 			}
 		});

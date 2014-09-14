@@ -1053,7 +1053,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mayi.lagou.com:border_color
+          @attr name android:border_color
         */
         public static final int CircleImageView_border_color = 1;
         /**
@@ -1069,7 +1069,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mayi.lagou.com:border_width
+          @attr name android:border_width
         */
         public static final int CircleImageView_border_width = 0;
         /** Attributes that can be used with a drop_down_list_attr.
@@ -1100,7 +1100,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mayi.lagou.com:isAutoLoadOnBottom
+          @attr name android:isAutoLoadOnBottom
         */
         public static final int drop_down_list_attr_isAutoLoadOnBottom = 2;
         /**
@@ -1114,7 +1114,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mayi.lagou.com:isDropDownStyle
+          @attr name android:isDropDownStyle
         */
         public static final int drop_down_list_attr_isDropDownStyle = 0;
         /**
@@ -1128,7 +1128,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mayi.lagou.com:isOnBottomStyle
+          @attr name android:isOnBottomStyle
         */
         public static final int drop_down_list_attr_isOnBottomStyle = 1;
     };
