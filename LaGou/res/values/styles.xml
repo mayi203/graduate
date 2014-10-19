@@ -140,5 +140,9 @@
         <item name="android:drawableRight">@drawable/right_arrow</item>
         <item name="android:background">@drawable/selector_search</item>
     </style>
-
+    <style name="top_category_scroll_view_item_text">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

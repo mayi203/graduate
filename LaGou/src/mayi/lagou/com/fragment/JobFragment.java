@@ -332,7 +332,7 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 	public void refreshData(String jType, String city, int pageNum,
 			final String type) {
 		if ("".equals(city))
-			;
+			return;
 		city = mCity;
 		jobType = jType;
 		final String url = LaGouApi.Host + LaGouApi.Jobs + jType + "?city="
