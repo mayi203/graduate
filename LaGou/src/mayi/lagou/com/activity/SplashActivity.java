@@ -55,7 +55,7 @@ public class SplashActivity extends BaseActivity {
 		new Handler().postDelayed(new Runnable() {
 			public void run() {
 				Intent intent = new Intent();
-				intent.setClass(SplashActivity.this, MainActivity.class);
+				intent.setClass(SplashActivity.this, SampleTabsDefault.class);
 				startActivity(intent);
 				finish();
 			}
