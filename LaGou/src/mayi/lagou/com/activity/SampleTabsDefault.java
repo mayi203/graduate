@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Window;
 
 public class SampleTabsDefault extends FragmentActivity {
     private static  String[] CONTENT;
@@ -17,6 +18,7 @@ public class SampleTabsDefault extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simple_tabs);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         CONTENT=getResources().getStringArray(R.array.job_list);
         FragmentPagerAdapter adapter = new GoogleMusicAdapter(getSupportFragmentManager());
 
