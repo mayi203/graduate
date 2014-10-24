@@ -33,7 +33,7 @@
             android:name=".activity.HomeActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name=".activity.SampleTabsDefault"
+        <activity android:name=".activity.MainActivity"
             android:theme="@style/Theme.PageIndicatorDefaults"
             android:screenOrientation="portrait">
         </activity>

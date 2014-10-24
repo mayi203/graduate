@@ -15,7 +15,7 @@
 -->
 
 <resources>
-    <style name="Theme.PageIndicatorDefaults" parent="android:Theme">
+    <style name="Theme.PageIndicatorDefaults" parent="@android:style/Theme.Holo.Light.NoActionBar">
         <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator</item>
     </style>
 
