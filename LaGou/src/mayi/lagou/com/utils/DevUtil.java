@@ -20,8 +20,10 @@ public class DevUtil {
 	private static boolean isDebug;
 	private static HashMap<String, Long> oldTimeMap = new HashMap<String, Long>();
 
-	private static final String NOT_INITIALIZE_ERROR_STRING = DevUtil.class.getSimpleName() + " not initialize. Please run " + DevUtil.class.getSimpleName()
-			+ ".initialize() first !";
+	private static final String NOT_INITIALIZE_ERROR_STRING = DevUtil.class
+			.getSimpleName()
+			+ " not initialize. Please run "
+			+ DevUtil.class.getSimpleName() + ".initialize() first !";
 
 	public static void initialize(Context context) {
 		mContext = context;
@@ -68,7 +70,8 @@ public class DevUtil {
 				oldTimeTemp = System.currentTimeMillis();
 			}
 			Long durationTime = currentTime - oldTimeTemp;
-			Log.v(yourName, message + " durationTime:" + durationTime + " - tag:" + yourName);
+			Log.v(yourName, message + " durationTime:" + durationTime
+					+ " - tag:" + yourName);
 			oldTimeTemp = currentTime;
 			oldTimeMap.put(yourName, oldTimeTemp);
 		}
@@ -102,7 +105,8 @@ public class DevUtil {
 
 		try {
 
-			PackageInfo info = manager.getPackageInfo(mContext.getPackageName(), PackageManager.GET_SIGNATURES);
+			PackageInfo info = manager.getPackageInfo(
+					mContext.getPackageName(), PackageManager.GET_SIGNATURES);
 
 			for (Signature sig : info.signatures) {
 				if (sig.hashCode() == DEBUG_SIGNATURE_HASH) {
@@ -123,7 +127,8 @@ public class DevUtil {
 	 * @return
 	 */
 	public static boolean isEmulator(Context context) {
-		TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+		TelephonyManager tm = (TelephonyManager) context
+				.getSystemService(Context.TELEPHONY_SERVICE);
 		String imei = tm.getDeviceId();
 		if (imei == null || imei.equals("000000000000000")) {
 			return true;
@@ -211,9 +216,11 @@ public class DevUtil {
 
 		if (hasGingerbread()) {
 
-			StrictMode.ThreadPolicy.Builder threadPolicyBuilder = new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog();
+			StrictMode.ThreadPolicy.Builder threadPolicyBuilder = new StrictMode.ThreadPolicy.Builder()
+					.detectAll().penaltyLog();
 
-			StrictMode.VmPolicy.Builder vmPolicyBuilder = new StrictMode.VmPolicy.Builder().detectAll().penaltyLog();
+			StrictMode.VmPolicy.Builder vmPolicyBuilder = new StrictMode.VmPolicy.Builder()
+					.detectAll().penaltyLog();
 
 			StrictMode.setThreadPolicy(threadPolicyBuilder.build());
 			StrictMode.setVmPolicy(vmPolicyBuilder.build());
@@ -228,7 +235,8 @@ public class DevUtil {
 
 		if (hasGingerbread()) {
 
-			StrictMode.ThreadPolicy.Builder threadPolicyBuilder = new StrictMode.ThreadPolicy.Builder().permitAll().penaltyLog();
+			StrictMode.ThreadPolicy.Builder threadPolicyBuilder = new StrictMode.ThreadPolicy.Builder()
+					.permitAll().penaltyLog();
 
 			StrictMode.setThreadPolicy(threadPolicyBuilder.build());
 		}

@@ -8,8 +8,10 @@ public class NetWorkState {
 
 	public static boolean isNetWorkConnected(Context context) {
 		if (context != null) {
-			ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-			NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+			ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo mNetworkInfo = mConnectivityManager
+					.getActiveNetworkInfo();
 			if (mNetworkInfo != null) {
 				return mNetworkInfo.isAvailable();
 			}
@@ -19,23 +21,27 @@ public class NetWorkState {
 
 	public static boolean isWifiConnected(Context context) {
 		if (context != null) {
-			ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-			NetworkInfo mWiFiNetworkInfo = mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+			ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo mWiFiNetworkInfo = mConnectivityManager
+					.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 			if (mWiFiNetworkInfo != null) {
 				return mWiFiNetworkInfo.isAvailable();
 			}
 		}
 		return false;
 	}
-	public static int getConnectedType(Context context) {    
-	     if (context != null) {    
-	         ConnectivityManager mConnectivityManager = (ConnectivityManager) context    
-	                 .getSystemService(Context.CONNECTIVITY_SERVICE);    
-	         NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();    
-	         if (mNetworkInfo != null && mNetworkInfo.isAvailable()) {    
-	             return mNetworkInfo.getType();    
-	         }    
-	     }    
-	     return -1;    
-	 }  
+
+	public static int getConnectedType(Context context) {
+		if (context != null) {
+			ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo mNetworkInfo = mConnectivityManager
+					.getActiveNetworkInfo();
+			if (mNetworkInfo != null && mNetworkInfo.isAvailable()) {
+				return mNetworkInfo.getType();
+			}
+		}
+		return -1;
+	}
 }

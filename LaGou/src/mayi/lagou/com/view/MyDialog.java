@@ -95,7 +95,8 @@ public class MyDialog extends Dialog {
 		});
 	}
 
-	public void setCheckBoxListener(android.widget.CompoundButton.OnCheckedChangeListener listener) {
+	public void setCheckBoxListener(
+			android.widget.CompoundButton.OnCheckedChangeListener listener) {
 		checkBox.setVisibility(View.VISIBLE);
 		checkBox.setOnCheckedChangeListener(listener);
 	}

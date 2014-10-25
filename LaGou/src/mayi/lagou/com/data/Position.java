@@ -9,33 +9,33 @@ public class Position implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	/**职位名称*/
+	/** 职位名称 */
 	private String positionName;
-	/**对应url*/
+	/** 对应url */
 	private String positionUrl;
-	/**城市*/
+	/** 城市 */
 	private String city;
-	/**薪资*/
+	/** 薪资 */
 	private String salary;
-	/**工作经验*/
+	/** 工作经验 */
 	private String experience;
-	/**学历*/
+	/** 学历 */
 	private String education;
-	/**职位诱惑*/
+	/** 职位诱惑 */
 	private String positionTempt;
-	/**发布时间*/
+	/** 发布时间 */
 	private String time;
-	/**公司*/
+	/** 公司 */
 	private String company;
-	/**公司连接*/
+	/** 公司连接 */
 	private String companyUrl;
-	/**领域*/
+	/** 领域 */
 	private String field;
-	/**阶段*/
+	/** 阶段 */
 	private String stage;
-	/**规模*/
+	/** 规模 */
 	private String scale;
-	/**福利*/
+	/** 福利 */
 	private List<String> weal;
 
 	public String getExperience() {

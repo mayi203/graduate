@@ -28,12 +28,11 @@ import android.widget.TextView;
 public abstract class BaseFragment extends Fragment {
 	public AsyncHttpClient client;
 
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		setHasOptionsMenu(true);
-//		getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+		// setHasOptionsMenu(true);
+		// getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
@@ -162,15 +161,15 @@ public abstract class BaseFragment extends Fragment {
 		} catch (Exception e) {
 		}
 	}
+
 	/**
 	 * 隐藏软键盘
 	 */
 	public void hideSoftInput() {
 		try {
-			((InputMethodManager) getActivity()
-					.getSystemService(Context.INPUT_METHOD_SERVICE))
-					.hideSoftInputFromWindow(getActivity().getCurrentFocus()
-							.getWindowToken(), 0);
+			((InputMethodManager) getActivity().getSystemService(
+					Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+					getActivity().getCurrentFocus().getWindowToken(), 0);
 		} catch (Exception e) {
 		}
 	}

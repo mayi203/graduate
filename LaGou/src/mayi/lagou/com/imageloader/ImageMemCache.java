@@ -25,13 +25,16 @@ public class ImageMemCache {
 
 	/**
 	 * 
-	 * 重要：本方法中使用了sdk level5的特性。使用本方法，需要保证你的app中android:minSdkVersion 否则使用将不显示加载图片
+	 * 重要：本方法中使用了sdk level5的特性。使用本方法，需要保证你的app中android:minSdkVersion
+	 * 否则使用将不显示加载图片
 	 * 
 	 * 百分比方式设置缓存大小
 	 * 
 	 * @param context
 	 * @param percent
-	 *            Sets the memory cache size based on a percentage of the device memory class percent is < 0.05 or > .8. 参见：setMemCacheSizePercent方法
+	 *            Sets the memory cache size based on a percentage of the device
+	 *            memory class percent is < 0.05 or > .8.
+	 *            参见：setMemCacheSizePercent方法
 	 */
 	public ImageMemCache(Context context, float percent) {
 		setMemCacheSizePercent(context, percent);
@@ -84,7 +87,8 @@ public class ImageMemCache {
 	}
 
 	/**
-	 * 清空缓存，所有图片会被recycle. 已作处理，可放心使用，recycle的图片不会报：trying to use a recycled bitmap错误
+	 * 清空缓存，所有图片会被recycle. 已作处理，可放心使用，recycle的图片不会报：trying to use a recycled
+	 * bitmap错误
 	 * 
 	 */
 	public void clearCache() {
@@ -92,7 +96,8 @@ public class ImageMemCache {
 	}
 
 	/**
-	 * Returns a copy of the current contents of the cache, ordered from least recently accessed to most recently accessed.
+	 * Returns a copy of the current contents of the cache, ordered from least
+	 * recently accessed to most recently accessed.
 	 */
 	public Map<String, Bitmap> snapshot() {
 		return mMemoryCache.snapshot();
@@ -132,7 +137,8 @@ public class ImageMemCache {
 		}
 		mMemoryCache = new LruCache<String, Bitmap>(memCacheSize) {
 			/**
-			 * Measure item size in bytes rather than units which is more practical for a bitmap cache
+			 * Measure item size in bytes rather than units which is more
+			 * practical for a bitmap cache
 			 */
 			@Override
 			protected int sizeOf(String key, Bitmap bitmap) {
@@ -143,19 +149,22 @@ public class ImageMemCache {
 			 * 缓存满时，移除对象对应操作
 			 */
 			@Override
-			protected void entryRemoved(boolean evicted, String key, Bitmap oldValue, Bitmap newValue) {
+			protected void entryRemoved(boolean evicted, String key,
+					Bitmap oldValue, Bitmap newValue) {
 
 				if (mImageMemCacheEvent == null) {// 使用默认动作
 
 					if (oldValue != null && !oldValue.isRecycled()) {
-						DevUtil.v("jackzhou", String.format("mImageMemCache recycle:%s", oldValue));
+						DevUtil.v("jackzhou", String.format(
+								"mImageMemCache recycle:%s", oldValue));
 
 						oldValue.recycle();
 						oldValue = null;
 					}
 
 				} else {// 外面用户自定义的动作
-					mImageMemCacheEvent.entryRemoved(evicted, key, oldValue, newValue);
+					mImageMemCacheEvent.entryRemoved(evicted, key, oldValue,
+							newValue);
 				}
 
 			};
@@ -178,12 +187,16 @@ public class ImageMemCache {
 	}
 
 	/**
-	 * 重要：本方法中使用了sdk level5的特性。使用本方法，需要保证你的app中android:minSdkVersion 否则使用将不显示加载图片
+	 * 重要：本方法中使用了sdk level5的特性。使用本方法，需要保证你的app中android:minSdkVersion
+	 * 否则使用将不显示加载图片
 	 * 
-	 * Sets the memory cache size based on a percentage of the device memory class. Eg. setting percent to 0.2 would set the memory cache to one fifth of the device memory class.
-	 * Throws {@link IllegalArgumentException} if percent is < 0.05 or > .8.
+	 * Sets the memory cache size based on a percentage of the device memory
+	 * class. Eg. setting percent to 0.2 would set the memory cache to one fifth
+	 * of the device memory class. Throws {@link IllegalArgumentException} if
+	 * percent is < 0.05 or > .8.
 	 * 
-	 * This value should be chosen carefully based on a number of factors Refer to the corresponding Android Training class for more discussion:
+	 * This value should be chosen carefully based on a number of factors Refer
+	 * to the corresponding Android Training class for more discussion:
 	 * http://developer.android.com/training/displaying-bitmaps/
 	 * 
 	 * @param context
@@ -193,13 +206,17 @@ public class ImageMemCache {
 	 */
 	private void setMemCacheSizePercent(Context context, float percent) {
 		if (percent < 0.05f || percent > 0.8f) {
-			throw new IllegalArgumentException("setMemCacheSizePercent - percent must be " + "between 0.05 and 0.8 (inclusive)");
+			throw new IllegalArgumentException(
+					"setMemCacheSizePercent - percent must be "
+							+ "between 0.05 and 0.8 (inclusive)");
 		}
-		memCacheSize = Math.round(percent * getMemoryClass(context) * 1024 * 1024);
+		memCacheSize = Math.round(percent * getMemoryClass(context) * 1024
+				* 1024);
 	}
 
 	/**
-	 * 重要：本方法中使用了sdk level5的特性。使用本方法，需要保证你的app中android:minSdkVersion 否则使用将不显示加载图片
+	 * 重要：本方法中使用了sdk level5的特性。使用本方法，需要保证你的app中android:minSdkVersion
+	 * 否则使用将不显示加载图片
 	 * 
 	 * @param context
 	 * @return
@@ -208,7 +225,9 @@ public class ImageMemCache {
 	private static int getMemoryClass(Context context) {
 		int ret = 0;
 		if (DevUtil.hasAndroid2_0()) {
-			ret = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
+			ret = ((ActivityManager) context
+					.getSystemService(Context.ACTIVITY_SERVICE))
+					.getMemoryClass();
 		}
 		return ret;
 	}
@@ -223,12 +242,16 @@ public class ImageMemCache {
 		/**
 		 * 
 		 * @param evicted
-		 *            true if the entry is being removed to make space, false if the removal was caused by a put or remove.
+		 *            true if the entry is being removed to make space, false if
+		 *            the removal was caused by a put or remove.
 		 * @param key
 		 * @param oldValue
 		 * @param newValue
-		 *            the new value for key, if it exists. If non-null, this removal was caused by a put. Otherwise it was caused by an eviction or a remove.
+		 *            the new value for key, if it exists. If non-null, this
+		 *            removal was caused by a put. Otherwise it was caused by an
+		 *            eviction or a remove.
 		 */
-		public void entryRemoved(boolean evicted, String key, Bitmap oldValue, Bitmap newValue);
+		public void entryRemoved(boolean evicted, String key, Bitmap oldValue,
+				Bitmap newValue);
 	}
 }

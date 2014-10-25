@@ -12,7 +12,8 @@ public class MD5Util {
 	 * <br>
 	 * 
 	 * 1. Change StringBuffer to StringBuilder<br>
-	 * The method doesn't use no static filed, so it not exists thread-safe problem;<br>
+	 * The method doesn't use no static filed, so it not exists thread-safe
+	 * problem;<br>
 	 * 2. Change compute ways<br>
 	 * Bit computing instead of Math.<br>
 	 * 3. Modify this, run with more speed.<br>
@@ -26,7 +27,8 @@ public class MD5Util {
 		if (str != null && !str.trim().equals("")) {
 			try {
 				MessageDigest md5 = MessageDigest.getInstance("MD5");
-				char[] HEX = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+				char[] HEX = { '0', '1', '2', '3', '4', '5', '6', '7', '8',
+						'9', 'a', 'b', 'c', 'd', 'e', 'f' };
 				byte[] md5Byte = md5.digest(str.getBytes("UTF8"));
 				StringBuilder sb = new StringBuilder();
 				for (int i = 0; i < md5Byte.length; i++) {

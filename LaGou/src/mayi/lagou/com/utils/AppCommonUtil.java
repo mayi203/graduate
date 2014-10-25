@@ -180,7 +180,8 @@ public class AppCommonUtil {
 	 * @return available true, not available false
 	 */
 	public static Boolean isNetworkAvailable(Context context) {
-		ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		ConnectivityManager manager = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		if (manager == null) {
 			return false;
 		}
@@ -204,9 +205,11 @@ public class AppCommonUtil {
 	public static String getLocalIpAddress() {
 		String ret = "";
 		try {
-			for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+			for (Enumeration<NetworkInterface> en = NetworkInterface
+					.getNetworkInterfaces(); en.hasMoreElements();) {
 				NetworkInterface intf = en.nextElement();
-				for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+				for (Enumeration<InetAddress> enumIpAddr = intf
+						.getInetAddresses(); enumIpAddr.hasMoreElements();) {
 					InetAddress inetAddress = enumIpAddr.nextElement();
 					if (!inetAddress.isLoopbackAddress()) {
 						ret = inetAddress.getHostAddress().toString();
@@ -217,6 +220,7 @@ public class AppCommonUtil {
 		}
 		return ret;
 	}
+
 	/** 获取屏幕的宽度 */
 	public final static int getWindowsWidth(Activity activity) {
 		DisplayMetrics dm = new DisplayMetrics();

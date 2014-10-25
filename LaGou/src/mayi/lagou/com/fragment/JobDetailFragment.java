@@ -126,14 +126,15 @@ public class JobDetailFragment extends BaseFragment {
 				getActivity().onBackPressed();
 			}
 		});
-		findImageView(R.id.right_bar_del).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				MobclickAgent.onEvent(getActivity(), "share");
-				shareUrlIntent(mUrl);
-			}
-		});
+		findImageView(R.id.right_bar_del).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						MobclickAgent.onEvent(getActivity(), "share");
+						shareUrlIntent(mUrl);
+					}
+				});
 	}
 
 	private void gotoLogin() {

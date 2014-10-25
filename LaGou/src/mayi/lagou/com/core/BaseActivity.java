@@ -33,7 +33,7 @@ public abstract class BaseActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		getOverflowMenu();
+		// getOverflowMenu();
 		setContentView(contentView());
 		findViewsById();
 		initValue();

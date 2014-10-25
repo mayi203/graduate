@@ -34,7 +34,9 @@ public class BitmapWorkerTask extends LibAsyncTask<Void, Void, Bitmap> {
 	private String mCachePath;
 	private boolean mIsNeedCut;
 
-	public BitmapWorkerTask(String filePathOrUrl, ImageView imageView, Bitmap loadingBitmap, ImageMemCache imageMemCache, int width, int height, String cachePath, boolean isNeedCut) {
+	public BitmapWorkerTask(String filePathOrUrl, ImageView imageView,
+			Bitmap loadingBitmap, ImageMemCache imageMemCache, int width,
+			int height, String cachePath, boolean isNeedCut) {
 		this.mFilePathOrUrl = filePathOrUrl;
 		this.mLoadingBitmap = loadingBitmap;
 		mContext = imageView.getContext();
@@ -61,11 +63,13 @@ public class BitmapWorkerTask extends LibAsyncTask<Void, Void, Bitmap> {
 			return null;
 		}
 
-		String memKey = ImageLoader.generateMemCacheKey(mFilePathOrUrl, mWidth, mHeight, mCachePath, mIsNeedCut);
+		String memKey = ImageLoader.generateMemCacheKey(mFilePathOrUrl, mWidth,
+				mHeight, mCachePath, mIsNeedCut);
 		Bitmap temp = mImageMemCache.get(memKey);// 优化 相同图片mFilePathOrUrl
 													// 缓存命中则直接返回
 		if (temp == null) {
-			temp = ImageHelper.getInstance(mContext).loadImage(mFilePathOrUrl, mWidth, mHeight, mCachePath, mIsNeedCut);
+			temp = ImageHelper.getInstance(mContext).loadImage(mFilePathOrUrl,
+					mWidth, mHeight, mCachePath, mIsNeedCut);
 		}
 
 		return temp;
@@ -84,7 +88,8 @@ public class BitmapWorkerTask extends LibAsyncTask<Void, Void, Bitmap> {
 		final ImageView imageView = getAttachedImageView();
 
 		if (bitmap != null && imageView != null) {
-			String memKey = ImageLoader.generateMemCacheKey(mFilePathOrUrl, mWidth, mHeight, mCachePath, mIsNeedCut);
+			String memKey = ImageLoader.generateMemCacheKey(mFilePathOrUrl,
+					mWidth, mHeight, mCachePath, mIsNeedCut);
 			mImageMemCache.put(memKey, bitmap);
 			setImageBitmap(imageView, bitmap);
 		}
@@ -101,7 +106,9 @@ public class BitmapWorkerTask extends LibAsyncTask<Void, Void, Bitmap> {
 	}
 
 	/**
-	 * Returns the ImageView associated with this task as long as the ImageView's task still points to this task as well. Returns null otherwise.
+	 * Returns the ImageView associated with this task as long as the
+	 * ImageView's task still points to this task as well. Returns null
+	 * otherwise.
 	 */
 	private ImageView getAttachedImageView() {
 		final ImageView imageView = imageViewReference.get();
@@ -115,7 +122,8 @@ public class BitmapWorkerTask extends LibAsyncTask<Void, Void, Bitmap> {
 	}
 
 	/**
-	 * Called when the processing is complete and the final bitmap should be set on the ImageView.
+	 * Called when the processing is complete and the final bitmap should be set
+	 * on the ImageView.
 	 * 
 	 * @param imageView
 	 * @param bitmap
@@ -124,25 +132,31 @@ public class BitmapWorkerTask extends LibAsyncTask<Void, Void, Bitmap> {
 		if (mFadeInBitmap) {
 			// Transition drawable with a transparent drwabale and the final
 			// bitmap
-			final TransitionDrawable td = new TransitionDrawable(new Drawable[] { new ColorDrawable(android.R.color.transparent), new LibBitmapDrawable(mResources, bitmap) });
+			final TransitionDrawable td = new TransitionDrawable(
+					new Drawable[] {
+							new ColorDrawable(android.R.color.transparent),
+							new LibBitmapDrawable(mResources, bitmap) });
 
 			// Set background to loading bitmap
 			// imageView.setBackgroundDrawable(new BitmapDrawable(mResources,
 			// mLoadingBitmap));
 			// 更改效果，使用setImageDrawable
-			imageView.setImageDrawable(new BitmapDrawable(mResources, mLoadingBitmap));
+			imageView.setImageDrawable(new BitmapDrawable(mResources,
+					mLoadingBitmap));
 
 			imageView.setImageDrawable(td);
 			td.startTransition(FADE_IN_TIME);
 		} else {
-			imageView.setImageDrawable(new LibBitmapDrawable(mContext.getResources(), bitmap));
+			imageView.setImageDrawable(new LibBitmapDrawable(mContext
+					.getResources(), bitmap));
 		}
 	}
 
 	/**
 	 * @param imageView
 	 *            Any imageView
-	 * @return Retrieve the currently active work task (if any) associated with this imageView. null if there is no such task.
+	 * @return Retrieve the currently active work task (if any) associated with
+	 *         this imageView. null if there is no such task.
 	 */
 	private static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) {
 		if (imageView != null) {
@@ -156,10 +170,12 @@ public class BitmapWorkerTask extends LibAsyncTask<Void, Void, Bitmap> {
 	}
 
 	/**
-	 * Returns true if the current work has been canceled or if there was no work in progress on this image view. Returns false if the work in progress deals with the same data.
-	 * The work is not stopped in that case.
+	 * Returns true if the current work has been canceled or if there was no
+	 * work in progress on this image view. Returns false if the work in
+	 * progress deals with the same data. The work is not stopped in that case.
 	 */
-	public static boolean cancelPotentialWork(String mFilePathOrUrl, ImageView imageView) {
+	public static boolean cancelPotentialWork(String mFilePathOrUrl,
+			ImageView imageView) {
 		final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
 
 		if (bitmapWorkerTask != null) {

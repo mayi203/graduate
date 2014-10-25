@@ -526,9 +526,9 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 
 	@Override
 	public boolean onMenuItemClick(MenuItem item) {
-		if (item.getItemId()==R.id.login){
+		if (item.getItemId() == R.id.login) {
 			startActivity(UserInfoActicity.class);
-		}else if(item.getItemId()==R.id.setting){
+		} else if (item.getItemId() == R.id.setting) {
 			addFragmentToStack(R.id.contain, new SettingFragment());
 		}
 		return false;

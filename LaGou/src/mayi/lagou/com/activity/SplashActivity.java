@@ -15,7 +15,7 @@ import mayi.lagou.com.core.BaseActivity;
 
 public class SplashActivity extends BaseActivity {
 
-	private TextView lagou,lagouDel;
+	private TextView lagou, lagouDel;
 
 	@Override
 	public int contentView() {
@@ -25,27 +25,28 @@ public class SplashActivity extends BaseActivity {
 
 	@Override
 	public void findViewsById() {
-		lagou=findTextView(R.id.lagou);
-		lagouDel=findTextView(R.id.lagou_del);
+		lagou = findTextView(R.id.lagou);
+		lagouDel = findTextView(R.id.lagou_del);
 	}
 
 	@Override
 	public void initValue() {
-		Animation lAnim=AnimationUtils.loadAnimation(this, R.anim.lagou_anim);
-		final Animation dAnim=AnimationUtils.loadAnimation(this, R.anim.lagou_del_anim);
+		Animation lAnim = AnimationUtils.loadAnimation(this, R.anim.lagou_anim);
+		final Animation dAnim = AnimationUtils.loadAnimation(this,
+				R.anim.lagou_del_anim);
 		lagou.setAnimation(lAnim);
 		lAnim.setAnimationListener(new AnimationListener() {
-			
+
 			@Override
 			public void onAnimationStart(Animation animation) {
-				
+
 			}
-			
+
 			@Override
 			public void onAnimationRepeat(Animation animation) {
-				
+
 			}
-			
+
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				lagouDel.setVisibility(View.VISIBLE);
@@ -78,6 +79,5 @@ public class SplashActivity extends BaseActivity {
 		super.onResume();
 		MobclickAgent.onResume(this);
 	}
-	
 
 }

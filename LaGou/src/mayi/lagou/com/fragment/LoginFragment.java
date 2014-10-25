@@ -30,7 +30,7 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public int contentView() {
-//		getActivity().getActionBar().setTitle(R.string.string_login);
+		// getActivity().getActionBar().setTitle(R.string.string_login);
 		return R.layout.f_login;
 	}
 
@@ -115,7 +115,7 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 											getActivity(), "email", emailTxt);
 									SharePreferenceUtil.putString(
 											getActivity(), "psw", pswTxt);
-									LaGouApp.isLogin=true;
+									LaGouApp.isLogin = true;
 									SharePreferenceUtil.putBoolean(
 											getActivity(), "islogin", true);
 									boolean toDetail = SharePreferenceUtil
@@ -153,13 +153,13 @@ public class LoginFragment extends BaseFragment implements OnClickListener {
 		hideSoftInput();
 	}
 
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		if (item.getItemId() == android.R.id.home) {
-//			getActivity().getActionBar().setTitle(R.string.app_name);
-//			getActivity().onBackPressed();
-//		}
-//		return super.onOptionsItemSelected(item);
-//	}
+	// @Override
+	// public boolean onOptionsItemSelected(MenuItem item) {
+	// if (item.getItemId() == android.R.id.home) {
+	// getActivity().getActionBar().setTitle(R.string.app_name);
+	// getActivity().onBackPressed();
+	// }
+	// return super.onOptionsItemSelected(item);
+	// }
 
 }

@@ -24,7 +24,7 @@ public class AboutUsFragment extends BaseFragment {
 
 	@Override
 	public int contentView() {
-//		getActivity().getActionBar().setTitle(R.string.string_about_us_btn);
+		// getActivity().getActionBar().setTitle(R.string.string_about_us_btn);
 		return R.layout.f_about_us;
 	}
 
@@ -40,7 +40,7 @@ public class AboutUsFragment extends BaseFragment {
 		try {
 			info = manager.getPackageInfo(getActivity().getPackageName(), 0);
 			String version = info.versionName;
-			findTextView(R.id.ver).setText("Ver"+version);
+			findTextView(R.id.ver).setText("Ver" + version);
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -61,20 +61,21 @@ public class AboutUsFragment extends BaseFragment {
 			}
 		});
 		findTextView(R.id.back_about).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				getActivity().onBackPressed();
 			}
 		});
-		findImageView(R.id.right_bar_about).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				MobclickAgent.onEvent(getActivity(), "share");
-				shareUrl();
-			}
-		});
+		findImageView(R.id.right_bar_about).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						MobclickAgent.onEvent(getActivity(), "share");
+						shareUrl();
+					}
+				});
 	}
 
 	private void shareUrl() {
@@ -87,22 +88,22 @@ public class AboutUsFragment extends BaseFragment {
 		getActivity().startActivity(sendIntent);
 	}
 
-//	@Override
-//	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//		inflater.inflate(R.menu.jb_detail, menu);
-//		MenuItem item = menu.findItem(R.id.share);
-//		ShareActionProvider mShareActionProvider = (ShareActionProvider) item
-//				.getActionProvider();
-//		mShareActionProvider.setShareIntent(shareUrl());
-//		super.onCreateOptionsMenu(menu, inflater);
-//	}
-//
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		if (item.getItemId() == android.R.id.home) {
-//			getActivity().getActionBar().setTitle(R.string.app_setting);
-//			getActivity().onBackPressed();
-//		}
-//		return super.onOptionsItemSelected(item);
-//	}
+	// @Override
+	// public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	// inflater.inflate(R.menu.jb_detail, menu);
+	// MenuItem item = menu.findItem(R.id.share);
+	// ShareActionProvider mShareActionProvider = (ShareActionProvider) item
+	// .getActionProvider();
+	// mShareActionProvider.setShareIntent(shareUrl());
+	// super.onCreateOptionsMenu(menu, inflater);
+	// }
+	//
+	// @Override
+	// public boolean onOptionsItemSelected(MenuItem item) {
+	// if (item.getItemId() == android.R.id.home) {
+	// getActivity().getActionBar().setTitle(R.string.app_setting);
+	// getActivity().onBackPressed();
+	// }
+	// return super.onOptionsItemSelected(item);
+	// }
 }

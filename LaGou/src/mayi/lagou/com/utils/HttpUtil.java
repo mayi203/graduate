@@ -43,7 +43,8 @@ public class HttpUtil {
 	private HttpUtil() {
 	}
 
-	public static String getMethod(String url) throws ClientProtocolException, IOException {
+	public static String getMethod(String url) throws ClientProtocolException,
+			IOException {
 		HttpEntity entity = null;
 		HttpGet method = new HttpGet(url);
 		HttpResponse response = getHttpClient().execute(method);
@@ -51,14 +52,17 @@ public class HttpUtil {
 		return EntityUtils.toString(entity);
 	}
 
-	public static String postMethod(String url, HashMap<String, String> params) throws ClientProtocolException, IOException {
+	public static String postMethod(String url, HashMap<String, String> params)
+			throws ClientProtocolException, IOException {
 		HttpPost method = new HttpPost(url);
 		if (params.size() > 0) {
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			for (Map.Entry<String, String> entry : params.entrySet()) {
-				nameValuePairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+				nameValuePairs.add(new BasicNameValuePair(entry.getKey(), entry
+						.getValue()));
 			}
-			method.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.UTF_8));
+			method.setEntity(new UrlEncodedFormEntity(nameValuePairs,
+					HTTP.UTF_8));
 		}
 		HttpResponse response = getHttpClient().execute(method);
 		return EntityUtils.toString(response.getEntity());
@@ -94,9 +98,11 @@ public class HttpUtil {
 			// Set the specified user agent and register standard protocols.
 			HttpProtocolParams.setUserAgent(params, HttpUtil.class.getName());
 			SchemeRegistry schemeRegistry = new SchemeRegistry();
-			schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+			schemeRegistry.register(new Scheme("http", PlainSocketFactory
+					.getSocketFactory(), 80));
 
-			ClientConnectionManager manager = new ThreadSafeClientConnManager(params, schemeRegistry);
+			ClientConnectionManager manager = new ThreadSafeClientConnManager(
+					params, schemeRegistry);
 
 			_httpClient = new DefaultHttpClient(manager, params);
 		}

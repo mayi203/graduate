@@ -20,7 +20,7 @@ public class LaGouApp extends Application {
 	private static LaGouApp _instance;
 	private ImageLoader imageLoader;
 	public String mSdcardDataDir;
-	public static boolean isLogin=false;
+	public static boolean isLogin = false;
 
 	@Override
 	public void onCreate() {
@@ -29,8 +29,8 @@ public class LaGouApp extends Application {
 		imageLoader = new ImageLoader(this, 0.3f);
 		FeedbackAgent agent = new FeedbackAgent(this);
 		agent.sync();
-		mSdcardDataDir=getExternalCacheDir().getPath();
-		isLogin=SharePreferenceUtil.getBoolean(this, "islogin");
+		mSdcardDataDir = getExternalCacheDir().getPath();
+		isLogin = SharePreferenceUtil.getBoolean(this, "islogin");
 	}
 
 	public static LaGouApp getInstance() {

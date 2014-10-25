@@ -124,7 +124,8 @@ public class ImageHelper {
 	/**
 	 * 重要：本方法中使用了sdk level5的特性。使用本方法，需要保证你的app中android:minSdkVersion<br>
 	 * 
-	 * 提交保存exif信息 需要权限uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	 * 提交保存exif信息 需要权限uses-permission
+	 * android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	 */
 
 	@TargetApi(5)
@@ -169,7 +170,8 @@ public class ImageHelper {
 	 *            图片压缩率
 	 * @return 图片路径或者null
 	 */
-	public String saveImage2Local(Bitmap bitmap, String path, String fileName, int compress) {
+	public String saveImage2Local(Bitmap bitmap, String path, String fileName,
+			int compress) {
 
 		File imagePath = null;
 		try {
@@ -182,7 +184,8 @@ public class ImageHelper {
 
 				imagePath = new File(path, fileName);// 给新照的照片文件命名
 
-				BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(imagePath));
+				BufferedOutputStream bos = new BufferedOutputStream(
+						new FileOutputStream(imagePath));
 
 				/* 采用压缩转档方法 */
 				bitmap.compress(Bitmap.CompressFormat.JPEG, compress, bos);
@@ -209,21 +212,25 @@ public class ImageHelper {
 	}
 
 	/**
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param filePathOrUrl
 	 * @param maxWidth
 	 * @param maxHeight
 	 * @return
 	 */
-	public String getFilePathOfInSampleBitmapUseFilePathOrUrl(String filePathOrUrl, int maxWidth, int maxHeight) {
+	public String getFilePathOfInSampleBitmapUseFilePathOrUrl(
+			String filePathOrUrl, int maxWidth, int maxHeight) {
 
-		return getFilePathOfInSampleBitmapUseFilePathOrUrl(filePathOrUrl, maxWidth, maxHeight, null);
+		return getFilePathOfInSampleBitmapUseFilePathOrUrl(filePathOrUrl,
+				maxWidth, maxHeight, null);
 	}
 
 	/**
 	 * 得到网络或本地已经略缩图片的缓存在本地的图片path
 	 * 
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param filePathOrUrl
 	 * @param maxWidth
 	 * @param maxHeight
@@ -231,7 +238,8 @@ public class ImageHelper {
 	 *            指定缓存图片的路径 路径结尾不要带"/"
 	 * @return
 	 */
-	public String getFilePathOfInSampleBitmapUseFilePathOrUrl(String filePathOrUrl, int maxWidth, int maxHeight, String cachePath) {
+	public String getFilePathOfInSampleBitmapUseFilePathOrUrl(
+			String filePathOrUrl, int maxWidth, int maxHeight, String cachePath) {
 
 		if (cachePath == null) {
 			cachePath = mContext.getCacheDir().getAbsolutePath();
@@ -246,7 +254,8 @@ public class ImageHelper {
 			filePath = filePathOrUrl;
 		}
 
-		final String bitmapKey = getInSampleBitmapFileNameKey(filePath, maxWidth, maxHeight);
+		final String bitmapKey = getInSampleBitmapFileNameKey(filePath,
+				maxWidth, maxHeight);
 		final String bitmapFileNameMd5 = url2Md5FileName(bitmapKey);
 
 		if (isFileNameInCache(bitmapFileNameMd5, cachePath)) {// 已经有缓存
@@ -257,7 +266,8 @@ public class ImageHelper {
 	}
 
 	/**
-	 * 重要：本方法中使用了sdk level8的特性。使用本方法，需要保证你的app中android:minSdkVersion大于等于8，否则在低版本中会异常
+	 * 重要：本方法中使用了sdk
+	 * level8的特性。使用本方法，需要保证你的app中android:minSdkVersion大于等于8，否则在低版本中会异常
 	 * 
 	 * 获得按比例的略缩图，图片为指定大小（先缩放再裁剪）
 	 * 
@@ -267,12 +277,14 @@ public class ImageHelper {
 	 * @return
 	 */
 	@SuppressWarnings("unused")
-	private Bitmap getInSampleAndCutBitmap(String filePathOrUrl, int cutWidth, int cutHeight) {
+	private Bitmap getInSampleAndCutBitmap(String filePathOrUrl, int cutWidth,
+			int cutHeight) {
 		return getInSampleAndCutBitmap(filePathOrUrl, cutWidth, cutHeight, null);
 	}
 
 	/**
-	 * 重要：本方法中使用了sdk level8的特性。使用本方法，需要保证你的app中android:minSdkVersion大于等于8，否则在低版本中会异常
+	 * 重要：本方法中使用了sdk
+	 * level8的特性。使用本方法，需要保证你的app中android:minSdkVersion大于等于8，否则在低版本中会异常
 	 * 
 	 * 获得按比例的略缩图，图片为指定大小（先缩放再裁剪）
 	 * 
@@ -283,7 +295,8 @@ public class ImageHelper {
 	 * @return
 	 */
 	@TargetApi(8)
-	private Bitmap getInSampleAndCutBitmap(String filePathOrUrl, int cutWidth, int cutHeight, String cachePath) {
+	private Bitmap getInSampleAndCutBitmap(String filePathOrUrl, int cutWidth,
+			int cutHeight, String cachePath) {
 
 		if (!DevUtil.hasFroyo()) {// 小于2.2的系统无法使用
 			return BitmapFactory.decodeByteArray(new byte[] {}, 0, 0);
@@ -299,8 +312,10 @@ public class ImageHelper {
 		// 缓存 在特殊情况会有问题,建议每次拍照生成不同图片: 拍照在本地循环使用同一张照片保存。
 		// 会产生问题，后续拍照生成的略缩图因为filePath全是返回的缓存的第一张图
 		if (isDiskCached(filePathOrUrl, cutWidth, cutHeight, cachePath, true)) {
-			String filePath = diskCachedFilePath(filePathOrUrl, cutWidth, cutHeight, cachePath, true);
-			DevUtil.v("jackzhou", String.format("DiskCache hit(InSampleAndCut) path:%s", filePath));
+			String filePath = diskCachedFilePath(filePathOrUrl, cutWidth,
+					cutHeight, cachePath, true);
+			DevUtil.v("jackzhou", String.format(
+					"DiskCache hit(InSampleAndCut) path:%s", filePath));
 			return BitmapFactory.decodeFile(filePath);
 		}
 
@@ -310,7 +325,8 @@ public class ImageHelper {
 				ret = loadImage(filePathOrUrl);
 			} else {
 
-				ret = ThumbnailUtils.extractThumbnail(loadImage(filePathOrUrl), cutWidth, cutHeight);
+				ret = ThumbnailUtils.extractThumbnail(loadImage(filePathOrUrl),
+						cutWidth, cutHeight);
 			}
 
 		} else {// 本地图片
@@ -319,12 +335,15 @@ public class ImageHelper {
 				ret = BitmapFactory.decodeFile(filePathOrUrl);
 			} else {
 
-				ret = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(filePathOrUrl), cutWidth, cutHeight);
+				ret = ThumbnailUtils.extractThumbnail(
+						BitmapFactory.decodeFile(filePathOrUrl), cutWidth,
+						cutHeight);
 			}
 		}
 
 		// 缓存ret图片 不放入线程。在线程中，一些功能需要马上使用得到对应缓存图片做操作会有问题
-		String bitmapFileNameMd5 = getBitmapFileNameMd5(filePathOrUrl, cutWidth, cutHeight, cachePath, true);
+		String bitmapFileNameMd5 = getBitmapFileNameMd5(filePathOrUrl,
+				cutWidth, cutHeight, cachePath, true);
 		saveImage2Local(ret, cachePath, bitmapFileNameMd5);
 
 		return ret;
@@ -333,18 +352,21 @@ public class ImageHelper {
 	/**
 	 * 略缩图本地缓存时的文件名算法
 	 * 
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param filePath
 	 * @param maxWidth
 	 * @param maxHeight
 	 * @return
 	 */
-	public static String getInSampleBitmapFileNameKey(String filePath, int maxWidth, int maxHeight) {
+	public static String getInSampleBitmapFileNameKey(String filePath,
+			int maxWidth, int maxHeight) {
 		return "" + maxWidth + maxHeight + filePath;// filePatch需要放在最后为了适用url2Md5FileName方法
 	}
 
 	/**
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param filePath
 	 * @param maxWidth
 	 * @param maxHeight
@@ -364,7 +386,8 @@ public class ImageHelper {
 	 * 以字符串maxWidth + maxHeight + filePatch拼接字符串Md5为缓存文件名<br>
 	 * 缓存在mContext.getCacheDir()目录中,下次取直接可取得缓存图片。<br>
 	 * 
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param filePath
 	 * @param maxWidth
 	 *            0表示不限
@@ -374,7 +397,8 @@ public class ImageHelper {
 	 *            指定缓存图片的路径 路径结尾不要带"/"
 	 * @return
 	 */
-	public Bitmap getInSampleBitmap(String filePath, int maxWidth, int maxHeight, String cachePath) {
+	public Bitmap getInSampleBitmap(String filePath, int maxWidth,
+			int maxHeight, String cachePath) {
 
 		if (cachePath == null) {
 			cachePath = mContext.getCacheDir().getAbsolutePath();
@@ -382,13 +406,17 @@ public class ImageHelper {
 
 		Bitmap ret = null;
 
-		final String bitmapKey = getInSampleBitmapFileNameKey(filePath, maxWidth, maxHeight);
+		final String bitmapKey = getInSampleBitmapFileNameKey(filePath,
+				maxWidth, maxHeight);
 		final String bitmapFileNameMd5 = url2Md5FileName(bitmapKey);
 		// 缓存 在特殊情况会有问题,建议每次拍照生成不同图片: 拍照在本地循环使用同一张照片保存。
 		// 会产生问题，后续拍照生成的略缩图因为filePath全是返回的缓存的第一张图
 		if (isFileNameInCache(bitmapFileNameMd5, cachePath)) {// 已经有缓存
-			DevUtil.v("jackzhou", String.format("DiskCache hit(InSample) path:%s/%s", cachePath, bitmapFileNameMd5));
-			return BitmapFactory.decodeFile(cachePath + "/" + bitmapFileNameMd5);
+			DevUtil.v("jackzhou", String.format(
+					"DiskCache hit(InSample) path:%s/%s", cachePath,
+					bitmapFileNameMd5));
+			return BitmapFactory
+					.decodeFile(cachePath + "/" + bitmapFileNameMd5);
 		}
 
 		if (maxWidth == 0 && maxHeight == 0) {// 都不限制？
@@ -416,10 +444,12 @@ public class ImageHelper {
 				float inSampleSizeWidthFloat = (float) width / (float) maxWidth;
 				int inSampleSizeWidth = Math.round(inSampleSizeWidthFloat);
 				// 计算到maxHeight的压缩比
-				float inSampleSizeHeightFloat = (float) height / (float) maxHeight;
+				float inSampleSizeHeightFloat = (float) height
+						/ (float) maxHeight;
 				int inSampleSizeHeight = Math.round(inSampleSizeHeightFloat);
 
-				int inSampleSize = Math.max(inSampleSizeWidth, inSampleSizeHeight);
+				int inSampleSize = Math.max(inSampleSizeWidth,
+						inSampleSizeHeight);
 
 				opts.inJustDecodeBounds = false;
 				opts.inSampleSize = inSampleSize;
@@ -447,13 +477,15 @@ public class ImageHelper {
 	}
 
 	/**
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param url
 	 * @param maxWidth
 	 * @param maxHeight
 	 * @return
 	 */
-	public Bitmap getRemotePicInSampleBitmap(String url, int maxWidth, int maxHeight) {
+	public Bitmap getRemotePicInSampleBitmap(String url, int maxWidth,
+			int maxHeight) {
 
 		return getRemotePicInSampleBitmap(url, maxWidth, maxHeight, null);
 	}
@@ -461,7 +493,8 @@ public class ImageHelper {
 	/**
 	 * 取得图片的略缩图
 	 * 
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param url
 	 *            图片地址
 	 * @param maxWidth
@@ -470,12 +503,15 @@ public class ImageHelper {
 	 *            指定缓存图片的路径 路径结尾不要带"/"
 	 * @return
 	 */
-	public Bitmap getRemotePicInSampleBitmap(String url, int maxWidth, int maxHeight, String cachePath) {
+	public Bitmap getRemotePicInSampleBitmap(String url, int maxWidth,
+			int maxHeight, String cachePath) {
 
 		// 判断是否有缓存
 		if (isDiskCached(url, maxWidth, maxHeight, cachePath)) {
-			String filePath = diskCachedFilePath(url, maxWidth, maxHeight, cachePath);
-			DevUtil.v("jackzhou", String.format("DiskCache hit(InSample) path:%s", filePath));
+			String filePath = diskCachedFilePath(url, maxWidth, maxHeight,
+					cachePath);
+			DevUtil.v("jackzhou",
+					String.format("DiskCache hit(InSample) path:%s", filePath));
 			return BitmapFactory.decodeFile(filePath);
 		}
 
@@ -486,25 +522,30 @@ public class ImageHelper {
 		}
 
 		// 缩放下载后的图片
-		return getInSampleBitmap(url2Md5FilePath(url), maxWidth, maxHeight, cachePath);
+		return getInSampleBitmap(url2Md5FilePath(url), maxWidth, maxHeight,
+				cachePath);
 	}
 
 	/**
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param filePathOrUrl
 	 * @param maxWidth
 	 * @param maxHeight
 	 * @return
 	 */
-	public Bitmap getInSampleBitmapUseFilePathOrUrl(String filePathOrUrl, int maxWidth, int maxHeight) {
+	public Bitmap getInSampleBitmapUseFilePathOrUrl(String filePathOrUrl,
+			int maxWidth, int maxHeight) {
 
-		return getInSampleBitmapUseFilePathOrUrl(filePathOrUrl, maxWidth, maxHeight, null);
+		return getInSampleBitmapUseFilePathOrUrl(filePathOrUrl, maxWidth,
+				maxHeight, null);
 	}
 
 	/**
 	 * 获取网络或本地的图片的略缩图
 	 * 
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param filePathOrUrl
 	 * @param maxWidth
 	 * @param maxHeight
@@ -512,13 +553,16 @@ public class ImageHelper {
 	 *            指定缓存图片的路径 路径结尾不要带"/"
 	 * @return
 	 */
-	public Bitmap getInSampleBitmapUseFilePathOrUrl(String filePathOrUrl, int maxWidth, int maxHeight, String cachePath) {
+	public Bitmap getInSampleBitmapUseFilePathOrUrl(String filePathOrUrl,
+			int maxWidth, int maxHeight, String cachePath) {
 		Bitmap ret = null;
 
 		if (filePathOrUrl.startsWith("http")) {
-			ret = getRemotePicInSampleBitmap(filePathOrUrl, maxWidth, maxHeight, cachePath);
+			ret = getRemotePicInSampleBitmap(filePathOrUrl, maxWidth,
+					maxHeight, cachePath);
 		} else {
-			ret = getInSampleBitmap(filePathOrUrl, maxWidth, maxHeight, cachePath);
+			ret = getInSampleBitmap(filePathOrUrl, maxWidth, maxHeight,
+					cachePath);
 		}
 
 		return ret;
@@ -536,7 +580,8 @@ public class ImageHelper {
 		if (filePathOrUrl.startsWith("http")) {
 			return loadBitmapUseSDCard(filePathOrUrl);
 		} else {
-			DevUtil.v("jackzhou", String.format("DiskCache hit(Nomal) path:%s", filePathOrUrl));
+			DevUtil.v("jackzhou", String.format("DiskCache hit(Nomal) path:%s",
+					filePathOrUrl));
 			return BitmapFactory.decodeFile(filePathOrUrl);
 		}
 	}
@@ -544,7 +589,8 @@ public class ImageHelper {
 	/**
 	 * 载入手机本地路径的图片
 	 * 
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param path
 	 *            图片路径
 	 * @return
@@ -606,7 +652,8 @@ public class ImageHelper {
 	/**
 	 * 判断以前下载的图片是否在app的cache中
 	 * 
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param url
 	 * @return
 	 */
@@ -627,7 +674,8 @@ public class ImageHelper {
 	/**
 	 * 判断图片是否在app的cache目录（ mContext.getCacheDir() ）中
 	 * 
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param fileName
 	 * @param cachePath
 	 * @return
@@ -639,7 +687,8 @@ public class ImageHelper {
 	/**
 	 * 判断图片是否在指定的cache目录中
 	 * 
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param
 	 * @return
 	 */
@@ -664,7 +713,8 @@ public class ImageHelper {
 	/**
 	 * 取得以前下载图片在本地保存的文件路径
 	 * 
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param url
 	 * @return
 	 */
@@ -738,7 +788,8 @@ public class ImageHelper {
 	/**
 	 * 转化url为对应md5的文件名
 	 * 
-	 * @deprecated 不建议public使用 对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
+	 * @deprecated 不建议public使用
+	 *             对应操作均可用loadImage、isDiskCached、diskCachedFilePath方法搞定
 	 * @param url
 	 * @return
 	 */
@@ -752,7 +803,8 @@ public class ImageHelper {
 		if (url.lastIndexOf("/") != -1) {
 			String tempFileName = url.substring(url.lastIndexOf("/") + 1);
 			if (tempFileName.lastIndexOf(".") != -1) {
-				tempfileNameExt = tempFileName.substring(tempFileName.lastIndexOf(".") + 1);
+				tempfileNameExt = tempFileName.substring(tempFileName
+						.lastIndexOf(".") + 1);
 				ret = MD5Util.Md5(url) + "." + tempfileNameExt;
 			} else {
 				ret = MD5Util.Md5(url) + ".jpg";
@@ -802,15 +854,18 @@ public class ImageHelper {
 			FileOutputStream fileOutputStreamTemp = null;
 			try {
 				byte[] data = loadImageFromNetwork(url);
-				Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+				Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0,
+						data.length);
 
 				String imageType = getImageType(data);
 				fileOutputStreamTemp = new FileOutputStream(file);
 				if (!imageType.equalsIgnoreCase("jpg")) {
 					// 判断是否png 避免透明背景被弄成黑色
-					bitmap.compress(CompressFormat.PNG, 100, fileOutputStreamTemp);
+					bitmap.compress(CompressFormat.PNG, 100,
+							fileOutputStreamTemp);
 				} else {
-					bitmap.compress(CompressFormat.JPEG, 60, fileOutputStreamTemp);
+					bitmap.compress(CompressFormat.JPEG, 60,
+							fileOutputStreamTemp);
 				}
 				imagePath = file.getAbsolutePath();
 				if (!bitmap.isRecycled()) {// 图片存成文件后，直接回收掉. 防止out of memory
@@ -836,7 +891,8 @@ public class ImageHelper {
 				}
 			}
 		} else {
-			DevUtil.v("jackzhou", String.format("DiskCache hit(Nomal) path:%s", imagePath));
+			DevUtil.v("jackzhou",
+					String.format("DiskCache hit(Nomal) path:%s", imagePath));
 		}
 
 		ret = BitmapFactory.decodeFile(imagePath);
@@ -852,7 +908,8 @@ public class ImageHelper {
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	public byte[] loadImageFromNetwork(String url) throws ClientProtocolException, IOException {
+	public byte[] loadImageFromNetwork(String url)
+			throws ClientProtocolException, IOException {
 		HttpGet method = new HttpGet(url);
 		HttpResponse response = HttpUtil.getHttpClient().execute(method);
 		HttpEntity entity = response.getEntity();
@@ -883,9 +940,11 @@ public class ImageHelper {
 		}
 		if (b[0] == (byte) 'G' && b[1] == (byte) 'I' && b[2] == (byte) 'F') {
 			return "gif";
-		} else if (b[1] == (byte) 'P' && b[2] == (byte) 'N' && b[3] == (byte) 'G') {
+		} else if (b[1] == (byte) 'P' && b[2] == (byte) 'N'
+				&& b[3] == (byte) 'G') {
 			return "png";
-		} else if (b[6] == (byte) 'J' && b[7] == (byte) 'F' && b[8] == (byte) 'I' && b[9] == (byte) 'F') {
+		} else if (b[6] == (byte) 'J' && b[7] == (byte) 'F'
+				&& b[8] == (byte) 'I' && b[9] == (byte) 'F') {
 			return "jpg";
 		} else {
 			return "Unknown";
@@ -932,7 +991,8 @@ public class ImageHelper {
 	 * 判断图片是否已经磁盘缓存
 	 * 
 	 * @param filePathOrUrl
-	 *            图片的url或者加载的最原始的本地路径(http://a.com/a.jpg或者/data/data/xxx.com/ cache/a.jpg)
+	 *            图片的url或者加载的最原始的本地路径(http://a.com/a.jpg或者/data/data/xxx.com/
+	 *            cache/a.jpg)
 	 * @return
 	 */
 	public boolean isDiskCached(String filePathOrUrl) {
@@ -943,7 +1003,8 @@ public class ImageHelper {
 	 * 判断图片是否已经磁盘缓存
 	 * 
 	 * @param filePathOrUrl
-	 *            图片的url或者加载的最原始的本地路径(http://a.com/a.jpg或者/data/data/xxx.com/ cache/a.jpg)
+	 *            图片的url或者加载的最原始的本地路径(http://a.com/a.jpg或者/data/data/xxx.com/
+	 *            cache/a.jpg)
 	 * @param width
 	 *            图片在调用缩放裁剪方法时传入的width
 	 * @param height
@@ -958,7 +1019,8 @@ public class ImageHelper {
 	 * 判断图片是否已经磁盘缓存
 	 * 
 	 * @param filePathOrUrl
-	 *            图片的url或者加载的最原始的本地路径(http://a.com/a.jpg或者/data/data/xxx.com/ cache/a.jpg)
+	 *            图片的url或者加载的最原始的本地路径(http://a.com/a.jpg或者/data/data/xxx.com/
+	 *            cache/a.jpg)
 	 * @param width
 	 *            图片在调用缩放裁剪方法时传入的width
 	 * @param height
@@ -967,7 +1029,8 @@ public class ImageHelper {
 	 *            图片在调用缩放裁剪时传入的自定义磁盘缓存cache路径（/sdcard/000）路径结尾不要带"/"
 	 * @return
 	 */
-	public boolean isDiskCached(String filePathOrUrl, int width, int height, String cachePath) {
+	public boolean isDiskCached(String filePathOrUrl, int width, int height,
+			String cachePath) {
 		return isDiskCached(filePathOrUrl, width, height, cachePath, false);
 	}
 
@@ -975,7 +1038,8 @@ public class ImageHelper {
 	 * 判断图片是否已经磁盘缓存
 	 * 
 	 * @param filePathOrUrl
-	 *            图片的url或者加载的最原始的本地路径(http://a.com/a.jpg或者/data/data/xxx.com/ cache/a.jpg)
+	 *            图片的url或者加载的最原始的本地路径(http://a.com/a.jpg或者/data/data/xxx.com/
+	 *            cache/a.jpg)
 	 * @param width
 	 *            图片在调用缩放裁剪方法时传入的width
 	 * @param height
@@ -986,11 +1050,13 @@ public class ImageHelper {
 	 *            图片是否裁剪
 	 * @return
 	 */
-	public boolean isDiskCached(String filePathOrUrl, int width, int height, String cachePath, boolean isNeedCut) {
+	public boolean isDiskCached(String filePathOrUrl, int width, int height,
+			String cachePath, boolean isNeedCut) {
 
 		boolean ret = false;
 
-		String bitmapFileNameMd5 = getBitmapFileNameMd5(filePathOrUrl, width, height, cachePath, isNeedCut);
+		String bitmapFileNameMd5 = getBitmapFileNameMd5(filePathOrUrl, width,
+				height, cachePath, isNeedCut);
 		ret = isFileNameInCache(bitmapFileNameMd5, cachePath);
 
 		return ret;
@@ -1027,8 +1093,10 @@ public class ImageHelper {
 	 * @param cachePath
 	 * @return
 	 */
-	public String diskCachedFilePath(String filePathOrUrl, int width, int height, String cachePath) {
-		return diskCachedFilePath(filePathOrUrl, width, height, cachePath, false);
+	public String diskCachedFilePath(String filePathOrUrl, int width,
+			int height, String cachePath) {
+		return diskCachedFilePath(filePathOrUrl, width, height, cachePath,
+				false);
 	}
 
 	/**
@@ -1041,9 +1109,11 @@ public class ImageHelper {
 	 * @param isNeedCut
 	 * @return
 	 */
-	public String diskCachedFilePath(String filePathOrUrl, int width, int height, String cachePath, boolean isNeedCut) {
+	public String diskCachedFilePath(String filePathOrUrl, int width,
+			int height, String cachePath, boolean isNeedCut) {
 
-		String bitmapFileNameMd5 = getBitmapFileNameMd5(filePathOrUrl, width, height, cachePath, isNeedCut);
+		String bitmapFileNameMd5 = getBitmapFileNameMd5(filePathOrUrl, width,
+				height, cachePath, isNeedCut);
 
 		if (cachePath == null) {
 			cachePath = mContext.getCacheDir().getAbsolutePath();
@@ -1071,7 +1141,8 @@ public class ImageHelper {
 	 * @param cachePath
 	 * @return
 	 */
-	private String getBitmapFileNameMd5(String filePathOrUrl, int width, int height, String cachePath, boolean isNeedCut) {
+	private String getBitmapFileNameMd5(String filePathOrUrl, int width,
+			int height, String cachePath, boolean isNeedCut) {
 
 		if (filePathOrUrl == null) {
 			return filePathOrUrl;
@@ -1091,9 +1162,11 @@ public class ImageHelper {
 
 			String bitmapKey;
 			if (isNeedCut) {// 缩放及剪切的情况
-				bitmapKey = String.format("%s%s%s%s", width, height, isNeedCut, filePath);// filePatch需要放在最后为了适用url2Md5FileName方法
+				bitmapKey = String.format("%s%s%s%s", width, height, isNeedCut,
+						filePath);// filePatch需要放在最后为了适用url2Md5FileName方法
 			} else {// 仅缩放
-				bitmapKey = getInSampleBitmapFileNameKey(filePath, width, height);
+				bitmapKey = getInSampleBitmapFileNameKey(filePath, width,
+						height);
 			}
 
 			bitmapFileNameMd5 = url2Md5FileName(bitmapKey);
@@ -1128,14 +1201,16 @@ public class ImageHelper {
 	 * @param cachePath
 	 *            指定图片缓存目录 null则默认使用手机cache目录mContext.getCacheDir()
 	 */
-	public Bitmap loadImage(String filePathOrUrl, int width, int height, String cachePath) {
+	public Bitmap loadImage(String filePathOrUrl, int width, int height,
+			String cachePath) {
 		return loadImage(filePathOrUrl, width, height, cachePath, false);
 	}
 
 	/**
 	 * 加载图片<br>
 	 * <br>
-	 * 重要：本方法中isNeedCut=true使用了sdk level8的特性。使用本方法，需要保证你的app中android:minSdkVersion大于等于8，否则在低版本中会异常
+	 * 重要：本方法中isNeedCut=true使用了sdk
+	 * level8的特性。使用本方法，需要保证你的app中android:minSdkVersion大于等于8，否则在低版本中会异常
 	 * 
 	 * @param filePathOrUrl
 	 *            网络图片url或者本地路径
@@ -1144,11 +1219,13 @@ public class ImageHelper {
 	 * @param height
 	 *            高
 	 * @param isNeedCut
-	 *            true:缩放后将大于指定width和height的裁剪掉 false:仅按比例缩放保证图片宽和高不大于width和height
+	 *            true:缩放后将大于指定width和height的裁剪掉
+	 *            false:仅按比例缩放保证图片宽和高不大于width和height
 	 * @return
 	 */
 	@TargetApi(8)
-	public Bitmap loadImage(String filePathOrUrl, int width, int height, boolean isNeedCut) {
+	public Bitmap loadImage(String filePathOrUrl, int width, int height,
+			boolean isNeedCut) {
 		return loadImage(filePathOrUrl, width, height, null, isNeedCut);
 	}
 
@@ -1159,7 +1236,8 @@ public class ImageHelper {
 	/**
 	 * 加载图片<br>
 	 * <br>
-	 * 重要：本方法中isNeedCut=true使用了sdk level8的特性。使用本方法，需要保证你的app中android:minSdkVersion大于等于8，否则在低版本中会异常
+	 * 重要：本方法中isNeedCut=true使用了sdk
+	 * level8的特性。使用本方法，需要保证你的app中android:minSdkVersion大于等于8，否则在低版本中会异常
 	 * 
 	 * @param filePathOrUrl
 	 *            网络图片url或者本地路径
@@ -1170,11 +1248,13 @@ public class ImageHelper {
 	 * @param cachePath
 	 *            指定图片缓存目录 null则默认使用手机cache目录mContext.getCacheDir()
 	 * @param isNeedCut
-	 *            true:缩放后将大于指定width和height的裁剪掉 false:仅按比例缩放保证图片宽和高不大于width和height
+	 *            true:缩放后将大于指定width和height的裁剪掉
+	 *            false:仅按比例缩放保证图片宽和高不大于width和height
 	 * @return
 	 */
 	@TargetApi(8)
-	public Bitmap loadImage(String filePathOrUrl, int width, int height, String cachePath, boolean isNeedCut) {
+	public Bitmap loadImage(String filePathOrUrl, int width, int height,
+			String cachePath, boolean isNeedCut) {
 
 		if (filePathOrUrl == null) {
 			return null;
@@ -1193,19 +1273,24 @@ public class ImageHelper {
 
 		switch (imageLoadType) {
 		case Nomal:
-			DevUtil.v("jackzhou", String.format("loadImage:Nomal task:%s", this));
+			DevUtil.v("jackzhou",
+					String.format("loadImage:Nomal task:%s", this));
 			ret = loadImage(filePathOrUrl);
 			break;
 
 		case InSample:
-			DevUtil.v("jackzhou", String.format("loadImage:InSample task:%s", this));
-			ret = getInSampleBitmapUseFilePathOrUrl(filePathOrUrl, width, height, cachePath);
+			DevUtil.v("jackzhou",
+					String.format("loadImage:InSample task:%s", this));
+			ret = getInSampleBitmapUseFilePathOrUrl(filePathOrUrl, width,
+					height, cachePath);
 
 			break;
 
 		case InSampleAndCut:
-			DevUtil.v("jackzhou", String.format("loadImage:InSampleAndCut task:%s", this));
-			ret = getInSampleAndCutBitmap(filePathOrUrl, width, height, cachePath);
+			DevUtil.v("jackzhou",
+					String.format("loadImage:InSampleAndCut task:%s", this));
+			ret = getInSampleAndCutBitmap(filePathOrUrl, width, height,
+					cachePath);
 
 			break;
 		}

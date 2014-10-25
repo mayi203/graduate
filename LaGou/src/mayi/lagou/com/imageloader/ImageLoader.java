@@ -48,13 +48,16 @@ public class ImageLoader {
 
 	/**
 	 * 
-	 * 重要：本方法中使用了sdk level5的特性。使用本方法，需要保证你的app中android:minSdkVersion 否则使用将不显示加载图片
+	 * 重要：本方法中使用了sdk level5的特性。使用本方法，需要保证你的app中android:minSdkVersion
+	 * 否则使用将不显示加载图片
 	 * 
 	 * 百分比方式设置缓存大小
 	 * 
 	 * @param context
 	 * @param percent
-	 *            Sets the memory cache size based on a percentage of the device memory class percent is < 0.05 or > .8. 参见：setMemCacheSizePercent方法
+	 *            Sets the memory cache size based on a percentage of the device
+	 *            memory class percent is < 0.05 or > .8.
+	 *            参见：setMemCacheSizePercent方法
 	 */
 	@TargetApi(5)
 	public ImageLoader(Context context, float percent) {
@@ -79,20 +82,23 @@ public class ImageLoader {
 		DevUtil.initialize(mContext);
 	}
 
-	private static final Executor singleThreadExecutor = Executors.newSingleThreadExecutor(new ThreadFactory() {
-		private final AtomicInteger mCount = new AtomicInteger(1);
+	private static final Executor singleThreadExecutor = Executors
+			.newSingleThreadExecutor(new ThreadFactory() {
+				private final AtomicInteger mCount = new AtomicInteger(1);
 
-		public Thread newThread(Runnable r) {
-			return new Thread(r, "AsyncTask #" + mCount.getAndIncrement());
-		}
-	});
+				public Thread newThread(Runnable r) {
+					return new Thread(r, "AsyncTask #"
+							+ mCount.getAndIncrement());
+				}
+			});
 
 	/**
 	 * 异步加载图片<br>
 	 * <br>
 	 * 注意：<br>
 	 * 该加载内置磁盘及内存缓存机制。<br>
-	 * 图片在内存缓存满时，为防止OOM会自动recycle掉（已做处理，recycle后图片会透明，不会报：Trying to use recycled bitmap。为了app业务或美观建议设置ImageView的android:background属性。）<br>
+	 * 图片在内存缓存满时，为防止OOM会自动recycle掉（已做处理，recycle后图片会透明，不会报：Trying to use recycled
+	 * bitmap。为了app业务或美观建议设置ImageView的android:background属性。）<br>
 	 * 
 	 * @param imageView
 	 *            显示图片的控件
@@ -101,17 +107,20 @@ public class ImageLoader {
 	 * @param loadingBitmap
 	 *            加载图片时loading图
 	 */
-	public void loadImage(final ImageView imageView, String filePathOrUrl, final Bitmap loadingBitmap) {
+	public void loadImage(final ImageView imageView, String filePathOrUrl,
+			final Bitmap loadingBitmap) {
 		loadImage(imageView, filePathOrUrl, loadingBitmap, 0, 0, null, false);
 	}
 
 	/**
 	 * 异步加载图片，可以按比例缩放及裁剪图片<br>
 	 * <br>
-	 * 重要：本方法中isNeedCut=true使用了sdk level8的特性。使用本方法，需要保证你的app中android:minSdkVersion大于等于8，否则在低版本中会异常 <br>
+	 * 重要：本方法中isNeedCut=true使用了sdk
+	 * level8的特性。使用本方法，需要保证你的app中android:minSdkVersion大于等于8，否则在低版本中会异常 <br>
 	 * <br>
 	 * 该加载内置磁盘及内存缓存机制。<br>
-	 * 图片在内存缓存满时，为防止OOM会自动recycle掉（已做处理，recycle后图片会透明，不会报：Trying to use recycled bitmap。为了app业务或美观建议设置ImageView的android:background属性。）<br>
+	 * 图片在内存缓存满时，为防止OOM会自动recycle掉（已做处理，recycle后图片会透明，不会报：Trying to use recycled
+	 * bitmap。为了app业务或美观建议设置ImageView的android:background属性。）<br>
 	 * 
 	 * @param imageView
 	 *            显示图片的控件
@@ -126,24 +135,35 @@ public class ImageLoader {
 	 * @param cachePath
 	 *            缓存目录
 	 * @param isNeedCut
-	 *            缩放时是否需要裁剪 true:缩放后将大于指定width和height的裁剪掉 false:仅按比例缩放保证图片宽和高不大于width和height
+	 *            缩放时是否需要裁剪 true:缩放后将大于指定width和height的裁剪掉
+	 *            false:仅按比例缩放保证图片宽和高不大于width和height
 	 */
 	@TargetApi(8)
-	public void loadImage(final ImageView imageView, String filePathOrUrl, final Bitmap loadingBitmap, int width, int height, String cachePath, boolean isNeedCut) {
+	public void loadImage(final ImageView imageView, String filePathOrUrl,
+			final Bitmap loadingBitmap, int width, int height,
+			String cachePath, boolean isNeedCut) {
 		if (filePathOrUrl == null) {
 			return;
 		}
 
 		/*
-		 * 加载图片逻辑 1.mem缓存命中，直接显示 2.mem缓存未命中，磁盘缓存命中，使用独立线程池，与网络下载的线程池分开，提高加载速度 3.全未命中，第一次加载图片使用自定义的继承LibAsyncTask类，单线程队列下载和加载图片
+		 * 加载图片逻辑 1.mem缓存命中，直接显示 2.mem缓存未命中，磁盘缓存命中，使用独立线程池，与网络下载的线程池分开，提高加载速度
+		 * 3.全未命中，第一次加载图片使用自定义的继承LibAsyncTask类，单线程队列下载和加载图片
 		 */
 		// memcache状态
-		DevUtil.v("jackzhou", String.format("mImageMemCache status: size=%s - maxSize=%s - size*100/maxSize=%s - hitCount=%s - missCount=%s", mImageMemCache.size(),
-				mImageMemCache.maxSize(), mImageMemCache.size() * 100 / mImageMemCache.maxSize(), mImageMemCache.hitCount(), mImageMemCache.missCount()));
+		DevUtil.v(
+				"jackzhou",
+				String.format(
+						"mImageMemCache status: size=%s - maxSize=%s - size*100/maxSize=%s - hitCount=%s - missCount=%s",
+						mImageMemCache.size(), mImageMemCache.maxSize(),
+						mImageMemCache.size() * 100 / mImageMemCache.maxSize(),
+						mImageMemCache.hitCount(), mImageMemCache.missCount()));
 		// mem缓存命中
-		String memKey = generateMemCacheKey(filePathOrUrl, width, height, cachePath, isNeedCut);
+		String memKey = generateMemCacheKey(filePathOrUrl, width, height,
+				cachePath, isNeedCut);
 		if (isMemCached(memKey)) {
-			imageView.setImageDrawable(new LibBitmapDrawable(mContext.getResources(), mImageMemCache.get(memKey)));
+			imageView.setImageDrawable(new LibBitmapDrawable(mContext
+					.getResources(), mImageMemCache.get(memKey)));
 			return;
 		}
 
@@ -152,13 +172,20 @@ public class ImageLoader {
 
 			if (BitmapWorkerTask.cancelPotentialWork(filePathOrUrl, imageView)) {
 
-				final BitmapWorkerTask task = new BitmapWorkerTask(filePathOrUrl, imageView, loadingBitmap, mImageMemCache, width, height, cachePath, isNeedCut);
+				final BitmapWorkerTask task = new BitmapWorkerTask(
+						filePathOrUrl, imageView, loadingBitmap,
+						mImageMemCache, width, height, cachePath, isNeedCut);
 				task.setIsFadeInBitmap(mFadeInBitmap);
-				final AsyncDrawable asyncDrawable = new AsyncDrawable(imageView.getResources(), loadingBitmap, task);
+				final AsyncDrawable asyncDrawable = new AsyncDrawable(
+						imageView.getResources(), loadingBitmap, task);
 				imageView.setImageDrawable(asyncDrawable);
 
 				task.executeOnExecutor(singleThreadExecutor);
-				DevUtil.v("jackzhou", String.format("mImageMemCache ++++++++++++ Executor:singleThreadExecutor task:%s", task));
+				DevUtil.v(
+						"jackzhou",
+						String.format(
+								"mImageMemCache ++++++++++++ Executor:singleThreadExecutor task:%s",
+								task));
 			}
 
 			return;
@@ -167,14 +194,21 @@ public class ImageLoader {
 		// 第一次加载
 		if (BitmapWorkerTask.cancelPotentialWork(filePathOrUrl, imageView)) {
 
-			final BitmapWorkerTask task = new BitmapWorkerTask(filePathOrUrl, imageView, loadingBitmap, mImageMemCache, width, height, cachePath, isNeedCut);
+			final BitmapWorkerTask task = new BitmapWorkerTask(filePathOrUrl,
+					imageView, loadingBitmap, mImageMemCache, width, height,
+					cachePath, isNeedCut);
 			task.setIsFadeInBitmap(mFadeInBitmap);
-			final AsyncDrawable asyncDrawable = new AsyncDrawable(imageView.getResources(), loadingBitmap, task);
+			final AsyncDrawable asyncDrawable = new AsyncDrawable(
+					imageView.getResources(), loadingBitmap, task);
 			imageView.setImageDrawable(asyncDrawable);
 
 			task.executeOnExecutor(LibAsyncTask.SERIAL_EXECUTOR);// 这里一次只会有一个tast执行
 																	// BitmapWorkerTask继承新的AsyncTask。
-			DevUtil.v("jackzhou", String.format("mImageMemCache ------------ Executor:LibAsyncTask.SERIAL_EXECUTOR task:%s", task));
+			DevUtil.v(
+					"jackzhou",
+					String.format(
+							"mImageMemCache ------------ Executor:LibAsyncTask.SERIAL_EXECUTOR task:%s",
+							task));
 		}
 
 	}
@@ -184,7 +218,8 @@ public class ImageLoader {
 	 * <br>
 	 * 注意：<br>
 	 * 该加载内置磁盘及内存缓存机制。<br>
-	 * 图片在内存缓存满时，为防止OOM会自动recycle掉（已做处理，recycle后图片会透明，不会报：Trying to use recycled bitmap。为了app业务或美观建议设置ImageView的android:background属性。）<br>
+	 * 图片在内存缓存满时，为防止OOM会自动recycle掉（已做处理，recycle后图片会透明，不会报：Trying to use recycled
+	 * bitmap。为了app业务或美观建议设置ImageView的android:background属性。）<br>
 	 * 
 	 * @param imageView
 	 *            显示图片的控件
@@ -193,15 +228,18 @@ public class ImageLoader {
 	 * @param loadingBitmapResId
 	 *            加载图片时loading图资源id
 	 */
-	public void loadImage(final ImageView imageView, String filePathOrUrl, int loadingBitmapResId) {
-		loadImage(imageView, filePathOrUrl, loadingBitmapResId, 0, 0, null, false);
+	public void loadImage(final ImageView imageView, String filePathOrUrl,
+			int loadingBitmapResId) {
+		loadImage(imageView, filePathOrUrl, loadingBitmapResId, 0, 0, null,
+				false);
 	}
 
 	/**
 	 * 异步加载图片，可以按比例缩放图片 缩放保证图片宽和高不大于width和height<br>
 	 * <br>
 	 * 该加载内置磁盘及内存缓存机制。<br>
-	 * 图片在内存缓存满时，为防止OOM会自动recycle掉（已做处理，recycle后图片会透明，不会报：Trying to use recycled bitmap。为了app业务或美观建议设置ImageView的android:background属性。）<br>
+	 * 图片在内存缓存满时，为防止OOM会自动recycle掉（已做处理，recycle后图片会透明，不会报：Trying to use recycled
+	 * bitmap。为了app业务或美观建议设置ImageView的android:background属性。）<br>
 	 * 
 	 * @param imageView
 	 *            显示图片的控件
@@ -214,17 +252,21 @@ public class ImageLoader {
 	 * @param height
 	 *            高
 	 */
-	public void loadImage(final ImageView imageView, String filePathOrUrl, int loadingBitmapResId, int width, int height) {
-		loadImage(imageView, filePathOrUrl, loadingBitmapResId, width, height, null, false);
+	public void loadImage(final ImageView imageView, String filePathOrUrl,
+			int loadingBitmapResId, int width, int height) {
+		loadImage(imageView, filePathOrUrl, loadingBitmapResId, width, height,
+				null, false);
 	}
 
 	/**
 	 * 异步加载图片，可以按比例缩放及裁剪图片<br>
 	 * <br>
-	 * 重要：本方法中isNeedCut=true使用了sdk level8的特性。使用本方法，需要保证你的app中android:minSdkVersion大于等于8，否则在低版本中会异常 <br>
+	 * 重要：本方法中isNeedCut=true使用了sdk
+	 * level8的特性。使用本方法，需要保证你的app中android:minSdkVersion大于等于8，否则在低版本中会异常 <br>
 	 * <br>
 	 * 该加载内置磁盘及内存缓存机制。<br>
-	 * 图片在内存缓存满时，为防止OOM会自动recycle掉（已做处理，recycle后图片会透明，不会报：Trying to use recycled bitmap。为了app业务或美观建议设置ImageView的android:background属性。）<br>
+	 * 图片在内存缓存满时，为防止OOM会自动recycle掉（已做处理，recycle后图片会透明，不会报：Trying to use recycled
+	 * bitmap。为了app业务或美观建议设置ImageView的android:background属性。）<br>
 	 * 
 	 * @param imageView
 	 *            显示图片的控件
@@ -237,20 +279,25 @@ public class ImageLoader {
 	 * @param height
 	 *            高
 	 * @param isNeedCut
-	 *            缩放时是否需要裁剪 true:缩放后将大于指定width和height的裁剪掉 false:仅按比例缩放保证图片宽和高不大于width和height
+	 *            缩放时是否需要裁剪 true:缩放后将大于指定width和height的裁剪掉
+	 *            false:仅按比例缩放保证图片宽和高不大于width和height
 	 */
 	@TargetApi(8)
-	public void loadImage(final ImageView imageView, String filePathOrUrl, int loadingBitmapResId, int width, int height, boolean isNeedCut) {
-		loadImage(imageView, filePathOrUrl, loadingBitmapResId, width, height, null, isNeedCut);
+	public void loadImage(final ImageView imageView, String filePathOrUrl,
+			int loadingBitmapResId, int width, int height, boolean isNeedCut) {
+		loadImage(imageView, filePathOrUrl, loadingBitmapResId, width, height,
+				null, isNeedCut);
 	}
 
 	/**
 	 * 异步加载图片，可以按比例缩放及裁剪图片<br>
 	 * <br>
-	 * 重要：本方法中isNeedCut=true使用了sdk level8的特性。使用本方法，需要保证你的app中android:minSdkVersion大于等于8，否则在低版本中会异常 <br>
+	 * 重要：本方法中isNeedCut=true使用了sdk
+	 * level8的特性。使用本方法，需要保证你的app中android:minSdkVersion大于等于8，否则在低版本中会异常 <br>
 	 * <br>
 	 * 该加载内置磁盘及内存缓存机制。<br>
-	 * 图片在内存缓存满时，为防止OOM会自动recycle掉（已做处理，recycle后图片会透明，不会报：Trying to use recycled bitmap。为了app业务或美观建议设置ImageView的android:background属性。）<br>
+	 * 图片在内存缓存满时，为防止OOM会自动recycle掉（已做处理，recycle后图片会透明，不会报：Trying to use recycled
+	 * bitmap。为了app业务或美观建议设置ImageView的android:background属性。）<br>
 	 * 
 	 * @param imageView
 	 *            显示图片的控件
@@ -265,23 +312,29 @@ public class ImageLoader {
 	 * @param cachePath
 	 *            缓存目录
 	 * @param isNeedCut
-	 *            缩放时是否需要裁剪 true:缩放后将大于指定width和height的裁剪掉 false:仅按比例缩放保证图片宽和高不大于width和height
+	 *            缩放时是否需要裁剪 true:缩放后将大于指定width和height的裁剪掉
+	 *            false:仅按比例缩放保证图片宽和高不大于width和height
 	 */
 	@TargetApi(8)
-	public void loadImage(ImageView imageView, String filePathOrUrl, int loadingBitmapResId, int width, int height, String cachePath, boolean isNeedCut) {
+	public void loadImage(ImageView imageView, String filePathOrUrl,
+			int loadingBitmapResId, int width, int height, String cachePath,
+			boolean isNeedCut) {
 
 		// 加载时显示的默认图
 		Bitmap loadingBitmap = mCacheOfloadingBitmap.get(loadingBitmapResId);
 		if (loadingBitmap == null) {
-			loadingBitmap = BitmapFactory.decodeResource(imageView.getResources(), loadingBitmapResId);
+			loadingBitmap = BitmapFactory.decodeResource(
+					imageView.getResources(), loadingBitmapResId);
 			mCacheOfloadingBitmap.put(loadingBitmapResId, loadingBitmap);
 		}
 
-		loadImage(imageView, filePathOrUrl, loadingBitmap, width, height, cachePath, isNeedCut);
+		loadImage(imageView, filePathOrUrl, loadingBitmap, width, height,
+				cachePath, isNeedCut);
 	}
 
 	/**
-	 * 清空Memory缓存，所有图片会被recycle. 已作处理，可放心使用，recycle的图片不会报：trying to use a recycled bitmap错误<br>
+	 * 清空Memory缓存，所有图片会被recycle. 已作处理，可放心使用，recycle的图片不会报：trying to use a
+	 * recycled bitmap错误<br>
 	 * 建议在onPause及onDestroy中调用该方法
 	 * 
 	 */
@@ -290,7 +343,8 @@ public class ImageLoader {
 	}
 
 	/**
-	 * 移除单个Memory缓存，图片会被recycle. 已作处理，可放心使用，recycle的图片不会报：trying to use a recycled bitmap错误<br>
+	 * 移除单个Memory缓存，图片会被recycle. 已作处理，可放心使用，recycle的图片不会报：trying to use a
+	 * recycled bitmap错误<br>
 	 * 
 	 * @param key
 	 * @return
@@ -329,7 +383,8 @@ public class ImageLoader {
 		if (temp == null) {
 			return false;
 		} else {
-			DevUtil.v("jackzhou", String.format("mImageMemCache memcache hit. memKey = '%s'", memKey));
+			DevUtil.v("jackzhou", String.format(
+					"mImageMemCache memcache hit. memKey = '%s'", memKey));
 			return true;
 		}
 	}
@@ -343,9 +398,11 @@ public class ImageLoader {
 	 * @param cachePath
 	 * @return
 	 */
-	private boolean isDiskCached(String filePathOrUrl, int width, int height, String cachePath) {
+	private boolean isDiskCached(String filePathOrUrl, int width, int height,
+			String cachePath) {
 
-		return ImageHelper.getInstance(mContext).isDiskCached(filePathOrUrl, width, height, cachePath);
+		return ImageHelper.getInstance(mContext).isDiskCached(filePathOrUrl,
+				width, height, cachePath);
 	}
 
 	/**
@@ -358,8 +415,10 @@ public class ImageLoader {
 	 * @param isNeedCut
 	 * @return
 	 */
-	public static String generateMemCacheKey(String filePathOrUrl, int width, int height, String cachePath, boolean isNeedCut) {
-		return String.format("%s%s%s%s%s", String.valueOf(filePathOrUrl), width, height, String.valueOf(cachePath), isNeedCut);
+	public static String generateMemCacheKey(String filePathOrUrl, int width,
+			int height, String cachePath, boolean isNeedCut) {
+		return String.format("%s%s%s%s%s", String.valueOf(filePathOrUrl),
+				width, height, String.valueOf(cachePath), isNeedCut);
 	}
 
 	/**
@@ -407,7 +466,8 @@ public class ImageLoader {
 	 * 
 	 */
 	public String saveImage2Local(Bitmap bitmap, String string, String fileName) {
-		return saveImage2Local(bitmap, string, fileName, Bitmap.CompressFormat.JPEG, 100);
+		return saveImage2Local(bitmap, string, fileName,
+				Bitmap.CompressFormat.JPEG, 100);
 	}
 
 	/**
@@ -423,7 +483,8 @@ public class ImageLoader {
 	 *            图片压缩率
 	 * @return 图片路径或者null
 	 */
-	public String saveImage2Local(Bitmap bitmap, String path, String fileName, CompressFormat format, int compress) {
+	public String saveImage2Local(Bitmap bitmap, String path, String fileName,
+			CompressFormat format, int compress) {
 		File imagePath = null;
 		try {
 			if (bitmap != null && !bitmap.isRecycled()) {
@@ -435,7 +496,8 @@ public class ImageLoader {
 
 				imagePath = new File(path, fileName);// 给新照的照片文件命名
 
-				BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(imagePath));
+				BufferedOutputStream bos = new BufferedOutputStream(
+						new FileOutputStream(imagePath));
 
 				/* 采用压缩转档方法 */
 				bitmap.compress(format, compress, bos);
@@ -471,7 +533,8 @@ public class ImageLoader {
 		return mImageMemCache.get(key);
 	}
 
-	public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth) {
+	public static int calculateInSampleSize(BitmapFactory.Options options,
+			int reqWidth) {
 		// 源图片的宽度
 		final int width = options.outWidth;
 		int inSampleSize = 1;
@@ -483,7 +546,8 @@ public class ImageLoader {
 		return inSampleSize;
 	}
 
-	public static Bitmap decodeSampledBitmapFromResource(String pathName, int reqWidth) {
+	public static Bitmap decodeSampledBitmapFromResource(String pathName,
+			int reqWidth) {
 		// 第一次解析将inJustDecodeBounds设置为true，来获取图片大小
 		final BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;

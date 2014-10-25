@@ -13,6 +13,6 @@ public class LaGouApi {
 	public static String LogIn = "/user/login.json";
 	public static String Resume = "/resume/myresume.html";
 	public static String Jobs = "/jobs/list_";
-	public static String Deliver="/mycenter/deliverResumeBeforce.json";
-	public static String DeliverRecord="/mycenter/delivery.html?tag=-1&r=&pageNo=";
+	public static String Deliver = "/mycenter/deliverResumeBeforce.json";
+	public static String DeliverRecord = "/mycenter/delivery.html?tag=-1&r=&pageNo=";
 }
