@@ -1,27 +1,25 @@
 package mayi.lagou.com.fragment;
 
 import mayi.lagou.com.R;
-import mayi.lagou.com.core.BaseFragment;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
-public final class JobListFragment extends BaseFragment {
+public final class JobListFragment extends Fragment {
     private static final String KEY_CONTENT = "TestFragment:Content";
-    TextView text;
     public static JobListFragment newInstance(String content) {
         JobListFragment fragment = new JobListFragment();
-
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < 20; i++) {
-            builder.append(content).append(" ");
-        }
-        builder.deleteCharAt(builder.length() - 1);
-        fragment.mContent = builder.toString();
+        fragment.mContent = content;
 
         return fragment;
     }
 
     private String mContent = "???";
+    private TextView text;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,52 +30,18 @@ public final class JobListFragment extends BaseFragment {
         }
     }
 
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        text = new TextView(getActivity());
-//        text.setGravity(Gravity.CENTER);
-////        text.setText(mContent);
-//        text.setTextSize(20 * getResources().getDisplayMetrics().density);
-//        text.setPadding(20, 20, 20, 20);
-//
-//        LinearLayout layout = new LinearLayout(getActivity());
-//        layout.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-//        layout.setGravity(Gravity.CENTER);
-//        layout.addView(text);
-//
-//        return layout;
-//    }
+    @SuppressLint("InflateParams")
+	@Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    	View main=inflater.inflate(R.layout.f_job_list, null);
+    	text=(TextView)main.findViewById(R.id.txt);
+    	text.setText(mContent);
+        return main;
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(KEY_CONTENT, mContent);
     }
-
-//	@Override
-//	public void onResume() {
-//		super.onResume();
-//		text.setText(mContent);
-//	}
-
-	@Override
-	public int contentView() {
-		return R.layout.f_job_list;
-	}
-
-	@Override
-	public void findViewsById() {
-		
-	}
-
-	@Override
-	public void initValue() {
-		
-	}
-
-	@Override
-	public void initListener() {
-		
-	}
-    
 }
