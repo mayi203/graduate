@@ -1,55 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/topbar"
+        style="@style/topBar" >
+
+        <TextView
+            android:id="@+id/back_job"
+            style="@style/back_text"
+            android:text="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/right_bar_job"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/selector_detail_deliver_btn"
+            android:contentDescription="@string/app_name"
+            android:paddingBottom="8dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="15dp"
+            android:paddingTop="8dp"
+            android:src="@drawable/overflow_icon" />
+    </RelativeLayout>
+
+    <mayi.lagou.com.view.TabPageIndicator
+        android:id="@+id/indicator"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content" />
 
-        <RelativeLayout
-            android:id="@+id/topbar"
-            style="@style/topBar" >
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/back_job"
-                style="@style/back_text"
-                android:text="@string/app_name" />
-
-            <ImageView
-                android:id="@+id/right_bar_job"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/selector_detail_deliver_btn"
-                android:contentDescription="@string/app_name"
-                android:paddingBottom="8dp"
-                android:paddingLeft="25dp"
-                android:paddingRight="15dp"
-                android:paddingTop="8dp"
-                android:src="@drawable/overflow_icon" />
-        </RelativeLayout>
-
-        <mayi.lagou.com.view.TabPageIndicator
-            android:id="@+id/indicator"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <mayi.lagou.com.view.arcmenu.ArcMenu
-        android:id="@+id/arc_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
-
-</RelativeLayout>
+</LinearLayout>
