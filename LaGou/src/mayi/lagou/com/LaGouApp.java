@@ -3,6 +3,7 @@
  */
 package mayi.lagou.com;
 
+import com.loopj.android.http.AsyncHttpClient;
 import com.umeng.fb.FeedbackAgent;
 
 import mayi.lagou.com.imageloader.ImageLoader;
@@ -21,11 +22,13 @@ public class LaGouApp extends Application {
 	private ImageLoader imageLoader;
 	public String mSdcardDataDir;
 	public static boolean isLogin = false;
+	public AsyncHttpClient client;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		_instance = this;
+		client = new AsyncHttpClient();
 		imageLoader = new ImageLoader(this, 0.3f);
 		FeedbackAgent agent = new FeedbackAgent(this);
 		agent.sync();

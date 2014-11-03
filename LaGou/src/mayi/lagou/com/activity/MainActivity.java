@@ -2,7 +2,6 @@ package mayi.lagou.com.activity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import mayi.lagou.com.R;
 import mayi.lagou.com.fragment.JobListFragment;
 import mayi.lagou.com.view.TabPageIndicator;
@@ -55,9 +54,9 @@ public class MainActivity extends FragmentActivity {
 
 				@Override
 				public void onClick(View v) {
-					for(int i=0;i<list.size();i++){
-						if(list.get(i).isVisible()){
-							list.get(i).changeCity(" "+position);
+					for (int i = 0; i < list.size(); i++) {
+						if (list.get(i).isVisible() && list.get(i).isVisible) {
+							list.get(i).changeCity(" " + position);
 						}
 					}
 					Toast.makeText(MainActivity.this, "position:" + position,
