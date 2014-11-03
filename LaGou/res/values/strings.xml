@@ -91,4 +91,12 @@
         <item>实习</item>
     </string-array>
 
+    <string-array name="city_list">
+        <item>深圳</item>
+        <item>广州</item>
+        <item>杭州</item>
+        <item>上海</item>
+        <item>北京</item>
+        <item>全国</item>
+    </string-array>
 </resources>

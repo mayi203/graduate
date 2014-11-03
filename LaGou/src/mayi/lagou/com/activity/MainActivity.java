@@ -18,7 +18,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
-	private static String[] CONTENT;
+	private static String[] JobList;
+	private static String[] CityList;
 	private List<JobListFragment> list = new ArrayList<JobListFragment>();
 	private static final int[] ITEM_DRAWABLES = { R.drawable.composer_camera,
 			R.drawable.composer_music, R.drawable.composer_place,
@@ -29,7 +30,8 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.a_main);
-		CONTENT = getResources().getStringArray(R.array.job_list);
+		JobList = getResources().getStringArray(R.array.job_list);
+		CityList=getResources().getStringArray(R.array.city_list);
 		FragmentPagerAdapter adapter = new GoogleMusicAdapter(
 				getSupportFragmentManager());
 
@@ -56,10 +58,10 @@ public class MainActivity extends FragmentActivity {
 				public void onClick(View v) {
 					for (int i = 0; i < list.size(); i++) {
 						if (list.get(i).isVisible() && list.get(i).isVisible) {
-							list.get(i).changeCity(" " + position);
+							list.get(i).changeCity(CityList[position]);
 						}
 					}
-					Toast.makeText(MainActivity.this, "position:" + position,
+					Toast.makeText(MainActivity.this, CityList[position],
 							Toast.LENGTH_SHORT).show();
 				}
 			});
@@ -74,19 +76,19 @@ public class MainActivity extends FragmentActivity {
 		@Override
 		public Fragment getItem(int position) {
 			JobListFragment fragment = JobListFragment
-					.newInstance(CONTENT[position % CONTENT.length]);
+					.newInstance(JobList[position % JobList.length]);
 			list.add(fragment);
 			return fragment;
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return CONTENT[position % CONTENT.length];
+			return JobList[position % JobList.length];
 		}
 
 		@Override
 		public int getCount() {
-			return CONTENT.length;
+			return JobList.length;
 		}
 	}
 }
