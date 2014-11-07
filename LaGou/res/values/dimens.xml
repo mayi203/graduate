@@ -17,5 +17,11 @@
     <dimen name="picture_pull_to_refresh_last_update_time_top_margin">6dp</dimen>
     <dimen name="picture_pull_to_refresh_footer_height">40dp</dimen>
     
-
+    <!-- circle menu -->
+    <dimen name="action_button_size">72dp</dimen>
+    <dimen name="action_button_content_margin">16dp</dimen>
+    <dimen name="action_button_margin">12dp</dimen>
+    <dimen name="action_menu_radius">96dp</dimen>
+    <dimen name="sub_action_button_size">36dp</dimen>
+    <dimen name="sub_action_button_content_margin">6dp</dimen>
 </resources>

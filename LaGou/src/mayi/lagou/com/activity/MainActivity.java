@@ -2,10 +2,13 @@ package mayi.lagou.com.activity;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mayi.lagou.com.R;
 import mayi.lagou.com.fragment.JobListFragment;
 import mayi.lagou.com.view.TabPageIndicator;
-import mayi.lagou.com.view.arcmenu.ArcMenu;
+import mayi.lagou.com.view.circularmenu.FloatingActionButton;
+import mayi.lagou.com.view.circularmenu.FloatingActionMenu;
+import mayi.lagou.com.view.circularmenu.SubActionButton;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -17,21 +20,19 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements OnClickListener {
 	private static String[] JobList;
 	private static String[] CityList;
 	private List<JobListFragment> list = new ArrayList<JobListFragment>();
-	private static final int[] ITEM_DRAWABLES = { R.drawable.composer_camera,
-			R.drawable.composer_music, R.drawable.composer_place,
-			R.drawable.composer_sleep, R.drawable.composer_thought,
-			R.drawable.composer_with };
+	private FloatingActionMenu rightLowerMenu;
+	private ImageView rlIcon1, rlIcon2, rlIcon3, rlIcon4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.a_main);
 		JobList = getResources().getStringArray(R.array.job_list);
-		CityList=getResources().getStringArray(R.array.city_list);
+		CityList = getResources().getStringArray(R.array.city_list);
 		FragmentPagerAdapter adapter = new GoogleMusicAdapter(
 				getSupportFragmentManager());
 
@@ -41,31 +42,59 @@ public class MainActivity extends FragmentActivity {
 		TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
 		indicator.setViewPager(pager);
 
-		ArcMenu arcMenu = (ArcMenu) findViewById(R.id.arc_menu);
-		initArcMenu(arcMenu, ITEM_DRAWABLES);
+		intiCircalMenu();
 	}
 
-	private void initArcMenu(ArcMenu menu, int[] itemDrawables) {
-		final int itemCount = itemDrawables.length;
-		for (int i = 0; i < itemCount; i++) {
-			ImageView item = new ImageView(this);
-			item.setImageResource(itemDrawables[i]);
+	private void intiCircalMenu() {
+		ImageView fabIconNew = new ImageView(this);
+		fabIconNew.setImageDrawable(getResources().getDrawable(
+				R.drawable.ic_action_new_light));
+		FloatingActionButton rightLowerButton = new FloatingActionButton.Builder(
+				this).setContentView(fabIconNew).build();
 
-			final int position = i;
-			menu.addItem(item, new OnClickListener() {
+		SubActionButton.Builder rLSubBuilder = new SubActionButton.Builder(this);
+		rlIcon1 = new ImageView(this);
+		rlIcon2 = new ImageView(this);
+		rlIcon3 = new ImageView(this);
+		rlIcon4 = new ImageView(this);
+		rlIcon1.setImageDrawable(getResources().getDrawable(
+				R.drawable.ic_action_chat_light));
+		rlIcon2.setImageDrawable(getResources().getDrawable(
+				R.drawable.ic_action_camera_light));
+		rlIcon3.setImageDrawable(getResources().getDrawable(
+				R.drawable.ic_action_video_light));
+		rlIcon4.setImageDrawable(getResources().getDrawable(
+				R.drawable.ic_action_place_light));
 
-				@Override
-				public void onClick(View v) {
-					for (int i = 0; i < list.size(); i++) {
-						if (list.get(i).isVisible() && list.get(i).isVisible) {
-							list.get(i).changeCity(CityList[position]);
-						}
-					}
-					Toast.makeText(MainActivity.this, CityList[position],
-							Toast.LENGTH_SHORT).show();
-				}
-			});
+		rightLowerMenu = new FloatingActionMenu.Builder(this)
+				.addSubActionView(rLSubBuilder.setContentView(rlIcon1).build())
+				.addSubActionView(rLSubBuilder.setContentView(rlIcon2).build())
+				.addSubActionView(rLSubBuilder.setContentView(rlIcon3).build())
+				.addSubActionView(rLSubBuilder.setContentView(rlIcon4).build())
+				.attachTo(rightLowerButton).build();
+		rlIcon1.setId(101);
+		rlIcon1.setOnClickListener(this);
+		rlIcon2.setId(102);
+		rlIcon2.setOnClickListener(this);
+		rlIcon3.setId(103);
+		rlIcon3.setOnClickListener(this);
+		rlIcon4.setId(104);
+		rlIcon4.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		selectCity(v.getId());
+	}
+
+	private void selectCity(int i) {
+		rightLowerMenu.close(true);
+		for(int k=0;k<list.size();k++){
+			if(list.get(k) instanceof JobListFragment&&list.get(k).isVisible){
+				list.get(k).changeCity(CityList[i-100]);
+			}
 		}
+		Toast.makeText(this, CityList[i-100], Toast.LENGTH_SHORT).show();
 	}
 
 	class GoogleMusicAdapter extends FragmentPagerAdapter {
@@ -91,4 +120,5 @@ public class MainActivity extends FragmentActivity {
 			return JobList.length;
 		}
 	}
+
 }

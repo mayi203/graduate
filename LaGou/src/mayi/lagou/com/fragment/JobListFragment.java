@@ -42,9 +42,9 @@ public final class JobListFragment extends Fragment {
 	private String jobType = "所有职位";
 	private String city = "全国";
 	public boolean isVisible;
-	private boolean initComplate=false;
-	private boolean adapterData=false;
-	private boolean isFirstLoad=true;
+	private boolean initComplate = false;
+	private boolean adapterData = false;
+	private boolean isFirstLoad = true;
 	private PullToRefreshListView mPullToRefreshListView;
 	private ListView mListView;
 	private JobItemAdapt adapter;
@@ -112,8 +112,8 @@ public final class JobListFragment extends Fragment {
 						refreshData(jobType, city, pageNum, "up", true);
 					}
 				});
-		initComplate=true;
-		if(!adapterData&&isVisible){
+		initComplate = true;
+		if (!adapterData && isVisible) {
 			refreshData(jobType, city, pageNum, "down", true);
 		}
 	}
@@ -152,45 +152,45 @@ public final class JobListFragment extends Fragment {
 		String responseStr = ConfigCache.getUrlCache(url, getActivity());
 		if (useCache && responseStr != null && !"".equals(responseStr)) {
 			List<Position> list = ParserUtil.parserPosition(responseStr);
-			if ("down".equals(type)&&initComplate) {
+			if ("down".equals(type) && initComplate) {
 				allData.clear();
 				adapter.deleteAllItems();
 				adapter.addItems(list);
 				setLastUpdateTime();
 				mPullToRefreshListView.onPullDownRefreshComplete();
-			} else if ("up".equals(type)&&initComplate) {
+			} else if ("up".equals(type) && initComplate) {
 				adapter.addItems(list);
 				mPullToRefreshListView.onPullUpRefreshComplete();
 			}
-			if (list != null && list.size() > 0&&initComplate) {
+			if (list != null && list.size() > 0 && initComplate) {
 				allData.addAll(list);
 			}
-			adapterData=true;
-			isFirstLoad=false;
+			adapterData = true;
+			isFirstLoad = false;
 			return;
 		}
-		if(isFirstLoad){
+		if (isFirstLoad) {
 			DialogUtils.showProcessDialog(getActivity(), true);
 		}
 		LaGouApp.getInstance().client.get(url, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
 				List<Position> list = ParserUtil.parserPosition(response);
-				if ("down".equals(type)&&initComplate) {
+				if ("down".equals(type) && initComplate) {
 					allData.clear();
 					adapter.deleteAllItems();
 					adapter.addItems(list);
 					setLastUpdateTime();
 					mPullToRefreshListView.onPullDownRefreshComplete();
-				} else if ("up".equals(type)&&initComplate) {
+				} else if ("up".equals(type) && initComplate) {
 					adapter.addItems(list);
 					mPullToRefreshListView.onPullUpRefreshComplete();
 				}
-				if (list != null && list.size() > 0&&initComplate) {
+				if (list != null && list.size() > 0 && initComplate) {
 					allData.addAll(list);
 				}
-				adapterData=true;
-				isFirstLoad=false;
+				adapterData = true;
+				isFirstLoad = false;
 				ConfigCache.setUrlCache(response, url);
 			}
 
