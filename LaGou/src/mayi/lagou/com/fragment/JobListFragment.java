@@ -1,5 +1,6 @@
 package mayi.lagou.com.fragment;
 
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +23,8 @@ import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +46,6 @@ public final class JobListFragment extends Fragment {
 	private String city = "全国";
 	public boolean isVisible;
 	private boolean initComplate = false;
-	private boolean adapterData = false;
 	private boolean isFirstLoad = true;
 	private PullToRefreshListView mPullToRefreshListView;
 	private ListView mListView;
@@ -52,6 +54,7 @@ public final class JobListFragment extends Fragment {
 	private int pageNum = 1;
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
+	private MyHandler mHandler;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,7 @@ public final class JobListFragment extends Fragment {
 				&& savedInstanceState.containsKey(KEY_CONTENT)) {
 			jobType = savedInstanceState.getString(KEY_CONTENT);
 		}
+		mHandler=new MyHandler(this);
 	}
 
 	@Override
@@ -113,9 +117,6 @@ public final class JobListFragment extends Fragment {
 					}
 				});
 		initComplate = true;
-		if (!adapterData && isVisible) {
-			refreshData(jobType, city, pageNum, "down", true);
-		}
 	}
 
 	@Override
@@ -125,13 +126,33 @@ public final class JobListFragment extends Fragment {
 		if (isVisibleToUser) {
 			// 相当于Fragment的onResume
 			System.out.println("lagou setUserVisibleHint" + jobType);
-			refreshData(jobType, city, pageNum, "down", true);
+			mHandler.sendEmptyMessageDelayed(REFRESHDATA, 500);
 		} else {
 			// 相当于Fragment的onPause
 			DialogUtils.hideProcessDialog();
 		}
 	}
 
+	private void refresh(){
+		refreshData(jobType, city, pageNum, "down", true);
+	}
+	private static final int REFRESHDATA=1;
+	class MyHandler extends Handler{
+
+		private WeakReference<JobListFragment> fragment;
+		public MyHandler(JobListFragment f){
+			fragment=new WeakReference<JobListFragment>(f);
+		}
+		@Override
+		public void handleMessage(Message msg) {
+			JobListFragment listFragment=fragment.get();
+			switch(msg.what){
+			case REFRESHDATA:
+				listFragment.refresh();
+				break;
+			}
+		}
+	}
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -165,7 +186,6 @@ public final class JobListFragment extends Fragment {
 			if (list != null && list.size() > 0 && initComplate) {
 				allData.addAll(list);
 			}
-			adapterData = true;
 			isFirstLoad = false;
 			return;
 		}
@@ -189,7 +209,6 @@ public final class JobListFragment extends Fragment {
 				if (list != null && list.size() > 0 && initComplate) {
 					allData.addAll(list);
 				}
-				adapterData = true;
 				isFirstLoad = false;
 				ConfigCache.setUrlCache(response, url);
 			}
