@@ -5,6 +5,7 @@ import java.util.List;
 
 import mayi.lagou.com.R;
 import mayi.lagou.com.fragment.JobListFragment;
+import mayi.lagou.com.fragment.JobListFragment.OnChangeUrl;
 import mayi.lagou.com.view.TabPageIndicator;
 import mayi.lagou.com.view.circularmenu.FloatingActionButton;
 import mayi.lagou.com.view.circularmenu.FloatingActionMenu;
@@ -20,11 +21,13 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class MainActivity extends FragmentActivity implements OnClickListener {
+public class MainActivity extends FragmentActivity implements OnClickListener,
+		OnChangeUrl {
 	private static String[] JobList;
 	private static String[] CityList;
 	private List<JobListFragment> list = new ArrayList<JobListFragment>();
 	private FloatingActionMenu rightLowerMenu;
+	private FloatingActionButton rightLowerButton;
 	private ImageView rlIcon1, rlIcon2, rlIcon3, rlIcon4;
 
 	@Override
@@ -49,7 +52,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		ImageView fabIconNew = new ImageView(this);
 		fabIconNew.setImageDrawable(getResources().getDrawable(
 				R.drawable.ic_action_new_light));
-		FloatingActionButton rightLowerButton = new FloatingActionButton.Builder(
+		rightLowerButton = new FloatingActionButton.Builder(
 				this).setContentView(fabIconNew).build();
 
 		SubActionButton.Builder rLSubBuilder = new SubActionButton.Builder(this);
@@ -89,12 +92,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
 	private void selectCity(int i) {
 		rightLowerMenu.close(true);
-		for(int k=0;k<list.size();k++){
-			if(list.get(k) instanceof JobListFragment&&list.get(k).isVisible){
-				list.get(k).changeCity(CityList[i-100]);
+		for (int k = 0; k < list.size(); k++) {
+			if (list.get(k) instanceof JobListFragment && list.get(k).isVisible) {
+				list.get(k).changeCity(CityList[i - 100]);
 			}
 		}
-		Toast.makeText(this, CityList[i-100], Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, CityList[i - 100], Toast.LENGTH_SHORT).show();
 	}
 
 	class GoogleMusicAdapter extends FragmentPagerAdapter {
@@ -121,4 +124,21 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		}
 	}
 
+	private String mUrl;
+
+	@Override
+	public void setUrl(String url) {
+		mUrl = url;
+		rightLowerButton.setVisibility(View.GONE);
+	}
+
+	@Override
+	public String getUrl() {
+		return mUrl;
+	}
+
+	@Override
+	public void showMenu() {
+		rightLowerButton.setVisibility(View.VISIBLE);
+	}
 }
