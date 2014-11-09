@@ -5,8 +5,10 @@ import java.io.File;
 import mayi.lagou.com.LaGouApp;
 import mayi.lagou.com.R;
 import mayi.lagou.com.core.BaseFragment;
+import mayi.lagou.com.fragment.JobListFragment.OnChangeUrl;
 import mayi.lagou.com.utils.SharePreferenceUtil;
 import mayi.lagou.com.view.MyDialog;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -23,6 +25,7 @@ import com.umeng.fb.FeedbackAgent;
 public class SettingFragment extends BaseFragment implements OnClickListener {
 
 	private TextView changeUser;
+	private OnChangeUrl mOnChangeUrl;
 
 	@Override
 	public int contentView() {
@@ -211,4 +214,18 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 			}
 		}
 	};
+
+	@Override
+	public void onAttach(Activity activity) {
+		// TODO Auto-generated method stub
+		super.onAttach(activity);
+		mOnChangeUrl=(OnChangeUrl)activity;
+	}
+
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		mOnChangeUrl.showMenu();
+	}
+	
 }

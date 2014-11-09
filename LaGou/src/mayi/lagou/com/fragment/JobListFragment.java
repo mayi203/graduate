@@ -137,7 +137,7 @@ public final class JobListFragment extends Fragment {
 		});
 	}
 
-	private void addFragmentToStack(int container, Fragment fragment) {
+	public void addFragmentToStack(int container, Fragment fragment) {
 		if (fragment == null) {
 			return;
 		}
@@ -159,6 +159,7 @@ public final class JobListFragment extends Fragment {
 			System.out.println("lagou setUserVisibleHint" + jobType);
 			DialogUtils.showProcessDialog(getActivity(), true);
 			mHandler.sendEmptyMessageDelayed(REFRESHDATA, 500);
+			onChangeUrl.setCurrentFragment(this);
 		} else {
 			// 相当于Fragment的onPause
 			DialogUtils.hideProcessDialog();
@@ -175,6 +176,8 @@ public final class JobListFragment extends Fragment {
 		public String getUrl();
 		
 		public void showMenu();
+		
+		public void setCurrentFragment(JobListFragment fragment);
 	}
 
 	private static final int REFRESHDATA = 1;

@@ -3,32 +3,39 @@ package mayi.lagou.com.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import mayi.lagou.com.LaGouApp;
 import mayi.lagou.com.R;
 import mayi.lagou.com.fragment.JobListFragment;
+import mayi.lagou.com.fragment.SettingFragment;
 import mayi.lagou.com.fragment.JobListFragment.OnChangeUrl;
 import mayi.lagou.com.view.TabPageIndicator;
 import mayi.lagou.com.view.circularmenu.FloatingActionButton;
 import mayi.lagou.com.view.circularmenu.FloatingActionMenu;
 import mayi.lagou.com.view.circularmenu.SubActionButton;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements OnClickListener,
-		OnChangeUrl {
+		OnChangeUrl ,OnMenuItemClickListener{
 	private static String[] JobList;
 	private static String[] CityList;
 	private List<JobListFragment> list = new ArrayList<JobListFragment>();
 	private FloatingActionMenu rightLowerMenu;
 	private FloatingActionButton rightLowerButton;
-	private ImageView rlIcon1, rlIcon2, rlIcon3, rlIcon4;
+	private JobListFragment currentFragment=null;
+	private ImageView rightTab,rlIcon1, rlIcon2, rlIcon3, rlIcon4,rlIcon5,rlIcon6;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +53,28 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		indicator.setViewPager(pager);
 
 		intiCircalMenu();
+		
+		initListener();
 	}
 
+	private void initListener(){
+		rightTab=(ImageView)findViewById(R.id.right_bar_job);
+		rightTab.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (LaGouApp.isLogin) {
+					showPopMenu(rightTab, R.menu.job_home2);
+				} else {
+					showPopMenu(rightTab, R.menu.jb_home);
+				}				
+			}
+		});
+	}
 	private void intiCircalMenu() {
 		ImageView fabIconNew = new ImageView(this);
 		fabIconNew.setImageDrawable(getResources().getDrawable(
-				R.drawable.ic_action_new_light));
+				R.drawable.add));
 		rightLowerButton = new FloatingActionButton.Builder(
 				this).setContentView(fabIconNew).build();
 
@@ -60,20 +83,28 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		rlIcon2 = new ImageView(this);
 		rlIcon3 = new ImageView(this);
 		rlIcon4 = new ImageView(this);
+		rlIcon5 = new ImageView(this);
+		rlIcon6 = new ImageView(this);
 		rlIcon1.setImageDrawable(getResources().getDrawable(
-				R.drawable.ic_action_chat_light));
+				R.drawable.guang));
 		rlIcon2.setImageDrawable(getResources().getDrawable(
-				R.drawable.ic_action_camera_light));
+				R.drawable.shen));
 		rlIcon3.setImageDrawable(getResources().getDrawable(
-				R.drawable.ic_action_video_light));
+				R.drawable.hang));
 		rlIcon4.setImageDrawable(getResources().getDrawable(
-				R.drawable.ic_action_place_light));
+				R.drawable.hu));
+		rlIcon5.setImageDrawable(getResources().getDrawable(
+				R.drawable.jing));
+		rlIcon6.setImageDrawable(getResources().getDrawable(
+				R.drawable.quan));
 
 		rightLowerMenu = new FloatingActionMenu.Builder(this)
 				.addSubActionView(rLSubBuilder.setContentView(rlIcon1).build())
 				.addSubActionView(rLSubBuilder.setContentView(rlIcon2).build())
 				.addSubActionView(rLSubBuilder.setContentView(rlIcon3).build())
 				.addSubActionView(rLSubBuilder.setContentView(rlIcon4).build())
+				.addSubActionView(rLSubBuilder.setContentView(rlIcon5).build())
+				.addSubActionView(rLSubBuilder.setContentView(rlIcon6).build())
 				.attachTo(rightLowerButton).build();
 		rlIcon1.setId(101);
 		rlIcon1.setOnClickListener(this);
@@ -83,6 +114,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		rlIcon3.setOnClickListener(this);
 		rlIcon4.setId(104);
 		rlIcon4.setOnClickListener(this);
+		rlIcon5.setId(105);
+		rlIcon5.setOnClickListener(this);
+		rlIcon6.setId(106);
+		rlIcon6.setOnClickListener(this);
 	}
 
 	@Override
@@ -92,12 +127,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 
 	private void selectCity(int i) {
 		rightLowerMenu.close(true);
-		for (int k = 0; k < list.size(); k++) {
-			if (list.get(k) instanceof JobListFragment && list.get(k).isVisible) {
-				list.get(k).changeCity(CityList[i - 100]);
-			}
-		}
-		Toast.makeText(this, CityList[i - 100], Toast.LENGTH_SHORT).show();
+		currentFragment.changeCity(CityList[(i - 101)]);
+		Toast.makeText(this, CityList[i - 101], Toast.LENGTH_SHORT).show();
 	}
 
 	class GoogleMusicAdapter extends FragmentPagerAdapter {
@@ -140,5 +171,27 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 	@Override
 	public void showMenu() {
 		rightLowerButton.setVisibility(View.VISIBLE);
+	}
+	private void showPopMenu(View v, int res) {
+		PopupMenu popup = new PopupMenu(this, v);
+		popup.setOnMenuItemClickListener(this);
+		popup.inflate(res);
+		popup.show();
+	}
+
+	@Override
+	public boolean onMenuItemClick(MenuItem item) {
+		if (item.getItemId() == R.id.login) {
+			startActivity(new Intent(this,UserInfoActicity.class));
+		} else if (item.getItemId() == R.id.setting) {
+			rightLowerButton.setVisibility(View.GONE);
+			currentFragment.addFragmentToStack(R.id.contain, new SettingFragment());
+		}
+		return false;
+	}
+
+	@Override
+	public void setCurrentFragment(JobListFragment fragment) {
+		this.currentFragment=fragment;
 	}
 }

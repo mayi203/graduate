@@ -852,192 +852,199 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class drawable {
         public static final int action_search=0x7f020000;
-        public static final int back_arrow=0x7f020001;
-        public static final int bg_explore_card_half_normal=0x7f020002;
-        public static final int bg_explore_card_half_pressed=0x7f020003;
-        public static final int button_action=0x7f020004;
-        public static final int button_action_dark=0x7f020005;
-        public static final int button_action_dark_selector=0x7f020006;
-        public static final int button_action_dark_touch=0x7f020007;
-        public static final int button_action_selector=0x7f020008;
-        public static final int button_action_touch=0x7f020009;
-        public static final int button_sub_action=0x7f02000a;
-        public static final int button_sub_action_dark=0x7f02000b;
-        public static final int button_sub_action_dark_selector=0x7f02000c;
-        public static final int button_sub_action_dark_touch=0x7f02000d;
-        public static final int button_sub_action_selector=0x7f02000e;
-        public static final int button_sub_action_touch=0x7f02000f;
-        public static final int circle_pressed=0x7f020010;
-        public static final int clip=0x7f020011;
-        public static final int composer_icn_plus=0x7f020012;
-        public static final int composer_icn_plus_normal=0x7f020013;
-        public static final int composer_icn_plus_pressed=0x7f020014;
-        public static final int cricle_normal=0x7f020015;
-        public static final int custom_tab_indicator_divider=0x7f020016;
-        public static final int custom_tab_indicator_selected=0x7f020017;
-        public static final int custom_tab_indicator_unselected=0x7f020018;
-        public static final int default_avatar=0x7f020019;
-        public static final int default_ptr_rotate=0x7f02001a;
-        public static final int drawer_shadow=0x7f02001b;
-        public static final int drop_down_list_arrow=0x7f02001c;
-        public static final int explore_search_normal=0x7f02001d;
-        public static final int girl=0x7f02001e;
-        public static final int gmail=0x7f02001f;
-        public static final int green_btn_actived=0x7f020020;
-        public static final int green_btn_normal=0x7f020021;
-        public static final int ic_action_camera_light=0x7f020022;
-        public static final int ic_action_chat_light=0x7f020023;
-        public static final int ic_action_new_light=0x7f020024;
-        public static final int ic_action_place_light=0x7f020025;
-        public static final int ic_action_video_light=0x7f020026;
-        public static final int ic_launcher=0x7f020027;
-        public static final int job_card_bg=0x7f020028;
-        public static final int job_detail_null=0x7f020029;
-        public static final int left_tab=0x7f02002a;
-        public static final int list_de=0x7f02002b;
-        public static final int overflow_icon=0x7f02002c;
-        public static final int preloader_1_00000=0x7f02002d;
-        public static final int preloader_1_00001=0x7f02002e;
-        public static final int preloader_1_00002=0x7f02002f;
-        public static final int preloader_1_00003=0x7f020030;
-        public static final int preloader_1_00004=0x7f020031;
-        public static final int preloader_1_00005=0x7f020032;
-        public static final int preloader_1_00006=0x7f020033;
-        public static final int preloader_1_00007=0x7f020034;
-        public static final int preloader_1_00008=0x7f020035;
-        public static final int preloader_1_00009=0x7f020036;
-        public static final int preloader_1_00010=0x7f020037;
-        public static final int preloader_1_00011=0x7f020038;
-        public static final int preloader_1_00012=0x7f020039;
-        public static final int preloader_1_00013=0x7f02003a;
-        public static final int preloader_1_00014=0x7f02003b;
-        public static final int preloader_1_00015=0x7f02003c;
-        public static final int preloader_1_00016=0x7f02003d;
-        public static final int preloader_1_00017=0x7f02003e;
-        public static final int preloader_1_00018=0x7f02003f;
-        public static final int preloader_1_00019=0x7f020040;
-        public static final int preloader_1_00020=0x7f020041;
-        public static final int preloader_1_00021=0x7f020042;
-        public static final int preloader_1_00022=0x7f020043;
-        public static final int preloader_1_00023=0x7f020044;
-        public static final int preloader_1_00024=0x7f020045;
-        public static final int preloader_1_00025=0x7f020046;
-        public static final int preloader_1_00026=0x7f020047;
-        public static final int preloader_1_00027=0x7f020048;
-        public static final int preloader_1_00028=0x7f020049;
-        public static final int preloader_1_00029=0x7f02004a;
-        public static final int preloader_1_00030=0x7f02004b;
-        public static final int preloader_1_00031=0x7f02004c;
-        public static final int preloader_1_00032=0x7f02004d;
-        public static final int preloader_1_00033=0x7f02004e;
-        public static final int preloader_1_00034=0x7f02004f;
-        public static final int preloader_1_00035=0x7f020050;
-        public static final int preloader_1_00036=0x7f020051;
-        public static final int preloader_1_00037=0x7f020052;
-        public static final int preloader_1_00038=0x7f020053;
-        public static final int preloader_1_00039=0x7f020054;
-        public static final int preloader_1_00040=0x7f020055;
-        public static final int preloader_1_00041=0x7f020056;
-        public static final int preloader_1_00042=0x7f020057;
-        public static final int preloader_1_00043=0x7f020058;
-        public static final int preloader_1_00044=0x7f020059;
-        public static final int preloader_1_00045=0x7f02005a;
-        public static final int preloader_1_00046=0x7f02005b;
-        public static final int preloader_1_00047=0x7f02005c;
-        public static final int preloader_1_00048=0x7f02005d;
-        public static final int preloader_1_00049=0x7f02005e;
-        public static final int preloader_1_00050=0x7f02005f;
-        public static final int preloader_1_00051=0x7f020060;
-        public static final int preloader_1_00052=0x7f020061;
-        public static final int preloader_1_00053=0x7f020062;
-        public static final int preloader_1_00054=0x7f020063;
-        public static final int preloader_1_00055=0x7f020064;
-        public static final int preloader_1_00056=0x7f020065;
-        public static final int preloader_1_00057=0x7f020066;
-        public static final int preloader_1_00058=0x7f020067;
-        public static final int preloader_1_00059=0x7f020068;
-        public static final int preloader_1_00060=0x7f020069;
-        public static final int preloader_1_00061=0x7f02006a;
-        public static final int preloader_1_00062=0x7f02006b;
-        public static final int preloader_1_00063=0x7f02006c;
-        public static final int preloader_1_00064=0x7f02006d;
-        public static final int preloader_1_00065=0x7f02006e;
-        public static final int preloader_1_00066=0x7f02006f;
-        public static final int preloader_1_00067=0x7f020070;
-        public static final int preloader_1_00068=0x7f020071;
-        public static final int preloader_1_00069=0x7f020072;
-        public static final int preloader_1_00070=0x7f020073;
-        public static final int preloader_1_00071=0x7f020074;
-        public static final int preloader_1_00072=0x7f020075;
-        public static final int preloader_1_00073=0x7f020076;
-        public static final int preloader_1_00074=0x7f020077;
-        public static final int preloader_1_00075=0x7f020078;
-        public static final int preloader_1_00076=0x7f020079;
-        public static final int preloader_1_00077=0x7f02007a;
-        public static final int preloader_1_00078=0x7f02007b;
-        public static final int preloader_1_00079=0x7f02007c;
-        public static final int preloader_1_00080=0x7f02007d;
-        public static final int preloader_1_00081=0x7f02007e;
-        public static final int preloader_1_00082=0x7f02007f;
-        public static final int preloader_1_00083=0x7f020080;
-        public static final int profile_icon_bright=0x7f020081;
-        public static final int profile_icon_dark=0x7f020082;
-        public static final int radio_buttong_bg=0x7f020083;
-        public static final int right_arrow=0x7f020084;
-        public static final int selecter_profile=0x7f020085;
-        public static final int selector_btn_green=0x7f020086;
-        public static final int selector_cricle_btn=0x7f020087;
-        public static final int selector_detail_deliver_btn=0x7f020088;
-        public static final int selector_search=0x7f020089;
-        public static final int setting_icon=0x7f02008a;
-        public static final int shap_search_item=0x7f02008b;
-        public static final int share_icon=0x7f02008c;
-        public static final int umeng_common_gradient_green=0x7f02008d;
-        public static final int umeng_common_gradient_orange=0x7f02008e;
-        public static final int umeng_common_gradient_red=0x7f02008f;
-        public static final int umeng_fb_arrow_right=0x7f020090;
-        public static final int umeng_fb_back_normal=0x7f020091;
-        public static final int umeng_fb_back_selected=0x7f020092;
-        public static final int umeng_fb_back_selector=0x7f020093;
-        public static final int umeng_fb_bar_bg=0x7f020094;
-        public static final int umeng_fb_btn_bg_selector=0x7f020095;
-        public static final int umeng_fb_conversation_bg=0x7f020096;
-        public static final int umeng_fb_gradient_green=0x7f020097;
-        public static final int umeng_fb_gradient_orange=0x7f020098;
-        public static final int umeng_fb_gray_frame=0x7f020099;
-        public static final int umeng_fb_list_item=0x7f02009a;
-        public static final int umeng_fb_list_item_pressed=0x7f02009b;
-        public static final int umeng_fb_list_item_selector=0x7f02009c;
-        public static final int umeng_fb_logo=0x7f02009d;
-        public static final int umeng_fb_point_new=0x7f02009e;
-        public static final int umeng_fb_point_normal=0x7f02009f;
-        public static final int umeng_fb_reply_left_bg=0x7f0200a0;
-        public static final int umeng_fb_reply_right_bg=0x7f0200a1;
-        public static final int umeng_fb_see_list_normal=0x7f0200a2;
-        public static final int umeng_fb_see_list_pressed=0x7f0200a3;
-        public static final int umeng_fb_see_list_selector=0x7f0200a4;
-        public static final int umeng_fb_statusbar_icon=0x7f0200a5;
-        public static final int umeng_fb_submit_selector=0x7f0200a6;
-        public static final int umeng_fb_tick_normal=0x7f0200a7;
-        public static final int umeng_fb_tick_selected=0x7f0200a8;
-        public static final int umeng_fb_tick_selector=0x7f0200a9;
-        public static final int umeng_fb_top_banner=0x7f0200aa;
-        public static final int umeng_fb_user_bubble=0x7f0200ab;
-        public static final int umeng_fb_write_normal=0x7f0200ac;
-        public static final int umeng_fb_write_pressed=0x7f0200ad;
-        public static final int umeng_fb_write_selector=0x7f0200ae;
-        public static final int vpi__tab_indicator=0x7f0200af;
-        public static final int vpi__tab_selected_focused_holo=0x7f0200b0;
-        public static final int vpi__tab_selected_holo=0x7f0200b1;
-        public static final int vpi__tab_selected_pressed_holo=0x7f0200b2;
-        public static final int vpi__tab_unselected_focused_holo=0x7f0200b3;
-        public static final int vpi__tab_unselected_holo=0x7f0200b4;
-        public static final int vpi__tab_unselected_pressed_holo=0x7f0200b5;
-        public static final int waiting=0x7f0200b6;
-        public static final int weibo=0x7f0200b7;
-        public static final int weixin=0x7f0200b8;
-        public static final int xsearch_loading=0x7f0200b9;
-        public static final int xsearch_msg_pull_arrow_down=0x7f0200ba;
+        public static final int add=0x7f020001;
+        public static final int back_arrow=0x7f020002;
+        public static final int bg_explore_card_half_normal=0x7f020003;
+        public static final int bg_explore_card_half_pressed=0x7f020004;
+        public static final int button_action=0x7f020005;
+        public static final int button_action_dark=0x7f020006;
+        public static final int button_action_dark_selector=0x7f020007;
+        public static final int button_action_dark_touch=0x7f020008;
+        public static final int button_action_selector=0x7f020009;
+        public static final int button_action_touch=0x7f02000a;
+        public static final int button_sub_action=0x7f02000b;
+        public static final int button_sub_action_dark=0x7f02000c;
+        public static final int button_sub_action_dark_selector=0x7f02000d;
+        public static final int button_sub_action_dark_touch=0x7f02000e;
+        public static final int button_sub_action_selector=0x7f02000f;
+        public static final int button_sub_action_touch=0x7f020010;
+        public static final int circle_pressed=0x7f020011;
+        public static final int clip=0x7f020012;
+        public static final int composer_icn_plus=0x7f020013;
+        public static final int composer_icn_plus_normal=0x7f020014;
+        public static final int composer_icn_plus_pressed=0x7f020015;
+        public static final int cricle_normal=0x7f020016;
+        public static final int custom_tab_indicator_divider=0x7f020017;
+        public static final int custom_tab_indicator_selected=0x7f020018;
+        public static final int custom_tab_indicator_unselected=0x7f020019;
+        public static final int default_avatar=0x7f02001a;
+        public static final int default_ptr_rotate=0x7f02001b;
+        public static final int drawer_shadow=0x7f02001c;
+        public static final int drop_down_list_arrow=0x7f02001d;
+        public static final int explore_search_normal=0x7f02001e;
+        public static final int girl=0x7f02001f;
+        public static final int gmail=0x7f020020;
+        public static final int green_btn_actived=0x7f020021;
+        public static final int green_btn_normal=0x7f020022;
+        public static final int guang=0x7f020023;
+        public static final int hang=0x7f020024;
+        public static final int hu=0x7f020025;
+        public static final int ic_action_camera_light=0x7f020026;
+        public static final int ic_action_chat_light=0x7f020027;
+        public static final int ic_action_new_light=0x7f020028;
+        public static final int ic_action_place_light=0x7f020029;
+        public static final int ic_action_video_light=0x7f02002a;
+        public static final int ic_launcher=0x7f02002b;
+        public static final int jing=0x7f02002c;
+        public static final int job_card_bg=0x7f02002d;
+        public static final int job_detail_null=0x7f02002e;
+        public static final int left_tab=0x7f02002f;
+        public static final int list_de=0x7f020030;
+        public static final int overflow_icon=0x7f020031;
+        public static final int preloader_1_00000=0x7f020032;
+        public static final int preloader_1_00001=0x7f020033;
+        public static final int preloader_1_00002=0x7f020034;
+        public static final int preloader_1_00003=0x7f020035;
+        public static final int preloader_1_00004=0x7f020036;
+        public static final int preloader_1_00005=0x7f020037;
+        public static final int preloader_1_00006=0x7f020038;
+        public static final int preloader_1_00007=0x7f020039;
+        public static final int preloader_1_00008=0x7f02003a;
+        public static final int preloader_1_00009=0x7f02003b;
+        public static final int preloader_1_00010=0x7f02003c;
+        public static final int preloader_1_00011=0x7f02003d;
+        public static final int preloader_1_00012=0x7f02003e;
+        public static final int preloader_1_00013=0x7f02003f;
+        public static final int preloader_1_00014=0x7f020040;
+        public static final int preloader_1_00015=0x7f020041;
+        public static final int preloader_1_00016=0x7f020042;
+        public static final int preloader_1_00017=0x7f020043;
+        public static final int preloader_1_00018=0x7f020044;
+        public static final int preloader_1_00019=0x7f020045;
+        public static final int preloader_1_00020=0x7f020046;
+        public static final int preloader_1_00021=0x7f020047;
+        public static final int preloader_1_00022=0x7f020048;
+        public static final int preloader_1_00023=0x7f020049;
+        public static final int preloader_1_00024=0x7f02004a;
+        public static final int preloader_1_00025=0x7f02004b;
+        public static final int preloader_1_00026=0x7f02004c;
+        public static final int preloader_1_00027=0x7f02004d;
+        public static final int preloader_1_00028=0x7f02004e;
+        public static final int preloader_1_00029=0x7f02004f;
+        public static final int preloader_1_00030=0x7f020050;
+        public static final int preloader_1_00031=0x7f020051;
+        public static final int preloader_1_00032=0x7f020052;
+        public static final int preloader_1_00033=0x7f020053;
+        public static final int preloader_1_00034=0x7f020054;
+        public static final int preloader_1_00035=0x7f020055;
+        public static final int preloader_1_00036=0x7f020056;
+        public static final int preloader_1_00037=0x7f020057;
+        public static final int preloader_1_00038=0x7f020058;
+        public static final int preloader_1_00039=0x7f020059;
+        public static final int preloader_1_00040=0x7f02005a;
+        public static final int preloader_1_00041=0x7f02005b;
+        public static final int preloader_1_00042=0x7f02005c;
+        public static final int preloader_1_00043=0x7f02005d;
+        public static final int preloader_1_00044=0x7f02005e;
+        public static final int preloader_1_00045=0x7f02005f;
+        public static final int preloader_1_00046=0x7f020060;
+        public static final int preloader_1_00047=0x7f020061;
+        public static final int preloader_1_00048=0x7f020062;
+        public static final int preloader_1_00049=0x7f020063;
+        public static final int preloader_1_00050=0x7f020064;
+        public static final int preloader_1_00051=0x7f020065;
+        public static final int preloader_1_00052=0x7f020066;
+        public static final int preloader_1_00053=0x7f020067;
+        public static final int preloader_1_00054=0x7f020068;
+        public static final int preloader_1_00055=0x7f020069;
+        public static final int preloader_1_00056=0x7f02006a;
+        public static final int preloader_1_00057=0x7f02006b;
+        public static final int preloader_1_00058=0x7f02006c;
+        public static final int preloader_1_00059=0x7f02006d;
+        public static final int preloader_1_00060=0x7f02006e;
+        public static final int preloader_1_00061=0x7f02006f;
+        public static final int preloader_1_00062=0x7f020070;
+        public static final int preloader_1_00063=0x7f020071;
+        public static final int preloader_1_00064=0x7f020072;
+        public static final int preloader_1_00065=0x7f020073;
+        public static final int preloader_1_00066=0x7f020074;
+        public static final int preloader_1_00067=0x7f020075;
+        public static final int preloader_1_00068=0x7f020076;
+        public static final int preloader_1_00069=0x7f020077;
+        public static final int preloader_1_00070=0x7f020078;
+        public static final int preloader_1_00071=0x7f020079;
+        public static final int preloader_1_00072=0x7f02007a;
+        public static final int preloader_1_00073=0x7f02007b;
+        public static final int preloader_1_00074=0x7f02007c;
+        public static final int preloader_1_00075=0x7f02007d;
+        public static final int preloader_1_00076=0x7f02007e;
+        public static final int preloader_1_00077=0x7f02007f;
+        public static final int preloader_1_00078=0x7f020080;
+        public static final int preloader_1_00079=0x7f020081;
+        public static final int preloader_1_00080=0x7f020082;
+        public static final int preloader_1_00081=0x7f020083;
+        public static final int preloader_1_00082=0x7f020084;
+        public static final int preloader_1_00083=0x7f020085;
+        public static final int profile_icon_bright=0x7f020086;
+        public static final int profile_icon_dark=0x7f020087;
+        public static final int quan=0x7f020088;
+        public static final int radio_buttong_bg=0x7f020089;
+        public static final int right_arrow=0x7f02008a;
+        public static final int selecter_profile=0x7f02008b;
+        public static final int selector_btn_green=0x7f02008c;
+        public static final int selector_cricle_btn=0x7f02008d;
+        public static final int selector_detail_deliver_btn=0x7f02008e;
+        public static final int selector_search=0x7f02008f;
+        public static final int setting_icon=0x7f020090;
+        public static final int shap_search_item=0x7f020091;
+        public static final int share_icon=0x7f020092;
+        public static final int shen=0x7f020093;
+        public static final int umeng_common_gradient_green=0x7f020094;
+        public static final int umeng_common_gradient_orange=0x7f020095;
+        public static final int umeng_common_gradient_red=0x7f020096;
+        public static final int umeng_fb_arrow_right=0x7f020097;
+        public static final int umeng_fb_back_normal=0x7f020098;
+        public static final int umeng_fb_back_selected=0x7f020099;
+        public static final int umeng_fb_back_selector=0x7f02009a;
+        public static final int umeng_fb_bar_bg=0x7f02009b;
+        public static final int umeng_fb_btn_bg_selector=0x7f02009c;
+        public static final int umeng_fb_conversation_bg=0x7f02009d;
+        public static final int umeng_fb_gradient_green=0x7f02009e;
+        public static final int umeng_fb_gradient_orange=0x7f02009f;
+        public static final int umeng_fb_gray_frame=0x7f0200a0;
+        public static final int umeng_fb_list_item=0x7f0200a1;
+        public static final int umeng_fb_list_item_pressed=0x7f0200a2;
+        public static final int umeng_fb_list_item_selector=0x7f0200a3;
+        public static final int umeng_fb_logo=0x7f0200a4;
+        public static final int umeng_fb_point_new=0x7f0200a5;
+        public static final int umeng_fb_point_normal=0x7f0200a6;
+        public static final int umeng_fb_reply_left_bg=0x7f0200a7;
+        public static final int umeng_fb_reply_right_bg=0x7f0200a8;
+        public static final int umeng_fb_see_list_normal=0x7f0200a9;
+        public static final int umeng_fb_see_list_pressed=0x7f0200aa;
+        public static final int umeng_fb_see_list_selector=0x7f0200ab;
+        public static final int umeng_fb_statusbar_icon=0x7f0200ac;
+        public static final int umeng_fb_submit_selector=0x7f0200ad;
+        public static final int umeng_fb_tick_normal=0x7f0200ae;
+        public static final int umeng_fb_tick_selected=0x7f0200af;
+        public static final int umeng_fb_tick_selector=0x7f0200b0;
+        public static final int umeng_fb_top_banner=0x7f0200b1;
+        public static final int umeng_fb_user_bubble=0x7f0200b2;
+        public static final int umeng_fb_write_normal=0x7f0200b3;
+        public static final int umeng_fb_write_pressed=0x7f0200b4;
+        public static final int umeng_fb_write_selector=0x7f0200b5;
+        public static final int vpi__tab_indicator=0x7f0200b6;
+        public static final int vpi__tab_selected_focused_holo=0x7f0200b7;
+        public static final int vpi__tab_selected_holo=0x7f0200b8;
+        public static final int vpi__tab_selected_pressed_holo=0x7f0200b9;
+        public static final int vpi__tab_unselected_focused_holo=0x7f0200ba;
+        public static final int vpi__tab_unselected_holo=0x7f0200bb;
+        public static final int vpi__tab_unselected_pressed_holo=0x7f0200bc;
+        public static final int waiting=0x7f0200bd;
+        public static final int weibo=0x7f0200be;
+        public static final int weixin=0x7f0200bf;
+        public static final int xsearch_loading=0x7f0200c0;
+        public static final int xsearch_msg_pull_arrow_down=0x7f0200c1;
     }
     public static final class id {
         public static final int about_app=0x7f0a0050;
@@ -1408,7 +1415,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mayi.lagou.com:border_color
+          @attr name android:border_color
         */
         public static final int CircleImageView_border_color = 1;
         /**
@@ -1424,7 +1431,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mayi.lagou.com:border_width
+          @attr name android:border_width
         */
         public static final int CircleImageView_border_width = 0;
         /** Attributes that can be used with a CirclePageIndicator.
@@ -1433,8 +1440,8 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #CirclePageIndicator_android_background android:background}</code></td><td> View background </td></tr>
-           <tr><td><code>{@link #CirclePageIndicator_android_orientation android:orientation}</code></td><td> Orientation of the indicator.</td></tr>
+           <tr><td><code>{@link #CirclePageIndicator_android_background mayi.lagou.com:android_background}</code></td><td> View background </td></tr>
+           <tr><td><code>{@link #CirclePageIndicator_android_orientation mayi.lagou.com:android_orientation}</code></td><td> Orientation of the indicator.</td></tr>
            <tr><td><code>{@link #CirclePageIndicator_centered mayi.lagou.com:centered}</code></td><td> Whether or not the indicators should be centered.</td></tr>
            <tr><td><code>{@link #CirclePageIndicator_fillColor mayi.lagou.com:fillColor}</code></td><td> Color of the filled circle that represents the current page.</td></tr>
            <tr><td><code>{@link #CirclePageIndicator_pageColor mayi.lagou.com:pageColor}</code></td><td> Color of the filled circles that represents pages.</td></tr>
@@ -1462,18 +1469,16 @@ containing a value of this type.
           <p>
           @attr description
            View background 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#background}.
-          @attr name android:background
+          <p>This corresponds to the global attribute          resource symbol {@link mayi.lagou.com.R.attr#android_background}.
+          @attr name android:android_background
         */
         public static final int CirclePageIndicator_android_background = 1;
         /**
           <p>
           @attr description
            Orientation of the indicator. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#orientation}.
-          @attr name android:orientation
+          <p>This corresponds to the global attribute          resource symbol {@link mayi.lagou.com.R.attr#android_orientation}.
+          @attr name android:android_orientation
         */
         public static final int CirclePageIndicator_android_orientation = 0;
         /**
@@ -1489,7 +1494,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:centered
+          @attr name android:centered
         */
         public static final int CirclePageIndicator_centered = 2;
         /**
@@ -1506,7 +1511,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:fillColor
+          @attr name android:fillColor
         */
         public static final int CirclePageIndicator_fillColor = 4;
         /**
@@ -1523,7 +1528,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:pageColor
+          @attr name android:pageColor
         */
         public static final int CirclePageIndicator_pageColor = 5;
         /**
@@ -1541,7 +1546,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:radius
+          @attr name android:radius
         */
         public static final int CirclePageIndicator_radius = 6;
         /**
@@ -1557,7 +1562,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:snap
+          @attr name android:snap
         */
         public static final int CirclePageIndicator_snap = 7;
         /**
@@ -1574,7 +1579,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:strokeColor
+          @attr name android:strokeColor
         */
         public static final int CirclePageIndicator_strokeColor = 8;
         /**
@@ -1592,7 +1597,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:strokeWidth
+          @attr name android:strokeWidth
         */
         public static final int CirclePageIndicator_strokeWidth = 3;
         /** Attributes that can be used with a LinePageIndicator.
@@ -1601,7 +1606,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #LinePageIndicator_android_background android:background}</code></td><td> View background </td></tr>
+           <tr><td><code>{@link #LinePageIndicator_android_background mayi.lagou.com:android_background}</code></td><td> View background </td></tr>
            <tr><td><code>{@link #LinePageIndicator_centered mayi.lagou.com:centered}</code></td><td> Whether or not the indicators should be centered.</td></tr>
            <tr><td><code>{@link #LinePageIndicator_gapWidth mayi.lagou.com:gapWidth}</code></td><td> Width of the gap between each indicator line.</td></tr>
            <tr><td><code>{@link #LinePageIndicator_lineWidth mayi.lagou.com:lineWidth}</code></td><td> Width of each indicator line.</td></tr>
@@ -1625,9 +1630,8 @@ containing a value of this type.
           <p>
           @attr description
            View background 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#background}.
-          @attr name android:background
+          <p>This corresponds to the global attribute          resource symbol {@link mayi.lagou.com.R.attr#android_background}.
+          @attr name android:android_background
         */
         public static final int LinePageIndicator_android_background = 0;
         /**
@@ -1643,7 +1647,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:centered
+          @attr name android:centered
         */
         public static final int LinePageIndicator_centered = 1;
         /**
@@ -1661,7 +1665,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:gapWidth
+          @attr name android:gapWidth
         */
         public static final int LinePageIndicator_gapWidth = 6;
         /**
@@ -1679,7 +1683,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:lineWidth
+          @attr name android:lineWidth
         */
         public static final int LinePageIndicator_lineWidth = 5;
         /**
@@ -1696,7 +1700,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:selectedColor
+          @attr name android:selectedColor
         */
         public static final int LinePageIndicator_selectedColor = 2;
         /**
@@ -1714,7 +1718,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:strokeWidth
+          @attr name android:strokeWidth
         */
         public static final int LinePageIndicator_strokeWidth = 3;
         /**
@@ -1731,7 +1735,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:unselectedColor
+          @attr name android:unselectedColor
         */
         public static final int LinePageIndicator_unselectedColor = 4;
         /** Attributes that can be used with a TitlePageIndicator.
@@ -1740,9 +1744,9 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #TitlePageIndicator_android_background android:background}</code></td><td> View background </td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_android_textColor android:textColor}</code></td><td> Color of regular titles.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_android_textSize android:textSize}</code></td><td> Size of title text.</td></tr>
+           <tr><td><code>{@link #TitlePageIndicator_android_background mayi.lagou.com:android_background}</code></td><td> View background </td></tr>
+           <tr><td><code>{@link #TitlePageIndicator_android_textColor mayi.lagou.com:android_textColor}</code></td><td> Color of regular titles.</td></tr>
+           <tr><td><code>{@link #TitlePageIndicator_android_textSize mayi.lagou.com:android_textSize}</code></td><td> Size of title text.</td></tr>
            <tr><td><code>{@link #TitlePageIndicator_clipPadding mayi.lagou.com:clipPadding}</code></td><td> Screen edge padding.</td></tr>
            <tr><td><code>{@link #TitlePageIndicator_footerColor mayi.lagou.com:footerColor}</code></td><td> Color of the footer line and indicator.</td></tr>
            <tr><td><code>{@link #TitlePageIndicator_footerIndicatorHeight mayi.lagou.com:footerIndicatorHeight}</code></td><td> Height of the indicator above the footer line.</td></tr>
@@ -1782,27 +1786,24 @@ containing a value of this type.
           <p>
           @attr description
            View background 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#background}.
-          @attr name android:background
+          <p>This corresponds to the global attribute          resource symbol {@link mayi.lagou.com.R.attr#android_background}.
+          @attr name android:android_background
         */
         public static final int TitlePageIndicator_android_background = 2;
         /**
           <p>
           @attr description
            Color of regular titles. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#textColor}.
-          @attr name android:textColor
+          <p>This corresponds to the global attribute          resource symbol {@link mayi.lagou.com.R.attr#android_textColor}.
+          @attr name android:android_textColor
         */
         public static final int TitlePageIndicator_android_textColor = 1;
         /**
           <p>
           @attr description
            Size of title text. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#textSize}.
-          @attr name android:textSize
+          <p>This corresponds to the global attribute          resource symbol {@link mayi.lagou.com.R.attr#android_textSize}.
+          @attr name android:android_textSize
         */
         public static final int TitlePageIndicator_android_textSize = 0;
         /**
@@ -1820,7 +1821,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:clipPadding
+          @attr name android:clipPadding
         */
         public static final int TitlePageIndicator_clipPadding = 4;
         /**
@@ -1837,7 +1838,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:footerColor
+          @attr name android:footerColor
         */
         public static final int TitlePageIndicator_footerColor = 5;
         /**
@@ -1855,7 +1856,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:footerIndicatorHeight
+          @attr name android:footerIndicatorHeight
         */
         public static final int TitlePageIndicator_footerIndicatorHeight = 8;
         /**
@@ -1875,7 +1876,7 @@ containing a value of this type.
 <tr><td><code>underline</code></td><td>2</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:footerIndicatorStyle
+          @attr name android:footerIndicatorStyle
         */
         public static final int TitlePageIndicator_footerIndicatorStyle = 7;
         /**
@@ -1893,7 +1894,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:footerIndicatorUnderlinePadding
+          @attr name android:footerIndicatorUnderlinePadding
         */
         public static final int TitlePageIndicator_footerIndicatorUnderlinePadding = 9;
         /**
@@ -1911,7 +1912,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:footerLineHeight
+          @attr name android:footerLineHeight
         */
         public static final int TitlePageIndicator_footerLineHeight = 6;
         /**
@@ -1929,7 +1930,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:footerPadding
+          @attr name android:footerPadding
         */
         public static final int TitlePageIndicator_footerPadding = 10;
         /**
@@ -1948,7 +1949,7 @@ containing a value of this type.
 <tr><td><code>top</code></td><td>1</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:linePosition
+          @attr name android:linePosition
         */
         public static final int TitlePageIndicator_linePosition = 11;
         /**
@@ -1964,7 +1965,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:selectedBold
+          @attr name android:selectedBold
         */
         public static final int TitlePageIndicator_selectedBold = 12;
         /**
@@ -1981,7 +1982,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:selectedColor
+          @attr name android:selectedColor
         */
         public static final int TitlePageIndicator_selectedColor = 3;
         /**
@@ -1999,7 +2000,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:titlePadding
+          @attr name android:titlePadding
         */
         public static final int TitlePageIndicator_titlePadding = 13;
         /**
@@ -2017,7 +2018,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:topPadding
+          @attr name android:topPadding
         */
         public static final int TitlePageIndicator_topPadding = 14;
         /** Attributes that can be used with a UnderlinePageIndicator.
@@ -2026,7 +2027,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #UnderlinePageIndicator_android_background android:background}</code></td><td> View background </td></tr>
+           <tr><td><code>{@link #UnderlinePageIndicator_android_background mayi.lagou.com:android_background}</code></td><td> View background </td></tr>
            <tr><td><code>{@link #UnderlinePageIndicator_fadeDelay mayi.lagou.com:fadeDelay}</code></td><td> Length of the delay to fade the indicator.</td></tr>
            <tr><td><code>{@link #UnderlinePageIndicator_fadeLength mayi.lagou.com:fadeLength}</code></td><td> Length of the indicator fade to transparent.</td></tr>
            <tr><td><code>{@link #UnderlinePageIndicator_fades mayi.lagou.com:fades}</code></td><td> Whether or not the selected indicator fades.</td></tr>
@@ -2046,9 +2047,8 @@ containing a value of this type.
           <p>
           @attr description
            View background 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#background}.
-          @attr name android:background
+          <p>This corresponds to the global attribute          resource symbol {@link mayi.lagou.com.R.attr#android_background}.
+          @attr name android:android_background
         */
         public static final int UnderlinePageIndicator_android_background = 0;
         /**
@@ -2064,7 +2064,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:fadeDelay
+          @attr name android:fadeDelay
         */
         public static final int UnderlinePageIndicator_fadeDelay = 3;
         /**
@@ -2080,7 +2080,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:fadeLength
+          @attr name android:fadeLength
         */
         public static final int UnderlinePageIndicator_fadeLength = 4;
         /**
@@ -2096,7 +2096,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:fades
+          @attr name android:fades
         */
         public static final int UnderlinePageIndicator_fades = 2;
         /**
@@ -2113,7 +2113,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:selectedColor
+          @attr name android:selectedColor
         */
         public static final int UnderlinePageIndicator_selectedColor = 1;
         /** Attributes that can be used with a ViewPagerIndicator.
@@ -2149,7 +2149,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:vpiCirclePageIndicatorStyle
+          @attr name android:vpiCirclePageIndicatorStyle
         */
         public static final int ViewPagerIndicator_vpiCirclePageIndicatorStyle = 0;
         /**
@@ -2161,7 +2161,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:vpiIconPageIndicatorStyle
+          @attr name android:vpiIconPageIndicatorStyle
         */
         public static final int ViewPagerIndicator_vpiIconPageIndicatorStyle = 1;
         /**
@@ -2173,7 +2173,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:vpiLinePageIndicatorStyle
+          @attr name android:vpiLinePageIndicatorStyle
         */
         public static final int ViewPagerIndicator_vpiLinePageIndicatorStyle = 2;
         /**
@@ -2185,7 +2185,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:vpiTabPageIndicatorStyle
+          @attr name android:vpiTabPageIndicatorStyle
         */
         public static final int ViewPagerIndicator_vpiTabPageIndicatorStyle = 4;
         /**
@@ -2197,7 +2197,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:vpiTitlePageIndicatorStyle
+          @attr name android:vpiTitlePageIndicatorStyle
         */
         public static final int ViewPagerIndicator_vpiTitlePageIndicatorStyle = 3;
         /**
@@ -2209,7 +2209,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name mayi.lagou.com:vpiUnderlinePageIndicatorStyle
+          @attr name android:vpiUnderlinePageIndicatorStyle
         */
         public static final int ViewPagerIndicator_vpiUnderlinePageIndicatorStyle = 5;
         /** Attributes that can be used with a drop_down_list_attr.
@@ -2240,7 +2240,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mayi.lagou.com:isAutoLoadOnBottom
+          @attr name android:isAutoLoadOnBottom
         */
         public static final int drop_down_list_attr_isAutoLoadOnBottom = 2;
         /**
@@ -2254,7 +2254,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mayi.lagou.com:isDropDownStyle
+          @attr name android:isDropDownStyle
         */
         public static final int drop_down_list_attr_isDropDownStyle = 0;
         /**
@@ -2268,7 +2268,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mayi.lagou.com:isOnBottomStyle
+          @attr name android:isOnBottomStyle
         */
         public static final int drop_down_list_attr_isOnBottomStyle = 1;
     };
