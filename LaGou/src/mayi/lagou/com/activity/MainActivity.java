@@ -74,7 +74,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 	private void intiCircalMenu() {
 		ImageView fabIconNew = new ImageView(this);
 		fabIconNew.setImageDrawable(getResources().getDrawable(
-				R.drawable.add));
+				R.drawable.location));
 		rightLowerButton = new FloatingActionButton.Builder(
 				this).setContentView(fabIconNew).build();
 
@@ -160,6 +160,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 	@Override
 	public void setUrl(String url) {
 		mUrl = url;
+		rightLowerMenu.close(false);
 		rightLowerButton.setVisibility(View.GONE);
 	}
 

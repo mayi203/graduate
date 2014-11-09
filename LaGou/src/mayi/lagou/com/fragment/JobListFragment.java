@@ -59,6 +59,7 @@ public final class JobListFragment extends Fragment {
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
 	private MyHandler mHandler;
 	private OnChangeUrl onChangeUrl;
+	private boolean isFirstLoad;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -157,12 +158,11 @@ public final class JobListFragment extends Fragment {
 		if (isVisibleToUser) {
 			// 相当于Fragment的onResume
 			System.out.println("lagou setUserVisibleHint" + jobType);
-			DialogUtils.showProcessDialog(getActivity(), true);
-			mHandler.sendEmptyMessageDelayed(REFRESHDATA, 500);
+			isFirstLoad=true;
+			mHandler.sendEmptyMessageDelayed(REFRESHDATA, 20);
 			onChangeUrl.setCurrentFragment(this);
 		} else {
 			// 相当于Fragment的onPause
-			DialogUtils.hideProcessDialog();
 		}
 	}
 
@@ -210,6 +210,7 @@ public final class JobListFragment extends Fragment {
 	public void onPause() {
 		super.onPause();
 		mHandler.removeMessages(REFRESHDATA);
+		DialogUtils.hideProcessDialog();
 	}
 
 	public void changeCity(String city) {
@@ -240,8 +241,11 @@ public final class JobListFragment extends Fragment {
 			if (list != null && list.size() > 0) {
 				allData.addAll(list);
 			}
-			DialogUtils.hideProcessDialog();
+			isFirstLoad=false;
 			return;
+		}
+		if(isFirstLoad){
+			DialogUtils.showProcessDialog(getActivity());
 		}
 		LaGouApp.getInstance().client.get(url, new AsyncHttpResponseHandler() {
 			@Override
@@ -273,6 +277,7 @@ public final class JobListFragment extends Fragment {
 
 			@Override
 			public void onFinish() {
+				isFirstLoad=false;
 				DialogUtils.hideProcessDialog();
 				super.onFinish();
 			}
