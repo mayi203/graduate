@@ -335,226 +335,242 @@ public class ParserUtil {
 		}
 	}
 
-	private static Element getResumeElement(Document doc){
-		try{
-			return doc.getElementById("container").select("div.clearfixs mr_created").select("div.mr_myresume_l").get(0);
-		}catch(Exception e){
-			return null;
-		}
-	}
-	private static Element getResumeHeaderElement(Document doc){
-		try{
+	private static Element getResumeHeaderElement(Document doc) {
+		try {
 			return doc.getElementById("mr_mr_head");
-		}catch(Exception e){
+		} catch (Exception e) {
 			return null;
 		}
 	}
-	private static Element getResumeContentElement(Document doc){
-		try{
+
+	private static Element getResumeContentElement(Document doc) {
+		try {
 			return doc.select("div.mr_content").first();
-		}catch(Exception e){
+		} catch (Exception e) {
 			return null;
 		}
 	}
-	private static String getSimpleDescription(Element element){
-		try{
-			return element.select("div.mr_baseinfo").first().select("div.mr_p_introduce").first().select("span").get(1).text();
-		}catch(Exception e){
+
+	private static String getSimpleDescription(Element element) {
+		try {
+			return element.select("div.mr_baseinfo").first()
+					.select("div.mr_p_introduce").first().select("span").get(1)
+					.text();
+		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
 		}
 	}
-	private static String getUserName(Element element){
-		try{
-			return element.select("div.mr_p_name").first().select("span").get(1).text();
-		}catch(Exception e){
+
+	private static String getUserName(Element element) {
+		try {
+			return element.select("div.mr_p_name").first().select("span")
+					.get(1).text();
+		} catch (Exception e) {
 			return "";
 		}
 	}
+
 	private static String getBasicInfo(Element element) {
 		try {
-			return element.select("div.mr_p_info").first().select("div.info_t").first().select("span").get(1).text();
+			return element.select("div.mr_p_info").first().select("div.info_t")
+					.first().select("span").get(1).text();
 		} catch (NullPointerException e) {
 			return "";
 		}
 	}
+
 	private static String getSchoolInfo(Element element) {
 		try {
-			return element.select("div.mr_p_info").first().select("div.info_t").first().select("span").get(0).text();
+			return element.select("div.mr_p_info").first().select("div.info_t")
+					.first().select("span").get(0).text();
 		} catch (NullPointerException e) {
 			return "";
 		}
 	}
-	private static String getUserIcon(Element element){
-		try{
-			return element.select("div.mr_top_bg").first().select("img").first().attr("src");
-		}catch(Exception e){
+
+	private static String getUserIcon(Element element) {
+		try {
+			return element.getElementById("userpic").attr("src");
+		} catch (Exception e) {
 			return "";
 		}
 	}
+
+	private static String getSelfDescription(Element element) {
+		try {
+			return element.getElementById("selfDescription")
+					.select("div.mr_moudle_content").first()
+					.select("div.self_des_list").first()
+					.select("div.mr_self_r").text();
+		} catch (Exception e) {
+			return "";
+		}
+	}
+
+	private static String getJobException(Element element) {
+		try {
+			return element.getElementById("expectJob")
+					.select("div.mr_moudle_content").first()
+					.select("div.expectjob_list").first()
+					.select("div.mr_job_info").first().select("ul.clearfixs")
+					.text();
+		} catch (Exception e) {
+			return "";
+		}
+	}
+
+	private static List<ProjectShow> getProjectShow(Element element) {
+		try {
+			Elements elements = element.getElementById("worksShow")
+					.select("div.mr_moudle_content").first()
+					.select("div.mr_work_online").first()
+					.select("div.mr_wo_show");
+			List<ProjectShow> list = new ArrayList<ProjectShow>();
+			for (Element e : elements) {
+				ProjectShow show = new ProjectShow();
+				String url = e.select("div.mr_self_site").first().select("a")
+						.first().attr("href");
+				show.setProjectUrl(url);
+				String detail = e.select("div.mr_wo_preview").first().text();
+				show.setProjectDetail(detail);
+				list.add(show);
+			}
+			return list;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	private static List<ProjectExperience> getProjectExperience(Element element) {
+		try {
+			Elements elements = element.getElementById("projectExperience")
+					.select("div.mr_moudle_content").first()
+					.select("div.list_show").first().select("div.mr_jobe_list");
+			List<ProjectExperience> list = new ArrayList<ProjectExperience>();
+			for (Element e : elements) {
+				ProjectExperience ex = new ProjectExperience();
+				String projectName = e.select("div.clearfixs").first()
+						.select("div.mr_content_l").first().select("div.l2")
+						.select("a").first().text();
+				ex.setProjectName(projectName);
+				String projectTime = e.select("div.clearfixs").first()
+						.select("div.mr_content_r").first().select("span")
+						.first().text();
+				ex.setProjectTime(projectTime);
+				String projectDetail = e.select("div.mr_content_m").first()
+						.text();
+				ex.setProjectDetail(projectDetail);
+				list.add(ex);
+			}
+			return list;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	private static List<JobExperience> getJobExperience(Element element) {
+		try {
+			Elements elements = element.getElementById("workExperience")
+					.select("div.mr_moudle_content").first()
+					.select("div.list_show").first().select("div.mr_jobe_list");
+			List<JobExperience> list = new ArrayList<JobExperience>();
+			for (Element e : elements) {
+				JobExperience job = new JobExperience();
+				String jobTime = e.select("div.clearfixs").first()
+						.select("div.mr_content_r").first().select("span")
+						.text();
+				job.setJobTime(jobTime);
+				String positionName = e.select("div.clearfixs").first()
+						.select("div.mr_content_l").first().select("div.l2").first()
+						.select("span").text();
+				job.setPositionName(positionName);
+				String companyName = e.select("div.clearfixs").first()
+						.select("div.mr_content_l").first().select("div.l2").first()
+						.select("h4").text();
+				job.setCompanyName(companyName);
+				String iconUrl = e.select("div.clearfixs").first()
+						.select("div.mr_content_l").first().select("div.l1").first()
+						.select("img").attr("src");
+				job.setIconUrl(iconUrl);
+				list.add(job);
+			}
+			return list;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	private static List<EducationExperirnce> getEducationExperirnce(Element element){
+		try {
+			Elements elements = element.getElementById("educationalBackground")
+					.select("div.mr_moudle_content").first()
+					.select("div.list_show").first().select("div.clearfixs");
+			List<EducationExperirnce> list = new ArrayList<EducationExperirnce>();
+			for (Element e : elements) {
+				EducationExperirnce edu = new EducationExperirnce();
+				String school = e.select("div.mr_content_l").first()
+						.select("div.l2").first().select("h4")
+						.text();
+				edu.setSchool(school);
+				String major = e.select("div.mr_content_l").first()
+						.select("div.l2").first().select("span")
+						.text();
+				edu.setMajor(major);
+				String educationTime = e.select("div.mr_content_r").first()
+						.select("span").text();
+				edu.setEducationTime(educationTime);
+				String iconUrl=e.select("div.mr_content_l").first()
+						.select("div.l1").first().select("img")
+						.attr("src");
+				edu.setIconUrl(iconUrl);
+				list.add(edu);
+			}
+			return list;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	private static String getResumeMobile(Element element){
+		try {
+			return element.select("div.mr_p_info").first().select("div.info_b")
+					.first().select("span").get(0).text();
+		} catch (NullPointerException e) {
+			return "";
+		}
+	}
+	
+	private static String getResumeEmail(Element element){
+		try {
+			return element.select("div.mr_p_info").first().select("div.info_b")
+					.first().select("span").get(1).text();
+		} catch (NullPointerException e) {
+			return "";
+		}
+	}
+	
 	public static UserInfo parserUserInfo(String html) {
 		Document doc = Jsoup.parse(html);
-		Element headerElement=getResumeHeaderElement(doc);
+		Element headerElement = getResumeHeaderElement(doc);
+		Element headerBaseElement = headerElement.select("div.mr_baseinfo")
+				.first();
+		Element containElement = getResumeContentElement(doc);
 		UserInfo userInfo = new UserInfo();
-		Element headerBaseElement=headerElement.select("div.mr_baseinfo").first();
 		userInfo.setSimpleDescription(getSimpleDescription(headerElement));
 		userInfo.setUserName(getUserName(headerBaseElement));
 		userInfo.setBasicInfo(getBasicInfo(headerBaseElement));
 		userInfo.setUserSchool(getSchoolInfo(headerBaseElement));
 		userInfo.setUserIcon(getUserIcon(headerElement));
-
-		userInfo.setJobExpect(getJobExpect(doc));
-		userInfo.setJobExperience(obtainJobExperience(doc));
-		userInfo.setProjectExperience(obatinProjectExperience(doc));
-		userInfo.setResumePreviewUrl(getResumePreviewUrl(doc));
-		userInfo.setEducationExperience(obtainEducationExperience(doc));
-		userInfo.setSelfDescription(getSelfDescription(doc));
-		userInfo.setProjectShow(obtainProjectShow(doc));
+		userInfo.setSelfDescription(getSelfDescription(containElement));
+		userInfo.setJobExpect(getJobException(containElement));
+		userInfo.setProjectShow(getProjectShow(containElement));
+		userInfo.setProjectExperience(getProjectExperience(containElement));
+		userInfo.setJobExperience(getJobExperience(containElement));
+		userInfo.setEducationExperience(getEducationExperirnce(containElement));
+		userInfo.setMobile(getResumeMobile(headerBaseElement));
+		userInfo.setEmail(getResumeEmail(headerBaseElement));
 		return userInfo;
-	}
-
-	/**
-	 * @param doc
-	 * @return
-	 */
-	private static List<EducationExperirnce> obtainEducationExperience(
-			Document doc) {
-		try {
-			List<EducationExperirnce> educationExperience = new ArrayList<EducationExperirnce>();
-			EducationExperirnce education = null;
-			Elements educations = doc.select("ul.elist").select("div");
-			for (int i = 0; i < educations.size(); i++) {
-				education = new EducationExperirnce();
-				education.setSchool(educations.get(i).select("h3").text()
-						.trim());
-				education
-						.setMajor(educations.get(i).select("h4").text().trim());
-				education.setEducationTime(doc.select("ul.elist")
-						.select("span").get(i).text().trim());
-				educationExperience.add(education);
-			}
-			return educationExperience;
-		} catch (IndexOutOfBoundsException e) {
-			return null;
-		}
-	}
-
-	/**
-	 * @param doc
-	 * @return
-	 */
-	private static List<ProjectShow> obtainProjectShow(Document doc) {
-
-		List<ProjectShow> projectShows = new ArrayList<ProjectShow>();
-		ProjectShow project = null;
-		try {
-			Elements projects = doc.select("div.workShow").select("div.f16");
-			for (int i = 0; i < projects.size(); i++) {
-				project = new ProjectShow();
-				project.setProjectUrl(projects.get(i).select("a").text().trim());
-				project.setProjectDetail(doc.select("div.workShow").select("p")
-						.get(i).text().trim());
-				projectShows.add(project);
-			}
-		} catch (IndexOutOfBoundsException e) {
-		}
-		return projectShows;
-	}
-
-	/**
-	 * @param doc
-	 * @return
-	 */
-	private static String getSelfDescription(Document doc) {
-		try {
-			return doc.select("div.descriptionShow").text().trim();
-		} catch (NullPointerException e) {
-			return "";
-		}
-	}
-
-	/**
-	 * @param doc
-	 * @return
-	 */
-	private static List<JobExperience> obtainJobExperience(Document doc) {
-		try {
-			List<JobExperience> jobExperiences = new ArrayList<JobExperience>();
-			JobExperience job = null;
-			Elements jobs = doc.select("ul.wlist").select("div");
-			for (int i = 0; i < jobs.size(); i++) {
-				job = new JobExperience();
-				job.setPositionName(jobs.get(i).select("h3").text().trim());
-				job.setCompanyName(jobs.get(i).select("h4").text().trim());
-				job.setIconUrl(jobs.get(i).select("img").attr("src"));
-				job.setJobTime(doc.select("ul.wlist").select("span").get(i)
-						.text().trim());
-				jobExperiences.add(job);
-			}
-			return jobExperiences;
-		} catch (IndexOutOfBoundsException e) {
-			return null;
-		}
-	}
-
-	/**
-	 * @param doc
-	 * @return
-	 */
-	private static List<ProjectExperience> obatinProjectExperience(Document doc) {
-		try {
-			List<ProjectExperience> projects = new ArrayList<ProjectExperience>();
-			ProjectExperience project = null;
-			Elements projectList = doc.select("div.projectList");
-			for (int i = 0; i < projectList.size(); i++) {
-				project = new ProjectExperience();
-				String proName = projectList.get(i).select("div.f16").text()
-						.trim();
-				proName.substring(0, proName.indexOf(" ")).trim();
-				project.setProjectName(proName.substring(0,
-						proName.indexOf(" ")).trim());
-				project.setProjectTime(projectList.get(i).select("span").text()
-						.trim());
-				try {
-					project.setProjectDetail(projectList.get(i)
-							.select("div.dl1").text().trim());
-				} catch (NullPointerException e) {
-					project.setProjectDetail("");
-				}
-				projects.add(project);
-			}
-			return projects;
-		} catch (IndexOutOfBoundsException e) {
-			return null;
-		}
-	}
-
-	/**
-	 * @param doc
-	 * @return
-	 */
-	private static String getJobExpect(Document doc) {
-		try {
-			return doc.select("div.expectShow").select("span").text().trim();
-		} catch (NullPointerException e) {
-			return "";
-		}
-	}
-
-	/**
-	 * @param doc
-	 * @return
-	 */
-	private static String getResumePreviewUrl(Document doc) {
-		return doc.select("div.nameShow").select("a").attr("href");
-	}
-
-	/**
-	 * @param doc
-	 * @return
-	 */
-	private static String getUserIcon(Document doc) {
-		return doc.select("div.basicShow").select("img").attr("src");
 	}
 
 	public static String parseResumeDialogText(String html) {

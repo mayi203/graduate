@@ -27,8 +27,8 @@ public class UserInfo implements Serializable {
 	private String userIcon;
 	/** 期望工作 */
 	private String jobExpect;
-	/** 简历预览 */
-	private String resumePreviewUrl;
+	private String mobile;
+	private String email;
 	/** 简历上传 */
 	private String uploadResumeUrl;
 	/** 项目经验 */
@@ -136,21 +136,6 @@ public class UserInfo implements Serializable {
 	}
 
 	/**
-	 * @return the resumePreviewUrl
-	 */
-	public String getResumePreviewUrl() {
-		return resumePreviewUrl;
-	}
-
-	/**
-	 * @param resumePreviewUrl
-	 *            the resumePreviewUrl to set
-	 */
-	public void setResumePreviewUrl(String resumePreviewUrl) {
-		this.resumePreviewUrl = resumePreviewUrl;
-	}
-
-	/**
 	 * @return the uploadResumeUrl
 	 */
 	public String getUploadResumeUrl() {
@@ -217,6 +202,22 @@ public class UserInfo implements Serializable {
 
 	public void setUserSchool(String userSchool) {
 		this.userSchool = userSchool;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

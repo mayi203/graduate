@@ -22,6 +22,8 @@ public class EducationExperirnce implements Serializable {
 	private String major;
 	/** 教育时间 */
 	private String educationTime;
+	/**图标*/
+	private String iconUrl;
 
 	/**
 	 * @return the school
@@ -66,6 +68,14 @@ public class EducationExperirnce implements Serializable {
 	 */
 	public void setEducationTime(String educationTime) {
 		this.educationTime = educationTime;
+	}
+
+	public String getIconUrl() {
+		return iconUrl;
+	}
+
+	public void setIconUrl(String iconUrl) {
+		this.iconUrl = iconUrl;
 	}
 
 }

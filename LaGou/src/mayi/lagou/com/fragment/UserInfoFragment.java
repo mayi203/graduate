@@ -69,7 +69,6 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public int contentView() {
-		// getActivity().getActionBar().setTitle(R.string.self);
 		return R.layout.f_user_info;
 	}
 
@@ -84,7 +83,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void initValue() {
-		mCache=ACache.get(getActivity());
+		mCache = ACache.get(getActivity());
 		mPullToRefreshListView.setPullLoadEnabled(true);
 		mListView = mPullToRefreshListView.getRefreshableView();
 		mListView.setFadingEdgeLength(0);
@@ -206,7 +205,8 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String content) {
-				initData(content);
+				if (isFirstLoad)
+					initData(content);
 				if (!isExit) {
 					SharePreferenceUtil.putString(getActivity(), "userInfo",
 							content);
@@ -224,7 +224,11 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 	}
 
 	private void initData(String content) {
-		UserInfo user = ParserUtil.parserUserInfo(content);
+		UserInfo user = (UserInfo) mCache.getAsObject("userInfo");
+		if (user == null) {
+			user = ParserUtil.parserUserInfo(content);
+			mCache.put("userInfo", user, 2 * ACache.TIME_DAY);
+		}
 		onRequest.setUserInfo(user);
 		userInfo.setText(user.getBasicInfo());
 		if (user.getUserIcon() != null && !"".equals(user.getUserIcon())) {
@@ -285,7 +289,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 					allData.addAll(list);
 				}
 				isFirstLoad = false;
-				mCache.put(url, content,2*ACache.TIME_HOUR);
+				mCache.put(url, content, 2 * ACache.TIME_HOUR);
 			}
 
 			@Override
@@ -330,11 +334,5 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 		DialogUtils.hideProcessDialog();
 		super.onDestroyView();
 	}
-	// @Override
-	// public boolean onOptionsItemSelected(MenuItem item) {
-	// if (item.getItemId() == android.R.id.home) {
-	// getActivity().onBackPressed();
-	// }
-	// return super.onOptionsItemSelected(item);
-	// }
+
 }
