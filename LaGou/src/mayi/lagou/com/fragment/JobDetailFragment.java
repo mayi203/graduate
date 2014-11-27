@@ -10,7 +10,7 @@ import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.PositionDetail;
 import mayi.lagou.com.fragment.JobListFragment.OnChangeUrl;
-import mayi.lagou.com.utils.ConfigCache;
+import mayi.lagou.com.utils.ACache;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.utils.SharePreferenceUtil;
 import mayi.lagou.com.view.MyDialog;
@@ -56,6 +56,7 @@ public class JobDetailFragment extends BaseFragment {
 	private ImageView email;
 	private boolean isLogin = true;
 	private boolean gotoLogin = false;
+	private ACache mCache;
 
 	public JobDetailFragment() {
 
@@ -84,6 +85,7 @@ public class JobDetailFragment extends BaseFragment {
 
 	@Override
 	public void initValue() {
+		mCache=ACache.get(getActivity());
 		anim = AnimationUtils.loadAnimation(getActivity(), R.anim.email_anim);
 		anim.setRepeatMode(Animation.RESTART);
 		anim.setAnimationListener(new AnimationListener() {
@@ -182,7 +184,7 @@ public class JobDetailFragment extends BaseFragment {
 	}
 
 	private void refreshData() {
-		String responseStr = ConfigCache.getUrlCache(mUrl, getActivity());
+		String responseStr = mCache.getAsString(mUrl);
 		if (responseStr != null && !"".equals(responseStr)) {
 			PositionDetail detail = ParserUtil
 					.parserPositionDetail(responseStr);
@@ -254,7 +256,7 @@ public class JobDetailFragment extends BaseFragment {
 					if (config) {
 						confirmation();
 					}
-					ConfigCache.setUrlCache(response, mUrl);
+					mCache.put(mUrl, response,2*ACache.TIME_HOUR);
 				} else {
 					detail_null.setVisibility(View.VISIBLE);
 				}

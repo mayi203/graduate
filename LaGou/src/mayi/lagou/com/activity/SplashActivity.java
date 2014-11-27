@@ -1,17 +1,24 @@
 package mayi.lagou.com.activity;
 
-import com.umeng.analytics.MobclickAgent;
-
+import mayi.lagou.com.LaGouApp;
+import mayi.lagou.com.R;
+import mayi.lagou.com.core.BaseActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import mayi.lagou.com.R;
-import mayi.lagou.com.core.BaseActivity;
+
+import com.umeng.analytics.MobclickAgent;
 
 public class SplashActivity extends BaseActivity {
 
@@ -19,12 +26,26 @@ public class SplashActivity extends BaseActivity {
 
 	@Override
 	public int contentView() {
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		return R.layout.a_splash;
 	}
 
 	@Override
 	public void findViewsById() {
+		if (android.os.Build.VERSION.SDK_INT > 18) {
+            Window window = getWindow();
+            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            RelativeLayout main=(RelativeLayout)findViewById(R.id.main);
+            main.setPadding(0, LaGouApp.getInstance().getStatusBarHeight(), 0, 0);
+         // 创建TextView
+            TextView textView = new TextView(this);
+            LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LaGouApp.getInstance().getStatusBarHeight());
+            textView.setBackgroundColor(Color.parseColor("#019875"));
+            textView.setLayoutParams(lParams);
+            // 获得根视图并把TextView加进去。
+            ViewGroup view = (ViewGroup) getWindow().getDecorView();
+            view.addView(textView);
+        }
 		lagou = findTextView(R.id.lagou);
 		lagouDel = findTextView(R.id.lagou_del);
 	}

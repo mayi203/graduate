@@ -6,13 +6,14 @@ import java.util.List;
 import mayi.lagou.com.LaGouApp;
 import mayi.lagou.com.R;
 import mayi.lagou.com.fragment.JobListFragment;
-import mayi.lagou.com.fragment.SettingFragment;
 import mayi.lagou.com.fragment.JobListFragment.OnChangeUrl;
+import mayi.lagou.com.fragment.SettingFragment;
 import mayi.lagou.com.view.TabPageIndicator;
 import mayi.lagou.com.view.circularmenu.FloatingActionButton;
 import mayi.lagou.com.view.circularmenu.FloatingActionMenu;
 import mayi.lagou.com.view.circularmenu.SubActionButton;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -22,9 +23,16 @@ import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements OnClickListener,
@@ -41,6 +49,21 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.a_main);
+		if (android.os.Build.VERSION.SDK_INT > 18) {
+            Window window = getWindow();
+            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            FrameLayout main=(FrameLayout)findViewById(R.id.main);
+            main.setPadding(0, LaGouApp.getInstance().getStatusBarHeight(), 0, 0);
+         // 创建TextView
+            TextView textView = new TextView(this);
+            LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LaGouApp.getInstance().getStatusBarHeight());
+            textView.setBackgroundColor(Color.parseColor("#019875"));
+            textView.setLayoutParams(lParams);
+            // 获得根视图并把TextView加进去。
+            ViewGroup view = (ViewGroup) getWindow().getDecorView();
+            view.addView(textView);
+        }
 		JobList = getResources().getStringArray(R.array.job_list);
 		CityList = getResources().getStringArray(R.array.city_list);
 		FragmentPagerAdapter adapter = new GoogleMusicAdapter(

@@ -1048,134 +1048,135 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int xsearch_msg_pull_arrow_down=0x7f0200c2;
     }
     public static final class id {
-        public static final int about_app=0x7f0a0050;
-        public static final int about_icon=0x7f0a001f;
-        public static final int back=0x7f0a004a;
-        public static final int back_about=0x7f0a001d;
-        public static final int back_del=0x7f0a002f;
-        public static final int back_info=0x7f0a0052;
-        public static final int back_job=0x7f0a0007;
-        public static final int back_login=0x7f0a003d;
-        public static final int back_resume=0x7f0a0041;
-        public static final int back_setting=0x7f0a004c;
-        public static final int base=0x7f0a0043;
-        public static final int base_info=0x7f0a0062;
-        public static final int bottom=0x7f0a0003;
-        public static final int bottom_txt=0x7f0a003a;
-        public static final int button_layout=0x7f0a0079;
-        public static final int change_user=0x7f0a0051;
-        public static final int check=0x7f0a007c;
-        public static final int clear_cache=0x7f0a004f;
-        public static final int com_del=0x7f0a0037;
-        public static final int com_img=0x7f0a0035;
-        public static final int com_name=0x7f0a0036;
-        public static final int compony=0x7f0a005f;
-        public static final int contain=0x7f0a0005;
-        public static final int delive_list=0x7f0a0055;
-        public static final int deliver_company=0x7f0a0010;
-        public static final int deliver_position=0x7f0a000e;
-        public static final int deliver_progress=0x7f0a0013;
-        public static final int deliver_resume=0x7f0a0012;
-        public static final int deliver_salary=0x7f0a000f;
-        public static final int deliver_set=0x7f0a004d;
-        public static final int deliver_time=0x7f0a0011;
-        public static final int detail_null_img=0x7f0a003c;
-        public static final int details=0x7f0a0038;
-        public static final int dialog_button_cancel=0x7f0a007b;
-        public static final int dialog_button_ok=0x7f0a007a;
-        public static final int dialog_confirm_layout=0x7f0a0014;
-        public static final int dialog_process_image=0x7f0a0015;
-        public static final int drop_down_list_footer_button=0x7f0a0017;
-        public static final int drop_down_list_footer_progress_bar=0x7f0a0016;
-        public static final int drop_down_list_header_default_text=0x7f0a001b;
-        public static final int drop_down_list_header_default_text_layout=0x7f0a0019;
-        public static final int drop_down_list_header_image=0x7f0a001a;
-        public static final int drop_down_list_header_progress_bar=0x7f0a0018;
-        public static final int drop_down_list_header_second_text=0x7f0a001c;
-        public static final int education=0x7f0a0047;
-        public static final int email=0x7f0a003e;
-        public static final int ex_list=0x7f0a0045;
-        public static final int exp_icon=0x7f0a0057;
-        public static final int exp_job=0x7f0a0058;
-        public static final int exp_name=0x7f0a0059;
-        public static final int exp_time=0x7f0a0056;
-        public static final int expect=0x7f0a0044;
-        public static final int exprience=0x7f0a005e;
-        public static final int fb_null=0x7f0a0054;
-        public static final int girl=0x7f0a002e;
-        public static final int girl_lay=0x7f0a002d;
-        public static final int gmail=0x7f0a0022;
-        public static final int grayview=0x7f0a0026;
-        public static final int gridview=0x7f0a004b;
-        public static final int icon=0x7f0a0042;
-        public static final int indicator=0x7f0a0009;
-        public static final int item1=0x7f0a0028;
-        public static final int item2=0x7f0a0029;
-        public static final int item3=0x7f0a002a;
-        public static final int item4=0x7f0a002b;
-        public static final int item5=0x7f0a002c;
-        public static final int job_detail_null=0x7f0a003b;
-        public static final int job_list=0x7f0a0025;
-        public static final int lagou=0x7f0a000b;
-        public static final int lagou_del=0x7f0a000c;
-        public static final int lay_about=0x7f0a0021;
-        public static final int lay_deliver=0x7f0a0039;
-        public static final int lay_info=0x7f0a0053;
-        public static final int lay_sc=0x7f0a0023;
-        public static final int lay_search=0x7f0a0024;
-        public static final int login=0x7f0a007e;
-        public static final int login_btn=0x7f0a0040;
-        public static final int menu=0x7f0a0027;
-        public static final int message=0x7f0a0078;
-        public static final int none=0x7f0a0000;
-        public static final int pager=0x7f0a000a;
-        public static final int position=0x7f0a005a;
-        public static final int producation=0x7f0a0049;
-        public static final int project=0x7f0a0046;
-        public static final int psw=0x7f0a003f;
-        public static final int pull_to_load_footer_content=0x7f0a0063;
-        public static final int pull_to_load_footer_hint_textview=0x7f0a0065;
-        public static final int pull_to_load_footer_progressbar=0x7f0a0064;
-        public static final int pull_to_refresh_header_arrow=0x7f0a006b;
-        public static final int pull_to_refresh_header_content=0x7f0a0066;
-        public static final int pull_to_refresh_header_hint_textview=0x7f0a0068;
-        public static final int pull_to_refresh_header_progressbar=0x7f0a006c;
-        public static final int pull_to_refresh_header_text=0x7f0a0067;
-        public static final int pull_to_refresh_header_time=0x7f0a006a;
-        public static final int pull_to_refresh_last_update_time_text=0x7f0a0069;
-        public static final int release_time=0x7f0a0034;
-        public static final int require=0x7f0a0033;
-        public static final int right_arrow=0x7f0a005c;
-        public static final int right_bar_about=0x7f0a001e;
-        public static final int right_bar_del=0x7f0a0030;
-        public static final int right_bar_job=0x7f0a0008;
-        public static final int salary=0x7f0a005d;
-        public static final int scroll=0x7f0a0031;
-        public static final int self=0x7f0a0048;
-        public static final int setting=0x7f0a007f;
-        public static final int share=0x7f0a007d;
-        public static final int tag=0x7f0a0060;
-        public static final int time=0x7f0a005b;
-        public static final int title=0x7f0a0032;
-        public static final int top=0x7f0a0004;
-        public static final int topbar=0x7f0a0006;
-        public static final int triangle=0x7f0a0001;
-        public static final int u_contain=0x7f0a000d;
-        public static final int umeng_fb=0x7f0a004e;
-        public static final int umeng_fb_back=0x7f0a006e;
-        public static final int umeng_fb_conversation_contact_entry=0x7f0a006f;
-        public static final int umeng_fb_conversation_header=0x7f0a006d;
-        public static final int umeng_fb_conversation_list_wrapper=0x7f0a0070;
-        public static final int umeng_fb_conversation_umeng_logo=0x7f0a0075;
-        public static final int umeng_fb_list_reply_header=0x7f0a0076;
-        public static final int umeng_fb_reply_content=0x7f0a0074;
-        public static final int umeng_fb_reply_content_wrapper=0x7f0a0072;
-        public static final int umeng_fb_reply_date=0x7f0a0077;
-        public static final int umeng_fb_reply_list=0x7f0a0071;
-        public static final int umeng_fb_send=0x7f0a0073;
-        public static final int underline=0x7f0a0002;
-        public static final int user_icon=0x7f0a0061;
-        public static final int ver=0x7f0a0020;
+        public static final int about_app=0x7f0b0051;
+        public static final int about_icon=0x7f0b0020;
+        public static final int back=0x7f0b004b;
+        public static final int back_about=0x7f0b001e;
+        public static final int back_del=0x7f0b0030;
+        public static final int back_info=0x7f0b0053;
+        public static final int back_job=0x7f0b0008;
+        public static final int back_login=0x7f0b003e;
+        public static final int back_resume=0x7f0b0042;
+        public static final int back_setting=0x7f0b004d;
+        public static final int base=0x7f0b0044;
+        public static final int base_info=0x7f0b0063;
+        public static final int bottom=0x7f0b0003;
+        public static final int bottom_txt=0x7f0b003b;
+        public static final int button_layout=0x7f0b007a;
+        public static final int change_user=0x7f0b0052;
+        public static final int check=0x7f0b007d;
+        public static final int clear_cache=0x7f0b0050;
+        public static final int com_del=0x7f0b0038;
+        public static final int com_img=0x7f0b0036;
+        public static final int com_name=0x7f0b0037;
+        public static final int compony=0x7f0b0060;
+        public static final int contain=0x7f0b0005;
+        public static final int delive_list=0x7f0b0056;
+        public static final int deliver_company=0x7f0b0011;
+        public static final int deliver_position=0x7f0b000f;
+        public static final int deliver_progress=0x7f0b0014;
+        public static final int deliver_resume=0x7f0b0013;
+        public static final int deliver_salary=0x7f0b0010;
+        public static final int deliver_set=0x7f0b004e;
+        public static final int deliver_time=0x7f0b0012;
+        public static final int detail_null_img=0x7f0b003d;
+        public static final int details=0x7f0b0039;
+        public static final int dialog_button_cancel=0x7f0b007c;
+        public static final int dialog_button_ok=0x7f0b007b;
+        public static final int dialog_confirm_layout=0x7f0b0015;
+        public static final int dialog_process_image=0x7f0b0016;
+        public static final int drop_down_list_footer_button=0x7f0b0018;
+        public static final int drop_down_list_footer_progress_bar=0x7f0b0017;
+        public static final int drop_down_list_header_default_text=0x7f0b001c;
+        public static final int drop_down_list_header_default_text_layout=0x7f0b001a;
+        public static final int drop_down_list_header_image=0x7f0b001b;
+        public static final int drop_down_list_header_progress_bar=0x7f0b0019;
+        public static final int drop_down_list_header_second_text=0x7f0b001d;
+        public static final int education=0x7f0b0048;
+        public static final int email=0x7f0b003f;
+        public static final int ex_list=0x7f0b0046;
+        public static final int exp_icon=0x7f0b0058;
+        public static final int exp_job=0x7f0b0059;
+        public static final int exp_name=0x7f0b005a;
+        public static final int exp_time=0x7f0b0057;
+        public static final int expect=0x7f0b0045;
+        public static final int exprience=0x7f0b005f;
+        public static final int fb_null=0x7f0b0055;
+        public static final int girl=0x7f0b002f;
+        public static final int girl_lay=0x7f0b002e;
+        public static final int gmail=0x7f0b0023;
+        public static final int grayview=0x7f0b0027;
+        public static final int gridview=0x7f0b004c;
+        public static final int icon=0x7f0b0043;
+        public static final int indicator=0x7f0b000a;
+        public static final int item1=0x7f0b0029;
+        public static final int item2=0x7f0b002a;
+        public static final int item3=0x7f0b002b;
+        public static final int item4=0x7f0b002c;
+        public static final int item5=0x7f0b002d;
+        public static final int job_detail_null=0x7f0b003c;
+        public static final int job_list=0x7f0b0026;
+        public static final int lagou=0x7f0b000c;
+        public static final int lagou_del=0x7f0b000d;
+        public static final int lay_about=0x7f0b0022;
+        public static final int lay_deliver=0x7f0b003a;
+        public static final int lay_info=0x7f0b0054;
+        public static final int lay_sc=0x7f0b0024;
+        public static final int lay_search=0x7f0b0025;
+        public static final int login=0x7f0b007f;
+        public static final int login_btn=0x7f0b0041;
+        public static final int main=0x7f0b0006;
+        public static final int menu=0x7f0b0028;
+        public static final int message=0x7f0b0079;
+        public static final int none=0x7f0b0000;
+        public static final int pager=0x7f0b000b;
+        public static final int position=0x7f0b005b;
+        public static final int producation=0x7f0b004a;
+        public static final int project=0x7f0b0047;
+        public static final int psw=0x7f0b0040;
+        public static final int pull_to_load_footer_content=0x7f0b0064;
+        public static final int pull_to_load_footer_hint_textview=0x7f0b0066;
+        public static final int pull_to_load_footer_progressbar=0x7f0b0065;
+        public static final int pull_to_refresh_header_arrow=0x7f0b006c;
+        public static final int pull_to_refresh_header_content=0x7f0b0067;
+        public static final int pull_to_refresh_header_hint_textview=0x7f0b0069;
+        public static final int pull_to_refresh_header_progressbar=0x7f0b006d;
+        public static final int pull_to_refresh_header_text=0x7f0b0068;
+        public static final int pull_to_refresh_header_time=0x7f0b006b;
+        public static final int pull_to_refresh_last_update_time_text=0x7f0b006a;
+        public static final int release_time=0x7f0b0035;
+        public static final int require=0x7f0b0034;
+        public static final int right_arrow=0x7f0b005d;
+        public static final int right_bar_about=0x7f0b001f;
+        public static final int right_bar_del=0x7f0b0031;
+        public static final int right_bar_job=0x7f0b0009;
+        public static final int salary=0x7f0b005e;
+        public static final int scroll=0x7f0b0032;
+        public static final int self=0x7f0b0049;
+        public static final int setting=0x7f0b0080;
+        public static final int share=0x7f0b007e;
+        public static final int tag=0x7f0b0061;
+        public static final int time=0x7f0b005c;
+        public static final int title=0x7f0b0033;
+        public static final int top=0x7f0b0004;
+        public static final int topbar=0x7f0b0007;
+        public static final int triangle=0x7f0b0001;
+        public static final int u_contain=0x7f0b000e;
+        public static final int umeng_fb=0x7f0b004f;
+        public static final int umeng_fb_back=0x7f0b006f;
+        public static final int umeng_fb_conversation_contact_entry=0x7f0b0070;
+        public static final int umeng_fb_conversation_header=0x7f0b006e;
+        public static final int umeng_fb_conversation_list_wrapper=0x7f0b0071;
+        public static final int umeng_fb_conversation_umeng_logo=0x7f0b0076;
+        public static final int umeng_fb_list_reply_header=0x7f0b0077;
+        public static final int umeng_fb_reply_content=0x7f0b0075;
+        public static final int umeng_fb_reply_content_wrapper=0x7f0b0073;
+        public static final int umeng_fb_reply_date=0x7f0b0078;
+        public static final int umeng_fb_reply_list=0x7f0b0072;
+        public static final int umeng_fb_send=0x7f0b0074;
+        public static final int underline=0x7f0b0002;
+        public static final int user_icon=0x7f0b0062;
+        public static final int ver=0x7f0b0021;
     }
     public static final class layout {
         public static final int a_home=0x7f030000;
@@ -1212,9 +1213,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int v_mydialog=0x7f03001f;
     }
     public static final class menu {
-        public static final int jb_detail=0x7f0b0000;
-        public static final int jb_home=0x7f0b0001;
-        public static final int job_home2=0x7f0b0002;
+        public static final int jb_detail=0x7f0a0000;
+        public static final int jb_home=0x7f0a0001;
+        public static final int job_home2=0x7f0a0002;
     }
     public static final class string {
         public static final int about_app=0x7f070051;
@@ -1416,7 +1417,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:border_color
+          @attr name mayi.lagou.com:border_color
         */
         public static final int CircleImageView_border_color = 1;
         /**
@@ -1432,7 +1433,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:border_width
+          @attr name mayi.lagou.com:border_width
         */
         public static final int CircleImageView_border_width = 0;
         /** Attributes that can be used with a CirclePageIndicator.
@@ -1441,8 +1442,8 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #CirclePageIndicator_android_background mayi.lagou.com:android_background}</code></td><td> View background </td></tr>
-           <tr><td><code>{@link #CirclePageIndicator_android_orientation mayi.lagou.com:android_orientation}</code></td><td> Orientation of the indicator.</td></tr>
+           <tr><td><code>{@link #CirclePageIndicator_android_background android:background}</code></td><td> View background </td></tr>
+           <tr><td><code>{@link #CirclePageIndicator_android_orientation android:orientation}</code></td><td> Orientation of the indicator.</td></tr>
            <tr><td><code>{@link #CirclePageIndicator_centered mayi.lagou.com:centered}</code></td><td> Whether or not the indicators should be centered.</td></tr>
            <tr><td><code>{@link #CirclePageIndicator_fillColor mayi.lagou.com:fillColor}</code></td><td> Color of the filled circle that represents the current page.</td></tr>
            <tr><td><code>{@link #CirclePageIndicator_pageColor mayi.lagou.com:pageColor}</code></td><td> Color of the filled circles that represents pages.</td></tr>
@@ -1470,16 +1471,18 @@ containing a value of this type.
           <p>
           @attr description
            View background 
-          <p>This corresponds to the global attribute          resource symbol {@link mayi.lagou.com.R.attr#android_background}.
-          @attr name android:android_background
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#background}.
+          @attr name android:background
         */
         public static final int CirclePageIndicator_android_background = 1;
         /**
           <p>
           @attr description
            Orientation of the indicator. 
-          <p>This corresponds to the global attribute          resource symbol {@link mayi.lagou.com.R.attr#android_orientation}.
-          @attr name android:android_orientation
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#orientation}.
+          @attr name android:orientation
         */
         public static final int CirclePageIndicator_android_orientation = 0;
         /**
@@ -1495,7 +1498,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:centered
+          @attr name mayi.lagou.com:centered
         */
         public static final int CirclePageIndicator_centered = 2;
         /**
@@ -1512,7 +1515,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:fillColor
+          @attr name mayi.lagou.com:fillColor
         */
         public static final int CirclePageIndicator_fillColor = 4;
         /**
@@ -1529,7 +1532,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:pageColor
+          @attr name mayi.lagou.com:pageColor
         */
         public static final int CirclePageIndicator_pageColor = 5;
         /**
@@ -1547,7 +1550,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:radius
+          @attr name mayi.lagou.com:radius
         */
         public static final int CirclePageIndicator_radius = 6;
         /**
@@ -1563,7 +1566,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:snap
+          @attr name mayi.lagou.com:snap
         */
         public static final int CirclePageIndicator_snap = 7;
         /**
@@ -1580,7 +1583,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:strokeColor
+          @attr name mayi.lagou.com:strokeColor
         */
         public static final int CirclePageIndicator_strokeColor = 8;
         /**
@@ -1598,7 +1601,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:strokeWidth
+          @attr name mayi.lagou.com:strokeWidth
         */
         public static final int CirclePageIndicator_strokeWidth = 3;
         /** Attributes that can be used with a LinePageIndicator.
@@ -1607,7 +1610,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #LinePageIndicator_android_background mayi.lagou.com:android_background}</code></td><td> View background </td></tr>
+           <tr><td><code>{@link #LinePageIndicator_android_background android:background}</code></td><td> View background </td></tr>
            <tr><td><code>{@link #LinePageIndicator_centered mayi.lagou.com:centered}</code></td><td> Whether or not the indicators should be centered.</td></tr>
            <tr><td><code>{@link #LinePageIndicator_gapWidth mayi.lagou.com:gapWidth}</code></td><td> Width of the gap between each indicator line.</td></tr>
            <tr><td><code>{@link #LinePageIndicator_lineWidth mayi.lagou.com:lineWidth}</code></td><td> Width of each indicator line.</td></tr>
@@ -1631,8 +1634,9 @@ containing a value of this type.
           <p>
           @attr description
            View background 
-          <p>This corresponds to the global attribute          resource symbol {@link mayi.lagou.com.R.attr#android_background}.
-          @attr name android:android_background
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#background}.
+          @attr name android:background
         */
         public static final int LinePageIndicator_android_background = 0;
         /**
@@ -1648,7 +1652,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:centered
+          @attr name mayi.lagou.com:centered
         */
         public static final int LinePageIndicator_centered = 1;
         /**
@@ -1666,7 +1670,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:gapWidth
+          @attr name mayi.lagou.com:gapWidth
         */
         public static final int LinePageIndicator_gapWidth = 6;
         /**
@@ -1684,7 +1688,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:lineWidth
+          @attr name mayi.lagou.com:lineWidth
         */
         public static final int LinePageIndicator_lineWidth = 5;
         /**
@@ -1701,7 +1705,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:selectedColor
+          @attr name mayi.lagou.com:selectedColor
         */
         public static final int LinePageIndicator_selectedColor = 2;
         /**
@@ -1719,7 +1723,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:strokeWidth
+          @attr name mayi.lagou.com:strokeWidth
         */
         public static final int LinePageIndicator_strokeWidth = 3;
         /**
@@ -1736,7 +1740,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:unselectedColor
+          @attr name mayi.lagou.com:unselectedColor
         */
         public static final int LinePageIndicator_unselectedColor = 4;
         /** Attributes that can be used with a TitlePageIndicator.
@@ -1745,9 +1749,9 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #TitlePageIndicator_android_background mayi.lagou.com:android_background}</code></td><td> View background </td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_android_textColor mayi.lagou.com:android_textColor}</code></td><td> Color of regular titles.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_android_textSize mayi.lagou.com:android_textSize}</code></td><td> Size of title text.</td></tr>
+           <tr><td><code>{@link #TitlePageIndicator_android_background android:background}</code></td><td> View background </td></tr>
+           <tr><td><code>{@link #TitlePageIndicator_android_textColor android:textColor}</code></td><td> Color of regular titles.</td></tr>
+           <tr><td><code>{@link #TitlePageIndicator_android_textSize android:textSize}</code></td><td> Size of title text.</td></tr>
            <tr><td><code>{@link #TitlePageIndicator_clipPadding mayi.lagou.com:clipPadding}</code></td><td> Screen edge padding.</td></tr>
            <tr><td><code>{@link #TitlePageIndicator_footerColor mayi.lagou.com:footerColor}</code></td><td> Color of the footer line and indicator.</td></tr>
            <tr><td><code>{@link #TitlePageIndicator_footerIndicatorHeight mayi.lagou.com:footerIndicatorHeight}</code></td><td> Height of the indicator above the footer line.</td></tr>
@@ -1787,24 +1791,27 @@ containing a value of this type.
           <p>
           @attr description
            View background 
-          <p>This corresponds to the global attribute          resource symbol {@link mayi.lagou.com.R.attr#android_background}.
-          @attr name android:android_background
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#background}.
+          @attr name android:background
         */
         public static final int TitlePageIndicator_android_background = 2;
         /**
           <p>
           @attr description
            Color of regular titles. 
-          <p>This corresponds to the global attribute          resource symbol {@link mayi.lagou.com.R.attr#android_textColor}.
-          @attr name android:android_textColor
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#textColor}.
+          @attr name android:textColor
         */
         public static final int TitlePageIndicator_android_textColor = 1;
         /**
           <p>
           @attr description
            Size of title text. 
-          <p>This corresponds to the global attribute          resource symbol {@link mayi.lagou.com.R.attr#android_textSize}.
-          @attr name android:android_textSize
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#textSize}.
+          @attr name android:textSize
         */
         public static final int TitlePageIndicator_android_textSize = 0;
         /**
@@ -1822,7 +1829,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:clipPadding
+          @attr name mayi.lagou.com:clipPadding
         */
         public static final int TitlePageIndicator_clipPadding = 4;
         /**
@@ -1839,7 +1846,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:footerColor
+          @attr name mayi.lagou.com:footerColor
         */
         public static final int TitlePageIndicator_footerColor = 5;
         /**
@@ -1857,7 +1864,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:footerIndicatorHeight
+          @attr name mayi.lagou.com:footerIndicatorHeight
         */
         public static final int TitlePageIndicator_footerIndicatorHeight = 8;
         /**
@@ -1877,7 +1884,7 @@ containing a value of this type.
 <tr><td><code>underline</code></td><td>2</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name android:footerIndicatorStyle
+          @attr name mayi.lagou.com:footerIndicatorStyle
         */
         public static final int TitlePageIndicator_footerIndicatorStyle = 7;
         /**
@@ -1895,7 +1902,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:footerIndicatorUnderlinePadding
+          @attr name mayi.lagou.com:footerIndicatorUnderlinePadding
         */
         public static final int TitlePageIndicator_footerIndicatorUnderlinePadding = 9;
         /**
@@ -1913,7 +1920,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:footerLineHeight
+          @attr name mayi.lagou.com:footerLineHeight
         */
         public static final int TitlePageIndicator_footerLineHeight = 6;
         /**
@@ -1931,7 +1938,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:footerPadding
+          @attr name mayi.lagou.com:footerPadding
         */
         public static final int TitlePageIndicator_footerPadding = 10;
         /**
@@ -1950,7 +1957,7 @@ containing a value of this type.
 <tr><td><code>top</code></td><td>1</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name android:linePosition
+          @attr name mayi.lagou.com:linePosition
         */
         public static final int TitlePageIndicator_linePosition = 11;
         /**
@@ -1966,7 +1973,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:selectedBold
+          @attr name mayi.lagou.com:selectedBold
         */
         public static final int TitlePageIndicator_selectedBold = 12;
         /**
@@ -1983,7 +1990,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:selectedColor
+          @attr name mayi.lagou.com:selectedColor
         */
         public static final int TitlePageIndicator_selectedColor = 3;
         /**
@@ -2001,7 +2008,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:titlePadding
+          @attr name mayi.lagou.com:titlePadding
         */
         public static final int TitlePageIndicator_titlePadding = 13;
         /**
@@ -2019,7 +2026,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:topPadding
+          @attr name mayi.lagou.com:topPadding
         */
         public static final int TitlePageIndicator_topPadding = 14;
         /** Attributes that can be used with a UnderlinePageIndicator.
@@ -2028,7 +2035,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #UnderlinePageIndicator_android_background mayi.lagou.com:android_background}</code></td><td> View background </td></tr>
+           <tr><td><code>{@link #UnderlinePageIndicator_android_background android:background}</code></td><td> View background </td></tr>
            <tr><td><code>{@link #UnderlinePageIndicator_fadeDelay mayi.lagou.com:fadeDelay}</code></td><td> Length of the delay to fade the indicator.</td></tr>
            <tr><td><code>{@link #UnderlinePageIndicator_fadeLength mayi.lagou.com:fadeLength}</code></td><td> Length of the indicator fade to transparent.</td></tr>
            <tr><td><code>{@link #UnderlinePageIndicator_fades mayi.lagou.com:fades}</code></td><td> Whether or not the selected indicator fades.</td></tr>
@@ -2048,8 +2055,9 @@ containing a value of this type.
           <p>
           @attr description
            View background 
-          <p>This corresponds to the global attribute          resource symbol {@link mayi.lagou.com.R.attr#android_background}.
-          @attr name android:android_background
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#background}.
+          @attr name android:background
         */
         public static final int UnderlinePageIndicator_android_background = 0;
         /**
@@ -2065,7 +2073,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:fadeDelay
+          @attr name mayi.lagou.com:fadeDelay
         */
         public static final int UnderlinePageIndicator_fadeDelay = 3;
         /**
@@ -2081,7 +2089,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:fadeLength
+          @attr name mayi.lagou.com:fadeLength
         */
         public static final int UnderlinePageIndicator_fadeLength = 4;
         /**
@@ -2097,7 +2105,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:fades
+          @attr name mayi.lagou.com:fades
         */
         public static final int UnderlinePageIndicator_fades = 2;
         /**
@@ -2114,7 +2122,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:selectedColor
+          @attr name mayi.lagou.com:selectedColor
         */
         public static final int UnderlinePageIndicator_selectedColor = 1;
         /** Attributes that can be used with a ViewPagerIndicator.
@@ -2150,7 +2158,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:vpiCirclePageIndicatorStyle
+          @attr name mayi.lagou.com:vpiCirclePageIndicatorStyle
         */
         public static final int ViewPagerIndicator_vpiCirclePageIndicatorStyle = 0;
         /**
@@ -2162,7 +2170,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:vpiIconPageIndicatorStyle
+          @attr name mayi.lagou.com:vpiIconPageIndicatorStyle
         */
         public static final int ViewPagerIndicator_vpiIconPageIndicatorStyle = 1;
         /**
@@ -2174,7 +2182,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:vpiLinePageIndicatorStyle
+          @attr name mayi.lagou.com:vpiLinePageIndicatorStyle
         */
         public static final int ViewPagerIndicator_vpiLinePageIndicatorStyle = 2;
         /**
@@ -2186,7 +2194,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:vpiTabPageIndicatorStyle
+          @attr name mayi.lagou.com:vpiTabPageIndicatorStyle
         */
         public static final int ViewPagerIndicator_vpiTabPageIndicatorStyle = 4;
         /**
@@ -2198,7 +2206,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:vpiTitlePageIndicatorStyle
+          @attr name mayi.lagou.com:vpiTitlePageIndicatorStyle
         */
         public static final int ViewPagerIndicator_vpiTitlePageIndicatorStyle = 3;
         /**
@@ -2210,7 +2218,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:vpiUnderlinePageIndicatorStyle
+          @attr name mayi.lagou.com:vpiUnderlinePageIndicatorStyle
         */
         public static final int ViewPagerIndicator_vpiUnderlinePageIndicatorStyle = 5;
         /** Attributes that can be used with a drop_down_list_attr.
@@ -2241,7 +2249,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:isAutoLoadOnBottom
+          @attr name mayi.lagou.com:isAutoLoadOnBottom
         */
         public static final int drop_down_list_attr_isAutoLoadOnBottom = 2;
         /**
@@ -2255,7 +2263,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:isDropDownStyle
+          @attr name mayi.lagou.com:isDropDownStyle
         */
         public static final int drop_down_list_attr_isDropDownStyle = 0;
         /**
@@ -2269,7 +2277,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:isOnBottomStyle
+          @attr name mayi.lagou.com:isOnBottomStyle
         */
         public static final int drop_down_list_attr_isOnBottomStyle = 1;
     };

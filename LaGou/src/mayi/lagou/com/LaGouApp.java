@@ -3,13 +3,15 @@
  */
 package mayi.lagou.com;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.umeng.fb.FeedbackAgent;
+import java.lang.reflect.Field;
 
 import mayi.lagou.com.imageloader.ImageLoader;
 import mayi.lagou.com.utils.SharePreferenceUtil;
 import android.app.Activity;
 import android.app.Application;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.umeng.fb.FeedbackAgent;
 
 /**
  * @author wenfeili@163.com
@@ -68,4 +70,21 @@ public class LaGouApp extends Application {
 		}
 		return screenHeight;
 	}
+	//获取状态栏高度
+	public int getStatusBarHeight() {
+        Class<?> c = null;
+        Object obj = null;
+        Field field = null;
+        int x = 0, statusBarHeight = 0;
+        try {
+            c = Class.forName("com.android.internal.R$dimen");
+            obj = c.newInstance();
+            field = c.getField("status_bar_height");
+            x = Integer.parseInt(field.get(obj).toString());
+            statusBarHeight = getResources().getDimensionPixelSize(x);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return statusBarHeight;
+    }
 }

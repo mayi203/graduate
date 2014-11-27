@@ -15,7 +15,7 @@ import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.DeliverFeedback;
 import mayi.lagou.com.data.UserInfo;
 import mayi.lagou.com.fragment.JobFragment.OnChangeUrl;
-import mayi.lagou.com.utils.ConfigCache;
+import mayi.lagou.com.utils.ACache;
 import mayi.lagou.com.utils.NetWorkState;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.utils.SharePreferenceUtil;
@@ -59,6 +59,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 	private DeliverAdapter mAdapter;
 	private int pageNum = 1;
 	private boolean isFirstLoad = true;
+	private ACache mCache;
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
 
@@ -83,6 +84,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void initValue() {
+		mCache=ACache.get(getActivity());
 		mPullToRefreshListView.setPullLoadEnabled(true);
 		mListView = mPullToRefreshListView.getRefreshableView();
 		mListView.setFadingEdgeLength(0);
@@ -233,7 +235,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 
 	private void loadFeedBackData(final int pageNum, final String type) {
 		final String url = LaGouApi.Host + LaGouApi.DeliverRecord + pageNum;
-		String contentStr = ConfigCache.getUrlCache(url, getActivity());
+		String contentStr = mCache.getAsString(url);
 		if (contentStr != null && !"".equals(contentStr)) {
 			List<DeliverFeedback> list = ParserUtil
 					.parseDeliverFeedback(contentStr);
@@ -283,7 +285,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 					allData.addAll(list);
 				}
 				isFirstLoad = false;
-				ConfigCache.setUrlCache(content, url);
+				mCache.put(url, content,2*ACache.TIME_HOUR);
 			}
 
 			@Override

@@ -6,22 +6,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.http.Header;
-
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.LaGouApp;
 import mayi.lagou.com.R;
 import mayi.lagou.com.activity.MainActivity;
 import mayi.lagou.com.adapter.JobItemAdapt;
 import mayi.lagou.com.data.Position;
-import mayi.lagou.com.utils.ConfigCache;
+import mayi.lagou.com.utils.ACache;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.widget.networkdialog.DialogUtils;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase;
-import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
+import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
+
+import org.apache.http.Header;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
@@ -33,13 +32,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public final class JobListFragment extends Fragment {
 	private static final String KEY_CONTENT = "TestFragment:Content";
-
+	private ACache mCache;
 	public static JobListFragment newInstance(String content) {
 		JobListFragment fragment = new JobListFragment();
 		fragment.jobType = content;
@@ -69,6 +70,7 @@ public final class JobListFragment extends Fragment {
 				&& savedInstanceState.containsKey(KEY_CONTENT)) {
 			jobType = savedInstanceState.getString(KEY_CONTENT);
 		}
+		mCache = ACache.get(getActivity());
 		mHandler = new MyHandler(this);
 	}
 
@@ -225,7 +227,7 @@ public final class JobListFragment extends Fragment {
 			final String type, boolean useCache) {
 		final String url = LaGouApi.Host + LaGouApi.Jobs + jType + "?city="
 				+ city + "&pn=" + pageNum;
-		String responseStr = ConfigCache.getUrlCache(url, getActivity());
+		String responseStr=mCache.getAsString(url);
 		if (useCache && responseStr != null && !"".equals(responseStr)) {
 			List<Position> list = ParserUtil.parserPosition(responseStr);
 			if ("down".equals(type)) {
@@ -264,7 +266,7 @@ public final class JobListFragment extends Fragment {
 				if (list != null && list.size() > 0) {
 					allData.addAll(list);
 				}
-				ConfigCache.setUrlCache(response, url);
+				mCache.put(url, response,2*ACache.TIME_HOUR);
 			}
 
 			@Override

@@ -15,8 +15,8 @@ import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.adapter.JobItemAdapt;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.Position;
+import mayi.lagou.com.utils.ACache;
 import mayi.lagou.com.utils.AppCommonUtil;
-import mayi.lagou.com.utils.ConfigCache;
 import mayi.lagou.com.utils.NetWorkState;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.widget.networkdialog.DialogUtils;
@@ -87,6 +87,7 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 	private LinearLayout laySearch;
 	private View grayView;
 	private ImageView rightTab;
+	private ACache mCache;
 	// private View girlLay;
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
@@ -131,6 +132,7 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 	@Override
 	public void initValue() {
 		instance = this;
+		mCache=ACache.get(getActivity());
 		jobList = getActivity().getResources().getStringArray(R.array.job_list);
 		tvList = new TextView[jobList.length];
 		radius = app().getScreenWidth(getActivity()) * 2 / 5;
@@ -337,7 +339,7 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 		jobType = jType;
 		final String url = LaGouApi.Host + LaGouApi.Jobs + jType + "?city="
 				+ city + "&pn=" + pageNum;
-		String responseStr = ConfigCache.getUrlCache(url, getActivity());
+		String responseStr = mCache.getAsString(url);
 		if (responseStr != null && !"".equals(responseStr)) {
 			List<Position> list = ParserUtil.parserPosition(responseStr);
 			if ("down".equals(type)) {
@@ -377,7 +379,7 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 					allData.addAll(list);
 				}
 				isFirstLoad = false;
-				ConfigCache.setUrlCache(response, url);
+				mCache.put(url, response,2*ACache.TIME_HOUR);
 			}
 
 			@Override

@@ -19,6 +19,10 @@ public class UserInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/** 基本信息 */
 	private String basicInfo;
+	/**姓名*/
+	private String userName;
+	/**学校*/
+	private String userSchool;
 	/** 头像 */
 	private String userIcon;
 	/** 期望工作 */
@@ -31,6 +35,8 @@ public class UserInfo implements Serializable {
 	private List<ProjectExperience> projectExperience;
 	/** 工作经历 */
 	private List<JobExperience> jobExperience;
+	/**一句话描述自己*/
+	private String simpleDescription;
 	/** 自我描述 */
 	private String selfDescription;
 	/** 作品展示 */
@@ -187,6 +193,30 @@ public class UserInfo implements Serializable {
 	 */
 	public void setUserIcon(String userIcon) {
 		this.userIcon = userIcon;
+	}
+
+	public String getSimpleDescription() {
+		return simpleDescription;
+	}
+
+	public void setSimpleDescription(String simpleDescription) {
+		this.simpleDescription = simpleDescription;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserSchool() {
+		return userSchool;
+	}
+
+	public void setUserSchool(String userSchool) {
+		this.userSchool = userSchool;
 	}
 
 }

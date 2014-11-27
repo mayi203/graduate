@@ -335,11 +335,74 @@ public class ParserUtil {
 		}
 	}
 
+	private static Element getResumeElement(Document doc){
+		try{
+			return doc.getElementById("container").select("div.clearfixs mr_created").select("div.mr_myresume_l").get(0);
+		}catch(Exception e){
+			return null;
+		}
+	}
+	private static Element getResumeHeaderElement(Document doc){
+		try{
+			return doc.getElementById("mr_mr_head");
+		}catch(Exception e){
+			return null;
+		}
+	}
+	private static Element getResumeContentElement(Document doc){
+		try{
+			return doc.select("div.mr_content").first();
+		}catch(Exception e){
+			return null;
+		}
+	}
+	private static String getSimpleDescription(Element element){
+		try{
+			return element.select("div.mr_baseinfo").first().select("div.mr_p_introduce").first().select("span").get(1).text();
+		}catch(Exception e){
+			e.printStackTrace();
+			return "";
+		}
+	}
+	private static String getUserName(Element element){
+		try{
+			return element.select("div.mr_p_name").first().select("span").get(1).text();
+		}catch(Exception e){
+			return "";
+		}
+	}
+	private static String getBasicInfo(Element element) {
+		try {
+			return element.select("div.mr_p_info").first().select("div.info_t").first().select("span").get(1).text();
+		} catch (NullPointerException e) {
+			return "";
+		}
+	}
+	private static String getSchoolInfo(Element element) {
+		try {
+			return element.select("div.mr_p_info").first().select("div.info_t").first().select("span").get(0).text();
+		} catch (NullPointerException e) {
+			return "";
+		}
+	}
+	private static String getUserIcon(Element element){
+		try{
+			return element.select("div.mr_top_bg").first().select("img").first().attr("src");
+		}catch(Exception e){
+			return "";
+		}
+	}
 	public static UserInfo parserUserInfo(String html) {
 		Document doc = Jsoup.parse(html);
+		Element headerElement=getResumeHeaderElement(doc);
 		UserInfo userInfo = new UserInfo();
-		userInfo.setBasicInfo(getBasicInfo(doc));
-		userInfo.setUserIcon(getUserIcon(doc));
+		Element headerBaseElement=headerElement.select("div.mr_baseinfo").first();
+		userInfo.setSimpleDescription(getSimpleDescription(headerElement));
+		userInfo.setUserName(getUserName(headerBaseElement));
+		userInfo.setBasicInfo(getBasicInfo(headerBaseElement));
+		userInfo.setUserSchool(getSchoolInfo(headerBaseElement));
+		userInfo.setUserIcon(getUserIcon(headerElement));
+
 		userInfo.setJobExpect(getJobExpect(doc));
 		userInfo.setJobExperience(obtainJobExperience(doc));
 		userInfo.setProjectExperience(obatinProjectExperience(doc));
@@ -492,21 +555,6 @@ public class ParserUtil {
 	 */
 	private static String getUserIcon(Document doc) {
 		return doc.select("div.basicShow").select("img").attr("src");
-	}
-
-	/**
-	 * @param doc
-	 * @return
-	 */
-	private static String getBasicInfo(Document doc) {
-		try {
-			String info = doc.select("div.basicShow").select("span").toString()
-					.replace("<br />", BROKEN).trim();
-			Document dom = Jsoup.parse(info);
-			return dom.text().replace(BROKEN, "\n").trim();
-		} catch (NullPointerException e) {
-			return "";
-		}
 	}
 
 	public static String parseResumeDialogText(String html) {
