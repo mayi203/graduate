@@ -230,7 +230,7 @@ public class UserInfoFragment extends BaseFragment implements OnClickListener {
 			mCache.put("userInfo", user, 2 * ACache.TIME_DAY);
 		}
 		onRequest.setUserInfo(user);
-		userInfo.setText(user.getBasicInfo());
+		userInfo.setText(user.getSimpleDescription());
 		if (user.getUserIcon() != null && !"".equals(user.getUserIcon())) {
 			app().getImageLoader().loadImage(userHead, user.getUserIcon(),
 					R.drawable.default_avatar);

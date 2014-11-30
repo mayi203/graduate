@@ -36,6 +36,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public final class JobListFragment extends Fragment {

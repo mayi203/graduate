@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/user_icon"
-        android:paddingLeft="4dp"
+        android:paddingLeft="8dp"
         android:textColor="@color/dimgrey"
         android:textSize="14sp" />
 
