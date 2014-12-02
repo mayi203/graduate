@@ -383,7 +383,7 @@ public class JobDetailFragment extends BaseFragment {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userId", userId);
 		map.put("positionId", jobId);
-		map.put("force", "false");
+//		map.put("force", "false");
 		map.put("type", getResumeType());
 		map.put("resubmitToken", token);
 		RequestParams params = new RequestParams(map);
