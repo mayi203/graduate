@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ser_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ser_txt_bg"
+    android:gravity="center"
+    android:textColor="#d3d3d3"
+    android:padding="2dp" >
+
+</TextView>

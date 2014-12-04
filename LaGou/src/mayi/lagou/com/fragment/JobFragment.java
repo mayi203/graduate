@@ -16,9 +16,11 @@ import mayi.lagou.com.adapter.JobItemAdapt;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.Position;
 import mayi.lagou.com.utils.ACache;
-import mayi.lagou.com.utils.AppCommonUtil;
 import mayi.lagou.com.utils.NetWorkState;
 import mayi.lagou.com.utils.ParserUtil;
+import mayi.lagou.com.view.circularmenu.FloatingActionButton;
+import mayi.lagou.com.view.circularmenu.FloatingActionMenu;
+import mayi.lagou.com.view.circularmenu.SubActionButton;
 import mayi.lagou.com.widget.networkdialog.DialogUtils;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase;
 import mayi.lagou.com.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
@@ -26,32 +28,24 @@ import mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView;
 
 import org.apache.http.Header;
 
-import android.animation.Animator;
-import android.animation.Animator.AnimatorListener;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -62,33 +56,27 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
  * @date 2014-3-31
  */
 public class JobFragment extends BaseFragment implements OnClickListener,
-		OnMenuItemClickListener {
-	private static final String TAG = "JobFragment";
+		OnMenuItemClickListener, AnimationListener {
 
 	private PullToRefreshListView mPullToRefreshListView;
 	private ListView mListView;
-	// public TextView search;
 	private OnChangeUrl onChangeUrl;
 	private boolean isFirstLoad = true;
 	private JobItemAdapt adapter;
-	private Button mMenuButton;
-	private Button mItemButton1, mItemButton2, mItemButton3, mItemButton4,
-			mItemButton5;
-	private String cityName;
-	private boolean mIsMenuOpen = false;
-	private int radius;
 	public int pageNum = 1;
 	public String mCity = "全国";
 	public String jobType = "所有职位";
+	private String[] jobArray;
+	private String[] adArray;
+	private View hideLay;
+	private GridView gridView;
 	List<Position> allData;
 	private static JobFragment instance;
-	private String[] jobList;
-	private TextView[] tvList;
-	private LinearLayout laySearch;
-	private View grayView;
-	private ImageView rightTab;
+	private ImageView rightBar;
 	private ACache mCache;
-	// private View girlLay;
+	private FloatingActionMenu rightLowerMenu;
+	private FloatingActionButton rightLowerButton;
+	private ImageView rlIcon1, rlIcon2, rlIcon3, rlIcon4, rlIcon5, rlIcon6;
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
 
@@ -99,43 +87,19 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 
 	@Override
 	public void findViewsById() {
-		// search = findTextView(R.id.seatch_txt);
 		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.job_list);
-		mMenuButton = findButton(R.id.menu);
-		mItemButton1 = findButton(R.id.item1);
-		mItemButton2 = findButton(R.id.item2);
-		mItemButton3 = findButton(R.id.item3);
-		mItemButton4 = findButton(R.id.item4);
-		mItemButton5 = findButton(R.id.item5);
-		rightTab = findImageView(R.id.right_bar_job);
-		laySearch = (LinearLayout) findViewById(R.id.lay_search);
-		grayView = findViewById(R.id.grayview);
-		grayView.setOnTouchListener(new OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View arg0, MotionEvent arg1) {
-				if (arg1.getAction() == MotionEvent.ACTION_DOWN && mIsMenuOpen) {
-					mIsMenuOpen = false;
-					doAnimateClose(mItemButton1, 0, 5, radius);
-					doAnimateClose(mItemButton2, 1, 5, radius);
-					doAnimateClose(mItemButton3, 2, 5, radius);
-					doAnimateClose(mItemButton4, 3, 5, radius);
-					doAnimateClose(mItemButton5, 4, 5, radius);
-				}
-				return false;
-			}
-		});
-		// girlLay=findViewById(R.id.girl_lay);
+		rightBar = findImageView(R.id.right_bar_job);
+		hideLay = findViewById(R.id.hide_lay);
+		gridView = (GridView) findViewById(R.id.ser_items);
 	}
 
-	@SuppressWarnings("static-access")
 	@Override
 	public void initValue() {
 		instance = this;
-		mCache=ACache.get(getActivity());
-		jobList = getActivity().getResources().getStringArray(R.array.job_list);
-		tvList = new TextView[jobList.length];
-		radius = app().getScreenWidth(getActivity()) * 2 / 5;
+		intiCircalMenu();
+		mCache = ACache.get(getActivity());
+		jobArray = getResources().getStringArray(R.array.job_list);
+		adArray = getResources().getStringArray(R.array.city_list);
 		mPullToRefreshListView.setPullLoadEnabled(true);
 		mListView = mPullToRefreshListView.getRefreshableView();
 		mListView.setFadingEdgeLength(0);
@@ -145,48 +109,11 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 		adapter = new JobItemAdapt(getActivity());
 		mListView.setAdapter(adapter);
 		allData = new ArrayList<Position>();
-		int tvMinWidth = AppCommonUtil.dip2px(getActivity(), 40);
-		for (int i = 0, j = jobList.length; i < j; i++) {
-			TextView tv = new TextView(getActivity());
-			tv.setPadding(0, 0, 30, 0);
-			tv.setMinWidth(tvMinWidth);
-			tv.setTextSize(20);
-			tv.setTextColor(Color.rgb(120, 120, 120));
-			tv.setGravity(Gravity.CENTER);
-			tv.setText(jobList[i]);
-			tv.setId(100 + i);
-			tv.setOnClickListener(new JobListClickListener());
-			laySearch.addView(tv);
-			tvList[i] = tv;
-		}
-		tvList[0].setTextColor(Color.rgb(1, 152, 117));
-		lastClick = 100;
 		refreshData(jobType, mCity, 1, "down");
 		if (NetWorkState.isNetWorkConnected(getActivity())) {
 		} else {
 			afresh();
-			mMenuButton.setClickable(false);
-			findViewById(R.id.lay_search).setClickable(false);
-			// mPullToRefreshListView.setVisibility(View.GONE);
 			Toast.makeText(getActivity(), "好像没有联网哦", Toast.LENGTH_SHORT).show();
-		}
-	}
-
-	private int lastClick = 0;
-
-	private class JobListClickListener implements OnClickListener {
-
-		@Override
-		public void onClick(View v) {
-			int id = v.getId();
-			tvList[id - 100].setTextColor(Color.rgb(1, 152, 117));
-			if (lastClick != 0) {
-				tvList[lastClick - 100].setTextColor(Color.rgb(120, 120, 120));
-			}
-			lastClick = id;
-			jobType = jobList[id - 100];
-			isFirstLoad = true;
-			refreshData(jobType, mCity, 1, "down");
 		}
 	}
 
@@ -209,19 +136,6 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 						refreshData(jobType, mCity, pageNum, "up");
 					}
 				});
-		findViewById(R.id.lay_search).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				// addFragmentToStack(R.id.contain, new SearchFragment());
-			}
-		});
-		mMenuButton.setOnClickListener(this);
-		mItemButton1.setOnClickListener(this);
-		mItemButton2.setOnClickListener(this);
-		mItemButton3.setOnClickListener(this);
-		mItemButton4.setOnClickListener(this);
-		mItemButton5.setOnClickListener(this);
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -238,14 +152,14 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 				getActivity().onBackPressed();
 			}
 		});
-		rightTab.setOnClickListener(new OnClickListener() {
+		rightBar.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				if (LaGouApp.isLogin) {
-					showPopMenu(rightTab, R.menu.job_home2);
+					showPopMenu(rightBar, R.menu.job_home2);
 				} else {
-					showPopMenu(rightTab, R.menu.jb_home);
+					showPopMenu(rightBar, R.menu.jb_home);
 				}
 			}
 		});
@@ -261,6 +175,8 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 		public void setUrl(String url);
 
 		public String getUrl();
+
+		public void showMenu();
 	}
 
 	public static JobFragment getInsatance() {
@@ -288,8 +204,6 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 		public void handleMessage(Message msg) {
 			if (msg.what == 1) {
 				mPullToRefreshListView.setVisibility(View.VISIBLE);
-				// mMenuButton.setClickable(true);
-				findViewById(R.id.lay_search).setClickable(true);
 				refreshData(jobType, mCity, 1, "down");
 			}
 			super.handleMessage(msg);
@@ -379,7 +293,7 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 					allData.addAll(list);
 				}
 				isFirstLoad = false;
-				mCache.put(url, response,2*ACache.TIME_HOUR);
+				mCache.put(url, response, 2 * ACache.TIME_HOUR);
 			}
 
 			@Override
@@ -401,116 +315,11 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 
 	@Override
 	public void onClick(View v) {
-		cityName = findButton(v.getId()).getText().toString();
-		findButton(v.getId()).setText(mCity);
-		if (!mIsMenuOpen) {
-			mIsMenuOpen = true;
-			doAnimateOpen(mItemButton1, 0, 5, radius);
-			doAnimateOpen(mItemButton2, 1, 5, radius);
-			doAnimateOpen(mItemButton3, 2, 5, radius);
-			doAnimateOpen(mItemButton4, 3, 5, radius);
-			doAnimateOpen(mItemButton5, 4, 5, radius);
-		} else {
-			mIsMenuOpen = false;
-			doAnimateClose(mItemButton1, 0, 5, radius);
-			doAnimateClose(mItemButton2, 1, 5, radius);
-			doAnimateClose(mItemButton3, 2, 5, radius);
-			doAnimateClose(mItemButton4, 3, 5, radius);
-			doAnimateClose(mItemButton5, 4, 5, radius);
-			if (!cityName.equals(mCity)) {
-				mCity = cityName;
-				refreshData(jobType, cityName, pageNum, "down");
-			}
-		}
-		mMenuButton.setText(cityName);
+		selectCity(v.getId());
 	}
 
-	/**
-	 * 打开菜单的动画
-	 * 
-	 * @param view
-	 *            执行动画的view
-	 * @param index
-	 *            view在动画序列中的顺序
-	 * @param total
-	 *            动画序列的个数
-	 * @param radius
-	 *            动画半径
-	 */
-	private void doAnimateOpen(View view, int index, int total, int radius) {
-		if (view.getVisibility() != View.VISIBLE) {
-			view.setVisibility(View.VISIBLE);
-		}
-		grayView.setVisibility(View.VISIBLE);
-		double degree = Math.PI * index / ((total - 1) * 2) + 3 / 2 * Math.PI;
-		int translationX = (int) (radius * Math.cos(degree));
-		int translationY = (int) (radius * Math.sin(degree));
-		Log.d(TAG, String.format("degree=%f, translationX=%d, translationY=%d",
-				degree, translationX, translationY));
-		AnimatorSet set = new AnimatorSet();
-		// 包含平移、缩放和透明度动画
-		set.playTogether(
-				ObjectAnimator.ofFloat(view, "translationX", 0, translationX),
-				ObjectAnimator.ofFloat(view, "translationY", 0, translationY),
-				ObjectAnimator.ofFloat(view, "scaleX", 0f, 1f),
-				ObjectAnimator.ofFloat(view, "scaleY", 0f, 1f),
-				ObjectAnimator.ofFloat(view, "alpha", 0f, 1));
-		// 动画周期为500ms
-		set.setDuration(1 * 500).start();
-	}
-
-	/**
-	 * 关闭菜单的动画
-	 * 
-	 * @param view
-	 *            执行动画的view
-	 * @param index
-	 *            view在动画序列中的顺序
-	 * @param total
-	 *            动画序列的个数
-	 * @param radius
-	 *            动画半径
-	 */
-	private void doAnimateClose(final View view, int index, int total,
-			int radius) {
-		if (view.getVisibility() != View.VISIBLE) {
-			view.setVisibility(View.VISIBLE);
-		}
-		grayView.setVisibility(View.GONE);
-		double degree = Math.PI * index / ((total - 1) * 2) + 3 / 2 * Math.PI;
-		int translationX = (int) (radius * Math.cos(degree));
-		int translationY = (int) (radius * Math.sin(degree));
-		Log.d(TAG, String.format("degree=%f, translationX=%d, translationY=%d",
-				degree, translationX, translationY));
-		AnimatorSet set = new AnimatorSet();
-		// 包含平移、缩放和透明度动画
-		set.playTogether(
-				ObjectAnimator.ofFloat(view, "translationX", translationX, 0),
-				ObjectAnimator.ofFloat(view, "translationY", translationY, 0),
-				ObjectAnimator.ofFloat(view, "scaleX", 1f, 0f),
-				ObjectAnimator.ofFloat(view, "scaleY", 1f, 0f),
-				ObjectAnimator.ofFloat(view, "alpha", 1f, 0f));
-		// 为动画加上事件监听，当动画结束的时候，我们把当前view隐藏
-		set.addListener(new AnimatorListener() {
-			@Override
-			public void onAnimationStart(Animator animator) {
-			}
-
-			@Override
-			public void onAnimationRepeat(Animator animator) {
-			}
-
-			@Override
-			public void onAnimationEnd(Animator animator) {
-				view.setVisibility(View.GONE);
-			}
-
-			@Override
-			public void onAnimationCancel(Animator animator) {
-			}
-		});
-
-		set.setDuration(1 * 500).start();
+	private void selectCity(int i) {
+		rightLowerMenu.close(true);
 	}
 
 	@Override
@@ -535,28 +344,88 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 		}
 		return false;
 	}
-	// @Override
-	// public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-	// if (LaGouApp.isLogin) {
-	// inflater.inflate(R.menu.job_home2, menu);
-	// } else {
-	// inflater.inflate(R.menu.jb_home, menu);
-	// }
-	// super.onCreateOptionsMenu(menu, inflater);
-	// }
-	//
-	// @Override
-	// public boolean onOptionsItemSelected(MenuItem item) {
-	// if (item.getItemId() == R.id.login) {
-	// MobclickAgent.onEvent(getActivity(), "self");
-	// startActivity(UserInfoActicity.class);
-	// } else if (item.getItemId() == android.R.id.home) {
-	// MobclickAgent.onEvent(getActivity(), "self");
-	// getActivity().onBackPressed();
-	// } else if (item.getItemId() == R.id.setting) {
-	// addFragmentToStack(R.id.contain, new SettingFragment());
-	// }
-	// return super.onOptionsItemSelected(item);
-	// }
 
+	private void intiCircalMenu() {
+		ImageView fabIconNew = new ImageView(getActivity());
+		fabIconNew.setImageDrawable(getResources().getDrawable(
+				R.drawable.location));
+		rightLowerButton = new FloatingActionButton.Builder(getActivity())
+				.setContentView(fabIconNew).build();
+
+		SubActionButton.Builder rLSubBuilder = new SubActionButton.Builder(
+				getActivity());
+		rlIcon1 = new ImageView(getActivity());
+		rlIcon2 = new ImageView(getActivity());
+		rlIcon3 = new ImageView(getActivity());
+		rlIcon4 = new ImageView(getActivity());
+		rlIcon5 = new ImageView(getActivity());
+		rlIcon6 = new ImageView(getActivity());
+		rlIcon1.setImageDrawable(getResources().getDrawable(R.drawable.guang));
+		rlIcon2.setImageDrawable(getResources().getDrawable(R.drawable.shen));
+		rlIcon3.setImageDrawable(getResources().getDrawable(R.drawable.hang));
+		rlIcon4.setImageDrawable(getResources().getDrawable(R.drawable.hu));
+		rlIcon5.setImageDrawable(getResources().getDrawable(R.drawable.jing));
+		rlIcon6.setImageDrawable(getResources().getDrawable(R.drawable.quan));
+
+		rightLowerMenu = new FloatingActionMenu.Builder(getActivity())
+				.addSubActionView(rLSubBuilder.setContentView(rlIcon1).build())
+				.addSubActionView(rLSubBuilder.setContentView(rlIcon2).build())
+				.addSubActionView(rLSubBuilder.setContentView(rlIcon3).build())
+				.addSubActionView(rLSubBuilder.setContentView(rlIcon4).build())
+				.addSubActionView(rLSubBuilder.setContentView(rlIcon5).build())
+				.addSubActionView(rLSubBuilder.setContentView(rlIcon6).build())
+				.attachTo(rightLowerButton).build();
+		rlIcon1.setId(101);
+		rlIcon1.setOnClickListener(this);
+		rlIcon2.setId(102);
+		rlIcon2.setOnClickListener(this);
+		rlIcon3.setId(103);
+		rlIcon3.setOnClickListener(this);
+		rlIcon4.setId(104);
+		rlIcon4.setOnClickListener(this);
+		rlIcon5.setId(105);
+		rlIcon5.setOnClickListener(this);
+		rlIcon6.setId(106);
+		rlIcon6.setOnClickListener(this);
+	}
+
+	private Animation jobInAnimation, jobOutAnimation;
+
+	private void showJobSer() {
+		if (jobInAnimation == null) {
+			jobInAnimation = AnimationUtils.loadAnimation(getActivity(),
+					R.anim.ser_job_in);
+		}
+		jobInAnimation.setFillAfter(true);
+		hideLay.setVisibility(View.VISIBLE);
+		hideLay.startAnimation(jobInAnimation);
+	}
+
+	private void hideJobSer() {
+		if (jobOutAnimation == null) {
+			jobOutAnimation = AnimationUtils.loadAnimation(getActivity(),
+					R.anim.ser_job_out);
+		}
+		jobOutAnimation.setAnimationListener(this);
+		jobOutAnimation.setFillAfter(true);
+		hideLay.startAnimation(jobOutAnimation);
+	}
+
+	@Override
+	public void onAnimationStart(Animation animation) {
+
+	}
+
+	@Override
+	public void onAnimationEnd(Animation animation) {
+		if (animation == jobOutAnimation) {
+			gridView.setAdapter(null);
+			hideLay.clearAnimation();
+		}
+	}
+
+	@Override
+	public void onAnimationRepeat(Animation animation) {
+
+	}
 }

@@ -1,13 +1,13 @@
 package mayi.lagou.com.fragment;
 
 import java.io.File;
-
 import mayi.lagou.com.LaGouApp;
 import mayi.lagou.com.R;
 import mayi.lagou.com.core.BaseFragment;
-import mayi.lagou.com.fragment.JobListFragment.OnChangeUrl;
+import mayi.lagou.com.fragment.JobFragment.OnChangeUrl;
 import mayi.lagou.com.utils.SharePreferenceUtil;
 import mayi.lagou.com.view.MyDialog;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 
@@ -194,7 +193,6 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 				try {
 					sleep(1500);
 				} catch (InterruptedException e) {
-					// TODO 自动生成的 catch 块
 					e.printStackTrace();
 				}
 				proDialog.dismiss();
@@ -204,6 +202,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 		thread.start();
 	}
 
+	@SuppressLint("HandlerLeak")
 	Handler mHandler = new Handler() {
 
 		@Override
@@ -217,9 +216,8 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void onAttach(Activity activity) {
-		// TODO Auto-generated method stub
 		super.onAttach(activity);
-		mOnChangeUrl=(OnChangeUrl)activity;
+		mOnChangeUrl = (OnChangeUrl) activity;
 	}
 
 	@Override
@@ -227,5 +225,5 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 		super.onDetach();
 		mOnChangeUrl.showMenu();
 	}
-	
+
 }

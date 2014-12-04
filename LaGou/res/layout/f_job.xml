@@ -18,112 +18,49 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/overflow_icon"
             android:background="@drawable/selector_detail_deliver_btn"
             android:contentDescription="@string/app_name"
-            android:paddingLeft="25dp"
-            android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:paddingRight="15dp"/>
+            android:paddingLeft="25dp"
+            android:paddingRight="15dp"
+            android:paddingTop="8dp"
+            android:src="@drawable/overflow_icon" />
     </RelativeLayout>
-
-    <HorizontalScrollView
-        android:id="@+id/lay_sc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/topbar"
-        android:scrollbars="none" >
-
-        <LinearLayout
-            android:id="@+id/lay_search"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:padding="8dp" >
-        </LinearLayout>
-    </HorizontalScrollView>
 
     <mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView
         android:id="@+id/job_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/lay_sc"
+        android:layout_below="@id/topbar"
         android:layout_marginLeft="-2dp"
         android:layout_marginRight="-2dp" />
 
-    <View
-        android:id="@+id/grayview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#00d8d8d8"
-        android:visibility="gone" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="30dp" >
-
-        <Button
-            android:id="@+id/menu"
-            style="@style/MenuStyle"
-            android:text="@string/search_country" />
-
-        <Button
-            android:id="@+id/item1"
-            style="@style/MenuItemStyle"
-            android:text="@string/search_beijing"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/item2"
-            style="@style/MenuItemStyle"
-            android:text="@string/search_shanghai"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/item3"
-            style="@style/MenuItemStyle"
-            android:text="@string/search_hangzhou"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/item4"
-            style="@style/MenuItemStyle"
-            android:text="@string/search_shenzhen"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/item5"
-            style="@style/MenuItemStyle"
-            android:text="@string/search_guangzhou"
-            android:visibility="gone" />
-    </FrameLayout>
-
     <RelativeLayout
-        android:id="@+id/girl_lay"
+        android:id="@+id/hide_lay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone" >
+        android:background="#66000000" >
 
-        <ImageView
-            android:id="@+id/girl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/girl" />
-
-        <TextView
+        <EditText
+            android:id="@+id/ser_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/girl"
-            android:layout_marginTop="5dp"
-            android:gravity="center_horizontal"
-            android:text="@string/girl_txt"
-            android:textColor="@color/darkgreen" />
+            android:layout_margin="30dp"
+            android:background="@drawable/ser_ed_focus_shap"
+            android:hint="输入"
+            android:padding="3dp" />
+
+        <GridView
+            android:id="@+id/ser_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ser_txt"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:columnWidth="50dp"
+            android:horizontalSpacing="8dp"
+            android:numColumns="auto_fit"
+            android:verticalSpacing="10dp" />
     </RelativeLayout>
 
 </RelativeLayout>

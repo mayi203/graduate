@@ -104,4 +104,10 @@ public class UserInfoActicity extends BaseFragmentActivity implements Refresh,
 		return mUrl;
 	}
 
+	@Override
+	public void showMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

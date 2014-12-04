@@ -5,11 +5,11 @@ import java.util.Map;
 
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.R;
-import mayi.lagou.com.activity.MainActivity;
+import mayi.lagou.com.activity.HomeActivity;
 import mayi.lagou.com.activity.UserInfoActicity;
 import mayi.lagou.com.core.BaseFragment;
 import mayi.lagou.com.data.PositionDetail;
-import mayi.lagou.com.fragment.JobListFragment.OnChangeUrl;
+import mayi.lagou.com.fragment.JobFragment.OnChangeUrl;
 import mayi.lagou.com.utils.ACache;
 import mayi.lagou.com.utils.ParserUtil;
 import mayi.lagou.com.utils.SharePreferenceUtil;
@@ -85,7 +85,7 @@ public class JobDetailFragment extends BaseFragment {
 
 	@Override
 	public void initValue() {
-		mCache=ACache.get(getActivity());
+		mCache = ACache.get(getActivity());
 		anim = AnimationUtils.loadAnimation(getActivity(), R.anim.email_anim);
 		anim.setRepeatMode(Animation.RESTART);
 		anim.setAnimationListener(new AnimationListener() {
@@ -256,7 +256,7 @@ public class JobDetailFragment extends BaseFragment {
 					if (config) {
 						confirmation();
 					}
-					mCache.put(mUrl, response,2*ACache.TIME_HOUR);
+					mCache.put(mUrl, response, 2 * ACache.TIME_HOUR);
 				} else {
 					detail_null.setVisibility(View.VISIBLE);
 				}
@@ -383,7 +383,7 @@ public class JobDetailFragment extends BaseFragment {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userId", userId);
 		map.put("positionId", jobId);
-//		map.put("force", "false");
+		// map.put("force", "false");
 		map.put("type", getResumeType());
 		map.put("resubmitToken", token);
 		RequestParams params = new RequestParams(map);
@@ -489,16 +489,14 @@ public class JobDetailFragment extends BaseFragment {
 		super.onPause();
 	}
 
-	
-
 	@Override
 	public void onDetach() {
 		super.onDetach();
 		isFromMain();
 	}
 
-	public void isFromMain(){
-		if(getActivity() instanceof MainActivity){
+	public void isFromMain() {
+		if (getActivity() instanceof HomeActivity) {
 			onChangeUrl.showMenu();
 		}
 	}
