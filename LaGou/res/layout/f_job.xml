@@ -27,11 +27,27 @@
             android:src="@drawable/overflow_icon" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/screen_lay"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/topbar" >
+
+        <TextView
+            android:id="@+id/screen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="8dp"
+            android:gravity="center_vertical"
+            android:text="所有职位.全国" />
+    </RelativeLayout>
+
     <mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView
         android:id="@+id/job_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/topbar"
+        android:layout_below="@id/screen_lay"
         android:layout_marginLeft="-2dp"
         android:layout_marginRight="-2dp" />
 
@@ -39,7 +55,8 @@
         android:id="@+id/hide_lay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#66000000" >
+        android:background="#dd000000"
+        android:visibility="gone" >
 
         <EditText
             android:id="@+id/ser_txt"
@@ -48,6 +65,7 @@
             android:layout_margin="30dp"
             android:background="@drawable/ser_ed_focus_shap"
             android:hint="输入"
+            android:imeOptions="actionSearch"
             android:padding="3dp" />
 
         <GridView
@@ -57,7 +75,7 @@
             android:layout_below="@id/ser_txt"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:columnWidth="50dp"
+            android:columnWidth="80dp"
             android:horizontalSpacing="8dp"
             android:numColumns="auto_fit"
             android:verticalSpacing="10dp" />

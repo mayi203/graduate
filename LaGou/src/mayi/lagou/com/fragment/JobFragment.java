@@ -4,8 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import mayi.lagou.com.LaGouApi;
 import mayi.lagou.com.LaGouApp;
@@ -30,22 +28,30 @@ import org.apache.http.Header;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -67,13 +73,15 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 	public String mCity = "全国";
 	public String jobType = "所有职位";
 	private String[] jobArray;
-	private String[] adArray;
-	private View hideLay;
+	private String[] cityArray;
+	private RelativeLayout hideLay, screenLay;
 	private GridView gridView;
-	List<Position> allData;
+	private EditText hideEdit;
+	private List<Position> allData;
 	private static JobFragment instance;
 	private ImageView rightBar;
 	private ACache mCache;
+	private TextView screen;
 	private FloatingActionMenu rightLowerMenu;
 	private FloatingActionButton rightLowerButton;
 	private ImageView rlIcon1, rlIcon2, rlIcon3, rlIcon4, rlIcon5, rlIcon6;
@@ -89,8 +97,11 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 	public void findViewsById() {
 		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.job_list);
 		rightBar = findImageView(R.id.right_bar_job);
-		hideLay = findViewById(R.id.hide_lay);
+		hideLay = (RelativeLayout) findViewById(R.id.hide_lay);
+		screenLay = (RelativeLayout) findViewById(R.id.screen_lay);
 		gridView = (GridView) findViewById(R.id.ser_items);
+		hideEdit = (EditText) findViewById(R.id.ser_txt);
+		screen = (TextView) findTextView(R.id.screen);
 	}
 
 	@Override
@@ -99,7 +110,7 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 		intiCircalMenu();
 		mCache = ACache.get(getActivity());
 		jobArray = getResources().getStringArray(R.array.job_list);
-		adArray = getResources().getStringArray(R.array.city_list);
+		cityArray = getResources().getStringArray(R.array.city_list);
 		mPullToRefreshListView.setPullLoadEnabled(true);
 		mListView = mPullToRefreshListView.getRefreshableView();
 		mListView.setFadingEdgeLength(0);
@@ -163,6 +174,44 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 				}
 			}
 		});
+		hideLay.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (showJobSer) {
+					hideJobSer();
+				} else if (showCitySer) {
+					hideCitySer();
+				}
+				hideSoftInput();
+			}
+		});
+		screenLay.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				showJobSer(jobArray);
+			}
+		});
+		hideEdit.setOnEditorActionListener(new OnEditorActionListener() {
+
+			@Override
+			public boolean onEditorAction(TextView v, int actionId,
+					KeyEvent event) {
+				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+					if (showCitySer) {
+						mCity = hideEdit.getText().toString().trim();
+						hideCitySer();
+					} else if (showJobSer) {
+						jobType = hideEdit.getText().toString().trim();
+						hideJobSer();
+					}
+					screen.setText(jobType + "." + mCity);
+					refreshData(jobType, mCity, 1, "down");
+				}
+				return false;
+			}
+		});
 	}
 
 	@Override
@@ -186,15 +235,6 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 	@Override
 	public void onResume() {
 		super.onResume();
-		TimerTask task = new TimerTask() {
-
-			@Override
-			public void run() {
-				getActivity().getWindow().invalidatePanelMenu(
-						Window.FEATURE_OPTIONS_PANEL);
-			}
-		};
-		new Timer().schedule(task, 500);
 	}
 
 	@SuppressLint("HandlerLeak")
@@ -320,6 +360,11 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 
 	private void selectCity(int i) {
 		rightLowerMenu.close(true);
+		if (i == 106) {
+			showCitySer(cityArray);
+		} else {
+
+		}
 	}
 
 	@Override
@@ -389,16 +434,40 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 		rlIcon6.setOnClickListener(this);
 	}
 
-	private Animation jobInAnimation, jobOutAnimation;
+	private Animation jobInAnimation, jobOutAnimation, cityInAnimation,
+			cityOutAnimation;
 
-	private void showJobSer() {
+	private boolean showJobSer = false, showCitySer = false;
+
+	private void showJobSer(final String[] array) {
 		if (jobInAnimation == null) {
 			jobInAnimation = AnimationUtils.loadAnimation(getActivity(),
 					R.anim.ser_job_in);
 		}
 		jobInAnimation.setFillAfter(true);
 		hideLay.setVisibility(View.VISIBLE);
+		gridView.setAdapter(new ArrayAdapter<String>(getActivity(),
+				R.layout.search_item, array));
+		gridView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				hideEdit.setText(array[position]);
+			}
+		});
 		hideLay.startAnimation(jobInAnimation);
+		showJobSer = true;
+		showSoftInput();
+	}
+
+	private void showSoftInput() {
+		hideEdit.setFocusable(true);
+		hideEdit.setFocusableInTouchMode(true);
+		hideEdit.requestFocus();
+		InputMethodManager inputManager = (InputMethodManager) hideEdit
+				.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+		inputManager.showSoftInput(hideEdit, 0);
 	}
 
 	private void hideJobSer() {
@@ -411,6 +480,38 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 		hideLay.startAnimation(jobOutAnimation);
 	}
 
+	private void showCitySer(final String[] array) {
+		if (cityInAnimation == null) {
+			cityInAnimation = AnimationUtils.loadAnimation(getActivity(),
+					R.anim.ser_city_in);
+		}
+		cityInAnimation.setFillAfter(true);
+		hideLay.setVisibility(View.VISIBLE);
+		gridView.setAdapter(new ArrayAdapter<String>(getActivity(),
+				R.layout.search_item, array));
+		gridView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				hideEdit.setText(array[position]);
+			}
+		});
+		hideLay.startAnimation(cityInAnimation);
+		showCitySer = true;
+		showSoftInput();
+	}
+
+	private void hideCitySer() {
+		if (cityOutAnimation == null) {
+			cityOutAnimation = AnimationUtils.loadAnimation(getActivity(),
+					R.anim.ser_city_out);
+		}
+		cityOutAnimation.setAnimationListener(this);
+		cityOutAnimation.setFillAfter(true);
+		hideLay.startAnimation(cityOutAnimation);
+	}
+
 	@Override
 	public void onAnimationStart(Animation animation) {
 
@@ -418,9 +519,13 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 
 	@Override
 	public void onAnimationEnd(Animation animation) {
-		if (animation == jobOutAnimation) {
+		if (animation == jobOutAnimation || animation == cityOutAnimation) {
 			gridView.setAdapter(null);
 			hideLay.clearAnimation();
+			gridView.setOnItemClickListener(null);
+			hideLay.setVisibility(View.GONE);
+			showJobSer = false;
+			showCitySer = false;
 		}
 	}
 
