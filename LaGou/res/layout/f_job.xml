@@ -30,8 +30,10 @@
     <RelativeLayout
         android:id="@+id/screen_lay"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@id/topbar" >
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topbar"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/selector_search" >
 
         <TextView
             android:id="@+id/screen"
@@ -40,7 +42,9 @@
             android:layout_centerVertical="true"
             android:layout_margin="8dp"
             android:gravity="center_vertical"
-            android:text="所有职位.全国" />
+            android:padding="2dp"
+            android:text="所有职位.全国"
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <mayi.lagou.com.widget.pulltorefresh.PullToRefreshListView
@@ -75,7 +79,7 @@
             android:layout_below="@id/ser_txt"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:columnWidth="80dp"
+            android:columnWidth="60dp"
             android:horizontalSpacing="8dp"
             android:numColumns="auto_fit"
             android:verticalSpacing="10dp" />
