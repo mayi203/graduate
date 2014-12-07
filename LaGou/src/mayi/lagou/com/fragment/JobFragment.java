@@ -179,9 +179,9 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 			@Override
 			public void onClick(View v) {
 				if (showJobSer) {
-					hideJobSer();
+					hideSerLay();
 				} else if (showCitySer) {
-					hideCitySer();
+					hideSerLay();
 				}
 				hideSoftInput();
 			}
@@ -190,7 +190,7 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 
 			@Override
 			public void onClick(View v) {
-				showJobSer(jobArray);
+				showSerLay(jobArray);
 			}
 		});
 		hideEdit.setOnEditorActionListener(new OnEditorActionListener() {
@@ -201,10 +201,10 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 					if (showCitySer) {
 						mCity = hideEdit.getText().toString().trim();
-						hideCitySer();
+						hideSerLay();
 					} else if (showJobSer) {
 						jobType = hideEdit.getText().toString().trim();
-						hideJobSer();
+						hideSerLay();
 					}
 					screen.setText(jobType + "." + mCity);
 					refreshData(jobType, mCity, 1, "down");
@@ -361,7 +361,7 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 	private void selectCity(int i) {
 		rightLowerMenu.close(true);
 		if (i == 106) {
-			showCitySer(cityArray);
+			showSerLay(cityArray);
 		} else {
 
 		}
@@ -434,15 +434,14 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 		rlIcon6.setOnClickListener(this);
 	}
 
-	private Animation jobInAnimation, jobOutAnimation, cityInAnimation,
-			cityOutAnimation;
+	private Animation jobInAnimation, jobOutAnimation;
 
 	private boolean showJobSer = false, showCitySer = false;
 
-	private void showJobSer(final String[] array) {
+	private void showSerLay(final String[] array) {
 		if (jobInAnimation == null) {
 			jobInAnimation = AnimationUtils.loadAnimation(getActivity(),
-					R.anim.ser_job_in);
+					R.anim.ser_lay_in);
 		}
 		jobInAnimation.setFillAfter(true);
 		hideLay.setVisibility(View.VISIBLE);
@@ -470,46 +469,14 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 		inputManager.showSoftInput(hideEdit, 0);
 	}
 
-	private void hideJobSer() {
+	private void hideSerLay() {
 		if (jobOutAnimation == null) {
 			jobOutAnimation = AnimationUtils.loadAnimation(getActivity(),
-					R.anim.ser_job_out);
+					R.anim.ser_lay_out);
 		}
 		jobOutAnimation.setAnimationListener(this);
 		jobOutAnimation.setFillAfter(true);
 		hideLay.startAnimation(jobOutAnimation);
-	}
-
-	private void showCitySer(final String[] array) {
-		if (cityInAnimation == null) {
-			cityInAnimation = AnimationUtils.loadAnimation(getActivity(),
-					R.anim.ser_city_in);
-		}
-		cityInAnimation.setFillAfter(true);
-		hideLay.setVisibility(View.VISIBLE);
-		gridView.setAdapter(new ArrayAdapter<String>(getActivity(),
-				R.layout.search_item, array));
-		gridView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				hideEdit.setText(array[position]);
-			}
-		});
-		hideLay.startAnimation(cityInAnimation);
-		showCitySer = true;
-		showSoftInput();
-	}
-
-	private void hideCitySer() {
-		if (cityOutAnimation == null) {
-			cityOutAnimation = AnimationUtils.loadAnimation(getActivity(),
-					R.anim.ser_city_out);
-		}
-		cityOutAnimation.setAnimationListener(this);
-		cityOutAnimation.setFillAfter(true);
-		hideLay.startAnimation(cityOutAnimation);
 	}
 
 	@Override
@@ -519,7 +486,7 @@ public class JobFragment extends BaseFragment implements OnClickListener,
 
 	@Override
 	public void onAnimationEnd(Animation animation) {
-		if (animation == jobOutAnimation || animation == cityOutAnimation) {
+		if (animation == jobOutAnimation) {
 			gridView.setAdapter(null);
 			hideLay.clearAnimation();
 			gridView.setOnItemClickListener(null);

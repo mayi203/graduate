@@ -59,14 +59,28 @@
         android:id="@+id/hide_lay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#dd000000"
+        android:background="#ed000000"
         android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/hide_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ser_txt_bg"
+            android:padding="4dp"
+            android:text="搜索"
+            android:textColor="#d3d3d3"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/ser_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
+            android:layout_toLeftOf="@id/hide_search"
             android:background="@drawable/ser_ed_focus_shap"
             android:hint="输入"
             android:imeOptions="actionSearch"
